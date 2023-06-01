@@ -21,13 +21,13 @@ services:
       envs:
         - container: V2RAYA_ADDRESS
           description:
-            en_us: V2RayA WebUI Address
-            zh_cn: V2RayA WebUI地址
+            en_us: v2rayA WebUI Address
+            zh_cn: v2rayA WebUI地址
       volumes:
         - container: /etc/v2raya
           description:
-            en_us: V2RayA configuration directory
-            zh_cn: V2RayA配置目录
+            en_us: v2rayA configuration directory
+            zh_cn: v2rayA配置目录
 x-casaos:
   architectures:
     - amd64
@@ -40,13 +40,14 @@ x-casaos:
     en_us: V2RayA is a web-based V2Ray front-end with enhanced functionality. It provides an intuitive and user-friendly interface to configure and manage your V2Ray server. With V2RayA, you can easily set up and customize your own proxy server with various protocols and encryption methods.
     zh_cn: V2RayA是一个带有增强功能的基于Web的V2Ray前端。它提供了一个直观和用户友好的界面，用于配置和管理V2Ray服务器。使用V2RayA，您可以轻松设置和自定义具有各种协议和加密方法的代理服务器。
   developer: mzz2017
-  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/V2RayA/icon.png
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/v2rayA/icon.png
   tagline:
     en_us: Web-based V2Ray front-end
     zh_cn: 基于Web的V2Ray前端
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/V2RayA/thumbnail.jpg
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/v2rayA/thumbnail.png
   tips: {}
   title:
-    en_us: V2RayA
+    en_us: v2rayA
   index:
   port_map: "2017"
+  scheme: http
