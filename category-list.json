@@ -1,0 +1,132 @@
+[
+  {
+    "name": "Analytics",
+    "font": "chart-areaspline",
+    "description": "Analysis Apps"
+  },
+  {
+    "name": "Backup",
+    "font": "backup-restore",
+    "description": "File and Data Backup Apps"
+  },
+  {
+    "name": "Blog",
+    "font": "post-outline",
+    "description": "Blog Writing and Distribution Apps"
+  },
+  {
+    "name": "Chat",
+    "font": "chat-processing-outline",
+    "description": "Chat Apps"
+  },
+  {
+    "name": "Cloud",
+    "font": "cloud-outline",
+    "description": "Public cloud alternatives or enhanced Apps"
+  },
+  {
+    "name": "Developer",
+    "font": "code-greater-than-or-equal",
+    "description": "Developer Apps"
+  },
+  {
+    "name": "CRM",
+    "font": "account-box-outline",
+    "description": "CRM Apps"
+  },
+  {
+    "name": "Documents",
+    "font": "file-document-outline",
+    "description": "Document editing Apps"
+  },
+  {
+    "name": "Email",
+    "font": "email-outline",
+    "description": "Email Apps"
+  },
+  {
+    "name": "File Sync",
+    "font": "file-sync-outline",
+    "description": "File Sync Apps"
+  },
+  {
+    "name": "Finance",
+    "font": "currency-usd",
+    "description": "Finance Apps"
+  },
+  {
+    "name": "Forum",
+    "font": "forum-outline",
+    "description": "Forum Apps"
+  },
+  {
+    "name": "Gallery",
+    "font": "image",
+    "description": "Gallery Apps"
+  },
+  {
+    "name": "Games",
+    "font": "google-controller",
+    "description": "Games Apps"
+  },
+  {
+    "name": "Learning",
+    "font": "school-outline",
+    "description": "Learning Apps"
+  },
+  {
+    "name": "Media",
+    "font": "play-circle-outline",
+    "description": "Media Apps"
+  },
+  {
+    "name": "Notes",
+    "font": "note-edit-outline",
+    "description": "Notes Apps"
+  },
+  {
+    "name": "Project Management",
+    "font": "chart-gantt",
+    "description": "Project Management Apps"
+  },
+  {
+    "name": "VPN",
+    "font": "vpn",
+    "description": "VPN Apps"
+  },
+  {
+    "name": "WEB",
+    "font": "web",
+    "description": "WEB Apps"
+  },
+  {
+    "name": "WiKi",
+    "font": "book-open-page-variant-outline",
+    "description": "WiKi Apps"
+  },
+  {
+    "name": "Dapps",
+    "font": "vector-link",
+    "description": "Decentralized Apps"
+  },
+  {
+    "name": "Downloader",
+    "font": "tray-arrow-down",
+    "description": "Downloader Apps"
+  },
+  {
+    "name": "Utilities",
+    "font": "toolbox-outline",
+    "description": "Utilities Apps"
+  },
+  {
+    "name": "Home Automation",
+    "font": "home-automation",
+    "description": "Home Automation Apps"
+  },
+  {
+    "name": "Network",
+    "font": "lan",
+    "description": "Network Apps"
+  }
+]

@@ -1,0 +1,39 @@
+name: ddns-go
+services:
+  ddns-go:
+    image: jeessy/ddns-go:latest
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID
+        target: /root
+    x-casaos:
+      volumes:
+        - container: /root
+          description:
+            en_us: ddns-go configuration directory
+            zh_cn: ddns-go配置目录
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: ddns-go
+  author: Cp0204
+  category: Network
+  description:
+    en_us: A simple and easy-to-use DDNS (Dynamic Domain Name System) that automatically updates your domain name resolution to your public IP address. It supports various cloud services such as Alibaba Cloud, Tencent Cloud, Dnspod, Cloudflare, Callback, Huawei Cloud, Baidu Cloud, Porkbun, GoDaddy, and Google Domain.
+    zh_cn: 简单好用的DDNS。自动更新域名解析到公网IP(支持阿里云、腾讯云、Dnspod、Cloudflare、Callback、华为云、百度云、Porkbun、GoDaddy、Google Domain)
+  developer: Cp0204
+  icon: https://raw.githubusercontent.com/Cp0204/CasaOS-AppStore-Play/main/Apps/ddns-go/icon.png
+  tagline:
+    en_us: Automatically obtain your public IPv4 or IPv6 address and resolve it to the corresponding domain name service.
+    zh_cn: 自动获得你的公网 IPv4 或 IPv6 地址，并解析到对应的域名服务。
+  thumbnail: https://raw.githubusercontent.com/Cp0204/CasaOS-AppStore-Play/main/Apps/ddns-go/thumbnail.jpg
+  tips: {}
+  title:
+    en_us: ddns-go
+  index:
+  port_map: "9876"
+  scheme: http
