@@ -1,0 +1,46 @@
+name: frps
+services:
+  frps:
+    image: snowdreamtech/frps:latest
+    deploy:
+      resources:
+        reservations:
+          memory: "16M"
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/frp/frps.ini
+        target: /etc/frp/frps.ini
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+      - type: bind
+        source: /etc/timezone
+        target: /etc/timezone
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: Cp0204
+  category: Network
+  description:
+    en_us: A fast reverse proxy server that helps you expose a local server to the internet. It provides client authentication and supports multiple protocols.
+    zh_cn: 一个快速的反向代理服务器，可以帮助您将本地服务器暴露到互联网。它提供客户端认证并支持多种协议。
+  developer: snowdreamtech
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/frps/icon.png
+  main: frps
+  tagline:
+    en_us: Fast reverse proxy server.
+    zh_cn: 快速的反向代理服务器。
+  thumbnail: 
+  tips:
+    before_install:
+      en_us: Before installation, please create a file named `frps.ini` in the `/DATA/AppData/frp/` directory.
+      zh_cn: 安装前，请先在 `/DATA/AppData/frp/` 目录下建立 `frps.ini` 文件。
+  title:
+    en_us: frps
+  index:
+  port_map: "7500"
+  scheme: http
