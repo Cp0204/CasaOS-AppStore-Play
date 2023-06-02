@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID
+        source: /DATA/AppData/ql
         target: /ql/data
     x-casaos:
       envs:

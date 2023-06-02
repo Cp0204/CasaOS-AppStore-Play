@@ -24,12 +24,12 @@ x-casaos:
   description:
     en_us: A self-hosted push notification service written in Go. It simplifies the sending and receiving of push notifications over multiple platforms.
     zh_cn: 一个使用Go编写的自托管推送通知服务。它简化了在多个平台上发送和接收推送通知的过程。
-  developer: snowdreamtech
+  developer: jmattheis
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/screenshot-2.png
-  main: Gotify
+  main: gotify
   tagline:
     en_us: a simple server for sending and receiving messages
     zh_cn: 一个简单的服务器用于发送和接收消息。
