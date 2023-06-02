@@ -1,6 +1,6 @@
 name: frpc
 services:
-  frps:
+  frpc:
     image: snowdreamtech/frpc:latest
     deploy:
       resources:
@@ -42,5 +42,5 @@ x-casaos:
   title:
     en_us: frpc
   index:
-  port_map: 
-  scheme: 
+  port_map: "8760"
+  scheme: http
