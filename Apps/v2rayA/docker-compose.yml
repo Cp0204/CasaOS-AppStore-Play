@@ -4,6 +4,10 @@ services:
     environment:
       V2RAYA_ADDRESS: 0.0.0.0:2017
     image: mzz2017/v2raya:latest
+    deploy:
+      resources:
+        reservations:
+          memory: "128M"
     network_mode: host
     privileged: true
     restart: unless-stopped
@@ -41,6 +45,9 @@ x-casaos:
     zh_cn: V2RayA是一个带有增强功能的基于Web的V2Ray前端。它提供了一个直观和用户友好的界面，用于配置和管理V2Ray服务器。使用V2RayA，您可以轻松设置和自定义具有各种协议和加密方法的代理服务器。
   developer: mzz2017
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/v2rayA/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/v2rayA/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/v2rayA/screenshot-2.png
   tagline:
     en_us: Web-based V2Ray front-end
     zh_cn: 基于Web的V2Ray前端

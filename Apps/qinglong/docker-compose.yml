@@ -2,6 +2,10 @@ name: qinglong
 services:
   qinglong:
     image: whyour/qinglong:latest
+    deploy:
+      resources:
+        reservations:
+          memory: "256M"
     network_mode: bridge
     ports:
       - target: 5700
@@ -37,6 +41,9 @@ x-casaos:
     zh_cn: 青龙是一个用于管理和执行Python3、JavaScript、Shell和Typescript脚本的定时任务平台。
   developer: whyour
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qinglong/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qinglong/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qinglong/screenshot-2.png
   tagline:
     en_us: Task management platform for Python, JavaScript, Shell, and Typescript scripts.
     zh_cn: 用于Python、JavaScript、Shell和Typescript脚本的任务管理平台。
