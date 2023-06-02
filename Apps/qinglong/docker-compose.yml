@@ -51,5 +51,6 @@ x-casaos:
   tips: {}
   title:
     en_us: qinglong
+    zh_cn: 青龙
   index:
   port_map: "5700"
