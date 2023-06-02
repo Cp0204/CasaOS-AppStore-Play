@@ -17,5 +17,5 @@ casaos-cli app-management register app-store https://github.com/Cp0204/CasaOS-Ap
 国内用户也可以使用以下命令：
 
 ```shell
-https://ghproxy.com/https://github.com/Cp0204/CasaOS-AppStore-Play/archive/refs/heads/main.zip
+casaos-cli app-management register app-store https://ghproxy.com/https://github.com/Cp0204/CasaOS-AppStore-Play/archive/refs/heads/main.zip
 ```
