@@ -1,0 +1,83 @@
+name: dm-ticket
+
+networks:
+  dm_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.88.0.0/16
+        gateway: 172.88.0.1
+
+services:
+  # https://github.com/ClassmateLin/dm-ticket
+  dm-ticket:
+    image: classmatelin/dm-ticket:v0.1.5
+    container_name: dm-ticket
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - "/DATA/AppData/dm-ticket/config:/src/config"
+    networks:
+      - dm_network
+    depends_on:
+      - token-server
+      - zzdns
+    environment:
+      RUST_LOG: "INFO"
+      TOKEN_SERVER_URL: "http://172.88.0.2:8080"
+      DNS_SERVER: "172.88.0.3"
+
+  zzdns:
+    # https://github.com/ClassmateLin/zzdns
+    image: classmatelin/zzdns:latest
+    restart: unless-stopped
+    privileged: true
+    container_name: zzdns
+    volumes:
+      - "/DATA/AppData/dm-ticket/zzdns:/usr/local/zzdns/config"
+    networks:
+      dm_network:
+        ipv4_address:  172.88.0.3
+    environment:
+      RUST_LOG: "info"
+    # ports:
+    #   - "53:53/udp"
+
+  token-server:
+    image: classmatelin/alitoken-server:latest
+    restart: unless-stopped
+    container_name: token-server
+    networks:
+      dm_network:
+        ipv4_address:  172.88.0.2
+    environment:
+      RUST_LOG: "info"
+    # ports:
+    #   - "8080:8080"
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: Cp0204
+  category: WEB
+  description:
+    en_us:
+    zh_cn: 本应用并非一键使用，请详细阅读方法：https://github.com/ClassmateLin/dm-ticket
+  hostname: ""
+  icon: "https://pp.myapp.com/ma_icon/0/icon_11677_1685416848/256"
+  tagline:
+    en_us:
+    zh_cn: 大麦网自动购票
+  index: /
+  port_map: ""
+  tips:
+    custom: 命令列表
+      - 自动购票 `docker exec -it dm-ticket dm-ticket`
+      - 扫码登录 `docker exec -it dm-ticket dm-login`
+  scheme: http
+  store_app_id: dm-ticket
+  title:
+    en_us: dm-ticket
