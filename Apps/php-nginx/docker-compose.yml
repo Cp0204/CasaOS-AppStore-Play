@@ -1,0 +1,42 @@
+name: php-nginx
+services:
+  php-nginx:
+    environment:
+      TZ: UTC
+      HOME: /root
+      PGID: "1000"
+      PUID: "1000"
+      WEBHOME: /var/www/html
+    image: shinsenter/phpfpm-nginx:latest
+    network_mode: bridge
+    ports:
+      - target: 80
+        published: "8080"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/php-nginx/wwwroot:/var/www/html
+      - /DATA/AppData/php-nginx/certs:/etc/ssl/web
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: php-nginx
+  author: Cp0204
+  category: WEB
+  description:
+    en_us: A Docker application that combines PHP-FPM and Nginx to serve PHP websites. It provides a convenient setup for running PHP applications with an Nginx web server.
+    zh_cn: 一个将PHP-FPM和Nginx结合起来为PHP网站提供服务的Docker应用。它为使用Nginx作为Web服务器运行PHP应用程序提供了便捷的设置。
+  developer: shinsenter
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/php-nginx/icon.png
+  tagline:
+    en_us: PHP-FPM and Nginx for PHP websites
+    zh_cn: 用于PHP网站的PHP-FPM和Nginx
+  tips: {}
+  title:
+    en_us: php-nginx
+  index:
+  port_map: "8080"
+  scheme: http
