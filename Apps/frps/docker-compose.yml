@@ -32,9 +32,9 @@ x-casaos:
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/frps/icon.png
   main: frps
   tagline:
-    en_us: Fast reverse proxy server.
-    zh_cn: 快速的反向代理服务器。
-  thumbnail: 
+    en_us: Fast reverse proxy server
+    zh_cn: 快速的反向代理服务器
+  thumbnail:
   tips:
     before_install:
       en_us: Before installation, please create a file named `frps.ini` in the `/DATA/AppData/frp/` directory.

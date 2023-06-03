@@ -32,9 +32,9 @@ x-casaos:
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/frpc/icon.png
   main: frpc
   tagline:
-    en_us: Fast reverse proxy client.
-    zh_cn: 快速的反向代理客户端。
-  thumbnail: 
+    en_us: Fast reverse proxy client
+    zh_cn: 快速的反向代理客户端
+  thumbnail:
   tips:
     before_install:
       en_us: Before installation, please create a file named `frpc.ini` in the `/DATA/AppData/frp/` directory.

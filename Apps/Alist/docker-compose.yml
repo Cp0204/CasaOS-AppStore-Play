@@ -45,8 +45,8 @@ x-casaos:
   port_map: "5244"
   scheme: http
   tagline:
-    en_us: A file list program that supports multiple storage.
-    zh_cn: 一个支持多种存储的文件列表程序。
+    en_us: A file list program that supports multiple storage
+    zh_cn: 一个支持多种存储的文件列表程序
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Alist/thumbnail.png
   tips:
     before_install:

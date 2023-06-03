@@ -32,7 +32,7 @@ x-casaos:
   main: gotify
   tagline:
     en_us: a simple server for sending and receiving messages
-    zh_cn: 一个简单的服务器用于发送和接收消息。
+    zh_cn: 一个简单的服务器用于发送和接收消息
   thumbnail:
   tips:
   title:

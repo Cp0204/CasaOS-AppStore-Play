@@ -36,8 +36,8 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ddns-go/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ddns-go/screenshot-2.png
   tagline:
-    en_us: Automatically obtain your public IPv4 or IPv6 address and resolve it to the corresponding domain name service.
-    zh_cn: 自动获得你的公网 IPv4 或 IPv6 地址，并解析到对应的域名服务。
+    en_us: Automatically obtain your public IPv4 or IPv6 address and resolve it to the corresponding domain name service
+    zh_cn: 自动获得动态 IP 地址，并解析到对应的域名
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ddns-go/thumbnail.png
   tips: {}
   title:
