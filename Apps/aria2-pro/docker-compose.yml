@@ -1,0 +1,82 @@
+name: aria2-pro
+services:
+  aria2-pro:
+    environment:
+      LISTEN_PORT: "6888"
+      PGID: $PGID
+      PUID: $PUID
+      RPC_PORT: "6800"
+      RPC_SECRET: "TOKEN"
+    image: p3terx/aria2-pro:latest
+    deploy:
+      resources:
+        reservations:
+          memory: "64M"
+    network_mode: bridge
+    ports:
+      - target: 6800
+        published: "6800"
+        protocol: tcp
+      - target: 6888
+        published: "6888"
+        protocol: tcp
+      - target: 6888
+        published: "6888"
+        protocol: udp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+      - type: bind
+        source: /DATA/AppData/aria2-pro/config
+        target: /config
+    x-casaos:
+        envs:
+            - container: RPC_SECRET
+              description:
+                en_us: RPC secret key setting, which is the password required to be filled in when connecting to the WebUI, and only recommended to use letters and numbers.
+                zh_cn: RPC 密钥设置，即 WebUI 连接时需要填写的密码，只建议使用字母和数字。
+            - container: RPC_PORT
+              description:
+                en_us: RPC port setting
+                zh_cn: RPC 端口设置
+            - container: LISTEN_PORT
+              description:
+                en_us: BT listening port (TCP), DHT listening port (UDP) setting
+                zh_cn: BT 监听端口（TCP）、DHT 监听端口（UDP）设置
+        ports:
+            - container: "6800"
+              description:
+                en_us: RPC communication port mapping.
+                zh_cn: RPC 通信端口映射。
+            - container: "6888"
+              description:
+                en_us: BT listening port (TCP) mapping, which is the port defined in the listen-port option in Aria2 configuration.
+                zh_cn: BT 监听端口（TCP）映射，即 Aria2 配置中 listen-port 选项定义的端口。
+            - container: "6888"
+              description:
+                en_us: DHT listening port (UDP) mapping, which is the port defined in the dht-listen-port option in Aria2 configuration.
+                zh_cn: DHT 监听端口（UDP）映射，即 Aria2 配置中 dht-listen-port 选项定义的端口。
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: Cp0204
+  category: Downloader
+  description:
+    en_us: Aria2 is currently the most powerful and versatile download tool. It supports various downloading protocols such as BT, magnet, HTTP, and FTP, and is commonly used as a server for offline downloading. https://p3terx.com/archives/docker-aria2-pro.html
+    zh_cn: Aria2 是目前最强大的全能型下载工具，它支持 BT、磁力、HTTP、FTP 等下载协议，常用做离线下载的服务端。https://p3terx.com/archives/docker-aria2-pro.html
+  developer: P3TERX
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/thumbnail.png
+  main: aria2-pro
+  tagline:
+    en_us: A better Aria2 Docker container
+    zh_cn: 更好用的 Aria2 Docker 容器
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/thumbnail.png
+  tips:
+  title:
+    en_us: Aria2 Pro
