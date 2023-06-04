@@ -50,7 +50,7 @@ x-casaos:
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qinglong/thumbnail.png
   tips: {}
   title:
-    en_us: qinglong
+    en_us: QingLong
     zh_cn: 青龙
   index:
   port_map: "5700"
