@@ -25,7 +25,7 @@ x-casaos:
   author: Cp0204
   category: WEB
   description:
-    en_us:
+    en_us: BiliBiliTool is a tool that automatically performs tasks. When we forget to do a certain task, it is like a caring assistant that follows the commands we have given it in advance, helping us complete the planned tasks within the specified frequency and time range.
     zh_cn: BiliBiliTool 是一个自动执行任务的工具，当我们忘记做某项任务时，它会像一个贴心小助手，按照我们预先吩咐它的命令，在指定频率、时间范围内帮助我们完成计划的任务。
   developer: raywangqvq
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/icon.png
@@ -33,14 +33,13 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/screenshot-1.png
   tagline:
     en_us:
-    zh_cn: 自动执行任务的工具
+    zh_cn: 自动执行 BiliBi 任务的工具
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/thumbnail.png
   tips:
     before_install:
-      en_us:
+      en_us: Automated tool for performing BiliBili tasks.
       zh_cn: 安装前先建立 `/DATA/AppData/bilibilitoolpro/cookies.json` 文件，内容 `{}`
         详读： https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md
   main: bilibilitoolpro
-  scheme: http
   title:
     en_us: BiliBiliToolPro
