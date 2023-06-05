@@ -3,6 +3,10 @@ services:
   chatgpt-next-web:
     container_name: chatgpt-next-web
     image: yidadaa/chatgpt-next-web
+    deploy:
+      resources:
+        limits:
+          memory: 64M
     ports:
       - target: 3000
         published: 3000

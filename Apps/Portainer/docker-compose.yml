@@ -2,6 +2,10 @@ name: portainer
 services:
   portainer:
     image: portainer/portainer-ce:latest
+    deploy:
+      resources:
+        limits:
+          memory: 32M
     network_mode: bridge
     ports:
       - target: 8000
@@ -59,3 +63,6 @@ x-casaos:
   main: portainer
   title:
     en_us: Portainer
+  index: /
+  port_map: "9000"
+  scheme: http
