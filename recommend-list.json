@@ -3,9 +3,12 @@
     "appid": "qinglong"
   },
   {
-    "appid": "v2raya"
+    "appid": "chatgpt-next-web"
   },
   {
     "appid": "ddns-go"
+  },
+  {
+    "appid": "v2raya"
   }
 ]
