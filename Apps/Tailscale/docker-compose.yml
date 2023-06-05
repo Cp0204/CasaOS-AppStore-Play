@@ -9,6 +9,10 @@ services:
       TS_ROUTES: 192.168.100.0/24
       TS_STATE_DIR: /config
     image: tailscale/tailscale:latest
+    deploy:
+      resources:
+        reservations:
+          memory: "32M"
     network_mode: host
     restart: unless-stopped
     volumes:
@@ -35,8 +39,8 @@ x-casaos:
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Tailscale/icon.png
   main: tailscaled
   tagline:
-    en_us: Best VPN Service for Secure Networks.
-    zh_cn: 最佳 VPN 服务，为安全网络提供保护。
+    en_us: A VPN Service for Secure Networks.
+    zh_cn: 一个 VPN 服务，为安全网络提供保护。
   thumbnail:
   tips:
     before_install:
