@@ -1,0 +1,61 @@
+name: portainer
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    network_mode: bridge
+    ports:
+      - target: 8000
+        published: "8000"
+        protocol: tcp
+      - target: 9000
+        published: "9000"
+        protocol: tcp
+      - target: 9443
+        published: "9443"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/portainer
+        target: /data
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    x-casaos:
+      ports:
+        - container: "9000"
+          description:
+            en_us: Portainer Web UI Port
+            zh_cn: Portainer Web UI 端口
+        - container: "9443"
+          description:
+            en_us: Portainer Web UI Port(https)
+            zh_cn: Portainer Web UI 端口(https)
+      volumes:
+        - container: /data
+          description:
+            en_us: Portainer data directory
+            zh_cn: Portainer 数据目录
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Portainer is a lightweight management UI which allows you to easily manage your Docker environments. It is designed to be easy to use and offers full control over your Docker hosts and containers.
+    zh_cn: Portainer 是一个轻量级的管理界面，可让您轻松管理Docker环境。它被设计为易于使用，并提供对Docker主机和容器的完全控制。
+  developer: Portainer
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Portainer/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Portainer/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Portainer/screenshot-2.png
+  tagline:
+    en_us: Lightweight Docker management UI
+    zh_cn: 轻量级 Docker 管理界面
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Portainer/thumbnail.png
+  tips:
+  main: portainer
+  title:
+    en_us: Portainer
