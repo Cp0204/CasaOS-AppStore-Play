@@ -6,7 +6,6 @@ services:
         limits:
           memory: 64M
     environment:
-      - PANDORA_ACCESS_TOKEN=IF SET THIS DEL PANDORA_CLOUD
       - PANDORA_CLOUD=true
       - PANDORA_SERVER=0.0.0.0:80
     image: pengzhile/pandora:latest
@@ -17,6 +16,10 @@ services:
       - target: 80
         published: "84"
         protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/pandora
+        target: /data
     restart: unless-stopped
     privileged: false
 x-casaos:
