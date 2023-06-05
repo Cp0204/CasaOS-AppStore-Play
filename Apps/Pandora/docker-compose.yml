@@ -1,0 +1,47 @@
+name: pandora
+services:
+  pandora:
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+    environment:
+      - PANDORA_ACCESS_TOKEN=IF SET THIS DEL PANDORA_CLOUD
+      - PANDORA_CLOUD=true
+      - PANDORA_SERVER=0.0.0.0:80
+    image: pengzhile/pandora:latest
+    labels:
+      icon: https://img.uxwing.com/wp-content/themes/uxwing/download/brands-social-media/chatgpt-icon.png
+    network_mode: bridge
+    ports:
+      - target: 80
+        published: "84"
+        protocol: tcp
+    restart: unless-stopped
+    privileged: false
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  author: Cp0204
+  category: Chat
+  description:
+    en_us: Pandora has realized the primary operations of the webpage version of ChatGPT. Backend optimization has enabled it to bypass Cloudflare and achieve impressive speeds.
+    zh_cn: 潘多拉实现了网页版 ChatGPT 的主要操作。后端优化，绕过 Cloudflare，速度喜人。
+  developer: pengzhile
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Pandora/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Pandora/screenshot-1.png
+  tagline:
+    en_us: A ChatGPT that lets you breathe smoothly
+    zh_cn: 一个让你呼吸顺畅的ChatGPT
+  tips:
+    before_install:
+      en_us: Default installation is in cloud mode. After installation, please modify environment variables according to your needs. For more options, please refer to https://hub.docker.com/r/pengzhile/pandora.
+      zh_cn: 默认安装为云模式，安装后自行修改环境变量，更多选项参考 https://hub.docker.com/r/pengzhile/pandora
+  main: pandora
+  title:
+    en_us: Pandora
+  index: /
+  port_map: "84"
+  scheme: http
