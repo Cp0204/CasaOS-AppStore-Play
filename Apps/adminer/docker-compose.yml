@@ -14,6 +14,10 @@ services:
             en_us: Adminer HTTP Port
             zh_cn: Adminer HTTP 端口
 x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
   main: adminer
   author: Cp0204
   category: Database

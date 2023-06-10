@@ -43,6 +43,7 @@ services:
 x-casaos:
   architectures:
     - amd64
+    - arm
     - arm64
   main: mariadb
   author: Cp0204
@@ -50,7 +51,7 @@ x-casaos:
   description:
     en_us: MariaDB is a community-developed fork of MySQL and aims to be an enhanced, drop-in replacement for it.
     zh_cn: MariaDB 是 MySQL 的社区开发分支，旨在成为其增强版的兼容替代品。
-  developer: MariaDB Foundation
+  developer: MariaDB
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/MariaDB/icon.png
   tagline:
     en_us: Open-source relational database
