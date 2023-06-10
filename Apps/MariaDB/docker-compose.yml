@@ -1,0 +1,79 @@
+name: mariadb
+services:
+  mariadb:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: PASSWORD
+    ports:
+      - target: 3306
+        published: "3306"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /etc/mysql/conf.d
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          memory: "256M"
+    x-casaos:
+      envs:
+        - container: MYSQL_ROOT_PASSWORD
+          description:
+            en_us: Root password for MariaDB.
+            zh_cn: MariaDB 的 root 密码。
+      volumes:
+        - container: /etc/mysql/conf.d
+          description:
+            en_us: MariaDB config directory.
+            zh_cn: MariaDB 配置目录。
+        - container: /var/lib/mysql
+          description:
+            en_us: MariaDB data directory.
+            zh_cn: MariaDB 数据目录。
+      ports:
+        - container: "3306"
+          description:
+            en_us: MariaDB Port
+            zh_cn: MariaDB 端口
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: mariadb
+  author: Cp0204
+  category: Database
+  description:
+    en_us: MariaDB is a community-developed fork of MySQL and aims to be an enhanced, drop-in replacement for it.
+    zh_cn: MariaDB 是 MySQL 的社区开发分支，旨在成为其增强版的兼容替代品。
+  developer: MariaDB Foundation
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/MariaDB/icon.png
+  tagline:
+    en_us: Open-source relational database
+    zh_cn: 开源关系型数据库
+  tips:
+    before_install:
+      en_us: |
+        Default Credentials
+
+        | Username | Password |
+        |----------|----------|
+        | `root`   | `PASSWORD` |
+
+        The installation allows you to modify the environment variable afterwards.
+        For more parameters, please refer to https://hub.docker.com/_/mariadb
+      zh_cn: |
+        默认凭据
+
+        | 用户名 | 密码 |
+        |----------|----------|
+        | `root`   | `PASSWORD` |
+
+        安装后可在环境变量中修改
+        更多参数请参考 https://hub.docker.com/_/mariadb
+  title:
+    en_us: MariaDB
