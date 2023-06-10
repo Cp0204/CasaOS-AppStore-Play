@@ -1,0 +1,33 @@
+name: adminer
+services:
+  adminer:
+    image: adminer
+    ports:
+      - target: 8080
+        published: 8181
+        protocol: tcp
+    restart: unless-stopped
+    x-casaos:
+      ports:
+        - container: "8080"
+          description:
+            en_us: Adminer HTTP Port
+            zh_cn: Adminer HTTP 端口
+x-casaos:
+  main: adminer
+  author: Cp0204
+  category: Database
+  description:
+    en_us: Adminer is a database management tool that allows you to manage your databases with a simple and intuitive interface.
+    zh_cn: Adminer 是一个数据库管理工具，它通过简单直观的界面帮助您管理数据库。
+  developer: Adminer
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/adminer/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/adminer/screenshot-1.png
+  tagline:
+    en_us: Database management tool
+    zh_cn: 数据库管理工具
+  title:
+    en_us: Adminer
+  index: /
+  port_map: "8181"
