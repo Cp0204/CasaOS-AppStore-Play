@@ -6,6 +6,10 @@ services:
       USER_ID: "0"
       TZ: Asia/Hong_Kong
     image: tinymediamanager/tinymediamanager:5-test
+    deploy:
+      resources:
+        reservations:
+          memory: "1024M"
     network_mode: bridge
     ports:
       - target: 4000
