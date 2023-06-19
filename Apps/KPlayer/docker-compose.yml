@@ -1,0 +1,52 @@
+name: kplayer
+services:
+  kplayer:
+    image: bytelang/kplayer:latest
+    deploy:
+      resources:
+        reservations:
+          memory: "64M"
+    network_mode: bridge
+    ports:
+      - target: 4156
+        published: "4156"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/kplayer/cache
+        target: /kplayer/cache
+      - type: bind
+        source: /DATA/AppData/kplayer/config.json
+        target: /kplayer/config.json
+      - type: bind
+        source: /media
+        target: /media
+      - type: bind
+        source: /mnt
+        target: /mnt
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  author: Cp0204
+  category: Network
+  description:
+    en_us: KPlayer can help you quickly perform looped live streaming of video resources on the server, simply customize the configuration file to enable live streaming.
+    zh_cn: KPlayer 可以帮助你快速在服务器上进行视频资源的循环直播推流，只需要简单修改配置文件即可开启直播推流。
+  developer: bytelang
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/KPlayer/icon.png
+  main: kplayer
+  tagline:
+    en_us: Live streaming of video resources
+    zh_cn: 视频资源的直播推流
+  thumbnail:
+  tips:
+    before_install:
+      en_us: Before installation, please create a `config.json` file in the directory `/DATA/AppData/kplayer/`. Documentation https://docs.kplayer.net/v0.5.8/helper/config.html
+      zh_cn: 在安装之前，请先在目录 `/DATA/AppData/kplayer/` 中创建 `config.json` 文件。文档 https://docs.kplayer.net/v0.5.8/helper/config.html
+  title:
+    en_us: KPlayer
+  index:
+  port_map: "4156"
+  scheme: http
