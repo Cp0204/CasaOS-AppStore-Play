@@ -24,9 +24,9 @@ x-casaos:
     en_us: Excalidraw is a virtual collaborative whiteboard tool that lets you easily sketch diagrams, illustrate ideas, and create beautiful illustrations remotely.
     zh_cn: Excalidraw是一款虚拟协作白板工具，可以让您轻松绘制图表、阐明思想和远程创建精美的插图。
   developer: Excalidraw
-  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Excalidraw/icon.png
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Excalidraw/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Excalidraw/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Excalidraw/screenshot-1.png
   tagline:
     en_us: Collaborative Whiteboard Tool
     zh_cn: 协作白板工具
