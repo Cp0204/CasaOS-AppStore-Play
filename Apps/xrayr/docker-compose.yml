@@ -3,8 +3,8 @@ services:
   xrayr:
     deploy:
       resources:
-        limits:
-          memory: 32M
+        reservations:
+          memory: "64M"
     image: ghcr.io/xrayr-project/xrayr:master
     labels:
       icon: https://cdn.jsdelivr.net/gh/Cp0204/AppIcon@main/all/xrayr.png

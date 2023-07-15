@@ -1,0 +1,37 @@
+name: excalidraw
+services:
+  excalidraw:
+    environment:
+      TZ: $TZ
+    image: excalidraw/excalidraw:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 80
+        published: "5000"
+        protocol: tcp
+    restart: unless-stopped
+x-casaos:
+  architectures:
+    - amd64
+  main: excalidraw
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Excalidraw is a virtual collaborative whiteboard tool that lets you easily sketch diagrams, illustrate ideas, and create beautiful illustrations remotely.
+    zh_cn: Excalidraw是一款虚拟协作白板工具，可以让您轻松绘制图表、阐明思想和远程创建精美的插图。
+  developer: Excalidraw
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Excalidraw/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Excalidraw/screenshot-1.png
+  tagline:
+    en_us: Collaborative Whiteboard Tool
+    zh_cn: 协作白板工具
+  tips: {}
+  title:
+    en_us: Excalidraw
+  index: /
+  port_map: "5000"
