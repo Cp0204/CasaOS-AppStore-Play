@@ -1,0 +1,42 @@
+name: xrayr
+services:
+  xrayr:
+    deploy:
+      resources:
+        limits:
+          memory: 32M
+    image: ghcr.io/xrayr-project/xrayr:master
+    labels:
+      icon: https://cdn.jsdelivr.net/gh/Cp0204/AppIcon@main/all/xrayr.png
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/xrayr
+        target: /etc/XrayR
+      - type: bind
+        source: /etc/timezone
+        target: /etc/timezone
+    network_mode: host
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  author: Cp0204
+  category: Network
+  description:
+    en_us: A Xray backend framework that can easily support many panels.
+    zh_cn: 一个基于Xray的后端框架，支持V2ay,Trojan,Shadowsocks协议，极易扩展，支持多面板对接。
+  developer: thank243
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xrayr/icon.png
+  index: /
+  main: xrayr
+  store_app_id: xrayr
+  tagline:
+    en_us: A Xray backend framework
+    zh_cn: 一个基于Xray的后端框架
+  tips:
+    before_install:
+      en_us: Before installation, please create a `config.yml` file in the directory `/DATA/AppData/xrayr/`. Documentation https://xrayr-project.github.io/XrayR-doc/xrayr-pei-zhi-wen-jian-shuo-ming/config.html
+      zh_cn: 在安装之前，请先在目录 `/DATA/AppData/xrayr/` 中创建 `config.yml` 文件。文档 https://xrayr-project.github.io/XrayR-doc/xrayr-pei-zhi-wen-jian-shuo-ming/config.html
+  title:
+    en_us: XrayR
