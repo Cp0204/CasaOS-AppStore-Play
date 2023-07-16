@@ -1,0 +1,54 @@
+name: fastosdocker
+services:
+  fastosdocker:
+    environment:
+      FAST_STORE: http://dockernb.com:8300
+    image: wangbinxingkong/fast:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    ports:
+      - target: 8081
+        published: "8081"
+        protocol: tcp
+      - target: 8082
+        published: "8082"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: /etc/docker/
+        target: /etc/docker/
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /fast/data
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: fastosdocker
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: FAST OS DOCKER is a graphical management tool for Docker, providing users with Docker overview, local container management, remote image pulling, server disk mapping, server network management, and more. It can meet the container management needs of small to medium-sized organizations.
+    zh_cn: FAST OS DOCKER是Docker的图形化管理工具，为用户提供了Docker总览、本地容器管理、远程镜像拉取、服务器磁盘映射、服务器网络管理等功能，基本能满足中小型单位对容器管理的全部需求。
+  developer: wangbinxingkong
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fast-os-docker/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fast-os-docker/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fast-os-docker/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fast-os-docker/screenshot-3.png
+  tagline:
+    en_us: Docker Management Tool
+    zh_cn: Docker管理工具
+  thumbnail:
+  tips: {}
+  title:
+    en_us: FAST OS DOCKER
+  index: /
+  port_map: "8081"
