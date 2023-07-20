@@ -2,6 +2,7 @@ name: frps
 services:
   frps:
     image: snowdreamtech/frps:latest
+    container_name: frps
     deploy:
       resources:
         reservations:

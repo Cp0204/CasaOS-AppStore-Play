@@ -2,6 +2,7 @@ name: gotify-arm64
 services:
   gotify-arm64:
     image: gotify/server-arm64:latest
+    container_name: gotify-arm64
     deploy:
       resources:
         reservations:

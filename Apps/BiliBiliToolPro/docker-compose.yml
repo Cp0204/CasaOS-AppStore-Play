@@ -8,6 +8,7 @@ services:
       Ray_UnfollowBatchedTaskConfig__Cron: 0 6 1 * *
       Ray_VipBigPointConfig__Cron: 7 1 * * *
     image: ghcr.io/raywangqvq/bilibili_tool_pro:latest
+    container_name: bilibilitoolpro
     network_mode: bridge
     restart: unless-stopped
     volumes:

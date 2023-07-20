@@ -4,6 +4,7 @@ services:
     environment:
       V2RAYA_ADDRESS: 0.0.0.0:2017
     image: mzz2017/v2raya:latest
+    container_name: v2raya
     deploy:
       resources:
         reservations:

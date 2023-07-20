@@ -2,6 +2,7 @@ name: xunlei
 services:
   xunlei:
     image: cnk3x/xunlei:latest
+    container_name: xunlei
     deploy:
       resources:
         reservations:

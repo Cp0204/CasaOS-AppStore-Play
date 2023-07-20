@@ -4,6 +4,7 @@ services:
     environment:
       FAST_STORE: http://dockernb.com:8300
     image: wangbinxingkong/fast:latest
+    container_name: fastosdocker
     deploy:
       resources:
         reservations:

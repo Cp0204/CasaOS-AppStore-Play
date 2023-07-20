@@ -9,6 +9,7 @@ services:
       - PANDORA_CLOUD=true
       - PANDORA_SERVER=0.0.0.0:80
     image: pengzhile/pandora:latest
+    container_name: pandora
     labels:
       icon: https://img.uxwing.com/wp-content/themes/uxwing/download/brands-social-media/chatgpt-icon.png
     network_mode: bridge

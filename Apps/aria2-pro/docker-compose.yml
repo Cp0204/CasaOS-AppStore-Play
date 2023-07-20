@@ -8,6 +8,7 @@ services:
       RPC_PORT: "6800"
       RPC_SECRET: "TOKEN"
     image: p3terx/aria2-pro:latest
+    container_name: aria2-pro
     deploy:
       resources:
         reservations:

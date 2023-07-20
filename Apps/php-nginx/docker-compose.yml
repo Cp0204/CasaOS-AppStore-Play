@@ -8,6 +8,7 @@ services:
       PUID: "1000"
       WEBHOME: /var/www/html
     image: shinsenter/phpfpm-nginx:latest
+    container_name: php-nginx
     network_mode: bridge
     ports:
       - target: 80

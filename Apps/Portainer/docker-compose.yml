@@ -2,6 +2,7 @@ name: portainer
 services:
   portainer:
     image: portainer/portainer-ce:latest
+    container_name: portainer
     deploy:
       resources:
         limits:

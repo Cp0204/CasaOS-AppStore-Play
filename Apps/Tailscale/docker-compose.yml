@@ -9,6 +9,7 @@ services:
       TS_ROUTES: 192.168.100.0/24
       TS_STATE_DIR: /config
     image: tailscale/tailscale:latest
+    container_name: tailscaled
     deploy:
       resources:
         reservations:

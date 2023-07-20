@@ -2,6 +2,7 @@ name: ddns-go
 services:
   ddns-go:
     image: jeessy/ddns-go:latest
+    container_name: ddns-go
     deploy:
       resources:
         reservations:

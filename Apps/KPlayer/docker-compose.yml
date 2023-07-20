@@ -2,6 +2,7 @@ name: kplayer
 services:
   kplayer:
     image: bytelang/kplayer:latest
+    container_name: kplayer
     deploy:
       resources:
         reservations:

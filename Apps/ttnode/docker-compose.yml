@@ -2,6 +2,7 @@ name: ttnode
 services:
   ttnode:
     image: registry.cn-hangzhou.aliyuncs.com/tiptime/ttnode:latest
+    container_name: ttnode
     deploy:
       resources:
         limits:

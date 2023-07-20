@@ -2,6 +2,7 @@ name: frpc
 services:
   frpc:
     image: snowdreamtech/frpc:latest
+    container_name: frpc
     deploy:
       resources:
         reservations:

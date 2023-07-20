@@ -2,6 +2,7 @@ name: qinglong
 services:
   qinglong:
     image: whyour/qinglong:latest
+    container_name: qinglong
     deploy:
       resources:
         reservations:

@@ -4,6 +4,7 @@ services:
     environment:
       TZ: $TZ
     image: excalidraw/excalidraw:latest
+    container_name: excalidraw
     deploy:
       resources:
         reservations:

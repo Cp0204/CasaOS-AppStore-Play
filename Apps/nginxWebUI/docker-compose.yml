@@ -4,6 +4,7 @@ services:
     environment:
       BOOT_OPTIONS: "--server.port=8080"
     image: cym1102/nginxwebui:latest
+    container_name: nginxwebui
     deploy:
       resources:
         reservations:

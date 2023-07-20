@@ -6,6 +6,7 @@ services:
       USER_ID: "0"
       TZ: Asia/Hong_Kong
     image: tinymediamanager/tinymediamanager:5-test
+    container_name: tinymediamanager
     deploy:
       resources:
         reservations:

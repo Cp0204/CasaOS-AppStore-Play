@@ -2,6 +2,7 @@ name: gotify
 services:
   gotify:
     image: gotify/server:latest
+    container_name: gotify
     deploy:
       resources:
         reservations:

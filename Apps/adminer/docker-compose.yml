@@ -2,6 +2,7 @@ name: adminer
 services:
   adminer:
     image: adminer
+    container_name: adminer
     ports:
       - target: 8080
         published: 8181
