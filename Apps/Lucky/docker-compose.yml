@@ -23,7 +23,6 @@ x-casaos:
   main: lucky
   author: Cp0204
   category: Network
-  hostname: lucky
   description:
     en_us: A powerful tool for port forwarding, reverse proxy, dynamic DNS, wake-on-LAN, IPv4 NAT traversal, task scheduling, and automatic certificate management.
     zh_cn: 一款功能强大的端口转发、反向代理、动态域名、网络唤醒、IPv4内网穿透、计划任务和自动证书管理工具。
