@@ -27,11 +27,11 @@ x-casaos:
     en_us: nginxWebUI is a graphical management of nginx configuration tool , you can use the web page to quickly configure the various functions of nginx , including http protocol forwarding , tcp protocol forwarding , reverse proxy , load balancing , static html server , ssl certificate automatically apply for , renew , configure and so on , configure a good can be built to generate the nginx.conf file , and can control nginx using this file startup and reload , to complete the nginx graphical control of the closed loop . At the same time you can control nginx use this file to start and reload, complete the graphical control of nginx closed loop.
     zh_cn: nginxWebUI是一款图形化管理nginx配置得工具, 可以使用网页来快速配置nginx的各项功能, 包括http协议转发, tcp协议转发, 反向代理, 负载均衡, 静态html服务器, ssl证书自动申请、续签、配置等, 配置好后可一建生成nginx.conf文件, 同时可控制nginx使用此文件进行启动与重载, 完成对nginx的图形化控制闭环.
   developer: cym1102
-  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nginxwebui/icon.png
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nginxWebUI/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nginxwebui/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nginxwebui/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nginxwebui/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nginxWebUI/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nginxWebUI/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nginxWebUI/screenshot-3.png
   tagline:
     en_us: Manage Nginx with ease
     zh_cn: 轻松管理Nginx
