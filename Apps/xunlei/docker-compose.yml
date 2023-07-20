@@ -1,0 +1,58 @@
+name: xunlei
+services:
+  xunlei:
+    image: cnk3x/xunlei:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    privileged: true
+    network_mode: host
+    environment:
+      XL_WEB_PORT: "4321"
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /xunlei/data
+      - type: bind
+        source: /DATA/Downloads/ThunderDownloads
+        target: /xunlei/downloads
+    restart: unless-stopped
+    x-casaos:
+      envs:
+        - container: XL_WEB_PORT
+          description:
+            en_us: Web UI Port
+            zh_cn: Web UI端口
+      volumes:
+        - container: /xunlei/data
+          description:
+            en_us: Xunlei data directory.
+            zh_cn: 迅雷数据目录
+        - container: /xunlei/downloads
+          description:
+            en_us: Xunlei downloads directory.
+            zh_cn: 迅雷下载目录
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: xunlei
+  author: Cp0204
+  category: Downloader
+  description:
+    en_us: Xunlei remote download is a cross-regional remote control download mode, which can remotely control the remote downloader to download the task, which can really download the task anywhere.
+    zh_cn: 迅雷远程下载是一种跨地域远程控制的下载方式，可以远程遥控异地下载器来下载任务，真正做到随地随地下载任务。
+  developer: Xunlei Corporation
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xunlei/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xunlei/screenshot-1.png
+  tagline:
+    en_us: Popular download manager in China
+    zh_cn: 迅雷远程下载
+  tips: {}
+  title:
+    en_us: Thunder
+    zh_cn: 迅雷
+  index: /
+  port_map: "4321"
