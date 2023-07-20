@@ -1,0 +1,46 @@
+name: lucky
+services:
+  lucky:
+    cpu_shares: 90
+    container_name: lucky
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    image: gdy666/lucky
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/lucky
+        target: /goodluck
+    network_mode: host
+    privileged: false
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: lucky
+  author: Cp0204
+  category: Network
+  hostname: lucky
+  description:
+    en_us: A powerful tool for port forwarding, reverse proxy, dynamic DNS, wake-on-LAN, IPv4 NAT traversal, task scheduling, and automatic certificate management.
+    zh_cn: 一款功能强大的端口转发、反向代理、动态域名、网络唤醒、IPv4内网穿透、计划任务和自动证书管理工具。
+  developer: gdy666
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Lucky/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Lucky/screenshot-1.png
+  tagline:
+    en_us: Powerful networking tool
+    zh_cn: 软硬路由公网神器
+  tips:
+    before_install:
+      en_us: Default login account `666`, Default login password `666`
+      zh_cn: 默认登录账号 `666`，默认登录密码 `666`
+  title:
+    en_us: Lucky
+  index: /
+  port_map: "16601"
+  scheme: http
+  store_app_id: lucky
