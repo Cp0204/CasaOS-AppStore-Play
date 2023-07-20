@@ -11,6 +11,8 @@ A not-so-serious CasaOS App Store.
 
 ## Add to CasaOS / 添加到 CasaOS
 
+> NOTE: Custom Appstore is only supported on CasaOS version [0.4.4](https://blog.casaos.io/blog/32.html) and above.
+
 Source link 源地址：
 ```
 https://play.cuse.eu.org/Cp0204-AppStore-Play.zip
@@ -20,9 +22,6 @@ or 或：
 ```
 https://github.com/Cp0204/CasaOS-AppStore-Play/archive/refs/heads/main.zip
 ```
-
-
-> **NOTE: Custom Appstore is only supported on CasaOS version [0.4.4](https://blog.casaos.io/blog/32.html) and above. How to upgrade? [Click here](#-how-to-upgrade-casaos)**
 
 ## Donate / 赞助
 
