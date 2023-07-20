@@ -1,7 +1,6 @@
 name: lucky
 services:
   lucky:
-    cpu_shares: 90
     container_name: lucky
     deploy:
       resources:
