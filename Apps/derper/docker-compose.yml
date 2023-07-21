@@ -1,0 +1,50 @@
+name: tailscale-derper
+services:
+  tailscale-derper:
+    environment:
+      DERP_ADDR: :3443
+      DERP_CERT_MODE: manual
+      DERP_DOMAIN: xxx.com
+    image: fredliang/derper:latest
+    container_name: tailscale-derper
+    deploy:
+      resources:
+        reservations:
+          memory: "32M"
+    network_mode: bridge
+    ports:
+      - target: 3443
+        published: "3443"
+        protocol: tcp
+      - target: 3478
+        published: "3478"
+        protocol: udp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/derper/certs
+        target: /app/certs
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  author: Cp0204
+  category: VPN
+  description:
+    en_us: Tailscale Derper is a lightweight utility that allows you to serve your own Tailscale relays for better performance and control over your network traffic. Configure your DERP server with ease and enhance your Tailscale VPN experience.
+    zh_cn: Tailscale Derper是一个轻量级实用程序，允许您为Tailscale VPN服务提供自己的中继服务器，从而提供更好的性能和对网络流量的控制。轻松配置您的DERP服务器，增强Tailscale VPN体验。
+  developer: unknown
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Tailscale/icon.png
+  main: tailscale-derper
+  store_app_id: tailscale-derper
+  port_map: "3443"
+  scheme: http
+  tagline:
+    en_us: Tailscale Relay Server
+    zh_cn: Tailscale中继服务器
+  tips:
+    before_install:
+      en_us: If your domain name is `xxx.com`, the certificate and private key files are named `xxx.com.crt`, `xxx.com.key` and are placed in the /certs directory. [Documentation](https://tailscale.com/kb/1118/custom-derp-servers/)
+      zh_cn: 假设你的域名是`xxx.com`，证书和私钥文件命名`xxx.com.crt`、`xxx.com.key`，放于/certs目录。[文档](https://tailscale.com/kb/1118/custom-derp-servers/)
+  title:
+    en_us: Tailscale Derper
