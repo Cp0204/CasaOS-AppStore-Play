@@ -1,0 +1,45 @@
+name: mtg-proxy
+services:
+  mtg-proxy:
+    image: nineseconds/mtg:2
+    container_name: mtg-proxy
+    network_mode: host
+    deploy:
+      resources:
+        reservations:
+          memory: "32M"
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/mtg-proxy/config.toml
+        target: /config.toml
+    x-casaos:
+      volumes:
+        - container: /config.toml
+          description:
+            en_us: MTProto Proxy configuration file.
+            zh_cn: MTProto代理配置文件
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  author: Cp0204
+  category: VPN
+  description:
+    en_us: MTProto Proxy is a Telegram proxy server with support for all aspects of the protocol and multi-core processors. It provides a high level of privacy and security for your Telegram communication.
+    zh_cn: MTProto代理是一个支持Telegram协议的代理服务器，支持多核处理器。它为您的Telegram通信提供了高水平的隐私和安全性。
+  developer: nineseconds
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/mtg-proxy/icon.png
+  main: mtg-proxy
+  scheme: http
+  tagline:
+    en_us: Telegram proxy server
+    zh_cn: Telegram协议的代理服务器
+  thumbnail: ""
+  tips:
+    before_install:
+      en_us: Please create the `/DATA/AppData/mtg-proxy/config.toml` file first [Documentation](https://github.com/9seconds/mtg/blob/master/example.config.toml)
+      zh_cn: 请先创建`/DATA/AppData/mtg-proxy/config.toml`文件 [Documentation](https://github.com/9seconds/mtg/blob/master/example.config.toml)
+  title:
+    en_us: MTG Proxy
