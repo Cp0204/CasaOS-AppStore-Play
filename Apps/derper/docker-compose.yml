@@ -33,7 +33,7 @@ x-casaos:
   description:
     en_us: Tailscale Derper is a lightweight utility that allows you to serve your own Tailscale relays for better performance and control over your network traffic. Configure your DERP server with ease and enhance your Tailscale VPN experience.
     zh_cn: Tailscale Derper是一个轻量级实用程序，允许您为Tailscale VPN服务提供自己的中继服务器，从而提供更好的性能和对网络流量的控制。轻松配置您的DERP服务器，增强Tailscale VPN体验。
-  developer: unknown
+  developer: fredliang
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Tailscale/icon.png
   main: tailscale-derper
   store_app_id: tailscale-derper
