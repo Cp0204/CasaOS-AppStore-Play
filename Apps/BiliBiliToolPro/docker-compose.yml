@@ -33,12 +33,13 @@ x-casaos:
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/screenshot-1.png
   tagline:
-    en_us:
+    en_us: Automated tool for performing BiliBili tasks.
     zh_cn: 自动执行 BiliBi 任务的工具
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/thumbnail.png
   tips:
     before_install:
-      en_us: Automated tool for performing BiliBili tasks.
+      en_us: Before installing, create a `/DATA/AppData/bilibilitoolpro/cookies.json` file with `{}` content.
+        Read more https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md
       zh_cn: 安装前先建立 `/DATA/AppData/bilibilitoolpro/cookies.json` 文件，内容 `{}`
         详读： https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md
   main: bilibilitoolpro
