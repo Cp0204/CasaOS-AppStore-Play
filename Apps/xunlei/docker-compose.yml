@@ -20,6 +20,12 @@ services:
       - type: bind
         source: /DATA/Downloads/ThunderDownloads
         target: /xunlei/downloads
+      - type: bind
+        source: /mnt
+        target: /xunlei/HDD
+      - type: bind
+        source: /media/devmon
+        target: /xunlei/UDISK
     restart: unless-stopped
     x-casaos:
       envs:
