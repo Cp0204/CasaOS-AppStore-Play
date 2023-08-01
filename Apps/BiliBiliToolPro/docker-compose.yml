@@ -21,7 +21,6 @@ services:
 x-casaos:
   architectures:
     - amd64
-    - arm
     - arm64
   author: Cp0204
   category: WEB
@@ -38,10 +37,32 @@ x-casaos:
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/thumbnail.png
   tips:
     before_install:
-      en_us: Before installing, create a `/DATA/AppData/bilibilitoolpro/cookies.json` file with `{}` content.
-        Read more https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md
-      zh_cn: 安装前先建立 `/DATA/AppData/bilibilitoolpro/cookies.json` 文件，内容 `{}`
-        详读： https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md
+      en_us: Steps
+
+        1. Create a `cookies.json` file before installing, and run it on the host machine
+
+        `wget -O /DATA/AppData/bilibilitoolpro/cookies.json https://gcore.jsdelivr.net/gh/RayWangQvQ/BiliBiliToolPro@main/docker/sample/cookies.json`.
+
+
+        2. After installing and scanning the code to log in, run
+
+        `docker exec -it bilibilitoolpro bash -c "dotnet Ray.BiliBiliTool.Console.dll --runTasks=Login"`
+
+
+        [Documentation](https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md)
+      zh_cn: 使用步骤
+
+        1. 安装前建立**cookies.json**文件，在宿主机运行
+        
+        `wget -O /DATA/AppData/bilibilitoolpro/cookies.json https://gcore.jsdelivr.net/gh/RayWangQvQ/BiliBiliToolPro@main/docker/sample/cookies.json`
+
+
+        2. 安装完成后**扫码登录**，在宿主机运行
+
+        `docker exec -it bilibilitoolpro bash -c "dotnet Ray.BiliBiliTool.Console.dll --runTasks=Login"`
+
+
+        [官方文档](https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md)
   main: bilibilitoolpro
   title:
     en_us: BiliBiliToolPro
