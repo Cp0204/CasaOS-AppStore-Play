@@ -1,0 +1,50 @@
+name: vscode
+services:
+  vscode:
+    container_name: vscode
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    environment:
+      - DEFAULT_WORKSPACE=/config/workspace
+      - PASSWORD=casaos
+      - PGID=1000
+      - PUID=1000
+      - SUDO_PASSWORD=password
+      - TZ=Etc/UTC
+    image: linuxserver/code-server:latest
+    ports:
+      - target: 8443
+        published: "8443"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/vscode/config
+        target: /config
+      - type: bind
+        source: /DATA
+        target: /config/workspace/DATA
+    network_mode: bridge
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  author: Coder.com
+  category: Developer
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vscode/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vscode/screenshot-1.png
+  store_app_id: vscode
+  description:
+    en_us: Code with ease using Visual Studio Code on your server. Access it through your browser anywhere, anytime.
+    zh_cn: 在您的服务器上轻松编写代码，使用Visual Studio Code。通过浏览器随时随地访问。
+  tagline:
+    en_us: Code Anywhere with VS Code
+    zh_cn: 使用VS Code随时随地编码
+  title:
+    en_us: VS Code
+  index: /
+  port_map: "8443"
+  scheme: http
