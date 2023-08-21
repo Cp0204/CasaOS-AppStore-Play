@@ -3,11 +3,11 @@ version: "3"
 services:
 
   # --- LinkAce Image with PHP and nginx
-  linkace-app:
+  linkace:
     deploy:
       resources:
         reservations:
-          memory: 128M
+          memory: 256M
     image: linkace/linkace:simple
     restart: unless-stopped
     depends_on:
