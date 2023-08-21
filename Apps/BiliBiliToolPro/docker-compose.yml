@@ -41,7 +41,7 @@ x-casaos:
 
         1. Create a `cookies.json` file before installing, and run it on the host machine
 
-        `wget -O /DATA/AppData/bilibilitoolpro/cookies.json https://gcore.jsdelivr.net/gh/RayWangQvQ/BiliBiliToolPro@main/docker/sample/cookies.json`.
+        `mkdir -p /DATA/AppData/bilibilitoolpro ; wget -O /DATA/AppData/bilibilitoolpro/cookies.json https://gcore.jsdelivr.net/gh/RayWangQvQ/BiliBiliToolPro@main/docker/sample/cookies.json ; chmod 666 /DATA/AppData/bilibilitoolpro/cookies.json`.
 
 
         2. After installing and scanning the code to log in, run
@@ -53,8 +53,8 @@ x-casaos:
       zh_cn: 使用步骤
 
         1. 安装前建立**cookies.json**文件，在宿主机运行
-        
-        `wget -O /DATA/AppData/bilibilitoolpro/cookies.json https://gcore.jsdelivr.net/gh/RayWangQvQ/BiliBiliToolPro@main/docker/sample/cookies.json`
+
+        `mkdir -p /DATA/AppData/bilibilitoolpro ; wget -O /DATA/AppData/bilibilitoolpro/cookies.json https://gcore.jsdelivr.net/gh/RayWangQvQ/BiliBiliToolPro@main/docker/sample/cookies.json ; chmod 666 /DATA/AppData/bilibilitoolpro/cookies.json`
 
 
         2. 安装完成后**扫码登录**，在宿主机运行
