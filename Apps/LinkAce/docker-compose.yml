@@ -1,0 +1,89 @@
+name: linkace
+version: "3"
+services:
+
+  # --- LinkAce Image with PHP and nginx
+  linkace-app:
+    image: linkace/linkace:simple
+    restart: unless-stopped
+    depends_on:
+      - linkace-db
+    ports:
+      - "0.0.0.0:8086:80"
+      #- "0.0.0.0:443:443"
+    volumes:
+      - /DATA/AppData/linkace/.env:/app/.env
+      - /DATA/AppData/linkace/backups:/app/storage/app/backups
+      - /DATA/AppData/linkace/linkace_logs:/app/storage/logs
+      # Remove the hash of the following line if you want to use HTTPS for this container
+      #- ./nginx-ssl.conf:/etc/nginx/conf.d/default.conf:ro
+      #- /path/to/your/ssl/certificates:/certs:ro
+    container_name: linkace-app
+    networks:
+      - linkace-network
+
+  # --- MariaDB
+  linkace-db:
+    image: mariadb:10.7
+    restart: unless-stopped
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
+    environment:
+      - MYSQL_ROOT_PASSWORD=ChangeThisToASecurePassword!
+      - MYSQL_USER=linkace
+      - MYSQL_PASSWORD=ChangeThisToASecurePassword!
+      - MYSQL_DATABASE=linkace
+    volumes:
+      - /DATA/AppData/linkace/mysql:/var/lib/mysql
+    container_name: linkace-db
+    networks:
+      - linkace-network
+
+networks:
+  linkace-network:
+    driver: bridge
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: Cp0204
+  developer: linkace
+  category: Developer
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/LinkAce/icon.png
+  store_app_id: linkace
+  description:
+    en_us: Manage your bookmarks, links, and reading list with ease using LinkAce. Access your links from anywhere with a web browser.
+    zh_cn: 使用LinkAce轻松管理书签、链接和阅读列表。通过Web浏览器随时随地访问您的链接。
+  tagline:
+    en_us: Manage Your Bookmarks and Links
+    zh_cn: 管理您的书签和链接
+  tips:
+    before_install:
+      en_us: Steps
+
+        1. Create the **.env** file before installation and run it on the host computer
+
+        `wget -O /DATA/AppData/LinkAce/.env https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/LinkAce/.env`.
+
+
+        2. Customize the database password by modifying the **DB_PASSWORD** field in the **.env** file and the Docker environment variable
+
+
+        [Official documentation](https://www.linkace.org/docs/v1/setup/setup-with-docker/simple/)
+      zh_cn: 使用步骤
+
+        1. 安装前建立**.env**文件，在宿主机运行
+
+        `wget -O /DATA/AppData/LinkAce/.env https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/LinkAce/.env`
+
+
+        2. 自定义数据库密码，修改**.env**文件和Docker环境变量中的**DB_PASSWORD**字段
+
+
+        [官方文档](https://www.linkace.org/docs/v1/setup/setup-with-docker/simple/)
+  title:
+    en_us: LinkAce
+  index: /
+  port_map: "8086"
+  scheme: http
