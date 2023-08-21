@@ -4,6 +4,10 @@ services:
 
   # --- LinkAce Image with PHP and nginx
   linkace-app:
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
     image: linkace/linkace:simple
     restart: unless-stopped
     depends_on:
@@ -62,23 +66,29 @@ x-casaos:
     before_install:
       en_us: Steps
 
-        1. Create the **.env** file before installation and run it on the host computer
+        1. Create the **.env** file before installation and run it on the host machine
 
-        `wget -O /DATA/AppData/LinkAce/.env https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/LinkAce/.env`.
+        `mkdir -p /DATA/AppData/linkace ; wget -O /DATA/AppData/linkace/.env https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ LinkAce/.env ; chmod 666 /DATA/AppData/linkace/.env`
 
 
-        2. Customize the database password by modifying the **DB_PASSWORD** field in the **.env** file and the Docker environment variable
+        2. For security, customize the database password after installation, change the **DB_PASSWORD** field in the **.env** file and the Docker environment variable.
+
+
+        3. Go to WebUI to initialize the application
 
 
         [Official documentation](https://www.linkace.org/docs/v1/setup/setup-with-docker/simple/)
       zh_cn: 使用步骤
 
-        1. 安装前建立**.env**文件，在宿主机运行
+        1. 安装前建立 **.env** 文件，在宿主机运行
 
-        `wget -O /DATA/AppData/LinkAce/.env https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/LinkAce/.env`
+        `mkdir -p /DATA/AppData/linkace ; wget -O /DATA/AppData/linkace/.env https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/LinkAce/.env ; chmod 666 /DATA/AppData/linkace/.env`
 
 
-        2. 自定义数据库密码，修改**.env**文件和Docker环境变量中的**DB_PASSWORD**字段
+        2. 为确保安全，安装后自定义数据库密码：修改 **.env** 文件和Docker环境变量中的 **DB_PASSWORD** 字段
+
+
+        3. 进入 WebUI 初始化应用
 
 
         [官方文档](https://www.linkace.org/docs/v1/setup/setup-with-docker/simple/)
