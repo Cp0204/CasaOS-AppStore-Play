@@ -4,6 +4,8 @@ A not-so-serious CasaOS App Store.
 
 一个不是很正经的 CasaOS 应用商店。
 
+[App List / 应用列表](Apps/README.md)
+
 ## Features / 特色
 
  - Use of the `:latest` tag / 使用 `:latest` 标签 <sup>[Why?](https://github.com/Cp0204/CasaOS-AppStore-Play/issues/2#issuecomment-1647335915)</sup>
