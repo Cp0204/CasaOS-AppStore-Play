@@ -4,7 +4,7 @@ A not-so-serious CasaOS App Store.
 
 一个不是很正经的 CasaOS 应用商店。
 
-[App List / 应用列表](AppList.md)
+[App List / 应用列表](#app-list--应用列表)
 
 ## Features / 特色
 
