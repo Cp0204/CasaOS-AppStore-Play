@@ -6,7 +6,7 @@ services:
     deploy:
       resources:
         reservations:
-          memory: "128M"
+          memory: "64M"
     environment:
       PORT: 8886
     ports:
@@ -55,6 +55,7 @@ x-casaos:
     - amd64
     - arm64
   main: verysync
+  store_app_id: verysync
   author: Cp0204
   developer: verysync.com
   category: File Sync
