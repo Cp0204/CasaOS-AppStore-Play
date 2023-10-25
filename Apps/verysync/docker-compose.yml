@@ -1,0 +1,79 @@
+name: verysync
+services:
+  verysync:
+    image: jonnyan404/verysync:latest
+    container_name: verysync
+    deploy:
+      resources:
+        reservations:
+          memory: "128M"
+    environment:
+      PORT: 8886
+    ports:
+      - "3000:3000"
+      - "22037:22037/udp"
+      - "22027:22027/udp"
+      - "22330:22330"
+      - "8886:8886"
+    volumes:
+      - /DATA/AppData/verysync/config:/config
+      - /DATA/AppData/verysync/data:/data
+    x-casaos:
+      ports:
+        - container: "3000"
+          description:
+            en_us: Default Public Relay Port
+            zh_cn: 默认公共中继端口
+        - container: "22037"
+          description:
+            en_us: Local UDP Discovery Port
+            zh_cn: 内网UDP发现端口
+        - container: "22027"
+          description:
+            en_us: Local UDP Discovery Port
+            zh_cn: 内网UDP发现端口
+        - container: "22330"
+          description:
+            en_us: Data Transfer Port
+            zh_cn: 数据传输端口
+        - container: "8886"
+          description:
+            en_us: Web Management Page Port
+            zh_cn: web管理页面端口
+      volumes:
+        - container: /config
+          description:
+            en_us: Configuration Directory
+            zh_cn: 配置目录
+        - container: /data
+          description:
+            en_us: Data Directory
+            zh_cn: 数据目录
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: verysync
+  author: Cp0204
+  developer: verysync.com
+  category: File Sync
+  description:
+    en_us: A user-friendly, cross-platform file synchronization software with remarkable transfer speeds as its most significant advantage. VerySync's intelligent P2P technology accelerates synchronization by splitting files into small, data-only segments, and encrypting the files with AES.
+    zh_cn: 简单易用的多平台文件同步软件，惊人的传输速度是不同于其他产品的最大优势， 微力同步 的智能 P2P 技术加速同步，会将文件分割成若干份仅 KB 的数据同步，而文件都会进行 AES 加密处理.
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/verysync/icon.png
+  screenshot_link:
+    - https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/13/2a/1f/132a1f73-88d1-dc78-7780-68aff89d1f1f/pr_source.png/313x0w.webp
+    - https://is1-ssl.mzstatic.com/image/thumb/Purple123/v4/e0/b3/1d/e0b31d31-b098-a4cb-dcde-dd96655ef6ba/pr_source.png/313x0w.webp
+    - https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/3f/0e/7c/3f0e7c1d-11f7-a5fc-880c-1fe87aeff86f/pr_source.png/313x0w.webp
+    - https://is1-ssl.mzstatic.com/image/thumb/Purple123/v4/fc/f7/6f/fcf76f04-223f-b5a0-94a1-87256ddfc2e0/pr_source.png/313x0w.webp
+    - https://is1-ssl.mzstatic.com/image/thumb/Purple123/v4/08/ac/69/08ac69d8-6310-68e0-0ba7-d31c660ebde4/pr_source.png/313x0w.webp
+  tagline:
+    en_us: An efficient data transfer tool
+    zh_cn: 一款高效的数据传输工具
+  title:
+    en_us: VerySync
+    zh_cn: 微力同步
+  index:
+  port_map: "8886"
+  scheme: http
