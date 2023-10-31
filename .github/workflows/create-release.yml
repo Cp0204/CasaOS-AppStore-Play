@@ -1,0 +1,36 @@
+name: Create Release
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Generate Tag Name
+        id: generate_tag
+        run: echo "::set-output name=tag::$(date +'%Y%m%d%H%M%S')"
+
+      - name: Filter and Create Release
+        id: create_release
+        run: |
+          find . -type f \( -name "*.json" -o -name "*.yml" \) -exec zip AppStore.zip {} +
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: AppStore.zip
+          tag_name: ${{ steps.generate_tag.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
