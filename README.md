@@ -23,7 +23,7 @@ https://play.cuse.eu.org/Cp0204-AppStore-Play.zip
 or 或：
 
 ```
-https://github.com/Cp0204/CasaOS-AppStore-Play/archive/refs/heads/main.zip
+https://github.com/Cp0204/CasaOS-AppStore-Play/releases/latest/download/AppStore.zip
 ```
 
 ## Donate / 赞助
