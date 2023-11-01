@@ -16,10 +16,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Generate Tag Name
-        id: generate_tag
-        run: echo "::set-output name=tag::$(date +'%Y%m%d%H%M%S')"
-
       - name: Filter and Create Release
         id: create_release
         run: |
@@ -27,10 +23,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Release
+      - name: Delete latest tag and release
+        uses: dev-drprasad/delete-tag-and-release@v1.0
+        with:
+          tag_name: latest
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload New Release
         uses: softprops/action-gh-release@v1
         with:
           files: AppStore.zip
-          tag_name: ${{ steps.generate_tag.outputs.tag }}
+          tag_name: latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
