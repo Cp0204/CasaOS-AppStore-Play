@@ -1,0 +1,55 @@
+name: gopeed
+services:
+  gopeed:
+    image: liwei2633/gopeed:latest
+    deploy:
+      resources:
+        reservations:
+          memory: "32M"
+    network_mode: bridge
+    ports:
+      - target: 9999
+        published: "9999"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/Downloads
+        target: /root/Downloads
+    container_name: gopeed
+    x-casaos:
+      ports:
+        - container: "9999"
+          description:
+            en_us: WebUI Port
+            zh_cn: WebUI 端口
+      volumes:
+        - container: /root/Downloads
+          description:
+            en_us: Gopeed Download directory
+            zh_cn: Gopeed 下载目录
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  main: gopeed
+  author: Cp0204
+  developer: GopeedLab
+  category: Downloader
+  description:
+    en_us: "Gopeed (full name Go Speed) is a high-speed downloader developed by Golang + Flutter. It supports (HTTP, BitTorrent, Magnet) protocols and is compatible with all platforms. In addition to basic download functions, Gopeed is highly customizable, supporting additional features through API integration or by installing and developing extensions."
+    zh_cn: "Gopeed（全称 Go Speed）是一款由 Golang + Flutter 开发的高速下载器，支持（HTTP、BitTorrent、Magnet）协议下载，并且支持全平台使用。除了基本的下载功能外，Gopeed 还是一款高度可定制化的下载器，支持通过对接 APIs 或者安装和开发扩展来实现更多的功能。"
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gopeed/icon.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gopeed/thumbnail.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gopeed/screenshot-1.png
+  tagline:
+    en_us: Multiprotocol high-speed downloader
+    zh_cn: 多协议高速下载器
+  title:
+    en_us: Gopeed
+    zh_cn: Gopeed
+  index: /
+  port_map: "9999"
+  scheme: http
