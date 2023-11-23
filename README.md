@@ -12,19 +12,49 @@ A not-so-serious CasaOS App Store.
  - Unsuitable for official AppStore / 不适宜官方上架的
  - Native Niche Apps / 本土小众应用
 
+> Note: This store app uses the `:latest` tag, the ┆ check for updates function in the upper right corner of the app will be disabled, but **you can manually edit the app settings once (without changing anything) to get the latest image.** The good thing is that you can always get the latest version of the app even if the store is unmaintained.
+
+> 注意：本商店应用使用 `:latest` 标签，应用右上角┆检查更新功能会失效，但**你可以手动编辑一次应用设置（无需修改任何参数）获取最新镜像**。好处是即使商店无人维护，你总能获得应用的最新版本。
+
 ## Add to CasaOS / 添加到 CasaOS
 
-> NOTE: Custom Appstore is only supported on CasaOS version [0.4.4](https://blog.casaos.io/blog/32.html) and above.
-
-Source link 源地址：
+Source link / 源地址：
 ```
 https://play.cuse.eu.org/Cp0204-AppStore-Play.zip
 ```
-or 或：
+
+### Architecture-specific link / 分架构专属地址
+
+<details>
+
+<summary>arm/armv7/armhf (玩客云 等)</summary>
 
 ```
-https://github.com/Cp0204/CasaOS-AppStore-Play/releases/latest/download/AppStore.zip
+https://play.cuse.eu.org/Cp0204-AppStore-Play-arm.zip
 ```
+
+</details>
+
+<details>
+
+<summary>arm64/armv8 (S905盒子、RK33xx 等)</summary>
+
+```
+https://play.cuse.eu.org/Cp0204-AppStore-Play-arm64.zip
+```
+
+</details>
+
+<details>
+
+<summary>amd64/x86 (一般云主机、工控机 等)</summary>
+
+```
+https://play.cuse.eu.org/Cp0204-AppStore-Play-amd64.zip
+```
+
+</details>
+
 
 ## Donate / 赞助
 
