@@ -31,7 +31,8 @@ x-casaos:
   architectures:
     - amd64
     - arm64
-  author: Coder.com
+  author: Cp0204
+  developer: Coder.com
   category: Developer
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vscode/icon.png
   screenshot_link:
