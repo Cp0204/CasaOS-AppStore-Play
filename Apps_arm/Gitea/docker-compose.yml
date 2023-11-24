@@ -1,0 +1,105 @@
+name: gitea-arm
+services:
+  gitea:
+    environment:
+      USER_GID: "1000"
+      USER_UID: "1000"
+    image: patrickthedev/gitea-rpi:1.21.0
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+    network_mode: bridge
+    ports:
+      - target: 3000
+        published: "3002"
+        protocol: tcp
+      - target: 22
+        published: "222"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /data
+    x-casaos:
+      envs:
+        - container: USER_UID
+          description:
+            en_us: The UID (Unix user ID) of the user that runs Gitea
+            zh_cn: Gitea 运行的用户的 UID（Unix 用户 ID）
+        - container: USER_GID
+          description:
+            en_us: The GID (Unix group ID) of the user that runs Gitea
+            zh_cn: Gitea 运行的用户的 GID（Unix 组 ID）
+      ports:
+        - container: "3000"
+          description:
+            en_us: WebUI Port
+            zh_cn: WebUI 端口
+
+        - container: "22"
+          description:
+            en_us: SSH Port
+            zh_cn: SSH 端口
+
+      volumes:
+        - container: /data
+          description:
+            en_us: Gitea data directory.
+            zh_cn: Gitea 数据目录。
+    container_name: gitea
+x-casaos:
+  architectures:
+    - arm
+  main: gitea
+  author: CasaOS Team
+  category: Developer
+  description:
+    en_us: Gitea is a community managed lightweight code hosting solution written in Go.
+    zh_cn: Gitea 是一个由社区管理的轻量级代码托管解决方案，由 Go 编写。
+    ar_sa: Gitea هو حل استضافة الشفرة الخفيفة المدار من قبل المجتمع مكتوب بلغة Go.
+    de_de: Gitea ist eine von der Community verwaltete, leichte Code-Hosting-Lösung, die in Go geschrieben ist.
+    es_es: Gitea es una solución de alojamiento de código ligera administrada por la comunidad escrita en Go.
+    fr_fr: Gitea est une solution d'hébergement de code légère gérée par la communauté écrite en Go.
+    hu_hu: A Gitea egy közösség által kezelt könnyű kódhelyezési megoldás, amelyet Go írt.
+    it_it: Gitea è una soluzione di hosting di codice leggera gestita dalla comunità scritta in Go.
+    ru_ru: Gitea - это легкое решение для размещения кода, управляемое сообществом, написанное на Go.
+    pl_pl: Gitea to lekka rozwiązanie do hostingu kodu zarządzane przez społeczność napisane w Go.
+    pt_br: O Gitea é uma solução de hospedagem de código leve gerenciada pela comunidade escrita em Go.
+    sv_se: Gitea är ett communityhanterat lätthanterat kodhostningslösning skrivet i Go.
+    uk_ua: Gitea - це легке рішення для розміщення коду, кероване спільнотою, написане на Go.
+  developer: Gitea
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-1.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-2.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-3.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-4.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-5.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-6.jpg
+  tagline:
+    en_us: Git with a cup of tea
+    zh_cn: Git 与一杯茶
+    ar_sa: Git مع كوب من الشاي
+    de_de: Git mit einem Tässchen Tee
+    es_es: Git con una taza de té
+    fr_fr: Git avec une tasse de thé
+    hu_hu: Git egy csésze tea kíséretében
+    it_it: Git con una tazza di tè
+    ru_ru: Git с чашечкой чая
+    pl_pl: Git z filiżanką herbaty
+    pt_br: Git com uma xícara de chá
+    sv_se: Git med en kopp te
+    uk_ua: Git з чашкою чаю
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        When the App is installed, the first account registered will become the administrator account.
+      zh_cn: |
+        安装应用后，注册的第一个账号将成为管理员账号。
+  title:
+    en_us: Gitea
+  index: /
+  port_map: "3002"
