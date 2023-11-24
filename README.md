@@ -11,19 +11,19 @@ A not-so-serious CasaOS App Store.
  - Use of the `:latest` tag / 使用 `:latest` 标签 <sup>[Why?](https://github.com/Cp0204/CasaOS-AppStore-Play/issues/2#issuecomment-1647335915)</sup>
  - Unsuitable for official AppStore / 不适宜官方上架的
  - Native Niche Apps / 本土小众应用
+ - Support for armv7 App / 支持 armv7 应用
 
 > Note: This store app uses the `:latest` tag, the ┆ check for updates function in the upper right corner of the app will be disabled, but **you can manually edit the app settings once (without changing anything) to get the latest image.** The good thing is that you can always get the latest version of the app even if the store is unmaintained.
 
 > 注意：本商店应用使用 `:latest` 标签，应用右上角┆检查更新功能会失效，但**你可以手动编辑一次应用设置（无需修改任何参数）获取最新镜像**。好处是即使商店无人维护，你总能获得应用的最新版本。
 
-## Add to CasaOS / 添加到 CasaOS
+## Source link / 源地址
 
-Source link / 源地址：
 ```
 https://play.cuse.eu.org/Cp0204-AppStore-Play.zip
 ```
 
-### Architecture-specific link / 分架构专属地址
+### Arch-specific Source / 分架构专属源
 
 <details>
 
@@ -81,7 +81,6 @@ If you think this project is helpful to you, you can give me a little support. T
 | ![frps](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/frps/icon.png) | [frps](./Apps/frps) | A fast reverse proxy server that helps you expose a local server to the internet. It provides client authentication and supports multiple protocols.<br>一个快速的反向代理服务器，可以帮助您将本地服务器暴露到互联网。它提供客户端认证并支持多种协议。 |
 | ![Gopeed](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gopeed/icon.png) | [Gopeed](./Apps/gopeed) | Gopeed (full name Go Speed) is a high-speed downloader developed by Golang + Flutter. It supports (HTTP, BitTorrent, Magnet) protocols and is compatible with all platforms. In addition to basic download functions, Gopeed is highly customizable, supporting additional features through API integration or by installing and developing extensions.<br>Gopeed（全称 Go Speed）是一款由 Golang + Flutter 开发的高速下载器，支持（HTTP、BitTorrent、Magnet）协议下载，并且支持全平台使用。除了基本的下载功能外，Gopeed 还是一款高度可定制化的下载器，支持通过对接 APIs 或者安装和开发扩展来实现更多的功能。 |
 | ![Gotify](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/icon.png) | [Gotify](./Apps/Gotify) | A self-hosted push notification service written in Go. It simplifies the sending and receiving of push notifications over multiple platforms.<br>一个使用Go编写的自托管推送通知服务。它简化了在多个平台上发送和接收推送通知的过程。 |
-| ![Gotify-arm64](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/icon.png) | [Gotify-arm64](./Apps/Gotify-arm64) | A self-hosted push notification service written in Go. It simplifies the sending and receiving of push notifications over multiple platforms.<br>一个使用Go编写的自托管推送通知服务。它简化了在多个平台上发送和接收推送通知的过程。 |
 | ![KPlayer](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/KPlayer/icon.png) | [KPlayer](./Apps/KPlayer) | KPlayer can help you quickly perform looped live streaming of video resources on the server, simply customize the configuration file to enable live streaming.<br>KPlayer 可以帮助你快速在服务器上进行视频资源的循环直播推流，只需要简单修改配置文件即可开启直播推流。 |
 | ![LinkAce](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/LinkAce/icon.png) | [LinkAce](./Apps/LinkAce) | Manage your bookmarks, links, and reading list with ease using LinkAce. Access your links from anywhere with a web browser.<br>使用LinkAce轻松管理书签、链接和阅读列表。通过Web浏览器随时随地访问您的链接。 |
 | ![Lucky](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Lucky/icon.png) | [Lucky](./Apps/Lucky) | A powerful tool for port forwarding, reverse proxy, dynamic DNS, wake-on-LAN, IPv4 NAT traversal, task scheduling, and automatic certificate management.<br>一款功能强大的端口转发、反向代理、动态域名、网络唤醒、IPv4内网穿透、计划任务和自动证书管理工具。 |
