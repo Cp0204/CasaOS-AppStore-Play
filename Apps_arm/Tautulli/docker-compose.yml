@@ -1,6 +1,6 @@
 name: tautulli-arm
 services:
-  tautulli:
+  tautulli-arm:
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -12,39 +12,39 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-      - target: 8181
-        published: "8181"
+    - target: 8181
+      published: "8181"
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/$AppID/config
-        target: /config
+    - type: bind
+      source: /DATA/AppData/$AppID/config
+      target: /config
     x-casaos:
       envs:
-        - container: PUID
-          description:
-            en_us: ""
-        - container: PGID
-          description:
-            en_us: ""
-        - container: TZ
-          description:
-            en_us: ""
+      - container: PUID
+        description:
+          en_us: ""
+      - container: PGID
+        description:
+          en_us: ""
+      - container: TZ
+        description:
+          en_us: ""
       ports:
-        - container: "8181"
-          description:
-            en_us: ""
-          protocol: ""
+      - container: "8181"
+        description:
+          en_us: ""
+        protocol: ""
 
       volumes:
-        - container: /config
-          description:
-            en_us: ""
-    container_name: tautulli
+      - container: /config
+        description:
+          en_us: ""
+    container_name: tautulli-arm
 x-casaos:
   architectures:
-    - arm
-  main: tautulli
+  - arm
+  main: tautulli-arm
   author: Triskae
   category: Media
   description:
@@ -64,10 +64,10 @@ x-casaos:
   developer: Tautulli Team
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-3.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-4.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-2.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-3.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-4.png
   tagline:
     en_us: Monitor your Plex Media Server and much more.
     zh_cn: 监视您的Plex Media Server以及更多内容。

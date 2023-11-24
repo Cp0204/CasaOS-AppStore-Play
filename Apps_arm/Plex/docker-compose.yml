@@ -1,9 +1,9 @@
 name: plex-arm
 services:
-  plex:
+  plex-arm:
     devices:
-      - /dev/dri:/dev/dri
-      - /dev/dvb:/dev/dvb
+    - /dev/dri:/dev/dri
+    - /dev/dvb:/dev/dvb
     environment:
       PGID: $PGID
       PUID: $PUID
@@ -16,41 +16,41 @@ services:
     network_mode: host
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/$AppID/config
-        target: /config
-      - type: bind
-        source: /DATA/Media
-        target: /Media
+    - type: bind
+      source: /DATA/AppData/$AppID/config
+      target: /config
+    - type: bind
+      source: /DATA/Media
+      target: /Media
     x-casaos:
       envs:
-        - container: PUID
-          description:
-            en_us: Run Plex as specified uid.
-            zh_cn: 以指定的uid运行Plex
-        - container: PGID
-          description:
-            en_us: Run Plex as specified gid.
-            zh_cn: 以指定的gid运行Plex
-        - container: VERSION
-          description:
-            en_us: Let Docker handle the Plex Version
-            zh_cn: 让Docker处理Plex版本
+      - container: PUID
+        description:
+          en_us: Run Plex as specified uid.
+          zh_cn: 以指定的uid运行Plex
+      - container: PGID
+        description:
+          en_us: Run Plex as specified gid.
+          zh_cn: 以指定的gid运行Plex
+      - container: VERSION
+        description:
+          en_us: Let Docker handle the Plex Version
+          zh_cn: 让Docker处理Plex版本
 
       volumes:
-        - container: /config
-          description:
-            en_us: Plex config directory.
-            zh_cn: Plex配置目录
-        - container: /Media
-          description:
-            en_us: Plex Media directory.
-            zh_cn: Plex媒体目录
-    container_name: plex
+      - container: /config
+        description:
+          en_us: Plex config directory.
+          zh_cn: Plex配置目录
+      - container: /Media
+        description:
+          en_us: Plex Media directory.
+          zh_cn: Plex媒体目录
+    container_name: plex-arm
 x-casaos:
   architectures:
-    - arm
-  main: plex
+  - arm
+  main: plex-arm
   author: CasaOS Team
   category: Media
   description:
@@ -70,9 +70,9 @@ x-casaos:
   developer: Plex
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/screenshot-3.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/screenshot-2.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/screenshot-3.png
   tagline:
     en_us: The home for all your entertainment.
     zh_cn: 为您的娱乐提供家庭。

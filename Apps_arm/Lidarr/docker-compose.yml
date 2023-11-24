@@ -1,6 +1,6 @@
 name: lidarr-arm
 services:
-  lidarr:
+  lidarr-arm:
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -12,51 +12,51 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-      - target: 8686
-        published: "8686"
-        protocol: tcp
+    - target: 8686
+      published: "8686"
+      protocol: tcp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/lidarr/config
-        target: /config
-      - type: bind
-        source: /DATA/Media/Music
-        target: /music
-      - type: bind
-        source: /DATA/Downloads
-        target: /downloads
+    - type: bind
+      source: /DATA/AppData/lidarr/config
+      target: /config
+    - type: bind
+      source: /DATA/Media/Music
+      target: /music
+    - type: bind
+      source: /DATA/Downloads
+      target: /downloads
     x-casaos:
       envs:
-        - container: PUID
-          description:
-            en_us: ""
-        - container: PGID
-          description:
-            en_us: ""
-        - container: TZ
-          description:
-            en_us: ""
+      - container: PUID
+        description:
+          en_us: ""
+      - container: PGID
+        description:
+          en_us: ""
+      - container: TZ
+        description:
+          en_us: ""
       ports:
-        - container: "8686"
-          description:
-            en_us: ""
+      - container: "8686"
+        description:
+          en_us: ""
 
       volumes:
-        - container: /config
-          description:
-            en_us: ""
-        - container: /music
-          description:
-            en_us: ""
-        - container: /downloads
-          description:
-            en_us: ""
-    container_name: lidarr
+      - container: /config
+        description:
+          en_us: ""
+      - container: /music
+        description:
+          en_us: ""
+      - container: /downloads
+        description:
+          en_us: ""
+    container_name: lidarr-arm
 x-casaos:
   architectures:
-    - arm
-  main: lidarr
+  - arm
+  main: lidarr-arm
   author: CasaOS Team
   category: Downloader
   description:
@@ -76,9 +76,9 @@ x-casaos:
   developer: lidarr Team
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/screenshot-3.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/screenshot-2.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/screenshot-3.png
   tagline:
     en_us: Music collection manager for Usenet and BitTorrent users
     zh_cn: 用于Usenet和BitTorrent用户的音乐收藏管理器

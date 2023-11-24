@@ -1,6 +1,6 @@
 name: qbittorrent-arm
 services:
-  qbittorrent:
+  qbittorrent-arm:
     environment:
       PGID: $PGID
       PUID: $PUID
@@ -13,55 +13,55 @@ services:
           memory: "256M"
     network_mode: bridge
     ports:
-      - target: 8080
-        published: "8181"
-        protocol: tcp
+    - target: 8080
+      published: "8181"
+      protocol: tcp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/$AppID/config
-        target: /config
-      - type: bind
-        source: /DATA
-        target: /DATA
+    - type: bind
+      source: /DATA/AppData/$AppID/config
+      target: /config
+    - type: bind
+      source: /DATA
+      target: /DATA
     x-casaos:
       envs:
-        - container: TZ
-          description:
-            en_us: TimeZone
-            zh_cn: 时区
-        - container: PUID
-          description:
-            en_us: Run qBittorrent as specified uid.
-            zh_cn: 以指定的 uid 运行 qBittorrent。
-        - container: PGID
-          description:
-            en_us: Run qBittorrent as specified gid.
-            zh_cn: 以指定的 gid 运行 qBittorrent。
-        - container: UMASK
-          description:
-            en_us: Run qBittorrent as specified UMASK.
-            zh_cn: 以指定的 UMASK 运行 qBittorrent。
+      - container: TZ
+        description:
+          en_us: TimeZone
+          zh_cn: 时区
+      - container: PUID
+        description:
+          en_us: Run qBittorrent as specified uid.
+          zh_cn: 以指定的 uid 运行 qBittorrent。
+      - container: PGID
+        description:
+          en_us: Run qBittorrent as specified gid.
+          zh_cn: 以指定的 gid 运行 qBittorrent。
+      - container: UMASK
+        description:
+          en_us: Run qBittorrent as specified UMASK.
+          zh_cn: 以指定的 UMASK 运行 qBittorrent。
       ports:
-        - container: "8080"
-          description:
-            en_us: WebUI HTTP Port
-            zh_cn: WebUI HTTP 端口
+      - container: "8080"
+        description:
+          en_us: WebUI HTTP Port
+          zh_cn: WebUI HTTP 端口
 
       volumes:
-        - container: /config
-          description:
-            en_us: qBittorrent config directory.
-            zh_cn: qBittorrent 配置目录。
-        - container: /DATA
-          description:
-            en_us: qBittorrent Accessible directory.
-            zh_cn: qBittorrent 可访问目录。
-    container_name: qbittorrent
+      - container: /config
+        description:
+          en_us: qBittorrent config directory.
+          zh_cn: qBittorrent 配置目录。
+      - container: /DATA
+        description:
+          en_us: qBittorrent Accessible directory.
+          zh_cn: qBittorrent 可访问目录。
+    container_name: qbittorrent-arm
 x-casaos:
   architectures:
-    - arm
-  main: qbittorrent
+  - arm
+  main: qbittorrent-arm
   author: CasaOS Team
   category: Downloader
   description:
@@ -81,8 +81,8 @@ x-casaos:
   developer: qBittorrent
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/qBittorrent/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/qBittorrent/screenshot-1.jpg
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/qBittorrent/screenshot-2.jpg
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/qBittorrent/screenshot-1.jpg
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/qBittorrent/screenshot-2.jpg
   tagline:
     en_us: Free BitTorrent downloader
     zh_cn: 免费的 BitTorrent 下载器

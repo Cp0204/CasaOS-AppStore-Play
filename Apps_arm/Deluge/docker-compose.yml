@@ -1,6 +1,6 @@
 name: deluge-arm
 services:
-  deluge:
+  deluge-arm:
     environment:
       DELUGE_LOGLEVEL: error
       PGID: $PGID
@@ -13,72 +13,72 @@ services:
           memory: 256M
     network_mode: bridge
     ports:
-      - target: 8112
-        published: "8112"
-        protocol: tcp
-      - target: 6881
-        published: "6881"
-        protocol: tcp
-      - target: 6881
-        published: "6881"
-        protocol: udp
+    - target: 8112
+      published: "8112"
+      protocol: tcp
+    - target: 6881
+      published: "6881"
+      protocol: tcp
+    - target: 6881
+      published: "6881"
+      protocol: udp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/$AppID/config
-        target: /config
-      - type: bind
-        source: /DATA
-        target: /DATA
+    - type: bind
+      source: /DATA/AppData/$AppID/config
+      target: /config
+    - type: bind
+      source: /DATA
+      target: /DATA
     x-casaos:
       envs:
-        - container: TZ
-          description:
-            en_us: TimeZone
-            zh_cn: 时区
-        - container: PUID
-          description:
-            en_us: Run Deluge as specified uid.
-            zh_cn: 以指定的 uid 运行 Deluge。
-        - container: PGID
-          description:
-            en_us: Run Deluge as specified gid.
-            zh_cn: 以指定的 gid 运行 Deluge。
-        - container: DELUGE_LOGLEVEL
-          description:
-            en_us: Deluge Log Level
-            zh_cn: Deluge 日志级别
+      - container: TZ
+        description:
+          en_us: TimeZone
+          zh_cn: 时区
+      - container: PUID
+        description:
+          en_us: Run Deluge as specified uid.
+          zh_cn: 以指定的 uid 运行 Deluge。
+      - container: PGID
+        description:
+          en_us: Run Deluge as specified gid.
+          zh_cn: 以指定的 gid 运行 Deluge。
+      - container: DELUGE_LOGLEVEL
+        description:
+          en_us: Deluge Log Level
+          zh_cn: Deluge 日志级别
       ports:
-        - container: "8112"
-          description:
-            en_us: WebUI HTTP Port
-            zh_cn: WebUI HTTP 端口
+      - container: "8112"
+        description:
+          en_us: WebUI HTTP Port
+          zh_cn: WebUI HTTP 端口
 
-        - container: "6881"
-          description:
-            en_us: Inbound torrent traffic (TCP)
-            zh_cn: 入站 torrent 流量（TCP）
+      - container: "6881"
+        description:
+          en_us: Inbound torrent traffic (TCP)
+          zh_cn: 入站 torrent 流量（TCP）
 
-        - container: "6881"
-          description:
-            en_us: Inbound torrent traffic (UDP)
-            zh_cn: 入站 torrent 流量（UDP）
-          protocol: udp
+      - container: "6881"
+        description:
+          en_us: Inbound torrent traffic (UDP)
+          zh_cn: 入站 torrent 流量（UDP）
+        protocol: udp
 
       volumes:
-        - container: /config
-          description:
-            en_us: Deluge config directory.
-            zh_cn: Deluge 配置目录。
-        - container: /DATA
-          description:
-            en_us: Deluge Accessible directory.
-            zh_cn: Deluge 可访问目录。
-    container_name: deluge
+      - container: /config
+        description:
+          en_us: Deluge config directory.
+          zh_cn: Deluge 配置目录。
+      - container: /DATA
+        description:
+          en_us: Deluge Accessible directory.
+          zh_cn: Deluge 可访问目录。
+    container_name: deluge-arm
 x-casaos:
   architectures:
-    - arm
-  main: deluge
+  - arm
+  main: deluge-arm
   author: CasaOS Team
   category: Downloader
   description:
@@ -98,10 +98,10 @@ x-casaos:
   developer: Deluge Team
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Deluge/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Deluge/screenshot-1.jpg
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Deluge/screenshot-2.jpg
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Deluge/screenshot-3.jpg
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Deluge/screenshot-4.jpg
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Deluge/screenshot-1.jpg
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Deluge/screenshot-2.jpg
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Deluge/screenshot-3.jpg
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Deluge/screenshot-4.jpg
   tagline:
     en_us: A lightweight and free BitTorrent client.
     zh_cn: 轻量级且免费的 BitTorrent 客户端。

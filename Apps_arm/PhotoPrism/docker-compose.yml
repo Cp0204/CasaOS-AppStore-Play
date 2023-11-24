@@ -1,6 +1,6 @@
 name: photoprism-arm
 services:
-  photoprism:
+  photoprism-arm:
     environment:
       PHOTOPRISM_ADMIN_PASSWORD: casaos
       PHOTOPRISM_UPLOAD_NSFW: "true"
@@ -12,51 +12,51 @@ services:
           memory: "512M"
     network_mode: bridge
     ports:
-      - target: 2342
-        published: "2342"
-        protocol: tcp
+    - target: 2342
+      published: "2342"
+      protocol: tcp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/$AppID/photoprism/storage
-        target: /photoprism/storage
-      - type: bind
-        source: /DATA/Gallery
-        target: /photoprism/originals
+    - type: bind
+      source: /DATA/AppData/$AppID/photoprism/storage
+      target: /photoprism/storage
+    - type: bind
+      source: /DATA/Gallery
+      target: /photoprism/originals
     x-casaos:
       envs:
-        - container: TZ
-          description:
-            en_us: TimeZone
-            zh_cn: 时区
-        - container: PHOTOPRISM_UPLOAD_NSFW
-          description:
-            en_us: true or false, is it possible to upload NSFW
-            zh_cn: true 或 false，是否允许上传 NSFW
-        - container: PHOTOPRISM_ADMIN_PASSWORD
-          description:
-            en_us: The password of admin
-            zh_cn: 管理员密码
+      - container: TZ
+        description:
+          en_us: TimeZone
+          zh_cn: 时区
+      - container: PHOTOPRISM_UPLOAD_NSFW
+        description:
+          en_us: true or false, is it possible to upload NSFW
+          zh_cn: true 或 false，是否允许上传 NSFW
+      - container: PHOTOPRISM_ADMIN_PASSWORD
+        description:
+          en_us: The password of admin
+          zh_cn: 管理员密码
       ports:
-        - container: "2342"
-          description:
-            en_us: WebUI HTTP Port
-            zh_cn: WebUI HTTP 端口
+      - container: "2342"
+        description:
+          en_us: WebUI HTTP Port
+          zh_cn: WebUI HTTP 端口
 
       volumes:
-        - container: /photoprism/storage
-          description:
-            en_us: PhotoPrism storage directory.
-            zh_cn: PhotoPrism 存储目录
-        - container: /photoprism/originals
-          description:
-            en_us: PhotoPrism originals directory.
-            zh_cn: PhotoPrism 原始文件目录
-    container_name: photoprism
+      - container: /photoprism/storage
+        description:
+          en_us: PhotoPrism storage directory.
+          zh_cn: PhotoPrism 存储目录
+      - container: /photoprism/originals
+        description:
+          en_us: PhotoPrism originals directory.
+          zh_cn: PhotoPrism 原始文件目录
+    container_name: photoprism-arm
 x-casaos:
   architectures:
-    - arm
-  main: photoprism
+  - arm
+  main: photoprism-arm
   author: CasaOS Team
   category: Gallery
   description:
@@ -76,9 +76,9 @@ x-casaos:
   developer: PhotoPrism
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/screenshot-1.jpg
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/screenshot-2.jpg
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/screenshot-3.jpg
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/screenshot-1.jpg
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/screenshot-2.jpg
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/screenshot-3.jpg
   tagline:
     en_us: Browsing, organizing & sharing your photo collection
     zh_cn: 浏览、组织和共享您的照片集

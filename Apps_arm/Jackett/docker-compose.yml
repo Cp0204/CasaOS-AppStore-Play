@@ -1,6 +1,6 @@
 name: jackett-arm
 services:
-  jackett:
+  jackett-arm:
     environment:
       AUTO_UPDATE: "true"
       PGID: "1000"
@@ -13,48 +13,48 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-      - target: 9117
-        published: "9117"
-        protocol: tcp
+    - target: 9117
+      published: "9117"
+      protocol: tcp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/$AppID/config
-        target: /config
-      - type: bind
-        source: /DATA/Downloads
-        target: /downloads
+    - type: bind
+      source: /DATA/AppData/$AppID/config
+      target: /config
+    - type: bind
+      source: /DATA/Downloads
+      target: /downloads
     x-casaos:
       envs:
-        - container: PUID
-          description:
-            en_us: ""
-        - container: PGID
-          description:
-            en_us: ""
-        - container: TZ
-          description:
-            en_us: ""
-        - container: AUTO_UPDATE
-          description:
-            en_us: ""
+      - container: PUID
+        description:
+          en_us: ""
+      - container: PGID
+        description:
+          en_us: ""
+      - container: TZ
+        description:
+          en_us: ""
+      - container: AUTO_UPDATE
+        description:
+          en_us: ""
       ports:
-        - container: "9117"
-          description:
-            en_us: ""
+      - container: "9117"
+        description:
+          en_us: ""
 
       volumes:
-        - container: /config
-          description:
-            en_us: ""
-        - container: /downloads
-          description:
-            en_us: ""
-    container_name: jackett
+      - container: /config
+        description:
+          en_us: ""
+      - container: /downloads
+        description:
+          en_us: ""
+    container_name: jackett-arm
 x-casaos:
   architectures:
-    - arm
-  main: jackett
+  - arm
+  main: jackett-arm
   author: CasaOS Team
   category: Network
   description:
@@ -74,9 +74,9 @@ x-casaos:
   developer: Jackett
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/screenshot-3.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/screenshot-2.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/screenshot-3.png
   tagline:
     en_us: Jackett works as a proxy server
     zh_cn: Jackett作为代理服务器工作

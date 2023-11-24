@@ -1,6 +1,6 @@
 name: prowlarr-arm
 services:
-  prowlarr:
+  prowlarr-arm:
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -12,39 +12,39 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-      - target: 9696
-        published: "9696"
-        protocol: tcp
+    - target: 9696
+      published: "9696"
+      protocol: tcp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/prowlarr/config
-        target: /config
+    - type: bind
+      source: /DATA/AppData/prowlarr/config
+      target: /config
     x-casaos:
       envs:
-        - container: PUID
-          description:
-            en_us: ""
-        - container: PGID
-          description:
-            en_us: ""
-        - container: TZ
-          description:
-            en_us: ""
+      - container: PUID
+        description:
+          en_us: ""
+      - container: PGID
+        description:
+          en_us: ""
+      - container: TZ
+        description:
+          en_us: ""
       ports:
-        - container: "9696"
-          description:
-            en_us: ""
+      - container: "9696"
+        description:
+          en_us: ""
 
       volumes:
-        - container: /config
-          description:
-            en_us: ""
-    container_name: prowlarr
+      - container: /config
+        description:
+          en_us: ""
+    container_name: prowlarr-arm
 x-casaos:
   architectures:
-    - arm
-  main: prowlarr
+  - arm
+  main: prowlarr-arm
   author: CasaOS Team
   category: Downloader
   description:
@@ -64,8 +64,8 @@ x-casaos:
   developer: Prowlarr Team
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/screenshot-2.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/screenshot-2.png
   tagline:
     en_us: Integration of various PVR applications
     zh_cn: 各种PVR应用程序的集成

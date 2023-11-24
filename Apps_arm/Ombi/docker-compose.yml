@@ -1,6 +1,6 @@
 name: ombi-arm
 services:
-  ombi:
+  ombi-arm:
     environment:
       BASE_URL: /ombi
       PGID: "1000"
@@ -13,42 +13,42 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-      - target: 3579
-        published: "3579"
-        protocol: tcp
+    - target: 3579
+      published: "3579"
+      protocol: tcp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/ombi/config
-        target: /config
+    - type: bind
+      source: /DATA/AppData/ombi/config
+      target: /config
     x-casaos:
       envs:
-        - container: PUID
-          description:
-            en_us: ""
-        - container: PGID
-          description:
-            en_us: ""
-        - container: TZ
-          description:
-            en_us: ""
-        - container: BASE_URL
-          description:
-            en_us: ""
+      - container: PUID
+        description:
+          en_us: ""
+      - container: PGID
+        description:
+          en_us: ""
+      - container: TZ
+        description:
+          en_us: ""
+      - container: BASE_URL
+        description:
+          en_us: ""
       ports:
-        - container: "3579"
-          description:
-            en_us: ""
+      - container: "3579"
+        description:
+          en_us: ""
 
       volumes:
-        - container: /config
-          description:
-            en_us: ""
-    container_name: ombi
+      - container: /config
+        description:
+          en_us: ""
+    container_name: ombi-arm
 x-casaos:
   architectures:
-    - arm
-  main: ombi
+  - arm
+  main: ombi-arm
   author: CasaOS Team
   category: Media
   description:
@@ -68,9 +68,9 @@ x-casaos:
   developer: Sabnzbd Team
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/screenshot-3.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/screenshot-2.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/screenshot-3.png
   tagline:
     en_us: Friendly media request tool, automatically syncs with your media servers!
     zh_cn: 友好的媒体请求工具，自动与您的媒体服务器同步！

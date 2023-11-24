@@ -1,6 +1,6 @@
 name: mariadb-arm
 services:
-  mariadb:
+  mariadb-arm:
     image: linuxserver/mariadb:arm32v7-10.6.13
     restart: unless-stopped
     environment:
@@ -14,43 +14,43 @@ services:
       REMOTE_SQL: ''
     x-casaos:
       envs:
-        - container: PUID
-          description:
-            en_us: for UserID
-        - container: PGID
-          description:
-            en_us: for GroupID
-        - container: TZ
-          description:
-            en_us: specify a timezone to use, see this list.
-        - container: MYSQL_ROOT_PASSWORD
-          description:
-            en_us: Set this to root password for installation (minimum 4 characters & non-alphanumeric passwords must be properly escaped).
-        - container: MYSQL_DATABASE
-          description:
-            en_us: Specify the name of a database to be created on image startup.
-        - container: MYSQL_USER
-          description:
-            en_us: This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here).
-        - container: MYSQL_PASSWORD
-          description:
-            en_us: Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped).
-        - container: REMOTE_SQL
-          description:
-            en_us: Set this to ingest sql files from an http/https endpoint (comma seperated array).
+      - container: PUID
+        description:
+          en_us: for UserID
+      - container: PGID
+        description:
+          en_us: for GroupID
+      - container: TZ
+        description:
+          en_us: specify a timezone to use, see this list.
+      - container: MYSQL_ROOT_PASSWORD
+        description:
+          en_us: Set this to root password for installation (minimum 4 characters & non-alphanumeric passwords must be properly escaped).
+      - container: MYSQL_DATABASE
+        description:
+          en_us: Specify the name of a database to be created on image startup.
+      - container: MYSQL_USER
+        description:
+          en_us: This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here).
+      - container: MYSQL_PASSWORD
+        description:
+          en_us: Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped).
+      - container: REMOTE_SQL
+        description:
+          en_us: Set this to ingest sql files from an http/https endpoint (comma seperated array).
     ports:
-      - target: 3306
-        published: "3306"
-        protocol: tcp
+    - target: 3306
+      published: "3306"
+      protocol: tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/mariadb/config
-        target: /config
-    container_name: mariadb
+    - type: bind
+      source: /DATA/AppData/mariadb/config
+      target: /config
+    container_name: mariadb-arm
 x-casaos:
   architectures:
-    - arm
-  main: mariadb
+  - arm
+  main: mariadb-arm
   description:
     en_us: |
       MariaDB Server is one of the most popular open source relational databases. It’s made by the original developers of MySQL and guaranteed to stay open source. It is part of most cloud offerings and the default in most Linux distributions.

@@ -1,6 +1,6 @@
 name: syncthing-arm
 services:
-  syncthing:
+  syncthing-arm:
     environment:
       PGID: $PGID
       PUID: $PUID
@@ -12,76 +12,76 @@ services:
           memory: "256M"
     network_mode: bridge
     ports:
-      - target: 8384
-        published: "8384"
-        protocol: tcp
-      - target: 22000
-        published: "22000"
-        protocol: tcp
-      - target: 22000
-        published: "22000"
-        protocol: udp
-      - target: 21027
-        published: "21027"
-        protocol: udp
+    - target: 8384
+      published: "8384"
+      protocol: tcp
+    - target: 22000
+      published: "22000"
+      protocol: tcp
+    - target: 22000
+      published: "22000"
+      protocol: udp
+    - target: 21027
+      published: "21027"
+      protocol: udp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/$AppID/config
-        target: /config
-      - type: bind
-        source: /DATA
-        target: /DATA
+    - type: bind
+      source: /DATA/AppData/$AppID/config
+      target: /config
+    - type: bind
+      source: /DATA
+      target: /DATA
     x-casaos:
       envs:
-        - container: TZ
-          description:
-            en_us: TimeZone
-            zh_cn: 时区
-        - container: PUID
-          description:
-            en_us: Run Syncthing as specified uid.
-            zh_cn: 以指定的用户ID运行Syncthing
-        - container: PGID
-          description:
-            en_us: Run Syncthing as specified gid.
-            zh_cn: 以指定的组ID运行Syncthing
+      - container: TZ
+        description:
+          en_us: TimeZone
+          zh_cn: 时区
+      - container: PUID
+        description:
+          en_us: Run Syncthing as specified uid.
+          zh_cn: 以指定的用户ID运行Syncthing
+      - container: PGID
+        description:
+          en_us: Run Syncthing as specified gid.
+          zh_cn: 以指定的组ID运行Syncthing
       ports:
-        - container: "8384"
-          description:
-            en_us: WebUI HTTP Port
-            zh_cn: WebUI HTTP端口
+      - container: "8384"
+        description:
+          en_us: WebUI HTTP Port
+          zh_cn: WebUI HTTP端口
 
-        - container: "22000"
-          description:
-            en_us: Syncthing listening Port (TCP)
-            zh_cn: Syncthing监听端口（TCP）
+      - container: "22000"
+        description:
+          en_us: Syncthing listening Port (TCP)
+          zh_cn: Syncthing监听端口（TCP）
 
-        - container: "22000"
-          description:
-            en_us: Syncthing listening Port (UDP)
-            zh_cn: Syncthing监听端口（UDP）
-          protocol: udp
-        - container: "21027"
-          description:
-            en_us: Syncthing protocol discovery Port (TCP)
-            zh_cn: Syncthing协议发现端口（TCP）
-          protocol: udp
+      - container: "22000"
+        description:
+          en_us: Syncthing listening Port (UDP)
+          zh_cn: Syncthing监听端口（UDP）
+        protocol: udp
+      - container: "21027"
+        description:
+          en_us: Syncthing protocol discovery Port (TCP)
+          zh_cn: Syncthing协议发现端口（TCP）
+        protocol: udp
 
       volumes:
-        - container: /config
-          description:
-            en_us: Syncthing config directory.
-            zh_cn: Syncthing配置目录
-        - container: /DATA
-          description:
-            en_us: Syncthing Accessible Directory.
-            zh_cn: Syncthing可访问目录
-    container_name: syncthing
+      - container: /config
+        description:
+          en_us: Syncthing config directory.
+          zh_cn: Syncthing配置目录
+      - container: /DATA
+        description:
+          en_us: Syncthing Accessible Directory.
+          zh_cn: Syncthing可访问目录
+    container_name: syncthing-arm
 x-casaos:
   architectures:
-    - arm
-  main: syncthing
+  - arm
+  main: syncthing-arm
   author: CasaOS Team
   category: Backup
   description:

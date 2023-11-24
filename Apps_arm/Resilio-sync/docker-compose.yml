@@ -1,35 +1,35 @@
 name: resilio-sync-arm
 services:
-  resilio-sync:
+  resilio-sync-arm:
     environment:
-      - PGID=$PGID
-      - PUID=$PUID
-      - TZ=$TZ
+    - PGID=$PGID
+    - PUID=$PUID
+    - TZ=$TZ
     image: linuxserver/resilio-sync:arm32v7-2.7.3
     network_mode: bridge
     ports:
-      - target: 55555
-        published: "55555"
-        protocol: tcp
-      - target: 8888
-        published: "8888"
-        protocol: tcp
+    - target: 55555
+      published: "55555"
+      protocol: tcp
+    - target: 8888
+      published: "8888"
+      protocol: tcp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/$AppID/data
-        target: /sync
-      - type: bind
-        source: /DATA/AppData/$AppID/config
-        target: /config
-      - type: bind
-        source: /DATA/Downloads
-        target: /downloads
+    - type: bind
+      source: /DATA/AppData/$AppID/data
+      target: /sync
+    - type: bind
+      source: /DATA/AppData/$AppID/config
+      target: /config
+    - type: bind
+      source: /DATA/Downloads
+      target: /downloads
     privileged: false
-    container_name: resilio-sync
+    container_name: resilio-sync-arm
 x-casaos:
   architectures:
-    - arm
+  - arm
   description:
     en_us: resilio-sync is a Docker-based application that enables fast and secure file synchronization and sharing.
     zh_cn: resilio-sync是一个基于Docker的应用，可以实现无缝快速、安全的文件同步和共享。
@@ -46,7 +46,7 @@ x-casaos:
     uk_ua: resilio-sync - це додаток на основі Docker, який забезпечує швидку і безпечну синхронізацію та обмін файлами.
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Resilio-sync/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Resilio-sync/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Resilio-sync/screenshot-1.png
   tagline:
     en_us: Unleash the power of seamless file synchronization.
     zh_cn: 发挥无缝文件同步的力量。
@@ -70,3 +70,4 @@ x-casaos:
   store_app_id: resilio-sync
   title:
     en_us: resilio-sync
+  main: resilio-sync-arm

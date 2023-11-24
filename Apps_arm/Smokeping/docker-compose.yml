@@ -1,6 +1,6 @@
 name: smokeping-arm
 services:
-  smokeping:
+  smokeping-arm:
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -12,45 +12,45 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-      - target: 80
-        published: "10280"
-        protocol: tcp
+    - target: 80
+      published: "10280"
+      protocol: tcp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/smokeping/config
-        target: /config
-      - type: bind
-        source: /DATA/AppData/smokeping/data
-        target: /data
+    - type: bind
+      source: /DATA/AppData/smokeping/config
+      target: /config
+    - type: bind
+      source: /DATA/AppData/smokeping/data
+      target: /data
     x-casaos:
       envs:
-        - container: PUID
-          description:
-            en_us: ""
-        - container: PGID
-          description:
-            en_us: ""
-        - container: TZ
-          description:
-            en_us: ""
+      - container: PUID
+        description:
+          en_us: ""
+      - container: PGID
+        description:
+          en_us: ""
+      - container: TZ
+        description:
+          en_us: ""
       ports:
-        - container: "80"
-          description:
-            en_us: ""
+      - container: "80"
+        description:
+          en_us: ""
 
       volumes:
-        - container: /config
-          description:
-            en_us: ""
-        - container: /data
-          description:
-            en_us: ""
-    container_name: smokeping
+      - container: /config
+        description:
+          en_us: ""
+      - container: /data
+        description:
+          en_us: ""
+    container_name: smokeping-arm
 x-casaos:
   architectures:
-    - arm
-  main: smokeping
+  - arm
+  main: smokeping-arm
   author: CasaOS Team
   category: Network
   description:
@@ -70,11 +70,11 @@ x-casaos:
   developer: Lazylibrarian Team
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-3.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-4.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-5.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-2.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-3.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-4.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-5.png
   tagline:
     en_us: Free open source network performance monitoring tool
     zh_cn: 免费开源的网络性能监控工具

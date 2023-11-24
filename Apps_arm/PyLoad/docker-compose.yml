@@ -1,7 +1,7 @@
 name: pyload-arm
 services:
-  pyload:
-    container_name: pyload
+  pyload-arm:
+    container_name: pyload-arm
     image: linuxserver/pyload-ng:arm32v7-0.5.0
     deploy:
       resources:
@@ -15,55 +15,55 @@ services:
     network_mode: bridge
     privileged: false
     volumes:
-      - type: bind
-        source: /DATA/AppData/$AppID/config
-        target: /config
-      - type: bind
-        source: /DATA/Downloads
-        target: /downloads
+    - type: bind
+      source: /DATA/AppData/$AppID/config
+      target: /config
+    - type: bind
+      source: /DATA/Downloads
+      target: /downloads
     ports:
-      - target: 8000
-        published: "8000"
-        protocol: tcp
-      - target: 9666
-        published: "9666"
-        protocol: tcp
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+    - target: 9666
+      published: "9666"
+      protocol: tcp
 
     x-casaos:
       envs:
-        - container: TZ
-          description:
-            en_us: TimeZone
-        - container: PUID
-          description:
-            en_us: Run PyLoad as specified uid.
-        - container: PGID
-          description:
-            en_us: Run PyLoad as specified gid.
+      - container: TZ
+        description:
+          en_us: TimeZone
+      - container: PUID
+        description:
+          en_us: Run PyLoad as specified uid.
+      - container: PGID
+        description:
+          en_us: Run PyLoad as specified gid.
       ports:
-        - container: "8000"
-          description:
-            en_us: WebUI HTTP Port
-          protocol: tcp
+      - container: "8000"
+        description:
+          en_us: WebUI HTTP Port
+        protocol: tcp
 
-        - container: "9666"
-          description:
-            en_us: PyLoad listening Port (TCP)
-          protocol: tcp
+      - container: "9666"
+        description:
+          en_us: PyLoad listening Port (TCP)
+        protocol: tcp
 
       volumes:
-        - container: /config
-          description:
-            en_us: PyLoad config directory.
+      - container: /config
+        description:
+          en_us: PyLoad config directory.
 
-        - container: /downloads
-          description:
-            en_us: PyLoad Download Directory.
+      - container: /downloads
+        description:
+          en_us: PyLoad Download Directory.
 
 x-casaos:
   architectures:
-    - arm
-  main: pyload
+  - arm
+  main: pyload-arm
   author: joaobosconff
   category: Downloader
   description:

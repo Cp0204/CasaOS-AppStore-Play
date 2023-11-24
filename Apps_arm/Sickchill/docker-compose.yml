@@ -1,6 +1,6 @@
 name: sickchill-arm
 services:
-  sickchill:
+  sickchill-arm:
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -12,51 +12,51 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-      - target: 8081
-        published: "8081"
-        protocol: tcp
+    - target: 8081
+      published: "8081"
+      protocol: tcp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/sickchill/config
-        target: /config
-      - type: bind
-        source: /DATA/Downloads
-        target: /downloads
-      - type: bind
-        source: /DATA/Media/TV Shows
-        target: /tv
+    - type: bind
+      source: /DATA/AppData/sickchill/config
+      target: /config
+    - type: bind
+      source: /DATA/Downloads
+      target: /downloads
+    - type: bind
+      source: /DATA/Media/TV Shows
+      target: /tv
     x-casaos:
       envs:
-        - container: PUID
-          description:
-            en_us: ""
-        - container: PGID
-          description:
-            en_us: ""
-        - container: TZ
-          description:
-            en_us: ""
+      - container: PUID
+        description:
+          en_us: ""
+      - container: PGID
+        description:
+          en_us: ""
+      - container: TZ
+        description:
+          en_us: ""
       ports:
-        - container: "8081"
-          description:
-            en_us: ""
+      - container: "8081"
+        description:
+          en_us: ""
 
       volumes:
-        - container: /config
-          description:
-            en_us: ""
-        - container: /downloads
-          description:
-            en_us: ""
-        - container: /tv
-          description:
-            en_us: ""
-    container_name: sickchill
+      - container: /config
+        description:
+          en_us: ""
+      - container: /downloads
+        description:
+          en_us: ""
+      - container: /tv
+        description:
+          en_us: ""
+    container_name: sickchill-arm
 x-casaos:
   architectures:
-    - arm
-  main: sickchill
+  - arm
+  main: sickchill-arm
   author: CasaOS Team
   category: Media
   description:
@@ -89,12 +89,12 @@ x-casaos:
   developer: Sickchill Team
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-3.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-4.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-5.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-6.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-2.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-3.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-4.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-5.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-6.png
   tagline:
     en_us: Automatic video library manager for TV Shows
     zh_cn: 自动视频库管理器

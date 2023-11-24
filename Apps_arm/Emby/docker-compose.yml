@@ -1,12 +1,12 @@
 name: emby-arm
 services:
-  emby:
+  emby-arm:
     devices:
-      - /dev/dri:/dev/dri
-      - /dev/vchiq:/dev/vchiq
-      - /dev/video10:/dev/video10
-      - /dev/video11:/dev/video11
-      - /dev/video12:/dev/video12
+    - /dev/dri:/dev/dri
+    - /dev/vchiq:/dev/vchiq
+    - /dev/video10:/dev/video10
+    - /dev/video11:/dev/video11
+    - /dev/video12:/dev/video12
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -18,58 +18,58 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-      - target: 8096
-        published: "8096"
-        protocol: tcp
-      - target: 8920
-        published: "8920"
-        protocol: tcp
+    - target: 8096
+      published: "8096"
+      protocol: tcp
+    - target: 8920
+      published: "8920"
+      protocol: tcp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/$AppID/config
-        target: /config
-      - type: bind
-        source: /DATA/Media/TV Shows
-        target: /data/tvshows
-      - type: bind
-        source: /DATA/Media/Movies
-        target: /data/movies
+    - type: bind
+      source: /DATA/AppData/$AppID/config
+      target: /config
+    - type: bind
+      source: /DATA/Media/TV Shows
+      target: /data/tvshows
+    - type: bind
+      source: /DATA/Media/Movies
+      target: /data/movies
     x-casaos:
       envs:
-        - container: PUID
-          description:
-            en_us: ""
-        - container: PGID
-          description:
-            en_us: ""
-        - container: TZ
-          description:
-            en_us: ""
+      - container: PUID
+        description:
+          en_us: ""
+      - container: PGID
+        description:
+          en_us: ""
+      - container: TZ
+        description:
+          en_us: ""
       ports:
-        - container: "8096"
-          description:
-            en_us: ""
+      - container: "8096"
+        description:
+          en_us: ""
 
-        - container: "8920"
-          description:
-            en_us: ""
+      - container: "8920"
+        description:
+          en_us: ""
 
       volumes:
-        - container: /config
-          description:
-            en_us: ""
-        - container: /data/tvshows
-          description:
-            en_us: ""
-        - container: /data/movies
-          description:
-            en_us: ""
-    container_name: emby
+      - container: /config
+        description:
+          en_us: ""
+      - container: /data/tvshows
+        description:
+          en_us: ""
+      - container: /data/movies
+        description:
+          en_us: ""
+    container_name: emby-arm
 x-casaos:
   architectures:
-    - arm
-  main: emby
+  - arm
+  main: emby-arm
   author: CasaOS Team
   category: Media
   description:
@@ -89,9 +89,9 @@ x-casaos:
   developer: linuxserver
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/screenshot-3.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/screenshot-2.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/screenshot-3.png
   tagline:
     en_us: TAKE YOUR MEDIA ANYWHERE WITH EMBY
     zh_cn: 用EMBY随时随地带着媒体

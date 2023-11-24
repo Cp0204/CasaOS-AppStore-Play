@@ -1,6 +1,6 @@
 name: embystat-arm
 services:
-  embystat:
+  embystat-arm:
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -12,39 +12,39 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-      - target: 6555
-        published: "6555"
-        protocol: tcp
+    - target: 6555
+      published: "6555"
+      protocol: tcp
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/embystat/config
-        target: /config
+    - type: bind
+      source: /DATA/AppData/embystat/config
+      target: /config
     x-casaos:
       envs:
-        - container: PUID
-          description:
-            en_us: ""
-        - container: PGID
-          description:
-            en_us: ""
-        - container: TZ
-          description:
-            en_us: ""
+      - container: PUID
+        description:
+          en_us: ""
+      - container: PGID
+        description:
+          en_us: ""
+      - container: TZ
+        description:
+          en_us: ""
       ports:
-        - container: "6555"
-          description:
-            en_us: ""
+      - container: "6555"
+        description:
+          en_us: ""
 
       volumes:
-        - container: /config
-          description:
-            en_us: ""
-    container_name: embystat
+      - container: /config
+        description:
+          en_us: ""
+    container_name: embystat-arm
 x-casaos:
   architectures:
-    - arm
-  main: embystat
+  - arm
+  main: embystat-arm
   author: CasaOS Team
   category: Media
   description:
@@ -64,9 +64,9 @@ x-casaos:
   developer: Embystart Team
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/screenshot-3.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/screenshot-2.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/screenshot-3.png
   tagline:
     en_us: Calculate all kinds of statistics from your (local) Emby or Jellyfin server
     zh_cn: 从您的（本地）Emby或Jellyfin服务器计算各种统计数据
