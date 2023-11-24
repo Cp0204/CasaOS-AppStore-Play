@@ -1,8 +1,8 @@
-name: gotify-arm64
+name: gotify
 services:
   gotify-arm64:
     image: gotify/server-arm64:latest
-    container_name: gotify-arm64
+    container_name: gotify
     deploy:
       resources:
         reservations:
@@ -30,14 +30,14 @@ x-casaos:
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/screenshot-2.png
-  main: gotify-arm64
+  main: gotify
   tagline:
     en_us: a simple server for sending and receiving messages
     zh_cn: 一个简单的服务器用于发送和接收消息
   thumbnail:
   tips:
   title:
-    en_us: Gotify-arm64
+    en_us: Gotify
   index:
   port_map: "86"
   scheme: http
