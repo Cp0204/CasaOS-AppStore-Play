@@ -1,0 +1,86 @@
+name: emulatorjs
+services:
+  emulatorjs:
+    environment:
+      - PGID=$PGID
+      - PUID=$PUID
+      - SUBFOLDER=/
+      - TZ=$TZ
+    image: lscr.io/linuxserver/emulatorjs:arm32v7-1.7.2
+    network_mode: bridge
+    ports:
+      - target: 3000
+        published: "3001"
+        protocol: tcp
+      - target: 4001
+        published: "4001"
+        protocol: tcp
+      - target: 80
+        published: "88"
+        protocol: tcp
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /data
+      - type: bind
+        source: /ROMS/nes
+        target: /data/nes/roms
+    x-casaos:
+      ports:
+        - container: "80"
+          description:
+            en_us: Play Game
+            zh_cn: 玩游戏
+        - container: "3000"
+          description:
+            en_us: Manage ROMS
+            zh_cn: ROM 管理
+    container_name: emulatorjs
+x-casaos:
+  architectures:
+    - arm
+  description:
+    en_us: EmulatorJS is a Docker-based emulator application that can simulate various operating systems and device environments within containers for development, testing, and learning purposes.
+    zh_cn: EmulatorJS是一个基于Docker的模拟器应用程序，可以在容器中模拟多种操作系统和设备环境，用于开发、测试和学习目的。
+    ar_sa: EmulatorJS هو تطبيق محاكي يعتمد على Docker يمكنه محاكاة أنظمة التشغيل المتعددة وبيئات الأجهزة داخل حاويات لأغراض التطوير والاختبار والتعلم.
+    de_de: EmulatorJS ist eine Docker-basierte Emulator-Anwendung, die verschiedene Betriebssysteme und Geräteumgebungen in Containern simulieren kann, um für Entwicklungs-, Test- und Lernzwecke eingesetzt zu werden.
+    es_es: EmulatorJS es una aplicación de emulador basada en Docker que puede simular varios sistemas operativos y entornos de dispositivos dentro de contenedores con fines de desarrollo, pruebas y aprendizaje.
+    fr_fr: EmulatorJS est une application d'émulation basée sur Docker qui peut simuler divers systèmes d'exploitation et environnements de périphériques dans des conteneurs à des fins de développement, de test et d'apprentissage.
+    hu_hu: Az EmulatorJS egy Docker-alapú emulátor alkalmazás, amely konténerekben képes szimulálni különböző operációs rendszereket és eszközkörnyezeteket fejlesztési, tesztelési és tanulási célokra.
+    it_it: EmulatorJS è un'applicazione di emulazione basata su Docker che può simulare vari sistemi operativi e ambienti dispositivi all'interno di container per scopi di sviluppo, test e apprendimento.
+    ru_ru: EmulatorJS - это приложение эмулятора, основанное на Docker, которое может моделировать различные операционные системы и среды устройств в контейнерах для разработки, тестирования и обучения.
+    pl_pl: EmulatorJS to aplikacja emulacyjna oparta na Dockerze, która może symulować różne systemy operacyjne i środowiska urządzeń w kontenerach w celu rozwoju, testowania i nauki.
+    pt_br: EmulatorJS é um aplicativo de emulação baseado em Docker que pode simular vários sistemas operacionais e ambientes de dispositivos dentro de contêineres para fins de desenvolvimento, teste e aprendizado.
+    sv_se: EmulatorJS är en Docker-baserad emulatorapplikation som kan simulera olika operativsystem och enhetsmiljöer i containrar för utveckling, testning och lärande.
+    uk_ua: EmulatorJS - це застосунок емулятора, заснований на Docker, який може моделювати різні операційні систем
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/EmulatorJS/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/EmulatorJS/screenshot-1.png
+  tagline:
+  en_us: Unlock the power of emulation with EmulatorJS – Explore, experiment, and innovate across diverse operating systems and device environments.
+  zh_cn: 发掘模拟的力量，与EmulatorJS一同探索、实验和创新于多样化的操作系统和设备环境。
+  ar_sa: اكتشف قوة المحاكاة مع EmulatorJS - استكشف وتجرب وابتكر عبر أنظمة التشغيل وبيئات الأجهزة المتنوعة.
+  de_de: Entfesseln Sie die Kraft der Emulation mit EmulatorJS – Erkunden, experimentieren und innovieren Sie in vielfältigen Betriebssystemen und Geräteumgebungen.
+  es_es: Desbloquea el poder de la emulación con EmulatorJS Explora, experimenta e innova en diversos sistemas operativos y entornos de dispositivos.
+  fr_fr: Libérez la puissance de l'émulation avec EmulatorJS - Explorez, expérimentez et innovez dans divers systèmes d'exploitation et environnements de périphériques.
+  hu_hu: Fedezd fel az emuláció erejét az EmulatorJS-szel - Fedezz fel, kísérletezz és innoválj sokféle operációs rendszeren és eszközkörnyezetben.
+  it_it: Sblocca il potere dell'emulazione con EmulatorJS - Esplora, sperimenta e innova su diversi sistemi operativi e ambienti dispositivi.
+  ru_ru: Разблокируйте мощь эмуляции с помощью EmulatorJS - Исследуйте, экспериментируйте и инновируйте в разнообразных операционных системах и средах устройств.
+  pl_pl: Odblokuj potęgę emulacji z EmulatorJS - Eksploruj, eksperymentuj i innowuj na różnorodnych systemach operacyjnych i środowiskach urządzeń.
+  pt_br: Desbloqueie o poder da emulação com o EmulatorJS - Explore, experimente e inove em diversos sistemas operacionais e ambientes de dispositivos.
+  sv_se: Lås upp kraften i emulering med EmulatorJS - Utforska, experimentera och innovera över olika operativsystem och enhetsmiljöer.
+  uk_ua: Розкрийте потужність емуляції з EmulatorJS - Досліджуйте, експериментуйте та інновуйте у різних операційних системах і середовищах пристроїв.
+  author: self
+  category: Utilities
+  hostname: ""
+  index: /
+  port_map: "88"
+  scheme: http
+  store_app_id: emulatorjs
+  title:
+    en_us: emulatorjs

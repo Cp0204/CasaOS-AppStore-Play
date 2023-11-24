@@ -1,0 +1,104 @@
+name: sabnzbd
+services:
+  sabnzbd:
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/sabnzbd:arm32v7-4.0.1
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 8080
+        published: "8282"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/Downloads
+        target: /incomplete-downloads
+      - type: bind
+        source: /DATA/AppData/sabnzbd/config
+        target: /config
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+      ports:
+        - container: "8080"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /incomplete-downloads
+          description:
+            en_us: ""
+        - container: /config
+          description:
+            en_us: ""
+        - container: /downloads
+          description:
+            en_us: ""
+    container_name: sabnzbd
+x-casaos:
+  architectures:
+    - arm
+  main: sabnzbd
+  author: CasaOS Team
+  category: Media
+  description:
+    en_us: SABnzbd is an Open Source Binary Newsreader written in Python. It's totally free, easy to use, and works practically everywhere. SABnzbd makes Usenet as simple and streamlined as possible by automating everything we can. All you have to do is add an .nzb. SABnzbd takes over from there, where it will be automatically downloaded, verified, repaired, extracted and filed away with zero human interaction. SABnzbd offers an easy setup wizard and has self-analysis tools to verify your setup.
+    zh_cn: SABnzbd是一个开源的二进制新闻阅读器，由Python编写。它完全免费，易于使用，几乎可以在任何地方使用。 SABnzbd通过自动化我们可以实现的所有内容来使Usenet尽可能简单和流畅。您所要做的就是添加一个.nzb。 SABnzbd从那里开始，它将自动下载，验证，修复，提取和归档，零人工干预。 SABnzbd提供了一个简单的安装向导，并具有自我分析工具来验证您的设置。
+    ar_sa: SABnzbd هو مستقل مصدر الأخبار الثنائية المكتوبة بلغة بايثون. إنه مجاني تمامًا وسهل الاستخدام ويعمل في معظم الأماكن. يجعل SABnzbd Usenet بسهولة وبساطة قدر الإمكان من خلال تلقائيات كل شيء يمكننا القيام به. كل ما عليك فعله هو إضافة .nzb. يتولى SABnzbd من هناك، حيث سيتم تنزيله تلقائيًا والتحقق منه وإصلاحه واستخراجه وترتيبه دون تدخل بشري. يقدم SABnzbd معالجًا سهلًا للإعداد وأدوات تحليل متخصصة للتحقق من إعدادك.
+    de_de: SABnzbd ist ein Open Source Binary Newsreader, der in Python geschrieben ist. Es ist völlig kostenlos, einfach zu bedienen und praktisch überall einsetzbar. SABnzbd macht Usenet so einfach und effizient wie möglich, indem es alles automatisiert, was wir tun können. Alles, was Sie tun müssen, ist eine .nzb hinzuzufügen. SABnzbd übernimmt dann die Kontrolle, wo es automatisch heruntergeladen, überprüft, repariert, extrahiert und archiviert wird, ohne menschliches Eingreifen. SABnzbd bietet einen einfachen Einrichtungsassistenten und hat selbstanalysierende Tools, um Ihre Einrichtung zu überprüfen.
+    es_es: SABnzbd es un lector de noticias binarias de código abierto escrito en Python. Es totalmente gratuito, fácil de usar y funciona prácticamente en todas partes. SABnzbd hace que Usenet sea lo más simple y eficiente posible mediante la automatización de todo lo que podemos hacer. Todo lo que tienes que hacer es agregar un .nzb. SABnzbd toma el control desde ahí, donde se descargará automáticamente, se verificará, reparará, extraerá y archivará sin intervención humana. SABnzbd ofrece un asistente de configuración fácil y tiene herramientas de análisis autónomas para verificar su configuración.
+    fr_fr: SABnzbd est un lecteur de nouvelles binaires open source écrit en Python. Il est entièrement gratuit, facile à utiliser et fonctionne pratiquement partout. SABnzbd rend Usenet aussi simple et efficace que possible en automatisant tout ce que nous pouvons faire. Tout ce que vous avez à faire est d'ajouter un .nzb. SABnzbd prend le contrôle de là, où il sera automatiquement téléchargé, vérifié, réparé, extrait et archivé sans intervention humaine. SABnzbd offre un assistant de configuration facile et dispose d'outils d'analyse autonomes pour vérifier votre configuration.
+    hu_hu: A SABnzbd egy nyílt forráskódú bináris hírlapíró, amelyet Python írt. Teljesen ingyenes, könnyen használható és majdnem bárhol használható. A SABnzbd automatizálja az összes olyan dolgot, amit tehetünk, hogy Usenetet lehetőleg egyszerű és hatékony legyen. Minden, amit tenned kell, az egy .nzb hozzáadása. A SABnzbd innentől kezdve átvette a kontrollt, ahol automatikusan letölti, ellenőrzi, javítja, kicsomagolja és archiválja, anélkül, hogy emberi beavatkozást igényelne. A SABnzbd könnyen beállítható varázslóval és önálló elemzési eszközökkel rendelkezik a beállítások ellenőrzéséhez.
+    it_it: SABnzbd è un lettore di notizie binarie open source scritto in Python. È completamente gratuito, facile da usare e funziona praticamente ovunque. SABnzbd rende Usenet il più semplice e efficiente possibile automatizzando tutto ciò che possiamo fare. Tutto ciò che devi fare è aggiungere un .nzb. SABnzbd prende il controllo da lì, dove verrà scaricato automaticamente, verificato, riparato, estratto e archiviato senza intervento umano. SABnzbd offre un assistente di configurazione facile e dispone di strumenti di analisi autonome per verificare la tua configurazione.
+    ru_ru: SABnzbd - это открытый исходный код бинарного новостного читателя, написанный на Python. Он полностью бесплатен, прост в использовании и работает практически везде. SABnzbd делает Usenet как можно проще и эффективнее, автоматизируя все, что мы можем сделать. Все, что вам нужно сделать, - это добавить .nzb. SABnzbd берет на себя контроль оттуда, где он будет автоматически загружен, проверен, восстановлен, извлечен и архивирован без человеческого вмешательства. SABnzbd предлагает простой мастер настройки и имеет самостоятельные инструменты анализа для проверки вашей конфигурации.
+    pl_pl: SABnzbd to oprogramowanie open source do czytania wiadomości binarnych napisane w Pythonie. Jest całkowicie darmowe, łatwe w obsłudze i działa praktycznie wszędzie. SABnzbd sprawia, że Usenet jest jak najprostszy i najbardziej wydajny, automatyzując wszystko, co możemy zrobić. Wszystko, co musisz zrobić, to dodać .nzb. SABnzbd przejmuje kontrolę od tamtego miejsca, gdzie zostanie pobrany automatycznie, zweryfikowany, naprawiony, wypakowany i zarchiwizowany bez udziału człowieka. SABnzbd oferuje prosty kreator konfiguracji i dysponuje samodzielnymi narzędziami do analizy konfiguracji.
+    pt_br: O SABnzbd é um leitor de notícias binárias de código aberto escrito em Python. É totalmente gratuito, fácil de usar e funciona praticamente em qualquer lugar. O SABnzbd torna o Usenet o mais simples e eficiente possível, automatizando tudo o que podemos fazer. Tudo o que você precisa fazer é adicionar um .nzb. O SABnzbd assume o controle de lá, onde será baixado automaticamente, verificado, reparado, extraído e arquivado sem intervenção humana. O SABnzbd oferece um assistente de configuração fácil e possui ferramentas de análise autônomas para verificar sua configuração.
+    sv_se: SABnzbd är en öppen källkod binär nyhetsläsare skriven i Python. Det är helt gratis, lätt att använda och fungerar praktiskt taget överallt. SABnzbd gör Usenet så enkelt och effektivt som möjligt genom att automatisera allt vi kan göra. Allt du behöver göra är att lägga till en .nzb. SABnzbd tar över kontrollen därifrån, där det automatiskt laddas ner, verifieras, repareras, packas upp och arkiveras utan mänsklig inblandning. SABnzbd erbjuder en enkel konfigurationsguide och har självständiga analysverktyg för att kontrollera din konfiguration.
+    uk_ua: SABnzbd - це відкритий вихідний код бінарного читача новин, написаний на Python. Він повністю безкоштовний, легкий у використанні і працює майже в будь-якому місці. SABnzbd робить Usenet якомога простішим і ефективнішим, автоматизуючи все, що ми можемо зробити. Все, що вам потрібно зробити, - це додати .nzb. SABnzbd бере на себе контроль звідти, де він буде автоматично завантажений, перевірений, відновлений, розпакований і архівований без участі людини. SABnzbd пропонує простий майстер налаштування і має самостійні інструменти аналізу для перевірки вашої конфігурації.
+  developer: Sabnzbd Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-4.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-5.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-6.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-7.png
+  tagline:
+    en_us: Free and easy binary newsreader
+    zh_cn: 免费易用的二进制新闻阅读器
+    ar_sa: قارئ أخبار متعدد الوسائط مجاني وسهل الاستخدام
+    de_de: Freier und einfacher Binär-Newsreader
+    es_es: Lector de noticias binarias gratuito y fácil de usar
+    fr_fr: Lecteur de nouvelles binaire gratuit et facile à utiliser
+    hu_hu: Ingyenes és egyszerű bináris hír olvasó
+    it_it: Lettore di notizie binarie gratuito e facile da usare
+    ru_ru: Бесплатный и простой бинарный новостной читатель
+    pl_pl: Darmowy i prosty czytnik wiadomości binarnych
+    pt_br: Leitor de notícias binárias gratuito e fácil de usar
+    sv_se: Gratis och enkel binär nyhetsläsare
+    uk_ua: Безкоштовний і простий бінарний новинний читач
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/thumbnail.png
+  tips: {}
+  title:
+    en_us: Sabnzbd
+  port_map: "8282"

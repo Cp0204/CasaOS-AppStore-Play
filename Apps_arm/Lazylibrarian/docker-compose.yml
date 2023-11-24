@@ -1,0 +1,104 @@
+name: lazylibrarian
+services:
+  lazylibrarian:
+    environment:
+      DOCKER_MODS: linuxserver/calibre-web:calibre|linuxserver/mods:lazylibrarian-ffmpeg
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/lazylibrarian:arm32v7-version-f066b525
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 5299
+        published: "5299"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+      - type: bind
+        source: /path/to/data
+        target: /books
+      - type: bind
+        source: /DATA/AppData/lazylibrarian/config
+        target: /config
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+        - container: DOCKER_MODS
+          description:
+            en_us: ""
+      ports:
+        - container: "5299"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /downloads
+          description:
+            en_us: ""
+        - container: /books
+          description:
+            en_us: ""
+        - container: /config
+          description:
+            en_us: ""
+    container_name: lazylibrarian
+x-casaos:
+  architectures:
+    - arm
+  main: lazylibrarian
+  author: CasaOS Team
+  category: Downloader
+  description:
+    en_us: Lazylibrarian is a program to follow authors and grab metadata for all your digital reading needs. It uses a combination of Goodreads Librarything and optionally GoogleBooks as sources for author info and book info. This container is based on the DobyTang fork.
+    zh_cn: Lazylibrarian是一个程序，用于跟踪作者并获取所有数字阅读需求的元数据。它使用Goodreads Librarything和可选的GoogleBooks作为作者信息和书籍信息的来源。此容器基于DobyTang分支。
+    ar_sa: Lazylibrarian هو برنامج لمتابعة المؤلفين والحصول على بيانات التعريف لجميع احتياجات القراءة الرقمية الخاصة بك. يستخدم مزيجًا من Goodreads Librarything واختياريًا GoogleBooks كمصادر لمعلومات المؤلف ومعلومات الكتاب. يعتمد هذا الحاوية على تفريع DobyTang.
+    de_de: Lazylibrarian ist ein Programm, um Autoren zu verfolgen und Metadaten für alle Ihre digitalen Lesebedürfnisse zu erhalten. Es verwendet eine Kombination aus Goodreads Librarything und optional GoogleBooks als Quellen für Autoren- und Buchinformationen. Dieser Container basiert auf dem DobyTang-Fork.
+    es_es: Lazylibrarian es un programa para seguir autores y obtener metadatos para todas sus necesidades de lectura digital. Usa una combinación de Goodreads Librarything y opcionalmente GoogleBooks como fuentes de información de autor y libro. Este contenedor se basa en el bifurcación de DobyTang.
+    fr_fr: Lazylibrarian est un programme pour suivre les auteurs et obtenir des métadonnées pour tous vos besoins de lecture numérique. Il utilise une combinaison de Goodreads Librarything et éventuellement GoogleBooks comme sources d'informations sur l'auteur et le livre. Ce conteneur est basé sur la fourchette DobyTang.
+    hu_hu: A Lazylibrarian egy program, amely követi az írókat és lekérdezi az összes digitális olvasási igényének metadatáit. Goodreads Librarything és opcionálisan GoogleBooks kombinációját használja az írói és könyvi információk forrásaként. Ez a tároló a DobyTang fork alapján épül fel.
+    it_it: Lazylibrarian è un programma per seguire gli autori e ottenere i metadati per tutte le vostre esigenze di lettura digitali. Usa una combinazione di Goodreads Librarything e opzionalmente GoogleBooks come fonti di informazioni sull'autore e sul libro. Questo contenitore si basa sulla biforcazione di DobyTang.
+    ru_ru: Lazylibrarian - это программа для отслеживания авторов и получения метаданных для всех ваших цифровых потребностей в чтении. Он использует комбинацию Goodreads Librarything и по желанию GoogleBooks в качестве источников информации об авторе и книге. Этот контейнер основан на форке DobyTang.
+    pl_pl: Lazylibrarian to program do śledzenia autorów i pobierania metadanych dla wszystkich potrzeb czytania cyfrowego. Używa połączenia Goodreads Librarything i opcjonalnie GoogleBooks jako źródeł informacji o autorze i książce. Ten kontener oparty jest na forku DobyTang.
+    pt_br: Lazylibrarian é um programa para seguir autores e obter metadados para todas as suas necessidades de leitura digital. Usa uma combinação de Goodreads Librarything e opcionalmente GoogleBooks como fontes de informações do autor e do livro. Este contêiner é baseado no fork DobyTang.
+    sv_se: Lazylibrarian är ett program för att följa författare och hämta metadata för alla dina digitala läsningsbehov. Det använder en kombination av Goodreads Librarything och valfritt GoogleBooks som källor för författar- och bokinformation. Denna behållare baseras på DobyTang-forken.
+    uk_ua: Lazylibrarian - це програма для відстеження авторів і отримання метаданих для всіх ваших цифрових потреб в читанні. Він використовує комбінацію Goodreads Librarything і за бажанням GoogleBooks як джерела інформації про автора і книгу. Цей контейнер базується на форку DobyTang.
+  developer: Lazylibrarian Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lazylibrarian/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lazylibrarian/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lazylibrarian/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lazylibrarian/screenshot-3.png
+  tagline:
+    en_us: eBook Auto Downloader
+    zh_cn: eBook自动下载器
+    ar_sa: محمّل كتب إلكترونية تلقائي
+    de_de: eBook Auto Downloader
+    es_es: Descargador automático de libros electrónicos
+    fr_fr: Téléchargeur de livres électroniques automatique
+    hu_hu: eBook automatikus letöltő
+    it_it: eBook Auto Downloader
+    ru_ru: Автоматический загрузчик электронных книг
+    pl_pl: Automatyczny pobieracz e-booków
+    pt_br: eBook Auto Downloader
+    sv_se: eBook Auto Downloader
+    uk_ua: Автоматичний завантажувач електронних книг
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lazylibrarian/thumbnail.png
+  tips: {}
+  title:
+    en_us: Lazylibrarian
+  port_map: "5299"

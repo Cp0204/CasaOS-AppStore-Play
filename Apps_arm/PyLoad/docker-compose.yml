@@ -1,0 +1,112 @@
+name: pyload
+services:
+  pyload:
+    container_name: pyload
+    image: linuxserver/pyload-ng:arm32v7-0.5.0
+    deploy:
+      resources:
+        reservations:
+          memory: "256M"
+    environment:
+      PGID: $PGID
+      PUID: $PUID
+      TZ: $TZ
+    restart: unless-stopped
+    network_mode: bridge
+    privileged: false
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+    ports:
+      - target: 8000
+        published: "8000"
+        protocol: tcp
+      - target: 9666
+        published: "9666"
+        protocol: tcp
+
+    x-casaos:
+      envs:
+        - container: TZ
+          description:
+            en_us: TimeZone
+        - container: PUID
+          description:
+            en_us: Run PyLoad as specified uid.
+        - container: PGID
+          description:
+            en_us: Run PyLoad as specified gid.
+      ports:
+        - container: "8000"
+          description:
+            en_us: WebUI HTTP Port
+          protocol: tcp
+
+        - container: "9666"
+          description:
+            en_us: PyLoad listening Port (TCP)
+          protocol: tcp
+
+      volumes:
+        - container: /config
+          description:
+            en_us: PyLoad config directory.
+
+        - container: /downloads
+          description:
+            en_us: PyLoad Download Directory.
+
+x-casaos:
+  architectures:
+    - arm
+  main: pyload
+  author: joaobosconff
+  category: Downloader
+  description:
+    en_us: pyLoad is a Free and Open Source download manager written in Python and designed to be extremely lightweight, easily extensible and fully manageable via web.
+    pt_br: pyLoad é um gerenciador de download gratuito e de código aberto escrito em Python e projetado para ser extremamente leve, facilmente extensível e totalmente gerenciável via web.
+  developer: linuxserver
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PyLoad/icon.png
+  screenshot_link:
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PyLoad/screenshot-1.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PyLoad/screenshot-2.png
+  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PyLoad/screenshot-3.png
+  tagline:
+    en_us: Free Downloader Manager.
+    pt_br: Gerenciador de download gratuito.
+  thumbnail:
+  tips:
+    before_install:
+      en_us: |
+        Default Account
+
+        | Username | Password |
+        |----------|----------|
+        | `pyload`    | `pyload` |
+
+        Default Accessible Path in Pyload
+
+        | Name | Value |
+        | ---- | ----- |
+        | Downloads Path | `/DATA/Downloads` |
+      pt_br: |
+        Conta Padrão
+
+        | Usuário | Senha |
+        |----------|----------|
+        | `pyload`    | `pyload` |
+
+         Diretório padrão no Pyload
+
+        | Nome | Valor |
+        | ---- | ----- |
+        | Diretório de Download | `/DATA/Downloads` |
+  title:
+    en_us: PyLoad
+    pt_br: PyLoad
+  index: /
+  port_map: "8000"

@@ -1,0 +1,87 @@
+name: prowlarr
+services:
+  prowlarr:
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/prowlarr:arm32v7-1.5.2
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 9696
+        published: "9696"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/prowlarr/config
+        target: /config
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+      ports:
+        - container: "9696"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+    container_name: prowlarr
+x-casaos:
+  architectures:
+    - arm
+  main: prowlarr
+  author: CasaOS Team
+  category: Downloader
+  description:
+    en_us: Prowlarr is an indexer manager/proxy built on the popular *arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports management of both Torrent Trackers and Usenet Indexers. It integrates seamlessly with Lidarr, Mylar3, Radarr, Readarr, and Sonarr offering complete management of your indexers with no per app Indexer setup required (we do it all).
+    zh_cn: Prowlarr是一个索引器管理器/代理，建立在流行的*arr .net / reactjs基础堆栈上，用于与各种PVR应用程序集成。 Prowlarr支持管理Torrent Trackers和Usenet Indexers。它与Lidarr，Mylar3，Radarr，Readarr和Sonarr无缝集成，提供完整的索引器管理，无需每个应用程序索引器设置即可完成（我们全部都做到了）。
+    ar_sa: Prowlarr هو مدير مؤشر / وكيل مبني على مكتبة * arr الشعبية .net / reactjs للتكامل مع تطبيقات PVR المختلفة. Prowlarr يدعم إدارة Torrent Trackers و Usenet Indexers. يتم تكامله بسلاسة مع Lidarr و Mylar3 و Radarr و Readarr و Sonarr ، مما يوفر إدارة كاملة لمؤشراتك بدون تعيين مؤشر لكل تطبيق مطلوب (نحن نفعل كل شيء).
+    de_de: Prowlarr ist ein Indexmanager / Proxy, der auf der beliebten * arr .net / reactjs-Grundstapelbasis für die Integration mit Ihren verschiedenen PVR-Apps entwickelt wurde. Prowlarr unterstützt die Verwaltung von Torrent-Trackern und Usenet-Indexern. Es integriert sich nahtlos in Lidarr, Mylar3, Radarr, Readarr und Sonarr und bietet eine vollständige Verwaltung Ihrer Indexer ohne eine Indexer-Einstellung pro App (wir machen alles).
+    es_es: Prowlarr es un administrador de índices / proxy construido en la popular base de pila .net / reactjs * arr para integrarse con sus diversas aplicaciones PVR. Prowlarr admite la gestión de Torrent Trackers y Usenet Indexers. Se integra sin problemas con Lidarr, Mylar3, Radarr, Readarr y Sonarr, ofreciendo una gestión completa de sus indexadores sin configuración de indexador por aplicación (lo hacemos todo).
+    fr_fr: Prowlarr est un gestionnaire d'index / proxy construit sur la base de pile populaire .net / reactjs * arr pour s'intégrer à vos différentes applications PVR. Prowlarr prend en charge la gestion des trackers Torrent et des indexeurs Usenet. Il s'intègre sans problème à Lidarr, Mylar3, Radarr, Readarr et Sonarr, offrant une gestion complète de vos indexeurs sans configuration d'indexeur par application (nous faisons tout).
+    hu_hu: A Prowlarr egy indexelőkezelő / proxy, amely a népszerű * arr .net / reactjs alapstackre épül, hogy integrálja a különböző PVR alkalmazásait. A Prowlarr támogatja a Torrent Trackers és a Usenet Indexers kezelését. A Lidarr, Mylar3, Radarr, Readarr és Sonarr integrálódik a tökéletesen, és teljes kezelést biztosít az indexelőknek az alkalmazásokonkénti indexelőbeállítás nélkül (mindent megteszünk).
+    it_it: Prowlarr è un gestore di indici / proxy costruito sulla popolare base di stack .net / reactjs * arr per integrarsi con le varie applicazioni PVR. Prowlarr supporta la gestione di Torrent Trackers e Usenet Indexers. Si integra perfettamente con Lidarr, Mylar3, Radarr, Readarr e Sonarr, offrendo un'intera gestione degli indexer senza configurazione di indexer per applicazione (lo facciamo tutto).
+    ru_ru: Prowlarr - это менеджер индексов / прокси, построенный на популярной базе стека .net / reactjs * arr для интеграции с различными приложениями PVR. Prowlarr поддерживает управление трекерами Torrent и Usenet Indexers. Он безупречно интегрируется с Lidarr, Mylar3, Radarr, Readarr и Sonarr, предлагая полное управление индексами без необходимости настройки индекса для каждого приложения (мы делаем все).
+    pl_pl: Prowlarr to menedżer indeksów / proxy, zbudowany na popularnej podstawie stosu .net / reactjs * arr do integracji z różnymi aplikacjami PVR. Prowlarr obsługuje zarządzanie Torrent Trackers i Usenet Indexers. Bezproblemowo integruje się z Lidarr, Mylar3, Radarr, Readarr i Sonarr, oferując pełną obsługę indeksów bez konieczności konfigurowania indeksu dla każdej aplikacji (robimy wszystko).
+    pt_br: O Prowlarr é um gerenciador de índices / proxy construído na base de pilha popular .net / reactjs * arr para integração com suas várias aplicações PVR. O Prowlarr suporta a gestão de Torrent Trackers e Usenet Indexers. Ele se integra perfeitamente com Lidarr, Mylar3, Radarr, Readarr e Sonarr, oferecendo gerenciamento completo de seus indexadores sem configuração de indexador por aplicativo (fazemos tudo).
+    sv_se: Prowlarr är en indexhanterare / proxy som byggs på den populära .net / reactjs-staplarna * arr för att integreras med dina olika PVR-appar. Prowlarr stöder hantering av Torrent Trackers och Usenet Indexers. Det integreras perfekt med Lidarr, Mylar3, Radarr, Readarr och Sonarr, vilket ger fullständig hantering av dina index utan indexinställning per app (vi gör allt).
+    uk_ua: Prowlarr - це менеджер індексів / проксі, збудований на популярній базі стеку .net / reactjs * arr для інтеграції з різними додатками PVR. Prowlarr підтримує управління трекерами Torrent і Usenet Indexers. Він бездоганно інтегрується з Lidarr, Mylar3, Radarr, Readarr і Sonarr, пропонуючи повне управління індексами без необхідності налаштування індекса для кожного додатку (ми робимо все).
+  developer: Prowlarr Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/screenshot-2.png
+  tagline:
+    en_us: Integration of various PVR applications
+    zh_cn: 各种PVR应用程序的集成
+    ar_sa: تكامل مختلف تطبيقات PVR
+    de_de: Integration verschiedener PVR-Anwendungen
+    es_es: Integración de varias aplicaciones PVR
+    fr_fr: Intégration de diverses applications PVR
+    hu_hu: Különböző PVR alkalmazások integrációja
+    it_it: Integrazione di varie applicazioni PVR
+    ru_ru: Интеграция различных приложений PVR
+    pl_pl: Integracja różnych aplikacji PVR
+    pt_br: Integração de várias aplicações PVR
+    sv_se: Integration av olika PVR-appar
+    uk_ua: Інтеграція різних додатків PVR
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/thumbnail.png
+  tips: {}
+  title:
+    en_us: Prowlarr
+  port_map: "9696"

@@ -1,0 +1,122 @@
+name: syncthing
+services:
+  syncthing:
+    environment:
+      PGID: $PGID
+      PUID: $PUID
+      TZ: $TZ
+    image: linuxserver/syncthing:arm32v7-1.23.5
+    deploy:
+      resources:
+        reservations:
+          memory: "256M"
+    network_mode: bridge
+    ports:
+      - target: 8384
+        published: "8384"
+        protocol: tcp
+      - target: 22000
+        published: "22000"
+        protocol: tcp
+      - target: 22000
+        published: "22000"
+        protocol: udp
+      - target: 21027
+        published: "21027"
+        protocol: udp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA
+        target: /DATA
+    x-casaos:
+      envs:
+        - container: TZ
+          description:
+            en_us: TimeZone
+            zh_cn: 时区
+        - container: PUID
+          description:
+            en_us: Run Syncthing as specified uid.
+            zh_cn: 以指定的用户ID运行Syncthing
+        - container: PGID
+          description:
+            en_us: Run Syncthing as specified gid.
+            zh_cn: 以指定的组ID运行Syncthing
+      ports:
+        - container: "8384"
+          description:
+            en_us: WebUI HTTP Port
+            zh_cn: WebUI HTTP端口
+
+        - container: "22000"
+          description:
+            en_us: Syncthing listening Port (TCP)
+            zh_cn: Syncthing监听端口（TCP）
+
+        - container: "22000"
+          description:
+            en_us: Syncthing listening Port (UDP)
+            zh_cn: Syncthing监听端口（UDP）
+          protocol: udp
+        - container: "21027"
+          description:
+            en_us: Syncthing protocol discovery Port (TCP)
+            zh_cn: Syncthing协议发现端口（TCP）
+          protocol: udp
+
+      volumes:
+        - container: /config
+          description:
+            en_us: Syncthing config directory.
+            zh_cn: Syncthing配置目录
+        - container: /DATA
+          description:
+            en_us: Syncthing Accessible Directory.
+            zh_cn: Syncthing可访问目录
+    container_name: syncthing
+x-casaos:
+  architectures:
+    - arm
+  main: syncthing
+  author: CasaOS Team
+  category: Backup
+  description:
+    en_us: Syncthing is a continuous file synchronization program. It synchronizes files between two or more computers in real time, safely protected from prying eyes. Your data is your data alone and you deserve to choose where it is stored, whether it is shared with some third party, and how it's transmitted over the internet.
+    zh_cn: Syncthing是一个持续的文件同步程序。它实时同步两台或多台计算机之间的文件，安全地保护免受窥视。您的数据是您自己的数据，您有权选择将其存储在何处，是否与第三方共享，以及如何通过互联网传输。
+    ar_sa: Syncthing هو برنامج مزامنة ملفات مستمر. يقوم بمزامنة الملفات بين جهازين أو أكثر في الوقت الفعلي ، محميًا بأمان من الأعين الحاسدة. بياناتك هي بياناتك ويستحق أن تختار أين يتم تخزينها ، سواء كانت مشاركة مع طرف ثالث أو لا ، وكيف يتم نقلها عبر الإنترنت.
+    de_de: Syncthing ist ein kontinuierliches Dateisynchronisationsprogramm. Es synchronisiert Dateien zwischen zwei oder mehr Computern in Echtzeit, sicher geschützt vor neugierigen Augen. Ihre Daten sind Ihre Daten allein und Sie verdienen es, zu entscheiden, wo sie gespeichert werden, ob sie mit einem Dritten geteilt werden und wie sie über das Internet übertragen werden.
+    es_es: Syncthing es un programa de sincronización de archivos continuo. Sincroniza archivos entre dos o más computadoras en tiempo real, protegido de manera segura de miradas indiscretas. Tus datos son tuyos y mereces decidir dónde se almacenan, si se comparten con algún tercero y cómo se transmiten por Internet.
+    fr_fr: Syncthing est un programme de synchronisation de fichiers continu. Il synchronise des fichiers entre deux ou plusieurs ordinateurs en temps réel, protégé de manière sécurisée des regards indiscrets. Vos données sont les vôtres et vous méritez de décider où elles sont stockées, si elles sont partagées avec un tiers et comment elles sont transmises sur Internet.
+    hu_hu: A Syncthing egy folyamatos fájl szinkronizáló program. Valós idejűen szinkronizálja a két vagy több számítógép közötti fájlokat, biztonságosan védve a kíváncsi szemektől. Az adataid azok, és megérdemled, hogy eldöntsd, hol tárolják, megosztják-e valakivel vagy sem, és hogyan kerülnek át az interneten.
+    it_it: Syncthing è un programma di sincronizzazione dei file continuo. Sincronizza i file tra due o più computer in tempo reale, protetti in modo sicuro da occhi indiscreti. I tuoi dati sono tuoi e meriti di decidere dove vengono memorizzati, se condivisi con un terzo e come vengono trasmessi su Internet.
+    ru_ru: Syncthing - это непрерывная программа синхронизации файлов. Он синхронизирует файлы между двумя или более компьютерами в реальном времени, безопасно защищенные от любопытных глаз. Ваши данные - это только ваши данные, и вы заслуживаете выбирать, где они хранятся, делиться ли они с кем-то третьим, и как они передаются через Интернет.
+    pl_pl: Syncthing to ciągła aplikacja do synchronizacji plików. Synchronizuje pliki między dwoma lub więcej komputerami w czasie rzeczywistym, chroniąc je przed ciekawskimi oczami. Twoje dane są Twoje i zasługujesz na to, abyś sam decydował, gdzie są przechowywane, czy są udostępniane z kimś innym i jak są przesyłane przez Internet.
+    pt_br: Syncthing é um programa de sincronização de arquivos contínuo. Sincroniza arquivos entre dois ou mais computadores em tempo real, protegido de maneira segura de olhares indiscretos. Seus dados são seus e você merece decidir onde eles são armazenados, se são compartilhados com alguém ou não e como são transmitidos pela Internet.
+    sv_se: Syncthing är ett kontinuerligt filsynkroniseringsprogram. Det synkroniserar filer mellan två eller flera datorer i realtid, säkert skyddat från nyfikna ögon. Dina data är dina och du förtjänar att bestämma var de lagras, om de delas med någon eller inte och hur de överförs över internet.
+    uk_ua: Syncthing - це програма безперервної синхронізації файлів. Вона синхронізує файли між двома або більше комп'ютерами у реальному часі, безпечно захищена від любопитних очей. Ваші дані - це лише ваші дані, і ви заслуговуєте на те, щоб самостійно вирішувати, де вони зберігаються, чи їх діляться з кимось і як вони передаються через Інтернет.
+  developer: Syncthing
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Syncthing/icon.png
+  tagline:
+    en_us: Free, secure, and distributed file synchronisation tool.
+    zh_cn: 免费，安全，分布式的文件同步工具。
+    ar_sa: أداة مزامنة ملفات مجانية وآمنة وموزعة.
+    de_de: Freies, sicheres und verteiltes Dateisynchronisationswerkzeug.
+    es_es: Herramienta de sincronización de archivos gratuita, segura y distribuida.
+    fr_fr: Outil de synchronisation de fichiers gratuit, sécurisé et distribué.
+    hu_hu: Ingyenes, biztonságos és terjesztett fájl szinkronizáló eszköz.
+    it_it: Strumento di sincronizzazione file gratuito, sicuro e distribuito.
+    ru_ru: Бесплатный, безопасный и распределенный инструмент синхронизации файлов.
+    pl_pl: Darmowy, bezpieczny i rozproszony narzędzie do synchronizacji plików.
+    pt_br: Ferramenta de sincronização de arquivos gratuita, segura e distribuída.
+    sv_se: Gratis, säker och distribuerad filsynkroniseringsverktyg.
+    uk_ua: Безкоштовний, безпечний і розподілений інструмент синхронізації файлів.
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jellyfin/thumbnail.jpg
+  tips: {}
+  title:
+    en_us: Syncthing
+  index: /
+  port_map: "8384"

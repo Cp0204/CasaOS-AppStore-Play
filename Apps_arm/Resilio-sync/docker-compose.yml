@@ -1,0 +1,72 @@
+name: resilio-sync
+services:
+  resilio-sync:
+    environment:
+      - PGID=$PGID
+      - PUID=$PUID
+      - TZ=$TZ
+    image: linuxserver/resilio-sync:arm32v7-2.7.3
+    network_mode: bridge
+    ports:
+      - target: 55555
+        published: "55555"
+        protocol: tcp
+      - target: 8888
+        published: "8888"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /sync
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+    privileged: false
+    container_name: resilio-sync
+x-casaos:
+  architectures:
+    - arm
+  description:
+    en_us: resilio-sync is a Docker-based application that enables fast and secure file synchronization and sharing.
+    zh_cn: resilio-sync是一个基于Docker的应用，可以实现无缝快速、安全的文件同步和共享。
+    ar_sa: resilio-sync هو تطبيق مبني على دوكر يتيح مزامنة ومشاركة الملفات بسرعة وبأمان.
+    de_de: resilio-sync ist eine Docker-basierte Anwendung, die schnelle und sichere Dateisynchronisierung und -freigabe ermöglicht.
+    es_es: resilio-sync es una aplicación basada en Docker que permite la sincronización y compartición de archivos de forma rápida y segura.
+    fr_fr: resilio-sync est une application basée sur Docker permettant une synchronisation et un partage de fichiers rapides et sécurisés.
+    hu_hu: A resilio-sync egy Docker-alapú alkalmazás, amely lehetővé teszi a gyors és biztonságos fájlszinkronizációt és megosztást.
+    it_it: resilio-sync è un'applicazione basata su Docker che consente la sincronizzazione e la condivisione rapida e sicura di file.
+    ru_ru: resilio-sync - это приложение на основе Docker, которое обеспечивает быструю и безопасную синхронизацию и обмен файлами.
+    pl_pl: resilio-sync to aplikacja oparta na Dockerze, umożliwiająca szybką i bezpieczną synchronizację i udostępnianie plików.
+    pt_br: resilio-sync é um aplicativo baseado em Docker que permite a sincronização e compartilhamento de arquivos de forma rápida e segura.
+    sv_se: resilio-sync är en Docker-baserad applikation som möjliggör snabb och säker filsynkronisering och delning.
+    uk_ua: resilio-sync - це додаток на основі Docker, який забезпечує швидку і безпечну синхронізацію та обмін файлами.
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Resilio-sync/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Resilio-sync/screenshot-1.png
+  tagline:
+    en_us: Unleash the power of seamless file synchronization.
+    zh_cn: 发挥无缝文件同步的力量。
+    ar_sa: استعن بقوة المزامنة المتناغمة للملفات.
+    de_de: Entfessle die Kraft der nahtlosen Dateisynchronisierung.
+    es_es: Libera el poder de la sincronización de archivos sin problemas.
+    fr_fr: Libérez la puissance de la synchronisation de fichiers sans faille.
+    hu_hu: Engedje szabadon a zavartalan fájlszinkronizáció erejét.
+    it_it: Scatena il potere della sincronizzazione dei file senza soluzione di continuità.
+    ru_ru: Разблокируйте мощь безупречной синхронизации файлов.
+    pl_pl: Uwolnij moc bezproblemowej synchronizacji plików.
+    pt_br: Desperte o poder da sincronização perfeita de arquivos.
+    sv_se: Frigör kraften i sömlös filsynkronisering.
+    uk_ua: Розкрийте потужність безперервної синхронізації файлів.
+  author: self
+  category: File Sync
+  hostname: ""
+  index: /
+  port_map: "8888"
+  scheme: http
+  store_app_id: resilio-sync
+  title:
+    en_us: resilio-sync

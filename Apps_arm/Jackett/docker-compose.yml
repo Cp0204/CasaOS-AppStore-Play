@@ -1,0 +1,99 @@
+name: jackett
+services:
+  jackett:
+    environment:
+      AUTO_UPDATE: "true"
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/jackett:arm32v7-0.21.352
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 9117
+        published: "9117"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+        - container: AUTO_UPDATE
+          description:
+            en_us: ""
+      ports:
+        - container: "9117"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+        - container: /downloads
+          description:
+            en_us: ""
+    container_name: jackett
+x-casaos:
+  architectures:
+    - arm
+  main: jackett
+  author: CasaOS Team
+  category: Network
+  description:
+    en_us: it translates queries from apps (Sonarr, Radarr, SickRage, CouchPotato, Mylar3, Lidarr, DuckieTV, qBittorrent, Nefarious etc.) into tracker-site-specific http queries, parses the html or json response, and then sends results back to the requesting software. This allows for getting recent uploads (like RSS) and performing searches. Jackett is a single repository of maintained indexer scraping & translation logic - removing the burden from other apps.
+    zh_cn: Jackett是一个代理服务器，它将应用程序（Sonarr，Radarr，SickRage，CouchPotato，Mylar3，Lidarr，DuckieTV，qBittorrent，Nefarious等）的查询转换为特定于跟踪器网站的http查询，解析html或json响应，然后将结果发送回请求软件。这允许获取最近的上传（如RSS）并执行搜索。Jackett是维护的索引器抓取和翻译逻辑的单个存储库-从其他应用程序中删除负担。
+    ar_sa: يترجم Jackett الاستعلامات من التطبيقات (Sonarr و Radarr و SickRage و CouchPotato و Mylar3 و Lidarr و DuckieTV و qBittorrent و Nefarious إلخ) إلى استعلامات http خاصة بموقع المتتبع ، ويحلل الاستجابة html أو json ، ويرسل النتائج بعد ذلك إلى البرنامج المطلوب. هذا يسمح بالحصول على تحميلات حديثة (مثل RSS) وإجراء البحث. Jackett هو مستودع واحد من منطق الاستخراج والترجمة للمؤشرات المحافظ عليها - إزالة الوزن من التطبيقات الأخرى.
+    de_de: Jackett übersetzt Abfragen von Apps (Sonarr, Radarr, SickRage, CouchPotato, Mylar3, Lidarr, DuckieTV, qBittorrent, Nefarious usw.) in tracker-site-spezifische HTTP-Abfragen, analysiert die HTML- oder JSON-Antwort und sendet dann Ergebnisse an die anfordernde Software zurück. Dies ermöglicht das Abrufen von aktuellen Uploads (wie RSS) und das Ausführen von Suchen. Jackett ist ein einzelnes Repository für wartungsfreie Indexer-Scraping- und Übersetzungslogik - das Entfernen des Lastdrucks von anderen Apps.
+    es_es: Jackett traduce las consultas de las aplicaciones (Sonarr, Radarr, SickRage, CouchPotato, Mylar3, Lidarr, DuckieTV, qBittorrent, Nefarious, etc.) en consultas HTTP específicas del sitio del rastreador, analiza la respuesta HTML o JSON y luego envía los resultados de vuelta al software solicitante. Esto permite obtener subidas recientes (como RSS) y realizar búsquedas. Jackett es un repositorio único de lógica de raspado y traducción de indexadores mantenidos - eliminando la carga de otras aplicaciones.
+    fr_fr: Jackett traduit les requêtes des applications (Sonarr, Radarr, SickRage, CouchPotato, Mylar3, Lidarr, DuckieTV, qBittorrent, Nefarious, etc.) en requêtes HTTP spécifiques au site de suivi, analyse la réponse HTML ou JSON et envoie ensuite les résultats au logiciel demandeur. Cela permet d'obtenir des téléchargements récents (comme RSS) et d'exécuter des recherches. Jackett est un seul référentiel de logique de balayage et de traduction d'indexeurs maintenus - supprimant la charge des autres applications.
+    hu_hu: A Jackett alkalmazások (Sonarr, Radarr, SickRage, CouchPotato, Mylar3, Lidarr, DuckieTV, qBittorrent, Nefarious stb.) lekérdezéseit fordítja le a követőhely specifikus HTTP-lekérdezésekre, elemzi a HTML vagy JSON választ, majd visszaküldi a kérő szoftvernek az eredményeket. Ez lehetővé teszi a legfrissebb feltöltések (mint például az RSS) lekérdezését és keresését. A Jackett egyetlen tárolóhelye a karbantartott indexelőelemző és fordítási logikának - eltávolítja a többi alkalmazás terhelését.
+    it_it: Jackett traduce le query dagli applicativi (Sonarr, Radarr, SickRage, CouchPotato, Mylar3, Lidarr, DuckieTV, qBittorrent, Nefarious ecc.) in query HTTP specifiche per il sito del tracker, analizza la risposta HTML o JSON e invia quindi i risultati al software richiedente. Ciò consente di ottenere caricamenti recenti (come RSS) e di eseguire ricerche. Jackett è un singolo repository di logica di scraping e traduzione degli indexer mantenuti - rimuovendo il carico da altre applicazioni.
+    ru_ru: Jackett переводит запросы из приложений (Sonarr, Radarr, SickRage, CouchPotato, Mylar3, Lidarr, DuckieTV, qBittorrent, Nefarious и т. Д.) В запросы HTTP, специфичные для сайта трекера, анализирует ответ HTML или JSON и затем отправляет результаты обратно в запрашивающее программное обеспечение. Это позволяет получать последние загрузки (например, RSS) и выполнять поиски. Jackett - это единственный репозиторий с поддерживаемой логикой сбора и перевода индексаторов - удаляет нагрузку с других приложений.
+    pl_pl: Jackett przetłumacza zapytania aplikacji (Sonarr, Radarr, SickRage, CouchPotato, Mylar3, Lidarr, DuckieTV, qBittorrent, Nefarious itp.) Na zapytania HTTP specyficzne dla witryny śledzenia, analizuje odpowiedź HTML lub JSON i następnie zwraca wyniki do oprogramowania żądającego. Pozwala to na uzyskanie najnowszych przesyłek (takich jak RSS) i przeprowadzenie wyszukiwania. Jackett jest jednym repozytorium z logiką przetwarzania i tłumaczenia indeksatorów - usuwa obciążenie innych aplikacji.
+    pt_br: O Jackett traduz as consultas de aplicativos (Sonarr, Radarr, SickRage, CouchPotato, Mylar3, Lidarr, DuckieTV, qBittorrent, Nefarious, etc.) em consultas HTTP específicas do site de rastreamento, analisa a resposta HTML ou JSON e, em seguida, envia os resultados de volta ao software solicitante. Isso permite obter uploads recentes (como RSS) e executar pesquisas. O Jackett é um único repositório de lógica de raspagem e tradução de indexadores mantidos - removendo a carga de outras aplicações.
+    sv_se: Jackett översätter applikationsförfrågningar (Sonarr, Radarr, SickRage, CouchPotato, Mylar3, Lidarr, DuckieTV, qBittorrent, Nefarious, etc.) till specifika HTTP-förfrågningar för spårningssidan, analyserar HTML- eller JSON-svaret och skickar sedan tillbaka resultatet till den begärande mjukvaran. Detta gör det möjligt att hämta senaste uppladdningar (till exempel RSS) och utföra sökningar. Jackett är ett enda repository för skrapnings- och översättningslogiken för indexer - borttagning av belastning från andra appar.
+    uk_ua: Jackett перекладає запити з додатків (Sonarr, Radarr, SickRage, CouchPotato, Mylar3, Lidarr, DuckieTV, qBittorrent, Nefarious тощо.) В запити HTTP, специфічні для сайту трекера, аналізує відповідь HTML або JSON і потім повертає результати до запитуючого програмного забезпечення. Це дозволяє отримувати останні завантаження (наприклад, RSS) і виконувати пошук. Jackett - це один репозиторій з підтримуваною логікою скрапінгу і перекладу індексаторів - видалення навантаження на інші додатки.
+  developer: Jackett
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/screenshot-3.png
+  tagline:
+    en_us: Jackett works as a proxy server
+    zh_cn: Jackett作为代理服务器工作
+    ar_sa: يعمل جاكيت كخادم وكيل
+    de_de: Jackett arbeitet als Proxy-Server
+    es_es: Jackett funciona como un servidor proxy
+    fr_fr: Jackett fonctionne comme un serveur mandataire
+    hu_hu: A Jackett proxyként működik
+    it_it: Jackett funziona come server proxy
+    ru_ru: Jackett работает как прокси-сервер
+    pl_pl: Jackett działa jako serwer proxy
+    pt_br: O Jackett funciona como um servidor proxy
+    sv_se: Jackett fungerar som en proxyserver
+    uk_ua: Jackett працює як проксі-сервер
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/thumbnail.png
+  tips: {}
+  title:
+    en_us: Jackett
+  index: /
+  port_map: "9117"

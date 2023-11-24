@@ -1,0 +1,95 @@
+name: plex
+services:
+  plex:
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/dvb:/dev/dvb
+    environment:
+      PGID: $PGID
+      PUID: $PUID
+      VERSION: docker
+    image: linuxserver/plex:arm32v7-1.32.4
+    deploy:
+      resources:
+        reservations:
+          memory: "256M"
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/Media
+        target: /Media
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: Run Plex as specified uid.
+            zh_cn: 以指定的uid运行Plex
+        - container: PGID
+          description:
+            en_us: Run Plex as specified gid.
+            zh_cn: 以指定的gid运行Plex
+        - container: VERSION
+          description:
+            en_us: Let Docker handle the Plex Version
+            zh_cn: 让Docker处理Plex版本
+
+      volumes:
+        - container: /config
+          description:
+            en_us: Plex config directory.
+            zh_cn: Plex配置目录
+        - container: /Media
+          description:
+            en_us: Plex Media directory.
+            zh_cn: Plex媒体目录
+    container_name: plex
+x-casaos:
+  architectures:
+    - arm
+  main: plex
+  author: CasaOS Team
+  category: Media
+  description:
+    en_us: Plex organizes video, music and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices. This container is packaged as a standalone Plex Media Server. has always been a top priority. Straightforward design and bulk actions mean getting things done faster.
+    zh_cn: Plex整理个人媒体库中的视频，音乐和照片，并将其流式传输到智能电视，流媒体盒子和移动设备。此容器打包为独立的Plex Media Server。一直以来，Plex的顶级优先级一直是简单的设计和批量操作，这意味着更快地完成任务。
+    ar_sa: ينظم Plex الفيديو والموسيقى والصور من مكتبات الوسائط الشخصية وينقلها إلى تلفزيونات ذكية وصناديق تشغيل البث وأجهزة الجوال. يتم تعبئة هذا الحاوي كخادم وسائط Plex مستقل. لقد كانت دائمًا أولوية عليا. التصميم البسيط والإجراءات الجماعية تعني الحصول على الأشياء بشكل أسرع.
+    de_de: Plex organisiert Videos, Musik und Fotos aus persönlichen Medienbibliotheken und streamt sie auf Smart-TVs, Streaming-Boxen und mobile Geräte. Dieser Container wird als eigenständiger Plex Media Server verpackt. Plex hat immer eine Top-Priorität gehabt. Einfache Gestaltung und Stapelaktionen bedeuten, dass Dinge schneller erledigt werden.
+    es_es: Plex organiza videos, música y fotos de las bibliotecas de medios personales y los transmite a televisores inteligentes, cajas de transmisión y dispositivos móviles. Este contenedor se empaqueta como un servidor multimedia Plex independiente. Plex siempre ha sido una prioridad de primera categoría. Un diseño sencillo y acciones masivas significan que las cosas se hacen más rápido.
+    fr_fr: Plex organise les vidéos, la musique et les photos des bibliothèques multimédias personnelles et les diffuse sur les téléviseurs intelligents, les boîtes de diffusion et les appareils mobiles. Ce conteneur est emballé comme un serveur multimédia Plex autonome. Plex a toujours été une priorité de premier plan. Une conception simple et des actions en vrac signifient que les choses se font plus rapidement.
+    hu_hu: A Plex személyes média-könyvtárakból származó videókat, zenéket és fényképeket szervez és továbbítja okos TV-kre, streamelő dobozokra és mobil eszközökre. Ez a konténer egy önálló Plex Media Server-ként van csomagolva. A Plex mindig elsőbbséget élvezett. Egyszerű tervezés és tömeges műveletek azt jelentik, hogy a dolgok gyorsabban megtörténnek.
+    it_it: Plex organizza video, musica e foto dalle librerie multimediali personali e li trasmette a TV intelligenti, box di streaming e dispositivi mobili. Questo contenitore è impacchettato come un server multimediale Plex autonomo. Plex è sempre stato una priorità. Un design semplice e azioni in blocco significano che le cose vengono fatte più velocemente.
+    ru_ru: Plex организует видео, музыку и фотографии из личных медиатек и передает их на умные телевизоры, стриминговые боксы и мобильные устройства. Этот контейнер упакован как независимый сервер мультимедиа Plex. Plex всегда был в приоритете. Простой дизайн и массовые действия означают, что дела идут быстрее.
+    pl_pl: Plex organizuje filmy, muzykę i zdjęcia z prywatnych bibliotek mediów i przesyła je na telewizory inteligentne, skrzynki strumieniowe i urządzenia mobilne. Ten kontener jest pakowany jako niezależny serwer mediów Plex. Plex zawsze był priorytetem. Prosty design i masowe działania oznaczają, że rzeczy robimy szybciej.
+    pt_br: O Plex organiza vídeos, músicas e fotos na biblioteca de mídia pessoal e transmite-os em streaming para Smart TVs, dispositivos de streaming e dispositivos móveis. Este conjunto é empacotado como o servidor de mídia independente Plex Media Server. Desde sempre, a maior prioridade do Plex tem sido um design simples e operações em lote, o que significa que as tarefas são concluídas mais rapidamente.
+    sv_se: Plex organiserar video, musik och foton från personliga mediebibliotek och strömmar dem till smarta TV-apparater, streamingboxar och mobila enheter. Denna behållare är förpackad som en självständig Plex Media Server. Plex har alltid varit en topprioritet. Enkel design och massiva åtgärder betyder att saker blir gjorda snabbare.
+    uk_ua: Plex організує відео, музику і фотографії з особистих медіатек і передає їх на розумні телевізори, стрімінгові бокси і мобільні пристрої. Цей контейнер упакований як незалежний сервер мультимедіа Plex. Plex завжди був в пріоритеті. Простий дизайн і масові дії означають, що речі йдуть швидше.
+  developer: Plex
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/screenshot-3.png
+  tagline:
+    en_us: The home for all your entertainment.
+    zh_cn: 为您的娱乐提供家庭。
+    ar_sa: المنزل لجميع الترفيه الخاص بك.
+    de_de: Das Zuhause für Ihre Unterhaltung.
+    es_es: El hogar de toda tu entretenimiento.
+    fr_fr: Le foyer de votre divertissement.
+    hu_hu: A szórakozás otthona.
+    it_it: Il tuo punto di riferimento per il divertimento.
+    ru_ru: Дом для всего вашего развлечения.
+    pl_pl: Dom dla wszystkich Twoich rozrywek.
+    pt_br: O lar para toda a sua diversão.
+    sv_se: Hemmet för all din underhållning.
+    uk_ua: Дім для всього вашого розваги.
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/thumbnail.png
+  tips: {}
+  title:
+    en_us: Plex
+  index: /web/index.html
+  port_map: "32400"

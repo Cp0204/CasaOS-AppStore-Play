@@ -1,0 +1,90 @@
+name: tautulli
+services:
+  tautulli:
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/tautulli:arm32v7-2.12.4
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 8181
+        published: "8181"
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+      ports:
+        - container: "8181"
+          description:
+            en_us: ""
+          protocol: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+    container_name: tautulli
+x-casaos:
+  architectures:
+    - arm
+  main: tautulli
+  author: Triskae
+  category: Media
+  description:
+    en_us: Tautulli is a 3rd party application that you can run alongside your Plex Media Server to monitor activity and track various statistics.
+    zh_cn: Tautulli是您可以在Plex Media Server旁边运行的第三方应用程序，用于监视活动并跟踪各种统计信息。
+    ar_sa: Tautulli هو تطبيق ثالث يمكنك تشغيله جنبا إلى جنب مع خادم وسائط Plex الخاص بك لمراقبة النشاط وتتبع مختلف الإحصاءات.
+    de_de: Tautulli ist eine Drittanwendung, die Sie neben Ihrem Plex Media Server ausführen können, um Aktivitäten zu überwachen und verschiedene Statistiken zu verfolgen.
+    es_es: Tautulli es una aplicación de terceros que puede ejecutar junto con su servidor de medios Plex para monitorear la actividad y rastrear varias estadísticas.
+    fr_fr: Tautulli est une application tierce que vous pouvez exécuter en parallèle de votre serveur de médias Plex pour surveiller l'activité et suivre diverses statistiques.
+    hu_hu: A Tautulli egy harmadik fél alkalmazása, amelyet a Plex Media Server mellett futtathat, hogy nyomon követhesse az aktivitást és különböző statisztikákat nyomon követhessen.
+    it_it: Tautulli è un'applicazione di terze parti che puoi eseguire insieme al tuo server multimediale Plex per monitorare l'attività e tenere traccia di varie statistiche.
+    ru_ru: Tautulli - это стороннее приложение, которое вы можете запустить вместе с вашим сервером мультимедиа Plex, чтобы отслеживать активность и отслеживать различные статистические данные.
+    pl_pl: Tautulli to aplikacja trzecia, którą możesz uruchomić obok swojego serwera mediów Plex, aby monitorować aktywność i śledzić różne statystyki.
+    pt_br: O Tautulli é um aplicativo de terceiros que você pode executar junto com seu servidor de mídia Plex para monitorar a atividade e rastrear várias estatísticas.
+    sv_se: Tautulli är en tredjepartsapplikation som du kan köra bredvid din Plex Media Server för att övervaka aktiviteten och spåra olika statistik.
+    uk_ua: Tautulli - це стороння програма, яку ви можете запустити разом з вашим сервером мультимедіа Plex, щоб відстежувати активність та відстежувати різні статистичні дані.
+  developer: Tautulli Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/screenshot-4.png
+  tagline:
+    en_us: Monitor your Plex Media Server and much more.
+    zh_cn: 监视您的Plex Media Server以及更多内容。
+    ar_sa: اراقب خادم وسائط Plex الخاص بك والكثير من الأشياء الأخرى.
+    de_de: Überwachen Sie Ihren Plex Media Server und vieles mehr.
+    es_es: Monitoree su servidor de medios Plex y mucho más.
+    fr_fr: Surveillez votre serveur de médias Plex et bien plus encore.
+    hu_hu: Figyelje a Plex Media Serverét és még sok más dolgot is.
+    it_it: Monitora il tuo server multimediale Plex e molto altro ancora.
+    ru_ru: Отслеживайте свой сервер мультимедиа Plex и многое другое.
+    pl_pl: Monitoruj swój serwer mediów Plex i wiele innych.
+    pt_br: Monitore seu servidor de mídia Plex e muito mais.
+    sv_se: Övervaka din Plex Media Server och mycket mer.
+    uk_ua: Відстежуйте свій сервер мультимедіа Plex та багато іншого.
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/thumbnail.png
+  tips: {}
+  title:
+    en_us: Tautulli
+  index: /
+  port_map: "8181"

@@ -1,0 +1,101 @@
+name: readarr
+services:
+  readarr:
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/readarr:arm32v7-0.1.8-develop
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 8787
+        published: "8787"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/readarr/config
+        target: /config
+      - type: bind
+        source: /path/to/books
+        target: /books
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+      ports:
+        - container: "8787"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+        - container: /books
+          description:
+            en_us: ""
+        - container: /downloads
+          description:
+            en_us: ""
+    container_name: readarr
+x-casaos:
+  architectures:
+    - arm
+  main: readarr
+  author: CasaOS Team
+  category: Media
+  description:
+    en_us: Readarr is a ebook collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new books from your favorite authors and will interface with clients and indexers to grab, sort, and rename them.
+    zh_cn: Readarr是一个用于Usenet和BitTorrent用户的电子书收藏管理器。它可以监视多个RSS源以获取您最喜欢的作者的新书，并且可以与客户端和索引器进行交互以获取，排序和重命名它们。
+    ar_sa: Readarr هو مدير مجموعة كتب إلكترونية لمستخدمي Usenet و BitTorrent. يمكنه مراقبة مزودي RSS متعددة للكتب الجديدة من مؤلفيك المفضلين وسيتم تفاعله مع العملاء والمؤشرات للتقاط وفرز وإعادة تسمية.
+    de_de: Readarr ist ein E-Book-Sammlungsmanager für Usenet- und BitTorrent-Nutzer. Es kann mehrere RSS-Feeds überwachen, um neue Bücher von Ihren Lieblingsautoren zu erhalten und wird mit Clients und Indexern interagieren, um sie zu erhalten, zu sortieren und umzubenennen.
+    es_es: Readarr es un administrador de colecciones de libros electrónicos para usuarios de Usenet y BitTorrent. Puede monitorear múltiples fuentes RSS para obtener nuevos libros de sus autores favoritos y se comunicará con clientes e indexadores para obtener, clasificar y renombrarlos.
+    fr_fr: Readarr est un gestionnaire de collection de livres électroniques pour les utilisateurs de Usenet et de BitTorrent. Il peut surveiller plusieurs flux RSS pour obtenir de nouveaux livres de vos auteurs préférés et interagira avec des clients et des indexeurs pour les obtenir, les trier et les renommer.
+    hu_hu: A Readarr egy elektronikus könyvgyűjteménykezelő a Usenet és a BitTorrent felhasználók számára. Követni tudja a kedvenc szerzői könyvek új könyveinek több RSS-hírcsatornáját, és a kliensekkel és indexelőkkel kommunikálhat, hogy beszerezze, rendezze és átnevezze őket.
+    it_it: Readarr è un gestore di collezioni di libri elettronici per utenti Usenet e BitTorrent. Può monitorare più feed RSS per ottenere nuovi libri dai tuoi autori preferiti e interagirà con client e indexer per ottenerli, ordinarli e rinominarli.
+    ru_ru: Readarr - это менеджер коллекций электронных книг для пользователей Usenet и BitTorrent. Он может отслеживать несколько RSS-каналов для получения новых книг от ваших любимых авторов и будет взаимодействовать с клиентами и индексаторами для получения, сортировки и переименования их.
+    pl_pl: Readarr to menedżer kolekcji e-booków dla użytkowników Usenet i BitTorrent. Może monitorować wiele kanałów RSS do uzyskania nowych książek od ulubionych autorów i będzie komunikować się z klientami i indeksatorami, aby uzyskać, posortować i zmienić nazwę.
+    pt_br: Readarr é um gerenciador de coleções de livros eletrônicos para usuários de Usenet e BitTorrent. Ele pode monitorar vários feeds RSS para obter novos livros de seus autores favoritos e interagir com clientes e indexadores para obtê-los, classificá-los e renomeá-los.
+    sv_se: Readarr är en e-bokssamling för användare av Usenet och BitTorrent. Den kan övervaka flera RSS-flöden för nya böcker från dina favoritförfattare och kommer att interagera med klienter och index för att hämta, sortera och döpa om dem.
+    uk_ua: Readarr - це менеджер колекцій електронних книг для користувачів Usenet і BitTorrent. Він може відстежувати декілька RSS-каналів для отримання нових книг від ваших улюблених авторів і буде взаимодіяти з клієнтами і індексаторами для отримання, сортування і перейменування їх.
+  developer: Readarr Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-4.png
+  tagline:
+    en_us: Ebook and audiobook collection manager for Usenet and BitTorrent users.
+    zh_cn: 用于Usenet和BitTorrent用户的电子书和有声书收藏管理器。
+    ar_sa: مدير مجموعة كتب إلكترونية وكتب صوتية لمستخدمي Usenet و BitTorrent.
+    de_de: E-Book- und Hörbuch-Sammlungsmanager für Usenet- und BitTorrent-Nutzer.
+    es_es: Administrador de colecciones de libros electrónicos y audiolibros para usuarios de Usenet y BitTorrent.
+    fr_fr: Gestionnaire de collection de livres électroniques et d'audiolivres pour les utilisateurs de Usenet et de BitTorrent.
+    hu_hu: Usenet és BitTorrent felhasználók számára elektronikus könyv- és hangoskönyvgyűjteménykezelő.
+    it_it: Gestore di collezioni di libri elettronici e audiolibri per utenti Usenet e BitTorrent.
+    ru_ru: Менеджер коллекций электронных книг и аудиокниг для пользователей Usenet и BitTorrent.
+    pl_pl: Menadżer kolekcji e-booków i audiobooków dla użytkowników Usenet i BitTorrent.
+    pt_br: Gerenciador de coleções de livros eletrônicos e audiolivros para usuários de Usenet e BitTorrent.
+    sv_se: E-bokssamling för användare av Usenet och BitTorrent.
+    uk_ua: Менеджер колекцій електронних книг і аудіокниг для користувачів Usenet і BitTorrent.
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/thumbnail.png
+  tips: {}
+  title:
+    en_us: Readarr
+  port_map: "8787"

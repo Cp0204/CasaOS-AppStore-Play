@@ -1,0 +1,154 @@
+name: transmission
+services:
+  transmission:
+    environment:
+      PASS: casaos
+      PEERPORT: "51413"
+      PGID: "1000"
+      PUID: "1000"
+      TRANSMISSION_WEB_HOME: /transmission-web-control/
+      TZ: Europe/London
+      USER: casaos
+    image: linuxserver/transmission:arm32v7-4.0.3
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 9091
+        published: "9091"
+        protocol: tcp
+      - target: 51413
+        published: "51413"
+        protocol: tcp
+      - target: 51413
+        published: "51413"
+        protocol: UDP
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+      - type: bind
+        source: /DATA/Downloads/watch
+        target: /watch
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+        - container: TRANSMISSION_WEB_HOME
+          description:
+            en_us: ""
+        - container: USER
+          description:
+            en_us: ""
+        - container: PASS
+          description:
+            en_us: ""
+        - container: PEERPORT
+          description:
+            en_us: ""
+      ports:
+        - container: "9091"
+          description:
+            en_us: ""
+
+        - container: "51413"
+          description:
+            en_us: ""
+
+        - container: "51413"
+          description:
+            en_us: ""
+          protocol: udp
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+        - container: /downloads
+          description:
+            en_us: ""
+        - container: /watch
+          description:
+            en_us: ""
+    container_name: transmission
+x-casaos:
+  architectures:
+    - arm
+  main: transmission
+  author: CasaOS Team
+  category: Downloader
+  description:
+    en_us: |
+      Transmission is an open source, volunteer-based project. Unlike some BitTorrent clients, Transmission doesn''t play games with its users to make money:  Transmission doesn''t bundle toolbars, pop-up ads, flash ads, twitter tools, or anything else. It doesn''t hold some features back for a payware version. Its source code is available for anyone to review. We don''t track our users, and our website and forums have no third-party ads or analytics.
+    zh_cn: |
+      Transmission 是一个开源的、志愿者驱动的项目。与某些 BitTorrent 客户端不同，Transmission 不会以赚钱为目的来玩弄用户：Transmission 不会捆绑工具栏、弹出广告、Flash 广告、Twitter 工具或其他任何东西。它不会将某些功能留给付费版本。它的源代码可供任何人查看。我们不会跟踪我们的用户，我们的网站和论坛没有第三方广告或分析。
+    ar_sa: |
+      Transmission هو مشروع مفتوح المصدر ويعتمد على العمل الجماعي. بالمقارنة مع بعض عملاء BitTorrent ، لا يلعب Transmission ألعاب مع مستخدميه لجمع المال: لا يجمع Transmission شريط أدوات ، إعلانات منبثقة ، إعلانات فلاش ، أدوات تويتر أو أي شيء آخر. لا يحتفظ ببعض الميزات الخلفية للإصدار المدفوع. يتوفر على مصدر الكود المصدري للجميع لمراجعته. لا نتابع مستخدمينا ، وموقعنا ومنتدياتنا ليس لديها إعلانات أو تحليلات ثالثة.
+    de_de: |
+      Transmission ist ein Open-Source-Projekt, das auf der Freiwilligkeit basiert. Im Gegensatz zu einigen BitTorrent-Clients spielt Transmission nicht mit seinen Benutzern, um Geld zu verdienen: Transmission enthält keine Symbolleisten, Pop-up-Werbung, Flash-Werbung, Twitter-Tools oder sonstige Dinge. Es hält einige Funktionen nicht für eine bezahlte Version zurück. Der Quellcode ist für jeden verfügbar, um ihn zu überprüfen. Wir verfolgen nicht unsere Benutzer und unsere Website und Foren haben keine Werbung oder Analysen von Drittanbietern.
+    es_es: |
+      Transmission es un proyecto de código abierto, basado en la voluntad. A diferencia de algunos clientes BitTorrent, Transmission no juega juegos con sus usuarios para ganar dinero: Transmission no incluye barras de herramientas, anuncios emergentes, anuncios flash, herramientas de Twitter o cualquier otra cosa. No retiene algunas funciones para una versión de pago. Su código fuente está disponible para que cualquiera lo revise. No seguimos a nuestros usuarios, y nuestro sitio web y foros no tienen anuncios de terceros ni análisis.
+    fr_fr: |
+      Transmission est un projet open source, basé sur le volontariat. Contrairement à certains clients BitTorrent, Transmission ne joue pas avec ses utilisateurs pour gagner de l''argent : Transmission ne comprend pas de barres d''outils, de publicités contextuelles, de publicités flash, d''outils Twitter ou autre. Il ne retient pas certaines fonctionnalités pour une version payante. Son code source est disponible pour tout le monde pour examen. Nous ne suivons pas nos utilisateurs, et notre site Web et nos forums n''ont pas de publicités ou d''analyses tierces.
+    hu_hu: |
+      A Transmission egy nyílt forrású, önkéntes alapú projekt. A BitTorrent kliensekhez képest a Transmission nem játszik játékokat a felhasználóival a pénzért: a Transmission nem csomagolja együtt az eszközsávokat, felugró hirdetéseket, flash hirdetéseket, Twitter eszközöket vagy bármi mást. Nem tartja vissza néhány funkciót a fizetős verzióhoz. A forráskódja bárkinek elérhető a felülvizsgálatra. Nem követjük a felhasználóinkat, és a webhelyünk és a fórumaink nem tartalmaznak harmadik fél hirdetéseket vagy elemzéseket.
+    it_it: |
+      Transmission è un progetto open source, basato sul volontariato. A differenza di alcuni client BitTorrent, Transmission non gioca a giochi con i suoi utenti per guadagnare soldi: Transmission non include barre degli strumenti, annunci pop-up, annunci flash, strumenti Twitter o altro. Non tiene alcune funzioni per una versione a pagamento. Il suo codice sorgente è disponibile per chiunque per la revisione. Non tracciamo i nostri utenti, e il nostro sito web e i nostri forum non hanno annunci o analisi di terze parti.
+    ru_ru: |
+      Transmission - это проект с открытым исходным кодом, основанный на добровольных участниках. В отличие от некоторых клиентов BitTorrent, Transmission не играет с пользователями, чтобы заработать деньги: Transmission не включает панели инструментов, всплывающие объявления, всплывающие объявления, инструменты Twitter или что-либо еще. Он не держит некоторые функции для платной версии. Его исходный код доступен для любого рассмотрения. Мы не отслеживаем наших пользователей, и наш сайт и форумы не имеют рекламы или анализа сторонних лиц.
+    pl_pl: |
+      Transmission jest otwartym projektem, który bazuje na pracy wolontariuszy. W przeciwieństwie do niektórych klientów BitTorrent, Transmission nie gra w gry z użytkownikami, aby zarobić pieniądze: Transmission nie zawiera pasków narzędzi, reklam wyskakujących okien, reklam flash, narzędzi Twittera ani niczego innego. Nie trzyma niektórych funkcji wersji płatnej. Jego kod źródłowy jest dostępny dla każdego do przeglądania. Nie śledzimy naszych użytkowników, a nasza strona internetowa i fora nie mają reklam lub analiz innych firm.
+    pt_br: |
+      Transmission é um projeto de código aberto, baseado em voluntários. Ao contrário de alguns clientes BitTorrent, o Transmission não joga com seus usuários para ganhar dinheiro: o Transmission não inclui barras de ferramentas, anúncios pop-up, anúncios flash, ferramentas do Twitter ou qualquer outra coisa. Ele não mantém algumas funcionalidades para uma versão pagável. Seu código-fonte está disponível para qualquer um revisar. Nós não rastreamos nossos usuários e nosso site e fóruns não têm anúncios ou análises de terceiros.
+    sv_se: |
+      Transmission är ett öppet källkodsprojekt som drivs av frivilliga. I motsats till vissa BitTorrent-klienter spelar Transmission inte spel med sina användare för att tjäna pengar: Transmission inkluderar inte verktygsfält, popupreklam, Flash-reklam, Twitter-verktyg eller något annat. Det håller tillbaka några funktioner för en betalversion. Källkoden är tillgänglig för alla att granska. Vi spårar inte våra användare och vår webbplats och forum har inga tredjepartsannonser eller analys.
+    uk_ua: |
+      Transmission - це вільний проект, який базується на волонтерстві. На відміну від деяких клієнтів BitTorrent, Transmission не грає із своїми користувачами для збору грошей: Transmission не містить панелі інструментів, спливаючих вікон, реклами Flash, інструментів Twitter або іншого. Він не зберігає деякі функції назад для версії платної. Його вихідний код доступний для перегляду будь-кому. Ми не відстежуємо наших користувачів, і наш веб-сайт і форуми не мають реклами або аналітики третіх сторін.
+  developer: Transmission
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/screenshot-3.png
+  tagline:
+    en_us: Transmission is a cross-platform BitTorrent client
+    zh_cn: Transmission 是一个跨平台的 BitTorrent 客户端
+    ar_sa: Transmission هو عميل BitTorrent متعدد الأنظمة
+    de_de: Transmission ist ein plattformübergreifender BitTorrent-Client
+    es_es: Transmission es un cliente BitTorrent multiplataforma
+    fr_fr: Transmission est un client BitTorrent multiplateforme
+    hu_hu: A Transmission egy több platformos BitTorrent kliens
+    it_it: Transmission è un client BitTorrent multipiattaforma
+    ru_ru: Transmission - это многоплатформенный клиент BitTorrent
+    pl_pl: Transmission jest wieloplatformowym klientem BitTorrent
+    pt_br: Transmission é um cliente BitTorrent multiplataforma
+    sv_se: Transmission är en multiplattformars BitTorrent-klient
+    uk_ua: Transmission - це багатоплатформний клієнт BitTorrent
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        | username | password |
+        | -------- | -------- |
+        | `casaos` | `casaos` |
+      zh_cn: |
+        | 用户名 | 密码 |
+        | -------- | -------- |
+        | `casaos` | `casaos` |
+  title:
+    en_us: Transmission
+  index: /
+  port_map: "9091"

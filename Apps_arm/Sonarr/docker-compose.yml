@@ -1,0 +1,109 @@
+name: sonarr
+services:
+  sonarr:
+    environment:
+      PGID: $PGID
+      PUID: $PUID
+      TZ: $TZ
+    image: linuxserver/sonarr:arm32v7-3.0.9
+    deploy:
+      resources:
+        reservations:
+          memory: "256M"
+    network_mode: bridge
+    ports:
+      - target: 8989
+        published: "8989"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/Media/TV Shows
+        target: /tv
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+    x-casaos:
+      envs:
+        - container: TZ
+          description:
+            en_us: TimeZone
+            zh_cn: 时区
+        - container: PUID
+          description:
+            en_us: Run Sonarr as specified uid.
+            zh_cn: 以指定的uid运行Sonarr
+        - container: PGID
+          description:
+            en_us: Run Sonarr as specified gid.
+            zh_cn: 以指定的gid运行Sonarr
+      ports:
+        - container: "8989"
+          description:
+            en_us: WebUI HTTP Port
+            zh_cn: WebUI HTTP端口
+
+      volumes:
+        - container: /config
+          description:
+            en_us: Sonarr config directory.
+            zh_cn: Sonarr配置目录
+        - container: /tv
+          description:
+            en_us: Sonarr tv directory.
+            zh_cn: Sonarr TV目录
+        - container: /downloads
+          description:
+            en_us: Sonarr downloads directory.
+            zh_cn: Sonarr下载目录
+    container_name: sonarr
+x-casaos:
+  architectures:
+    - arm
+  main: sonarr
+  author: CasaOS Team
+  category: Media
+  description:
+    en_us: Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.
+    zh_cn: Sonarr是一个用于Usenet和BitTorrent用户的PVR。它可以监视多个RSS源以获取您最喜欢的节目的新剧集，并且可以抓取，排序和重命名它们。它还可以配置为在出现更好的质量格式时自动升级已下载文件的质量。
+    ar_sa: Sonarr هو PVR لمستخدمي Usenet و BitTorrent. يمكنه مراقبة مزودي RSS متعددين للحصول على حلقات جديدة من البرامج التلفزيونية المفضلة لديك وسوف يقبض، وترتيب وإعادة تسميتها. يمكنه أيضًا أن يكون مكونًا لترقية الجودة تلقائيًا للملفات التي تم تنزيلها بالفعل عندما يصبح هناك تنسيق جودة أفضل متاحًا.
+    de_de: Sonarr ist ein PVR für Usenet- und BitTorrent-Nutzer. Es kann mehrere RSS-Feeds überwachen, um neue Episoden Ihrer Lieblingssendungen zu finden und sie zu fangen, zu sortieren und umzubenennen. Es kann auch so konfiguriert werden, dass es die Qualität von bereits heruntergeladenen Dateien automatisch aktualisiert, wenn eine bessere Qualität verfügbar ist.
+    es_es: Sonarr es un PVR para usuarios de Usenet y BitTorrent. Puede monitorear múltiples fuentes RSS para nuevos episodios de sus programas favoritos y atraparlos, ordenarlos y renombrarlos. También se puede configurar para que actualice automáticamente la calidad de los archivos ya descargados cuando una mejor calidad esté disponible.
+    fr_fr: Sonarr est un PVR pour les utilisateurs de Usenet et de BitTorrent. Il peut surveiller plusieurs flux RSS pour de nouveaux épisodes de vos émissions préférées et les attraper, les trier et les renommer. Il peut également être configuré pour mettre automatiquement à niveau la qualité des fichiers déjà téléchargés lorsque une meilleure qualité est disponible.
+    hu_hu: A Sonarr egy PVR Usenet és BitTorrent felhasználók számára. Követni tudja több RSS hírcsatornát az Ön kedvenc műsorainak új részeire, és elkapja, rendezni és átnevezni őket. Beállítható arra is, hogy automatikusan frissítse a már letöltött fájlok minőségét, ha egy jobb minőség áll rendelkezésre.
+    it_it: Sonarr è un PVR per gli utenti di Usenet e BitTorrent. Può monitorare più feed RSS per nuovi episodi dei tuoi programmi preferiti e catturarli, ordinarli e rinominarli. Può anche essere configurato per aggiornare automaticamente la qualità dei file già scaricati quando una qualità migliore è disponibile.
+    ru_ru: Sonarr - это PVR для пользователей Usenet и BitTorrent. Он может отслеживать несколько RSS-каналов для новых серий ваших любимых шоу и захватывать, сортировать и переименовывать их. Он также может быть настроен для автоматического обновления качества уже загруженных файлов, когда лучшее качество становится доступным.
+    pl_pl: Sonarr to PVR dla użytkowników Usenet i BitTorrent. Może monitorować wiele kanałów RSS dla nowych odcinków ulubionych programów telewizyjnych i łapać, sortować i zmieniać nazwy. Może być również skonfigurowany do automatycznego ulepszania jakości już pobranych plików, gdy lepsza jakość staje się dostępna.
+    pt_br: O Sonarr é um PVR para usuários de Usenet e BitTorrent. Ele pode monitorar vários feeds RSS para novos episódios de seus programas favoritos e capturá-los, classificá-los e renomeá-los. Ele também pode ser configurado para atualizar automaticamente a qualidade dos arquivos já baixados quando uma qualidade melhor estiver disponível.
+    sv_se: Sonarr är en PVR för användare av Usenet och BitTorrent. Den kan övervaka flera RSS-flöden för nya avsnitt av dina favoritprogram och fånga dem, sortera dem och döpa om dem. Den kan också konfigureras för att automatiskt uppgradera kvaliteten på de redan nedladdade filerna när en bättre kvalitet blir tillgänglig.
+    uk_ua: Sonarr - це PVR для користувачів Usenet і BitTorrent. Він може відстежувати кілька RSS-каналів для нових серій ваших улюблених шоу і захоплювати, сортувати і перейменовувати їх. Він також може бути налаштований для автоматичного оновлення якості вже завантажених файлів, коли краща якість стає доступною.
+  developer: Sonarr
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-1.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-2.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-3.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-4.jpg
+  tagline:
+    en_us: The PVR for Usenet and BitTorrent users
+    zh_cn: 用于Usenet和BitTorrent用户的PVR
+    ar_sa: PVR لمستخدمي Usenet و BitTorrent
+    de_de: Der PVR für Usenet und BitTorrent Nutzer
+    es_es: El PVR para usuarios de Usenet y BitTorrent
+    fr_fr: Le PVR pour les utilisateurs de Usenet et de BitTorrent
+    hu_hu: A PVR Usenet és BitTorrent felhasználók számára
+    it_it: Il PVR per gli utenti di Usenet e BitTorrent
+    ru_ru: PVR для пользователей Usenet и BitTorrent
+    pl_pl: PVR dla użytkowników Usenet i BitTorrent
+    pt_br: O PVR para usuários de Usenet e BitTorrent
+    sv_se: PVR för användare av Usenet och BitTorrent
+    uk_ua: PVR для користувачів Usenet і BitTorrent
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/thumbnail.jpg
+  tips: {}
+  title:
+    en_us: Sonarr
+  index: /
+  port_map: "8989"

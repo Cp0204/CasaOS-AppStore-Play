@@ -1,0 +1,116 @@
+name: sickchill
+services:
+  sickchill:
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/sickchill:arm32v7-2023.6.27
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 8081
+        published: "8081"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/sickchill/config
+        target: /config
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+      - type: bind
+        source: /DATA/Media/TV Shows
+        target: /tv
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+      ports:
+        - container: "8081"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+        - container: /downloads
+          description:
+            en_us: ""
+        - container: /tv
+          description:
+            en_us: ""
+    container_name: sickchill
+x-casaos:
+  architectures:
+    - arm
+  main: sickchill
+  author: CasaOS Team
+  category: Media
+  description:
+    en_us: |
+      SickChill is an automatic Video Library Manager for TV Shows. It watches for new episodes of your favorite shows, and when they are posted it does its magic: automatic torrent/nzb searching, downloading, and processing at the qualities you want.
+    zh_cn: |
+      SickChill是一个自动视频库管理器。它会监视您喜欢的节目的新剧集，当它们发布时，它会自动搜索、下载和处理您想要的质量。
+    ar_sa: |
+      SickChill هو مدير مكتبة الفيديو التلقائي للبرامج التلفزيونية. يراقبها للحصول على حلقات جديدة من البرامج التلفزيونية المفضلة لديك ، وعندما يتم نشرها ، يقوم بعملها السحري: البحث التلقائي عن التورنت / nzb ، التنزيل ، والمعالجة بالجودات التي تريدها.
+    de_de: |
+      SickChill ist ein automatischer Video-Bibliotheksmanager für TV-Shows. Es überwacht neue Episoden Ihrer Lieblingssendungen und wenn sie veröffentlicht werden, macht es seine Magie: automatische Torrent / nzb-Suche, Download und Verarbeitung in der Qualität, die Sie möchten.
+    es_es: |
+      SickChill es un administrador automático de bibliotecas de video para programas de televisión. Vigila nuevas episodios de tus programas favoritos, y cuando se publican, hace su magia: búsqueda automática de torrents / nzbs, descarga y procesamiento en las calidades que desea.
+    fr_fr: |
+      SickChill est un gestionnaire de bibliothèque vidéo automatique pour les émissions de télévision. Il surveille les nouvelles épisodes de vos émissions préférées, et lorsque elles sont publiées, il fait sa magie: recherche automatique de torrents / nzbs, téléchargement et traitement dans les qualités que vous souhaitez.
+    hu_hu: |
+      A SickChill egy automatikus videókönyvtárkezelő a TV-műsorokhoz. Megfigyeli a kedvenc műsoraid új részeit, és amikor megjelennek, csodálatos dolgokat tesz: automatikus torrent / nzb keresés, letöltés és feldolgozás a kívánt minőségben.
+    it_it: |
+      SickChill è un gestore automatico di librerie video per programmi televisivi. Monitora nuovi episodi dei tuoi programmi preferiti, e quando vengono pubblicati, fa la sua magia: ricerca automatica di torrent / nzbs, download e elaborazione nelle qualità che desideri.
+    ru_ru: |
+      SickChill - это автоматический менеджер видеобиблиотек для телевизионных шоу. Он следит за новыми эпизодами ваших любимых шоу, и когда они выпускаются, он делает свою магию: автоматический поиск торрентов / nzbs, загрузка и обработка в качестве, которое вы хотите.
+    pl_pl: |
+      SickChill jest automatycznym menedżerem bibliotek wideo dla programów telewizyjnych. Obserwuje nowe odcinki ulubionych programów telewizyjnych, a gdy są opublikowane, robi swoją magię: automatyczne wyszukiwanie torrentów / nzbs, pobieranie i przetwarzanie w jakości, którą chcesz.
+    pt_br: |
+      SickChill é um gerenciador automático de bibliotecas de vídeo para programas de TV. Ele observa novos episódios de seus programas favoritos e quando são publicados, faz sua magia: busca automática de torrents / nzbs, download e processamento nas qualidades que você deseja.
+    sv_se: |
+      SickChill är en automatisk videobibliotekshanterare för TV-program. Den övervakar nya avsnitt av dina favoritprogram och när de publiceras gör den sin magi: automatisk torrent / nzb-sökning, nedladdning och bearbetning i de kvaliteter du vill ha.
+    uk_ua: |
+      SickChill - це автоматичний менеджер відеобібліотек для телевізійних шоу. Він слідкує за новими епізодами ваших улюблених шоу, і коли вони випускаються, він робить свою магію: автоматичний пошук торрентів / nzbs, завантаження і обробка в якості, яку ви хочете.
+  developer: Sickchill Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-4.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-5.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/screenshot-6.png
+  tagline:
+    en_us: Automatic video library manager for TV Shows
+    zh_cn: 自动视频库管理器
+    ar_sa: مدير مكتبة الفيديو التلقائي للبرامج التلفزيونية
+    de_de: Automatischer Video-Bibliotheksmanager für TV-Shows
+    es_es: Administrador automático de bibliotecas de video para programas de televisión
+    fr_fr: Gestionnaire de bibliothèque vidéo automatique pour les émissions de télévision
+    hu_hu: Automatikus videókönyvtárkezelő a TV-műsorokhoz
+    it_it: Gestore automatico di librerie video per programmi televisivi
+    ru_ru: Автоматический менеджер видеобиблиотек для телевизионных шоу
+    pl_pl: Automatyczny menedżer bibliotek wideo dla programów telewizyjnych
+    pt_br: Gerenciador automático de bibliotecas de vídeo para programas de TV
+    sv_se: Automatisk videobibliotekshanterare för TV-program
+    uk_ua: Автоматичний менеджер відеобібліотек для телевізійних шоу
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/thumbnail.png
+  tips: {}
+  title:
+    en_us: Sickchill
+  port_map: "8081"

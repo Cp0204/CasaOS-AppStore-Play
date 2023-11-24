@@ -1,0 +1,151 @@
+name: unifi-controller
+services:
+  unifi-controller:
+    environment:
+      MEM_LIMIT: "1024"
+      MEM_STARTUP: "1024"
+      PGID: "1000"
+      PUID: "1000"
+    image: linuxserver/unifi-controller:arm32v7-7.3.83
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 3478
+        published: "3478"
+        protocol: udp
+      - target: 10001
+        published: "10001"
+        protocol: udp
+      - target: 8080
+        published: "8383"
+        protocol: tcp
+      - target: 8443
+        published: "8443"
+        protocol: tcp
+      - target: 1900
+        published: "1900"
+        protocol: udp
+      - target: 8843
+        published: "8843"
+        protocol: tcp
+      - target: 8880
+        published: "8880"
+        protocol: tcp
+      - target: 6789
+        published: "6789"
+        protocol: tcp
+      - target: 5514
+        published: "5514"
+        protocol: udp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: MEM_LIMIT
+          description:
+            en_us: ""
+        - container: MEM_STARTUP
+          description:
+            en_us: ""
+      ports:
+        - container: "3478"
+          description:
+            en_us: ""
+          protocol: udp
+        - container: "10001"
+          description:
+            en_us: ""
+          protocol: udp
+        - container: "8080"
+          description:
+            en_us: ""
+
+        - container: "8443"
+          description:
+            en_us: ""
+
+        - container: "1900"
+          description:
+            en_us: ""
+          protocol: udp
+        - container: "8843"
+          description:
+            en_us: ""
+
+        - container: "8880"
+          description:
+            en_us: ""
+
+        - container: "6789"
+          description:
+            en_us: ""
+
+        - container: "5514"
+          description:
+            en_us: ""
+          protocol: udp
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+    container_name: unifi-controller
+x-casaos:
+  architectures:
+    - arm
+  main: unifi-controller
+  author: CasaOS Team
+  category: Network
+  description:
+    en_us: For Unifi to adopt other devices, e.g. an Access Point, it is required to change the inform IP address. Because Unifi runs inside Docker by default it uses an IP address not accessible by other devices. To change this go to Settings > System Settings > Controller Configuration and set the Controller Hostname/IP to a hostname or IP address accessible by your devices. Additionally the checkbox "Override inform host with controller hostname/IP" has to be checked, so that devices can connect to the controller during adoption (devices use the inform-endpoint during adoption).
+    zh_cn: 为了让Unifi控制器能够管理其他设备，例如无线接入点，需要修改inform IP地址。因为Unifi控制器默认运行在Docker中，所以它使用的IP地址不可被其他设备访问。要修改这个设置，请前往设置>系统设置>控制器配置，将控制器主机名/ IP设置为可被您的设备访问的主机名或IP地址。此外，必须选中“使用控制器主机名/ IP覆盖inform主机”复选框，以便在采用期间设备可以连接到控制器（设备在采用期间使用inform-endpoint）。
+    ar_sa: يجب تغيير عنوان IP inform لـ Unifi للسماح لـ Unifi بالتحكم في أجهزة أخرى ، على سبيل المثال نقطة الوصول. لأن Unifi يعمل داخل Docker بشكل افتراضي ، فإنه يستخدم عنوان IP غير قابل للوصول من قبل أجهزة أخرى. لتغيير ذلك ، انتقل إلى الإعدادات> إعدادات النظام> تكوين المراقب وقم بتعيين اسم المضيف / IP للمضيف أو عنوان IP الذي يمكن الوصول إليه من قبل الأجهزة الخاصة بك. بالإضافة إلى ذلك ، يجب عليك تحديد مربع الاختيار "تجاوز مضيف inform بمضيف المضيف / IP للمراقب" ، حتى يتمكن الأجهزة من الاتصال بالمراقبة أثناء الاستيفاء (تستخدم الأجهزة نقطة الاتصال inform أثناء الاستيفاء).
+    de_de: Um Unifi zu anderen Geräten, z. B. einem Access Point, zu übernehmen, muss die Inform-IP-Adresse geändert werden. Da Unifi standardmäßig in Docker läuft, verwendet es eine IP-Adresse, die von anderen Geräten nicht erreichbar ist. Um dies zu ändern, gehen Sie zu Einstellungen> Systemeinstellungen> Controller-Konfiguration und setzen Sie den Controller-Hostname / IP auf einen Hostname oder eine IP-Adresse, die von Ihren Geräten erreichbar ist. Zusätzlich muss die Option "Inform-Host mit Controller-Hostname / IP überschreiben" aktiviert sein, damit Geräte während der Übernahme mit dem Controller verbunden werden können (Geräte verwenden während der Übernahme den Inform-Endpunkt).
+    es_es: Para que Unifi adopte otros dispositivos, por ejemplo, un punto de acceso, es necesario cambiar la dirección IP inform. Debido a que Unifi se ejecuta en Docker de forma predeterminada, utiliza una dirección IP que no es accesible para otros dispositivos. Para cambiar esto, vaya a Configuración> Configuración del sistema> Configuración del controlador y establezca el nombre de host / IP del controlador en un nombre de host o una dirección IP accesible para sus dispositivos. Además, la casilla de verificación "Anular el host inform con el nombre de host / IP del controlador" debe estar marcada para que los dispositivos puedan conectarse al controlador durante la adopción (los dispositivos utilizan el punto final inform durante la adopción).
+    fr_fr: Pour que Unifi adopte d'autres appareils, par exemple un point d'accès, il est nécessaire de modifier l'adresse IP inform. Comme Unifi s'exécute par défaut dans Docker, il utilise une adresse IP non accessible par d'autres appareils. Pour modifier cela, allez dans Paramètres> Paramètres système> Configuration du contrôleur et définissez le nom d'hôte / IP du contrôleur sur un nom d'hôte ou une adresse IP accessible par vos appareils. De plus, la case "Remplacer l'hôte inform avec le nom d'hôte / IP du contrôleur" doit être cochée pour que les appareils puissent se connecter au contrôleur lors de l'adoption (les appareils utilisent le point de terminaison inform lors de l'adoption).
+    hu_hu: A Unifi-hez más eszközök, például egy hozzáférési pont, csatlakoztatásához meg kell változtatni az inform IP-címet. Mivel az Unifi alapértelmezetten Dockerben fut, használ egy IP-címet, amely nem elérhető más eszközöktől. Ehhez menj a Beállítások> Rendszerbeállítások> Vezérlő konfigurációhoz és állítsd be a Vezérlő hosztnevet / IP-címét egy hosztnévre vagy egy IP-címre, amely elérhető a készülékeidről. Továbbá a "Inform hoszt felülírása a vezérlő hosztnevével / IP-címmel" jelölőnégyzetet be kell jelölni, hogy a készülékek csatlakozhassanak a vezérlőhöz az öröklés során (a készülékek az inform végpontot használják az öröklés során).
+    it_it: Per far adottare a Unifi altri dispositivi, ad esempio un access point, è necessario modificare l'indirizzo IP inform. Poiché Unifi viene eseguito di default in Docker, utilizza un indirizzo IP non accessibile da altri dispositivi. Per modificarlo, vai su Impostazioni> Impostazioni di sistema> Configurazione del controller e imposta il nome host / IP del controller su un nome host o un indirizzo IP accessibile dai tuoi dispositivi. Inoltre, la casella di controllo "Sovrascrivi host inform con nome host / IP del controller" deve essere selezionata per consentire ai dispositivi di connettersi al controller durante l'adozione (i dispositivi utilizzano il punto di terminazione inform durante l'adozione).
+    ru_ru: Чтобы Unifi принял другие устройства, например, точку доступа, необходимо изменить IP-адрес inform. Поскольку Unifi по умолчанию запускается в Docker, он использует IP-адрес, который недоступен для других устройств. Чтобы это изменить, перейдите в Настройки> Системные настройки> Конфигурация контроллера и установите имя хоста / IP-адреса контроллера на имя хоста или IP-адрес, доступный для ваших устройств. Кроме того, флажок "Перезаписать хост inform с именем хоста / IP-адресом контроллера" должен быть установлен, чтобы устройства могли подключиться к контроллеру во время принятия (устройства используют конечную точку inform во время принятия).
+    pl_pl: Aby Unifi przyjął inne urządzenia, na przykład punkt dostępu, należy zmienić adres IP inform. Ponieważ Unifi jest domyślnie uruchamiany w Dockerze, używa adresu IP, który nie jest dostępny dla innych urządzeń. Aby to zmienić, przejdź do Ustawienia> Ustawienia systemowe> Konfiguracja kontrolera i ustaw nazwę hosta / adres IP kontrolera na nazwę hosta lub adres IP dostępny dla Twoich urządzeń. Ponadto pole wyboru "Nadpisz host inform na nazwę hosta / adres IP kontrolera" musi być zaznaczone, aby urządzenia mogły połączyć się z kontrolerem podczas adopcji (urządzenia korzystają z punktu końcowego inform podczas adopcji).
+    pt_br: Para que o Unifi aceite outros dispositivos, como um ponto de acesso, é necessário modificar o endereço IP inform. Como o Unifi é executado por padrão no Docker, ele usa um endereço IP não acessível por outros dispositivos. Para modificá-lo, vá para Configurações> Configurações do sistema> Configuração do controlador e defina o nome do host / IP do controlador em um nome de host ou um endereço IP acessível por seus dispositivos. Além disso, a caixa de seleção "Substituir host inform pelo nome do host / IP do controlador" deve ser marcada para permitir que os dispositivos se conectem ao controlador durante a adoção (os dispositivos usam o ponto de extremidade inform durante a adoção).
+    sv_se: För att Unifi ska acceptera andra enheter, till exempel en accesspunkt, måste du ändra IP-adressen inform. Eftersom Unifi körs som standard i Docker använder den en IP-adress som inte är tillgänglig för andra enheter. För att ändra detta, gå till Inställningar> Systeminställningar> Kontrollerns konfiguration och ange kontrollerns värdnamn / IP-adress till ett värdnamn eller en IP-adress som är tillgänglig för dina enheter. Dessutom måste kryssrutan "Ersätt informhost med kontrollerns värdnamn / IP-adress" vara markerad för att enheterna ska kunna ansluta till kontrollern under adoption (enheterna använder informändpunkten under adoption).
+    uk_ua: Щоб Unifi прийняв інші пристрої, наприклад, точку доступу, необхідно змінити IP-адресу inform. Оскільки Unifi за замовчуванням запускається в Docker, він використовує IP-адресу, яка недоступна для інших пристроїв. Щоб це змінити, перейдіть до Налаштування> Системні налаштування> Конфігурація контролера і встановіть ім'я хоста / IP-адресу контролера на ім'я хоста або IP-адресу, доступну для ваших пристроїв. Крім того, прапорець "Перезаписати хост inform з іменем хоста / IP-адресою контролера" повинен бути встановлений, щоб пристрої могли підключитися до контролера під час прийняття (пристрої використовують кінцеву точку inform під час прийняття).
+  developer: LinuxServer.io
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/screenshot-3.png
+  tagline:
+    en_us: The Unifi-controller software is a powerful, enterprise wireless software engine ideal for high-density client deployments requiring low latency and high uptime performance.
+    zh_cn: Unifi控制器软件是一种功能强大的企业级无线软件引擎，适用于需要低延迟和高可用性性能的高密度客户端部署。
+    ar_sa: يعد برنامج Unifi-controller محرك برمجيات لاسلكي متطور ومتخصص للمؤسسات، مثالي للتركيبات العميلية ذات الكثافة العالية التي تتطلب أداءً منخفضًا للتأخير وأداءً عالٍ للتواجد.
+    de_de: Die Unifi-controller-Software ist ein leistungsstarker, unternehmensweiter Wireless-Software-Engine, der für hochdichte Client-Implementierungen mit niedriger Latenz und hoher Verfügbarkeitsleistung ideal ist.
+    es_es: El software Unifi-controller es un poderoso motor de software inalámbrico empresarial ideal para implementaciones de clientes de alta densidad que requieren baja latencia y alto rendimiento de disponibilidad.
+    fr_fr: Le logiciel Unifi-controller est un puissant moteur logiciel sans fil d'entreprise idéal pour les déploiements de clients à haute densité nécessitant une faible latence et une haute disponibilité.
+    hu_hu: A Unifi-controller szoftver egy erőteljes, vállalati vezeték nélküli szoftvermotor, amely tökéletesen alkalmas a magas sűrűségű kliensek telepítésére, amelyek alacsony késleltetést és magas rendelkezésre állást igényelnek.
+    it_it: Il software Unifi-controller è un potente motore software wireless aziendale ideale per implementazioni client ad alta densità che richiedono bassa latenza e alto rendimento di disponibilità.
+    ru_ru: ПО Unifi-controller - это мощный корпоративный беспроводной программный двигатель, идеально подходящий для реализации клиентов с высокой плотностью, требующих низкую задержку и высокую производительность доступности.
+    pl_pl: Oprogramowanie Unifi-controller to potężny, korporacyjny silnik oprogramowania bezprzewodowego, idealny do implementacji klientów o wysokiej gęstości, wymagających niskiej opóźnienia i wysokiej wydajności dostępności.
+    pt_br: O software Unifi-controller é um poderoso motor de software sem fio corporativo ideal para implantações de clientes de alta densidade que exigem baixa latência e alto desempenho de disponibilidade.
+    sv_se: Unifi-controller-programvaran är ett kraftfullt, företagsinriktat trådlöst programvarumotor som är idealiskt för kundimplantationer med hög kundtäthet som kräver låg latens och hög tillgänglighet.
+    uk_ua: ПО Unifi-controller - це потужний корпоративний бездротовий програмний двигун, ідеально підходящий для реалізації клієнтів з високою щільністю, які вимагають низької затримки та високої доступності.
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/thumbnail.png
+  tips: {}
+  title:
+    en_us: Unifi-controller
+    zh_cn: Unifi控制器
+  index: /
+  port_map: "8383"

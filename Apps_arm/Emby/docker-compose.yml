@@ -1,0 +1,114 @@
+name: emby
+services:
+  emby:
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/vchiq:/dev/vchiq
+      - /dev/video10:/dev/video10
+      - /dev/video11:/dev/video11
+      - /dev/video12:/dev/video12
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: $TZ
+    image: linuxserver/emby:arm32v7-4.8.0-beta
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 8096
+        published: "8096"
+        protocol: tcp
+      - target: 8920
+        published: "8920"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/Media/TV Shows
+        target: /data/tvshows
+      - type: bind
+        source: /DATA/Media/Movies
+        target: /data/movies
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+      ports:
+        - container: "8096"
+          description:
+            en_us: ""
+
+        - container: "8920"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+        - container: /data/tvshows
+          description:
+            en_us: ""
+        - container: /data/movies
+          description:
+            en_us: ""
+    container_name: emby
+x-casaos:
+  architectures:
+    - arm
+  main: emby
+  author: CasaOS Team
+  category: Media
+  description:
+    en_us: Bringing all of your home videos, music, and photos together into one place has never been easier. Your personal Emby Server automatically converts and streams your media on-the-fly to play on any device.
+    zh_cn: 将所有的家庭视频，音乐和照片集中在一个地方从未如此简单。您的个人Emby服务器会自动转换和流媒体，以便在任何设备上播放。
+    ar_sa: جمع جميع مقاطع الفيديو المنزلية والموسيقى والصور الخاصة بك في مكان واحد لم يكن أسهل من ذلك من قبل. يقوم خادم Emby الشخصي الخاص بك بتحويل وتدفق الوسائط الخاصة بك تلقائيًا لتشغيلها على أي جهاز.
+    de_de: Alle Ihre Heimvideos, Musik und Fotos an einem Ort zusammenzubringen, war noch nie einfacher. Ihr persönlicher Emby-Server wandelt Ihre Medien automatisch um und streamt sie in Echtzeit, um sie auf jedem Gerät abzuspielen.
+    es_es: Juntar todos tus videos, música y fotos en un solo lugar nunca ha sido más fácil. Tu servidor Emby personal convierte y transmite tus medios en tiempo real para reproducirlos en cualquier dispositivo.
+    fr_fr: Rassembler toutes vos vidéos, musique et photos à un seul endroit n'a jamais été aussi facile. Votre serveur Emby personnel convertit et diffuse vos médias en temps réel pour les lire sur n'importe quel appareil.
+    hu_hu: A házimédia, zenék és fényképek összegyűjtése egy helyre soha nem volt ennyire egyszerű. Az Emby szervere automatikusan konvertálja és streameli a médiafájlokat, hogy bármilyen eszközön lejátszhassuk.
+    it_it: Raccogliere tutti i tuoi video, musica e foto in un unico posto non è mai stato così semplice. Il tuo server Emby personale converte e trasmette i tuoi contenuti in tempo reale per riprodurli su qualsiasi dispositivo.
+    ru_ru: Сбор всех ваших домашних видео, музыки и фотографий в одном месте никогда не был таким простым. Ваш личный сервер Emby автоматически конвертирует и потоково передает ваши медиа-файлы для воспроизведения на любом устройстве.
+    pl_pl: Zebranie wszystkich filmów domowych, muzyki i zdjęć w jednym miejscu nigdy nie było takie proste. Twój osobisty serwer Emby automatycznie konwertuje i przesyła strumieniowo twoje media, aby odtworzyć je na dowolnym urządzeniu.
+    pt_br: Juntar todos os seus vídeos, músicas e fotos em um só lugar nunca foi tão fácil. Seu servidor Emby pessoal converte e transmite seus arquivos de mídia em tempo real para reproduzi-los em qualquer dispositivo.
+    sv_se: Att samla alla dina hemvideor, musik och foton på ett ställe har aldrig varit enklare. Din personliga Emby-server konverterar och strömmar dina mediefiler i realtid för att spela upp dem på vilket som helst enhet.
+    uk_ua: Збирання всіх ваших домашніх відео, музики та фотографій в одному місці ніколи не було таким простим. Ваш особистий сервер Emby автоматично конвертує та потоково передає ваші медіа-файли для відтворення на будь-якому пристрої.
+  developer: linuxserver
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/screenshot-3.png
+  tagline:
+    en_us: TAKE YOUR MEDIA ANYWHERE WITH EMBY
+    zh_cn: 用EMBY随时随地带着媒体
+    ar_sa: احضر ميدياك في أي مكان مع EMBY
+    de_de: MIT EMBY IHRE MEDIEN ÜBERALL MITNEHMEN
+    es_es: LLEVA TUS MEDIOS A CUALQUIER LUGAR CON EMBY
+    fr_fr: PRENEZ VOS MÉDIAS PARTOUT AVEC EMBY
+    hu_hu: VEGYE MAGÁVAL A MÉDIÁT EMBY-VAL
+    it_it: PORTA I TUOI MEDIAS OVUNQUE CON EMBY
+    ru_ru: ВЗЯТЬ СЕБЕ МЕДИА ВСЮДУ С EMBY
+    pl_pl: PRZYNIEŚ SWOJE MEDIA WSZĘDZIE Z EMBY
+    pt_br: LEVE SEUS MÍDIAS PARA QUALQUER LUGAR COM EMBY
+    sv_se: TA DINA MEDIA VAR SOM HELST MED EMBY
+    uk_ua: ВЗЯТИ СЕБЕ МЕДІА ВСЮДИ З EMBY
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/thumbnail.png
+  tips: {}
+  title:
+    en_us: Emby
+  index: /
+  port_map: "8096"

@@ -1,0 +1,109 @@
+name: radarr
+services:
+  radarr:
+    environment:
+      PGID: $PGID
+      PUID: $PUID
+      TZ: $TZ
+    image: linuxserver/radarr:arm32v7-4.5.2
+    deploy:
+      resources:
+        reservations:
+          memory: "256M"
+    network_mode: bridge
+    ports:
+      - target: 7878
+        published: "7878"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/Media/Movies
+        target: /movies
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+    x-casaos:
+      envs:
+        - container: TZ
+          description:
+            en_us: TimeZone
+            zh_cn: 时区
+        - container: PUID
+          description:
+            en_us: Run Radarr as specified uid.
+            zh_cn: 以指定的uid运行Radarr
+        - container: PGID
+          description:
+            en_us: Run Radarr as specified gid.
+            zh_cn: 以指定的gid运行Radarr
+      ports:
+        - container: "7878"
+          description:
+            en_us: WebUI HTTP Port
+            zh_cn: WebUI HTTP端口
+
+      volumes:
+        - container: /config
+          description:
+            en_us: Radarr config directory.
+            zh_cn: Radarr配置目录
+        - container: /movies
+          description:
+            en_us: Radarr movies directory.
+            zh_cn: Radarr电影目录
+        - container: /downloads
+          description:
+            en_us: Radarr downloads directory.
+            zh_cn: Radarr下载目录
+    container_name: radarr
+x-casaos:
+  architectures:
+    - arm
+  main: radarr
+  author: CasaOS Team
+  category: Media
+  description:
+    en_us: Radarr is a movie collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new movies and will interface with clients and indexers to grab, sort, and rename them. It can also be configured to automatically upgrade the quality of existing files in the library when a better quality format becomes available. Note that only one type of a given movie is supported. If you want both an 4k version and 1080p version of a given movie you will need multiple instances.
+    zh_cn: Radarr是一个为Usenet和BitTorrent用户提供的电影集合管理器。它可以监视多个RSS源以获取新电影，并且可以与客户端和索引器进行交互以获取，排序和重命名它们。它还可以配置为在更好的质量格式可用时自动升级库中现有文件的质量。请注意，只支持给定电影的一种类型。如果您想要4k版本和1080p版本的给定电影，则需要多个实例。
+    ar_sa: Radarr هو مدير مجموعة أفلام لمستخدمي Usenet و BitTorrent. يمكنه مراقبة مزودي RSS متعددين للحصول على أفلام جديدة وسيتم التفاعل مع العملاء والمؤشرات للتقاط وفرز وإعادة تسمية. يمكنه أيضًا تكوينه لترقية الجودة التلقائية للملفات الموجودة في المكتبة عندما يصبح هناك تنسيق جودة أفضل. يرجى ملاحظة أن نوع واحد فقط من الفيلم المعطى مدعوم. إذا كنت ترغب في إصدار 4k وإصدار 1080p من الفيلم المعطى ، فستحتاج إلى عدة مثيلات.
+    de_de: Radarr ist ein Film-Sammlungsmanager für Usenet- und BitTorrent-Nutzer. Es kann mehrere RSS-Feeds überwachen, um neue Filme zu finden und mit Clients und Indexern interagieren, um sie zu sortieren, umbenennen und herunterzuladen. Es kann auch so konfiguriert werden, dass die Qualität vorhandener Dateien in der Bibliothek automatisch aktualisiert wird, wenn eine bessere Qualität verfügbar ist. Beachten Sie, dass nur ein Typ eines bestimmten Films unterstützt wird. Wenn Sie sowohl eine 4k-Version als auch eine 1080p-Version eines bestimmten Films haben möchten, benötigen Sie mehrere Instanzen.
+    es_es: Radarr es un administrador de colecciones de películas para usuarios de Usenet y BitTorrent. Puede monitorear múltiples fuentes RSS para encontrar nuevas películas y se comunicará con clientes e indexadores para clasificarlas, renombrarlas y descargarlas. También se puede configurar para que actualice automáticamente la calidad de los archivos existentes en la biblioteca cuando una calidad mejor esté disponible. Tenga en cuenta que solo se admite un tipo de película determinada. Si desea una versión 4k y una versión 1080p de una película determinada, necesitará varias instancias.
+    fr_fr: Radarr est un gestionnaire de collections de films pour les utilisateurs de Usenet et de BitTorrent. Il peut surveiller plusieurs flux RSS pour trouver de nouveaux films et interagir avec des clients et des indexeurs pour les classer, les renommer et les télécharger. Il peut également être configuré pour mettre automatiquement à jour la qualité des fichiers existants dans la bibliothèque lorsque une meilleure qualité est disponible. Veuillez noter qu'un seul type de film donné est pris en charge. Si vous souhaitez une version 4k et une version 1080p d'un film donné, vous aurez besoin de plusieurs instances.
+    it_it: Radarr è un gestore di collezioni di film per gli utenti di Usenet e BitTorrent. Può monitorare più feed RSS per trovare nuovi film e interagire con client e indexer per ordinarli, rinominarli e scaricarli. Può anche essere configurato per aggiornare automaticamente la qualità dei file esistenti nella libreria quando una qualità migliore è disponibile. Si noti che viene supportato solo un tipo di film specifico. Se si desidera una versione 4k e una versione 1080p di un film specifico, è necessario avere più istanze.
+    ru_ru: Radarr - это менеджер коллекций фильмов для пользователей Usenet и BitTorrent. Он может мониторить несколько RSS-каналов для поиска новых фильмов и взаимодействовать с клиентами и индексаторами для их сортировки, переименования и загрузки. Он также может быть настроен для автоматического обновления качества существующих файлов в библиотеке, когда становится доступным более высокое качество. Обратите внимание, что поддерживается только один тип определенного фильма. Если вы хотите версию 4k и версию 1080p определенного фильма, вам понадобится несколько экземпляров.
+    pl_pl: Radarr to menedżer kolekcji filmów dla użytkowników Usenet i BitTorrent. Może monitorować wiele kanałów RSS, aby znaleźć nowe filmy i komunikować się z klientami i indeksatorami, aby je sortować, zmieniać nazwy i pobierać. Może również być skonfigurowany do automatycznego aktualizowania jakości istniejących plików w bibliotece, gdy dostępna jest lepsza jakość. Zauważ, że obsługiwany jest tylko jeden typ określonego filmu. Jeśli chcesz wersję 4k i wersję 1080p określonego filmu, potrzebujesz kilku instancji.
+    pt_br: Radarr é um gerenciador de coleções de filmes para usuários de Usenet e BitTorrent. Ele pode monitorar vários feeds RSS para encontrar novos filmes e interagir com clientes e indexadores para classificá-los, renomeá-los e baixá-los. Ele também pode ser configurado para atualizar automaticamente a qualidade dos arquivos existentes na biblioteca quando uma qualidade melhor estiver disponível. Observe que apenas um tipo de filme específico é suportado. Se você deseja uma versão 4k e uma versão 1080p de um filme específico, você precisará de várias instâncias.
+    sv_se: Radarr är en filmkolektionshanterare för användare av Usenet och BitTorrent. Den kan övervaka flera RSS-flöden för att hitta nya filmer och interagera med klienter och indexer för att sortera, döpa om och ladda ner dem. Den kan också konfigureras för att automatiskt uppdatera kvaliteten på befintliga filer i biblioteket när en bättre kvalitet är tillgänglig. Observera att endast en typ av specifik film stöds. Om du vill ha en 4k-version och en 1080p-version av en specifik film behöver du flera instanser.
+    uk_ua: Radarr - це менеджер колекцій фільмів для користувачів Usenet і BitTorrent. Він може моніторити декілька RSS-каналів для пошуку нових фільмів і взаємодіяти з клієнтами і індексаторами для їх сортування, перейменування і завантаження. Він також може бути налаштований для автоматичного оновлення якості існуючих файлів в бібліотеці, коли доступна краща якість. Зверніть увагу, що підтримується лише один тип визначеного фільму. Якщо ви хочете версію 4k і версію 1080p визначеного фільму, вам потрібно декілька екземплярів.
+  developer: Radarr
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/screenshot-1.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/screenshot-2.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/screenshot-3.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/screenshot-4.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/screenshot-5.jpg
+  tagline:
+    en_us: The movie collection manager for Usenet and BitTorrent users
+    zh_cn: 为Usenet和BitTorrent用户提供的电影集合管理器
+    ar_sa: مدير مجموعة أفلام لمستخدمي Usenet و BitTorrent
+    de_de: Der Film-Sammlungs-Manager für Usenet- und BitTorrent-Nutzer
+    es_es: El administrador de colecciones de películas para usuarios de Usenet y BitTorrent
+    fr_fr: Le gestionnaire de collections de films pour les utilisateurs de Usenet et de BitTorrent
+    hu_hu: A Usenet és BitTorrent felhasználók filmgyűjteménye
+    it_it: Il gestore di collezioni di film per gli utenti di Usenet e BitTorrent
+    ru_ru: Менеджер коллекций фильмов для пользователей Usenet и BitTorrent
+    pl_pl: Menedżer kolekcji filmów dla użytkowników Usenet i BitTorrent
+    pt_br: O gerenciador de coleções de filmes para usuários de Usenet e BitTorrent
+    sv_se: Filmkolektionshanteraren för användare av Usenet och BitTorrent
+    uk_ua: Менеджер колекцій фільмів для користувачів Usenet і BitTorrent
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/thumbnail.jpg
+  tips: {}
+  title:
+    en_us: Radarr
+  index: /
+  port_map: "7878"

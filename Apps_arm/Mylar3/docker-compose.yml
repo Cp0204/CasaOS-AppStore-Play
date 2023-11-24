@@ -1,0 +1,97 @@
+name: mylar3
+services:
+  mylar3:
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+    image: linuxserver/mylar3:arm32v7-0.7.2
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 8090
+        published: "8090"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/mylar3/config
+        target: /config
+      - type: bind
+        source: /path/to/comics
+        target: /comics
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+      ports:
+        - container: "8090"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+        - container: /comics
+          description:
+            en_us: ""
+        - container: /downloads
+          description:
+            en_us: ""
+    container_name: mylar3
+x-casaos:
+  architectures:
+    - arm
+  main: mylar3
+  author: CasaOS Team
+  category: Downloader
+  description:
+    en_us: Mylar is an automated Comic Book (cbr/cbz) downloader program for use with NZB and torrents. Mylar allows you to create a watchlist of series that it monitors for various things (new issues, updated information, etc). It will grab, sort, and rename downloaded issues. It will also allow you to monitor weekly pull-lists for items belonging to said watchlisted series to download, as well as being able to monitor and maintain story-arcs.
+    zh_cn: Mylar是一个自动化的漫画（cbr/cbz）下载程序，可与NZB和torrents一起使用。 Mylar允许您创建监视列表，用于监视各种事物（新问题，更新信息等）。 它将抓取，排序和重命名下载的问题。 它还允许您监视周拉列表，以下载属于所述监视列表系列的项目，以及能够监视和维护故事弧线。
+    ar_sa: Mylar هو برنامج تنزيل متجر الكتب المصورة (cbr / cbz) التلقائي لاستخدامه مع NZB والبيانات المرسلة. يتيح لك Mylar إنشاء قائمة مراقبة للسلسلة التي يراقبها لمختلف الأشياء (المشاكل الجديدة والمعلومات المحدثة وما إلى ذلك). سيقوم بالتقاط وفرز وإعادة تسمية المشاكل التي تم تنزيلها. سيسمح لك أيضًا بمراقبة قوائم السحب الأسبوعية للعناصر التي تنتمي إلى هذه السلسلة المراقبة للتنزيل ، بالإضافة إلى أنه يمكنك مراقبة وصيانة الأقصى القصوى للقصة.
+    de_de: Mylar ist ein automatisches Comic-Book (cbr / cbz) Downloader-Programm zum Einsatz mit NZB und Torrents. Mylar ermöglicht es Ihnen, eine Beobachtungsliste von Serien zu erstellen, die für verschiedene Dinge überwacht werden (neue Ausgaben, aktualisierte Informationen usw.). Es wird heruntergeladene Ausgaben sortieren, sortieren und umbenennen. Es ermöglicht Ihnen auch, wöchentliche Pull-Listen zu überwachen, um Elemente zu überwachen, die zu den beobachteten Serien gehören, um sie herunterzuladen, sowie die Überwachung und Wartung von Story-Arcs.
+    es_es: Mylar es un programa de descarga automática de cómics (cbr / cbz) para usar con NZB y torrents. Mylar le permite crear una lista de seguimiento de series que monitorea varias cosas (nuevos problemas, información actualizada, etc.). Recogerá, ordenará y renombrará los problemas descargados. También le permitirá monitorear las listas de extracción semanales para descargar elementos que pertenecen a las series de la lista de seguimiento, así como monitorear y mantener los arcos de la historia.
+    fr_fr: Mylar est un programme de téléchargement automatique de bandes dessinées (cbr / cbz) à utiliser avec NZB et torrents. Mylar vous permet de créer une liste de surveillance de séries qui surveille diverses choses (nouveaux problèmes, informations mises à jour, etc.). Il récupérera, triera et renommera les problèmes téléchargés. Il vous permettra également de surveiller les listes de tirage hebdomadaires pour télécharger des éléments appartenant aux séries de la liste de surveillance, ainsi que de surveiller et de maintenir les arcs de l'histoire.
+    hu_hu: A Mylar egy automatizált Comic Book (cbr / cbz) letöltőprogram, amelyet NZB és torrentekkel lehet használni. A Mylar lehetővé teszi, hogy létrehozzon egy sorozatok figyelőlistáját, amelyeket különböző dolgokra figyel (új kiadások, frissített információk stb.). Összegyűjti, rendez, átnevezi a letöltött kiadásokat. Lehetővé teszi számára, hogy heti pull-listákat is figyeljen, hogy letölthessen elemeket, amelyek a figyelt sorozatokhoz tartoznak, valamint történet-ívek figyelését és karbantartását.
+    it_it: Mylar è un programma di download automatico di fumetti (cbr / cbz) da utilizzare con NZB e torrent. Mylar consente di creare un elenco di monitoraggio di serie che monitora varie cose (nuovi problemi, informazioni aggiornate, ecc.). Raccoglierà, ordinerà e rinominerà i problemi scaricati. Ti permetterà anche di monitorare le liste di estrazione settimanali per scaricare elementi che appartengono alle serie dell'elenco di monitoraggio, oltre a monitorare e mantenere gli archi della storia.
+    ru_ru: Mylar - это автоматическая программа загрузки комиксов (cbr / cbz) для использования с NZB и торрентами. Mylar позволяет вам создать список отслеживания серий, который отслеживает различные вещи (новые выпуски, обновленные сведения и т. Д.). Он соберет, отсортирует и переименует загруженные выпуски. Он также позволяет вам отслеживать недельные списки вытягивания, чтобы загрузить элементы, принадлежащие к сериям отслеживаемого списка, а также отслеживать и поддерживать арки истории.
+    pl_pl: Mylar to automatyczny program do pobierania komiksów (cbr / cbz) do użycia z NZB i torrentami. Mylar pozwala ci utworzyć listę obserwowanych seriali, które monitorują różne rzeczy (nowe wydania, aktualizowane informacje itp.). Zebrze, posortuje i zmieni nazwę pobranych wydań. Pozwoli ci również monitorować tygodniowe listy wyciągania, aby pobrać elementy należące do seriali na liście obserwowanych, a także monitorować i utrzymywać archiwa historii.
+    pt_br: Mylar é um programa de download automático de quadrinhos (cbr / cbz) para uso com NZB e torrents. Mylar permite que você crie uma lista de acompanhamento de séries que monitora várias coisas (novos problemas, informações atualizadas, etc.). Ele coletará, classificará e renomeará os problemas baixados. Ele também permitirá que você monitore listas de extração semanais para baixar itens que pertencem às séries da lista de acompanhamento, bem como monitorar e manter arcos da história.
+    sv_se: Mylar är ett automatiskt program för att ladda ner serier (cbr / cbz) för användning med NZB och torrenter. Mylar låter dig skapa en lista över serier som övervakar olika saker (nya utgåvor, uppdaterade uppgifter, etc.). Det kommer att samla in, sortera och döpa om de nedladdade utgåvorna. Det kommer också att låta dig övervaka veckovisa extraktionslistor för att ladda ner objekt som tillhör serier i övervakningslistan, samt övervaka och underhålla arkiv med historier.
+    uk_ua: Mylar - це автоматична програма завантаження коміксів (cbr / cbz) для використання з NZB і торрентами. Mylar дозволяє вам створити список спостереження за серіями, який спостерігає за різними речами (нові випуски, оновлені дані тощо). Він зіб'є, відсортує і перейменує завантажені випуски. Він також дозволить вам спостерігати за тижневими списками витягування, щоб завантажити елементи, які належать до серій списку спостереження, а також спостерігати і підтримувати арки історії.
+  developer: Mylar3 Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-4.png
+  tagline:
+    en_us: Automatic comic book (cbr/cbz) downloader
+    zh_cn: 自动漫画（cbr/cbz）下载程序
+    ar_sa: محمّل كتب مصورة تلقائي (cbr/cbz)
+    de_de: Automatischer Comic-Download (cbr/cbz)
+    es_es: Descargador automático de cómics (cbr/cbz)
+    fr_fr: Téléchargeur de bandes dessinées automatique (cbr/cbz)
+    hu_hu: Automatikus képregény (cbr/cbz) letöltő
+    it_it: Download automatico di fumetti (cbr/cbz)
+    ru_ru: Автоматическая программа загрузки комиксов (cbr/cbz)
+    pl_pl: Automatyczny program do pobierania komiksów (cbr/cbz)
+    pt_br: Download automático de quadrinhos (cbr/cbz)
+    sv_se: Automatisk serie (cbr/cbz) nedladdare
+    uk_ua: Автоматична програма завантаження коміксів (cbr/cbz)
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/thumbnail.png
+  tips: {}
+  title:
+    en_us: Mylar3
+  port_map: "8090"

@@ -1,0 +1,86 @@
+name: homeassistant
+services:
+  homeassistant:
+    environment:
+      PGID: $PGID
+      PUID: $PUID
+      TZ: $TZ
+    image: linuxserver/homeassistant:arm32v7-2023.4.6
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+    x-casaos:
+      envs:
+        - container: TZ
+          description:
+            en_us: TimeZone
+            zh_cn: 时区
+        - container: PUID
+          description:
+            en_us: Run HomeAssistant as specified uid.
+            zh_cn: 以指定的uid运行HomeAssistant
+        - container: PGID
+          description:
+            en_us: Run HomeAssistant as specified gid.
+            zh_cn: 以指定的gid运行HomeAssistant
+
+      volumes:
+        - container: /config
+          description:
+            en_us: HomeAssistant config directory.
+            zh_cn: HomeAssistant配置目录
+    container_name: homeassistant
+x-casaos:
+  architectures:
+    - arm
+  main: homeassistant
+  author: CasaOS Team
+  category: Home Automation
+  description:
+    en_us: Open source home automation that puts local control and privacy first. Powered by a worldwide community of tinkerers and DIY enthusiasts. Perfect to run on a Raspberry Pi or a local server.
+    zh_cn: 开源的家庭自动化软件，将本地控制和隐私放在首位。由全球各地的爱好者和DIY爱好者组成的社区提供支持。适合在树莓派或本地服务器上运行。
+    ar_sa: تحكم مفتوح المصدر في المنزل يضع السيطرة المحلية والخصوصية في المقدمة. يتم تشغيله بقوة من قبل مجتمع عالمي يتكون من مهندسين ومحبي DIY. مثالي للتشغيل على Raspberry Pi أو خادم محلي.
+    de_de: Open-Source-Home-Automation, die die lokale Steuerung und Privatsphäre zuerst stellt. Angetrieben von einer weltweiten Gemeinschaft von Bastlern und DIY-Enthusiasten. Perfekt zum Ausführen auf einem Raspberry Pi oder einem lokalen Server.
+    es_es: Automatización doméstica de código abierto que pone el control local y la privacidad primero. Impulsado por una comunidad mundial de entusiastas del bricolaje y los entusiastas del bricolaje. Perfecto para ejecutar en una Raspberry Pi o un servidor local.
+    fr_fr: Automatisation domestique open source qui met d'abord le contrôle local et la vie privée. Propulsé par une communauté mondiale de bricoleurs et d'enthusiastes DIY. Parfait pour fonctionner sur une Raspberry Pi ou un serveur local.
+    hu_hu: Nyílt forrású otthoni automatizálás, amely először a helyi vezérlésre és a magánéletre helyezi a hangsúlyt. A világ minden tájáról érkező tinkererek és DIY rajongók közössége hajtja. Tökéletesen működik egy Raspberry Pi-n vagy egy helyi szerveren.
+    it_it: Automazione domestica open source che mette il controllo locale e la privacy in primo piano. Alimentato da una comunità mondiale di tinkerers e appassionati di DIY. Perfetto per eseguire su una Raspberry Pi o un server locale.
+    ru_ru: Программное обеспечение для автоматизации домашней среды, которое помогает контролировать устройства в доме. Поддерживает множество устройств и платформ.
+    pl_pl: Otwartoźródłowa automatyzacja domowa, która umieszcza kontrolę lokalną i prywatność na pierwszym miejscu. Napędzane przez międzynarodową społeczność tinkerów i entuzjastów DIY. Idealne do uruchamiania na Raspberry Pi lub lokalnym serwerze.
+    pt_br: Automação residencial de código aberto que coloca o controle local e a privacidade em primeiro lugar. Impulsionado por uma comunidade mundial de entusiastas do bricolage e entusiastas do bricolage. Perfeito para executar em uma Raspberry Pi ou um servidor local.
+    sv_se: Öppen källkods hemautomation som sätter lokal kontroll och integritet i första hand. Drivs av en global gemenskap av tinkerers och DIY-entusiaster. Perfekt att köra på en Raspberry Pi eller en lokal server.
+    uk_ua: Відкритий джерельний код програмного забезпечення для автоматизації домашнього середовища, яке допомагає контролювати пристрої вдома. Підтримує багато пристроїв та платформ.
+  developer: Home Assistant
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-1.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-2.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-3.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-4.jpg
+  tagline:
+    en_us: Awaken your home
+    zh_cn: 唤醒你的家
+    ar_sa: انعاش منزلك
+    de_de: Wecken Sie Ihr Zuhause
+    es_es: Despierta tu hogar
+    fr_fr: Réveillez votre maison
+    hu_hu: Ébreszd fel otthonod
+    it_it: Sveglia la tua casa
+    ru_ru: Пробудите свой дом
+    pl_pl: Obudź swój dom
+    pt_br: Desperte sua casa
+    sv_se: Väck ditt hem
+    uk_ua: Пробудьте свій дім
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/thumbnail.png
+  tips: {}
+  title:
+    en_us: Home Assistant
+  index: /
+  port_map: "8123"

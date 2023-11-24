@@ -1,0 +1,114 @@
+name: photoprism
+services:
+  photoprism:
+    environment:
+      PHOTOPRISM_ADMIN_PASSWORD: casaos
+      PHOTOPRISM_UPLOAD_NSFW: "true"
+      TZ: $TZ
+    image: photoprism/photoprism:231011-armv7
+    deploy:
+      resources:
+        reservations:
+          memory: "512M"
+    network_mode: bridge
+    ports:
+      - target: 2342
+        published: "2342"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/photoprism/storage
+        target: /photoprism/storage
+      - type: bind
+        source: /DATA/Gallery
+        target: /photoprism/originals
+    x-casaos:
+      envs:
+        - container: TZ
+          description:
+            en_us: TimeZone
+            zh_cn: 时区
+        - container: PHOTOPRISM_UPLOAD_NSFW
+          description:
+            en_us: true or false, is it possible to upload NSFW
+            zh_cn: true 或 false，是否允许上传 NSFW
+        - container: PHOTOPRISM_ADMIN_PASSWORD
+          description:
+            en_us: The password of admin
+            zh_cn: 管理员密码
+      ports:
+        - container: "2342"
+          description:
+            en_us: WebUI HTTP Port
+            zh_cn: WebUI HTTP 端口
+
+      volumes:
+        - container: /photoprism/storage
+          description:
+            en_us: PhotoPrism storage directory.
+            zh_cn: PhotoPrism 存储目录
+        - container: /photoprism/originals
+          description:
+            en_us: PhotoPrism originals directory.
+            zh_cn: PhotoPrism 原始文件目录
+    container_name: photoprism
+x-casaos:
+  architectures:
+    - arm
+  main: photoprism
+  author: CasaOS Team
+  category: Gallery
+  description:
+    en_us: PhotoPrism® is an AI-powered app for browsing, organizing & sharing your photo collection. It makes use of the latest technologies to tag and find pictures automatically without getting in your way. You can run it at home, on a private server, or in the cloud.
+    zh_cn: PhotoPrism® 是一个基于 AI 的应用程序，用于浏览、组织和共享您的照片集。它利用最新的技术自动标记和查找图片，而不会干扰您。您可以在家中、私人服务器或云中运行它。
+    ar_sa: PhotoPrism® هو تطبيق يعمل بقوة AI لاستعراض وتنظيم ومشاركة مجموعة صورك. يستخدمها التقنيات الأحدث للتسمية والعثور على الصور بشكل تلقائي دون أن يتدخل في طريقك. يمكنك تشغيله في المنزل أو على خادم خاص أو في السحابة.
+    de_de: PhotoPrism® ist eine mit AI betriebene App zum Durchsuchen, Organisieren und Teilen Ihrer Foto-Sammlung. Es nutzt die neuesten Technologien, um Bilder automatisch zu kennzeichnen und zu finden, ohne Sie dabei zu stören. Sie können es zu Hause, auf einem privaten Server oder in der Cloud ausführen.
+    es_es: PhotoPrism® es una aplicación impulsada por IA para navegar, organizar y compartir su colección de fotos. Hace uso de las últimas tecnologías para etiquetar y encontrar fotos automáticamente sin molestarte. Puedes ejecutarlo en casa, en un servidor privado o en la nube.
+    fr_fr: PhotoPrism® est une application alimentée par l'IA pour parcourir, organiser et partager votre collection de photos. Il utilise les dernières technologies pour étiqueter et trouver des photos automatiquement sans vous déranger. Vous pouvez l'exécuter à la maison, sur un serveur privé ou dans le cloud.
+    hu_hu: A PhotoPrism® egy AI-meghajtott alkalmazás, amely lehetővé teszi a fényképek böngészését, rendezését és megosztását. A legújabb technológiákat használja a képek automatikus címkézéséhez és megtalálásához, anélkül, hogy bármit is akadályozna. Otthon, egy privát szerveren vagy felhőben futtathatja.
+    it_it: PhotoPrism® è un'app alimentata da IA per sfogliare, organizzare e condividere la tua collezione di foto. Fa uso delle ultime tecnologie per etichettare e trovare le foto automaticamente senza disturbarti. Puoi eseguirlo a casa, su un server privato o in cloud.
+    ru_ru: PhotoPrism® - это приложение, работающее на AI, для просмотра, организации и обмена фотоколлекцией. Оно использует последние технологии для автоматической маркировки и поиска фотографий без помех. Вы можете запустить его дома, на частном сервере или в облаке.
+    pl_pl: PhotoPrism® to aplikacja napędzana przez AI do przeglądania, organizowania i udostępniania kolekcji zdjęć. Wykorzystuje najnowsze technologie do automatycznego oznaczania i wyszukiwania zdjęć bez przeszkadzania. Możesz uruchomić ją w domu, na prywatnym serwerze lub w chmurze.
+    pt_br: PhotoPrism® é um aplicativo alimentado por IA para navegar, organizar e compartilhar sua coleção de fotos. Ele usa as últimas tecnologias para marcar e encontrar fotos automaticamente sem te incomodar. Você pode executá-lo em casa, em um servidor privado ou na nuvem.
+    sv_se: PhotoPrism® är en AI-drivet app för att bläddra, organisera och dela din fotokollektion. Den använder de senaste teknologierna för att märka och hitta bilder automatiskt utan att störa dig. Du kan köra det hemma, på en privat server eller i molnet.
+    uk_ua: PhotoPrism® - це додаток, працюючий на AI, для перегляду, організації та обміну фотоколекцією. Він використовує останні технології для автоматичного позначення та пошуку фотографій без перешкод. Ви можете запустити його додому, на приватному сервері або у хмарі.
+  developer: PhotoPrism
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/screenshot-1.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/screenshot-2.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/screenshot-3.jpg
+  tagline:
+    en_us: Browsing, organizing & sharing your photo collection
+    zh_cn: 浏览、组织和共享您的照片集
+    ar_sa: تصفح وتنظيم ومشاركة مجموعة صورك
+    de_de: Durchsuchen, Organisieren und Teilen Ihrer Foto-Sammlung
+    es_es: Navegar, organizar y compartir su colección de fotos
+    fr_fr: Parcourir, organiser et partager votre collection de photos
+    hu_hu: A fényképek böngészése, rendezése és megosztása
+    it_it: Sfogliare, organizzare e condividere la tua collezione di foto
+    ru_ru: Просмотр, организация и обмен фотоколлекцией
+    pl_pl: Przeglądanie, organizowanie i udostępnianie kolekcji zdjęć
+    pt_br: Navegando, organizando e compartilhando sua coleção de fotos
+    sv_se: Bläddra, organisera och dela din fotokollektion
+    uk_ua: Перегляд, організація та обмін фотоколекцією
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        Default Account
+
+        | Username | Password |
+        | -------- | -------- |
+        | `admin`    | `casaos`   |
+      zh_cn: |
+        默认账号
+
+        | 用户名 | 密码 |
+        | -------- | -------- |
+        | `admin`    | `casaos`   |
+  title:
+    en_us: PhotoPrism
+  index: /
+  port_map: "2342"

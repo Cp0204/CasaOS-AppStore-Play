@@ -1,0 +1,96 @@
+name: smokeping
+services:
+  smokeping:
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/smokeping:arm32v7-2.7.3
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 80
+        published: "10280"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/smokeping/config
+        target: /config
+      - type: bind
+        source: /DATA/AppData/smokeping/data
+        target: /data
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+      ports:
+        - container: "80"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+        - container: /data
+          description:
+            en_us: ""
+    container_name: smokeping
+x-casaos:
+  architectures:
+    - arm
+  main: smokeping
+  author: CasaOS Team
+  category: Network
+  description:
+    en_us: keeps track of your network latency.
+    zh_cn: 用于跟踪您的网络延迟。
+    ar_sa: يبقي تتبع تأخير شبكتك.
+    de_de: hält die Verfolgung Ihrer Netzwerklatenz.
+    es_es: mantiene un registro de su latencia de red.
+    fr_fr: garde une trace de votre latence réseau.
+    hu_hu: nyomon követi a hálózati késleltetését.
+    it_it: tiene traccia della latenza della rete.
+    ru_ru: отслеживает задержку сети.
+    pl_pl: śledzi opóźnienia sieci.
+    pt_br: mantém um registro de sua latência de rede.
+    sv_se: håller reda på din nätverkslatens.
+    uk_ua: відстежує затримку мережі.
+  developer: Lazylibrarian Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-4.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/screenshot-5.png
+  tagline:
+    en_us: Free open source network performance monitoring tool
+    zh_cn: 免费开源的网络性能监控工具
+    ar_sa: أداة مراقبة أداء الشبكة مفتوحة المصدر مجانًا
+    de_de: Kostenlose Open-Source-Netzwerkleistungsüberwachungswerkzeug
+    es_es: Herramienta de monitoreo de rendimiento de red de código abierto gratuita
+    fr_fr: Outil de surveillance de la performance réseau open source gratuit
+    hu_hu: Ingyenes nyílt forráskódú hálózati teljesítményfigyelő eszköz
+    it_it: Strumento di monitoraggio delle prestazioni di rete open source gratuito
+    ru_ru: Бесплатный инструмент мониторинга производительности сети с открытым исходным кодом
+    pl_pl: Darmowe narzędzie do monitorowania wydajności sieci otwartego kodu źródłowego
+    pt_br: Ferramenta de monitoramento de desempenho de rede de código aberto gratuita
+    sv_se: Gratis öppen källkodsnätverksprestandamonteringsverktyg
+    uk_ua: Безкоштовний інструмент моніторингу продуктивності мережі з відкритим вихідним кодом
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/thumbnail.png
+  tips: {}
+  title:
+    en_us: Smokeping
+  port_map: "10280"

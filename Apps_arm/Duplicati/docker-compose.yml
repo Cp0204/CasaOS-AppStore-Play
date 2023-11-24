@@ -1,0 +1,101 @@
+name: duplicati
+services:
+  duplicati:
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/duplicati:arm32v7-2.0.6
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 8200
+        published: "8200"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/Duplicati/backups
+        target: /backups
+      - type: bind
+        source: /DATA/Duplicati/source
+        target: /source
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+      ports:
+        - container: "8200"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+        - container: /backups
+          description:
+            en_us: ""
+        - container: /source
+          description:
+            en_us: ""
+    container_name: duplicati
+x-casaos:
+  architectures:
+    - arm
+  main: duplicati
+  author: CasaOS Team
+  category: Cloud
+  description:
+    en_us: Duplicati is a free, open source, backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers.
+    zh_cn: Duplicati是一个免费的开源备份客户端，它可以安全地存储加密的、增量的、压缩的备份文件到云存储服务和远程文件服务器。
+    ar_sa: Duplicati هو عميل احتياطي مفتوح المصدر مجاني ، يخزن بشكل آمن ومشفر ، مضغوط ، متزايد ، مضغوط على خدمات تخزين السحابة وخوادم الملفات البعيدة.
+    de_de: Duplicati ist ein kostenloser Open-Source-Backup-Client, der verschlüsselte, inkrementelle, komprimierte Backups sicher auf Cloud-Speicherdiensten und Remote-Dateiservern speichert.
+    es_es: Duplicati es un cliente de copia de seguridad gratuito y de código abierto que almacena de forma segura copias de seguridad cifradas, incrementales y comprimidas en servicios de almacenamiento en la nube y servidores de archivos remotos.
+    fr_fr: Duplicati est un client de sauvegarde gratuit et open source qui stocke de manière sécurisée des sauvegardes chiffrées, incrémentales et compressées sur des services de stockage dans le cloud et des serveurs de fichiers distants.
+    hu_hu: A Duplicati egy ingyenes és nyílt forráskódú biztonsági másolat kliens, amely biztonságosan tárolja az inkrementálisan, tömörített módon titkosított biztonsági mentéseket felhőtárhelyeken és távoli fájl szervereken.
+    it_it: Duplicati è un client di backup gratuito e open source che memorizza in modo sicuro backup crittografati, incrementali e compressi su servizi di archiviazione in cloud e server file remoti.
+    ru_ru: Duplicati - это бесплатный клиент резервного копирования с открытым исходным кодом, который безопасно хранит зашифрованные, инкрементальные, сжатые резервные копии на облачных службах хранения и удаленных файловых серверах.
+    pl_pl: Duplicati to darmowy klient kopii zapasowych open source, który bezpiecznie przechowuje zaszyfrowane, inkrementalne, skompresowane kopie zapasowe na usługach chmurowych i zdalnych serwerach plików.
+    pt_br: O Duplicati é um cliente de backup gratuito e de código aberto que armazena de forma segura backups criptografados, incrementais e compactados em serviços de armazenamento em nuvem e servidores de arquivos remotos.
+    sv_se: Duplicati är en gratis, öppen källkod, backup-klient som säkert lagrar krypterade, inkrementella, komprimerade säkerhetskopior på molntjänster och fjärrfiler.
+    uk_ua: Duplicati - це безкоштовний клієнт резервного копіювання з відкритим вихідним кодом, який безпечно зберігає зашифровані, інкрементні, стиснені резервні копії на хмарних службах зберігання та віддалених файлових серверах.
+  developer: duplicati
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Duplicati/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Duplicati/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Duplicati/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Duplicati/screenshot-3.png
+  tagline:
+    en_us: Store securely encrypted backups in the cloud!
+    zh_cn: 在云端存储安全加密的备份文件！
+    ar_sa: حفظ النسخ الاحتياطية المشفرة بأمان في السحابة!
+    de_de: Sicher verschlüsselte Backups in der Cloud speichern!
+    es_es: ¡Almacena copias de seguridad cifradas de forma segura en la nube!
+    fr_fr: Stockez des sauvegardes chiffrées de manière sécurisée dans le cloud !
+    hu_hu: Biztonságosan tárolhatja az adattárolót felhőben titkosítva!
+    it_it: Memorizza in modo sicuro i backup crittografati nella cloud!
+    ru_ru: Храните безопасные зашифрованные резервные копии в облаке!
+    pl_pl: Bezpiecznie przechowuj zaszyfrowane kopie zapasowe w chmurze!
+    pt_br: Armazene backups criptografados de forma segura na nuvem!
+    sv_se: Lagra säkert krypterade säkerhetskopior i molnet!
+    uk_ua: Зберігайте безпечні зашифровані резервні копії у хмарі!
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Duplicati/thumbnail.png
+  tips: {}
+  title:
+    en_us: Duplicati
+  index: /
+  port_map: "8200"

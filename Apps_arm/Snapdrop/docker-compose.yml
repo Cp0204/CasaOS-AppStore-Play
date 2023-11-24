@@ -1,0 +1,66 @@
+name: snapdrop
+services:
+  snapdrop:
+    environment:
+      - PGID=$PGID
+      - PUID=$PUID
+      - TZ=$TZ
+    image: linuxserver/snapdrop:arm32v7-version-eac78009
+    network_mode: bridge
+    ports:
+      - target: 443
+        published: "443"
+        protocol: tcp
+      - target: 80
+        published: "89"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+    privileged: false
+    container_name: snapdrop
+x-casaos:
+  architectures:
+    - arm
+  description:
+    en_us: Snapdrop is a Progressive Web App (PWA) that allows you to transfer files between devices in the same network without having to install anything.
+    zh_cn: Snapdrop是一个渐进式Web应用程序（PWA），允许您在同一网络中的设备之间传输文件，而无需安装任何内容。
+    ar_sa: Snapdrop هو تطبيق ويب تدريجي (PWA) يتيح لك نقل الملفات بين الأجهزة في نفس الشبكة دون الحاجة إلى تثبيت أي شيء.
+    de_de: Snapdrop ist eine Progressive Web App (PWA), mit der Sie Dateien zwischen Geräten im selben Netzwerk übertragen können, ohne etwas installieren zu müssen.
+    es_es: Snapdrop es una aplicación web progresiva (PWA) que le permite transferir archivos entre dispositivos en la misma red sin tener que instalar nada.
+    fr_fr: Snapdrop est une application Web progressive (PWA) qui vous permet de transférer des fichiers entre des appareils sur le même réseau sans avoir à installer quoi que ce soit.
+    hu_hu: A Snapdrop egy progresszív webalkalmazás (PWA), amely lehetővé teszi a fájlok átvitelét a hálózaton belüli eszközök között anélkül, hogy telepítenie kellene bármit is.
+    it_it: Snapdrop è un'app Web progressiva (PWA) che consente di trasferire file tra dispositivi nella stessa rete senza dover installare nulla.
+    ru_ru: Snapdrop - это прогрессивное веб-приложение (PWA), которое позволяет передавать файлы между устройствами в одной сети без необходимости устанавливать что-либо.
+    pl_pl: Snapdrop to progresywna aplikacja internetowa (PWA), która umożliwia przesyłanie plików między urządzeniami w tej samej sieci bez konieczności instalowania czegokolwiek.
+    pt_br: Snapdrop é um aplicativo da Web progressivo (PWA) que permite transferir arquivos entre dispositivos na mesma rede sem precisar instalar nada.
+    sv_se: Snapdrop är en progressiv webbapp (PWA) som låter dig överföra filer mellan enheter i samma nätverk utan att behöva installera något.
+    uk_ua: Snapdrop - це прогресивний веб-додаток (PWA), який дозволяє передавати файли між пристроями в одній мережі без необхідності встановлювати що-небудь.
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Snapdrop/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Snapdrop/screenshot-1.png
+  tagline:
+    en_us: Cross-platform file sharing made easy.
+    zh_cn: 轻松实现跨平台文件共享。
+    ar_sa: تبادل الملفات عبر المنصات بكل سهولة.
+    de_de: Einfacher plattformübergreifender Dateiaustausch.
+    es_es: Compartir archivos entre plataformas nunca fue tan fácil.
+    fr_fr: Partage de fichiers multiplateforme simplifié.
+    hu_hu: Egyszerűsített többplatformos fájlmegosztás.
+    it_it: Condivisione di file multi-piattaforma resa facile.
+    ru_ru: Простой обмен файлами между платформами.
+    pl_pl: Proste udostępnianie plików międzyplatformowych.
+    pt_br: Compartilhamento de arquivos entre plataformas feito fácil.
+    sv_se: Enkel filöverföring mellan olika plattformar.
+    uk_ua: Проста пересилка файлів між платформами.
+  author: self
+  category: Utilities
+  hostname: ""
+  index: /
+  port_map: "89"
+  scheme: http
+  store_app_id: snapdrop
+  title:
+    en_us: snapdrop

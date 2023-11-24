@@ -1,0 +1,131 @@
+name: mariadb
+services:
+  mariadb:
+    image: linuxserver/mariadb:arm32v7-10.6.13
+    restart: unless-stopped
+    environment:
+      PUID: $PUID
+      PGID: $PGID
+      TZ: $TZ
+      MYSQL_ROOT_PASSWORD: 'casaos'
+      MYSQL_DATABASE: 'casaos'
+      MYSQL_USER: 'casaos'
+      MYSQL_PASSWORD: 'casaos'
+      REMOTE_SQL: ''
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: for UserID
+        - container: PGID
+          description:
+            en_us: for GroupID
+        - container: TZ
+          description:
+            en_us: specify a timezone to use, see this list.
+        - container: MYSQL_ROOT_PASSWORD
+          description:
+            en_us: Set this to root password for installation (minimum 4 characters & non-alphanumeric passwords must be properly escaped).
+        - container: MYSQL_DATABASE
+          description:
+            en_us: Specify the name of a database to be created on image startup.
+        - container: MYSQL_USER
+          description:
+            en_us: This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here).
+        - container: MYSQL_PASSWORD
+          description:
+            en_us: Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped).
+        - container: REMOTE_SQL
+          description:
+            en_us: Set this to ingest sql files from an http/https endpoint (comma seperated array).
+    ports:
+      - target: 3306
+        published: "3306"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/mariadb/config
+        target: /config
+    container_name: mariadb
+x-casaos:
+  architectures:
+    - arm
+  main: mariadb
+  description:
+    en_us: |
+      MariaDB Server is one of the most popular open source relational databases. It’s made by the original developers of MySQL and guaranteed to stay open source. It is part of most cloud offerings and the default in most Linux distributions.
+
+      It is built upon the values of performance, stability, and openness, and MariaDB Foundation ensures contributions will be accepted on technical merit. Recent new functionality includes advanced clustering with Galera Cluster 4, compatibility features with Oracle Database and Temporal Data Tables, allowing one to query the data as it stood at any point in the past.
+    zh_cn: |
+      MariaDB Server 是最受欢迎的开源关系数据库之一。它由 MySQL 的原始开发者制作，并保证保持开源。它是大多数云提供商的一部分，并且是大多数 Linux 发行版的默认选择。
+
+      它以性能、稳定性和开放性为核心价值观，MariaDB 基金会确保技术上合理的贡献将被接受。最近的新功能包括使用 Galera Cluster 4 进行高级集群，与 Oracle Database 和 Temporal Data Tables 兼容的功能，允许查询数据在过去的任何时间点的状态。
+    ar_sa: |
+      خادم MariaDB هو واحد من أكثر قواعد البيانات العلاقية مفتوحة المصدر شهرةً. إنه مصنوع من قِبَل المطوّرين الأصليين لـ MySQL ومضمون البقاء كمصدر مفتوح. إنه جزء من معظم عروض السحابة والافتراضية في معظم توزيعات Linux.
+
+      يتم بناؤه على قيم الأداء والاستقرار والانفتاح، وتضمن مؤسسة MariaDB قبول المساهمات بناءً على الجدارة التقنية. يشمل الوظائف الجديدة الأخيرة التجميع المتقدم باستخدام Galera Cluster 4، وميزات التوافق مع Oracle Database وجداول البيانات الزمنية، مما يسمح للمستخدم باستعلام البيانات كما كانت في أي نقطة في الماضي.
+    de_de: |
+      Der MariaDB Server ist eine der beliebtesten Open-Source-Relation-Datenbanken. Er wird von den ursprünglichen Entwicklern von MySQL hergestellt und bleibt garantiert Open Source. Er ist Teil der meisten Cloud-Angebote und die Standardoption in den meisten Linux-Distributionen.
+
+      Er basiert auf den Werten von Leistung, Stabilität und Offenheit, und die MariaDB Foundation stellt sicher, dass Beiträge nach technischer Verdienst angenommen werden. Zu den neuesten Funktionen gehören erweitertes Clustering mit Galera Cluster 4, Kompatibilitätsfunktionen mit Oracle Database und temporale Datentabellen, mit denen Daten zu jedem beliebigen Zeitpunkt abgefragt werden können.
+    es_es: |
+      MariaDB Server es una de las bases de datos relacionales de código abierto más populares. Está creado por los desarrolladores originales de MySQL y está garantizado que se mantendrá como código abierto. Es parte de la mayoría de las ofertas en la nube y es la opción predeterminada en la mayoría de las distribuciones de Linux.
+
+      Está construido sobre los valores de rendimiento, estabilidad y apertura, y la Fundación MariaDB garantiza que se aceptarán contribuciones basadas en méritos técnicos. Las últimas funcionalidades incluyen clustering avanzado con Galera Cluster 4, características de compatibilidad con Oracle Database y Tablas de Datos Temporales, lo que permite consultar los datos tal como estaban en cualquier momento en el pasado.
+    fr_fr: |
+      MariaDB Server est l'une des bases de données relationnelles open source les plus populaires. Il est développé par les développeurs originaux de MySQL et est garanti d'être open source. Il fait partie de la plupart des offres cloud et est la solution par défaut dans la plupart des distributions Linux.
+
+      Il repose sur les valeurs de performance, de stabilité et d'ouverture, et la Fondation MariaDB garantit que les contributions seront acceptées sur des critères techniques. Les fonctionnalités récentes incluent le clustering avancé avec Galera Cluster 4, les fonctionnalités de compatibilité avec Oracle Database et les tables de données temporelles, permettant d'interroger les données telles qu'elles étaient à n'importe quel moment dans le passé.
+    hu_hu: |
+      A MariaDB Server a legnépszerűbb nyílt forráskódú relációs adatbázisok közé tartozik. Az eredeti MySQL fejlesztői készítették és garantáltan nyílt forráskódú marad. A legtöbb felhőkínálat és a legtöbb Linux disztribúció alapértelmezett része.
+
+      A teljesítmény, a stabilitás és a nyitottság értékeire épül, és a MariaDB Foundation biztosítja, hogy a technikai érdemek alapján elfogadja a hozzájárulásokat. Az új funkciók között szerepel az előrehaladott kluszterezés a Galera Cluster 4-tel, az Oracle Database-kompatibilitási funkciók és a Temporal Data Tables, amelyek lehetővé teszik az adatok lekérdezését a múlt bármely pontján.
+    it_it: |
+      MariaDB Server è uno dei database relazionali open source più popolari. È stato creato dagli sviluppatori originali di MySQL ed è garantito di rimanere open source. Fa parte della maggior parte delle offerte cloud e viene utilizzato come predefinito nella maggior parte delle distribuzioni Linux.
+
+      Si basa sui valori di prestazioni, stabilità e apertura e la Fondazione MariaDB assicura che i contributi siano accettati in base ai meriti tecnici. Le nuove funzionalità includono il clustering avanzato con Galera Cluster 4, funzionalità di compatibilità con Oracle Database e tabelle di dati temporali, consentendo di interrogare i dati così come erano in un determinato punto nel passato.
+    ru_ru: |
+      MariaDB Server является одной из самых популярных реляционных баз данных с открытым исходным кодом. Он создан разработчиками MySQL и гарантированно останется открытым исходным кодом. Он является частью большинства облачных предложений и является наиболее распространенным в большинстве дистрибутивов Linux.
+
+      Он основан на ценностях производительности, стабильности и открытости, и MariaDB Foundation гарантирует, что вклады будут приниматься на основе технического достоинства. Среди последних новых функций: продвинутое кластеризование с помощью Galera Cluster 4, функции совместимости с Oracle Database и временные таблицы данных, позволяющие выполнять запросы к данным на любой момент в прошлом.
+    pt_br: |
+      O MariaDB Server é um dos bancos de dados relacionais de código aberto mais populares. É feito pelos desenvolvedores originais do MySQL e garantido para permanecer como código aberto. Ele faz parte da maioria das ofertas em nuvem e é a opção padrão na maioria das distribuições Linux.
+
+      Ele é construído com base nos valores de desempenho, estabilidade e abertura, e a Fundação MariaDB garante que contribuições serão aceitas com base no mérito técnico. Recursos recentes incluem clusterização avançada com Galera Cluster 4, recursos de compatibilidade com o Oracle Database e tabelas de dados temporais, permitindo consultar os dados conforme estavam em qualquer ponto do passado.
+    sv_se: |
+      MariaDB Server är en av de mest populära öppna relationella databaserna. Den är skapad av ursprungliga utvecklare av MySQL och garanteras att vara öppen källkod. Den är en del av de flesta molnleverantörer och standardvalet i de flesta Linux-distributioner.
+
+      Den är byggd på värdena prestanda, stabilitet och öppenhet, och MariaDB Foundation säkerställer att bidrag accepteras utifrån teknisk förtjänst. Nya funktioner inkluderar avancerad klustrering med Galera Cluster 4, kompatibilitetsfunktioner med Oracle Database och Temporal Data Tables, vilket gör det möjligt att fråga data som det var vid valfri tidpunkt i det förflutna.
+    uk_ua: |
+      Сервер MariaDB є однією з найпопулярніших відкритих реляційних баз даних. Він створений розробниками оригінального MySQL і гарантується, що залишиться відкритим джерелом. Він є частиною більшості хмарних пропозицій і є типовим в більшості дистрибутивів Linux.
+
+      Він побудований на цінностях продуктивності, стабільності та відкритості, а Фонд MariaDB гарантує, що приймаються внески на основі технічних заслуг. Серед останніх нових функцій: розширена кластеризація з Galera Cluster 4, функції сумісності з Oracle Database та тимчасові таблиці даних, що дозволяють запитувати дані так, як вони були в будь-який момент у минулому.
+  tagline:
+    en_us: "MariaDB Server is one of the most popular database servers in the world. It's made by the original developers of MySQL and guaranteed to stay open source."
+    zh_cn: "MariaDB Server 是世界上最受欢迎的数据库服务器之一。它由 MySQL 的原始开发者创建，并保证始终保持开源。"
+    ar_sa: "خادم MariaDB هو واحد من أكثر خوادم قواعد البيانات شهرة في العالم. صُنع بواسطة المطورين الأصليين لـ MySQL ومضمون أن يبقى مفتوح المصدر."
+    de_de: "MariaDB Server ist einer der beliebtesten Datenbankserver der Welt. Er wurde von den ursprünglichen Entwicklern von MySQL entwickelt und bleibt garantiert Open Source."
+    es_es: "MariaDB Server es uno de los servidores de bases de datos más populares del mundo. Está creado por los desarrolladores originales de MySQL y garantiza ser de código abierto."
+    fr_fr: "MariaDB Server est l'un des serveurs de bases de données les plus populaires au monde. Il est créé par les développeurs originaux de MySQL et garantit de rester open source."
+    hu_hu: "A MariaDB Server a világ egyik legnépszerűbb adatbázis-szervere. Az eredeti MySQL fejlesztői készítették, és garantáltan nyílt forráskódú marad."
+    it_it: "MariaDB Server è uno dei server di database più popolari al mondo. È stato creato dagli sviluppatori originali di MySQL e garantisce di rimanere open source."
+    ru_ru: "Сервер MariaDB является одним из самых популярных серверов баз данных в мире. Он создан оригинальными разработчиками MySQL и гарантированно остается открытым исходным кодом."
+    pl_pl: "Serwer MariaDB jest jednym z najpopularniejszych serwerów baz danych na świecie. Został stworzony przez oryginalnych twórców MySQL i gwarantuje pozostanie otwartym źródłem."
+    pt_br: "O MariaDB Server é um dos servidores de banco de dados mais populares do mundo. É feito pelos desenvolvedores originais do MySQL e garantido para permanecer como código aberto."
+    sv_se: "MariaDB Server är en av världens mest populära databasservrar. Den är skapad av de ursprungliga utvecklarna av MySQL och garanteras att förbli öppen källkod."
+    uk_ua: "Сервер MariaDB є одним з найпопулярніших серверів баз даних у світі. Він створений оригінальними розробниками MySQL і гарантується його відкритість."
+  developer: MariaDB Foundation
+  author: WisdomSky
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/MariaDB/icon.png
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/MariaDB/icon.png
+  tips:
+    before_install:
+      en_us: |
+        Default user: `casaos`
+        Default password: `casaos`
+        Default database: `casaos`
+
+        Default root password: `casaos`
+  title:
+    en_us: MariaDB
+  category: Developer

@@ -1,0 +1,108 @@
+name: calibre-web
+services:
+  calibre-web:
+    environment:
+      DOCKER_MODS: ghcr.io/linuxserver/mods:universal-calibre
+      PGID: $PGID
+      PUID: $PUID
+      TZ: $TZ
+    image: linuxserver/calibre-web:arm32v7-0.6.20
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 8083
+        published: "8083"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/Media/Books
+        target: /books
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+        - container: DOCKER_MODS
+          description:
+            en_us: ""
+      ports:
+        - container: "8083"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+        - container: /books
+          description:
+            en_us: ""
+    container_name: calibre-web
+x-casaos:
+  architectures:
+    - arm
+  main: calibre-web
+  author: CasaOS Team
+  category: Media
+  description:
+    en_us: Calibre-web is a web app providing a clean interface for browsing, reading and downloading eBooks using an existing Calibre database. It is also possible to integrate google drive and edit metadata and your calibre library through the app itself.
+    zh_cn: Calibre-web是一个Web应用程序，提供了一个干净的界面，用于浏览，阅读和下载使用现有Calibre数据库的电子书。也可以通过应用程序本身集成谷歌驱动器并编辑元数据和您的calibre库。
+    ar_sa: Calibre-web هو تطبيق ويب يوفر واجهة نظيفة لاستعراض وقراءة وتنزيل الكتب الإلكترونية باستخدام قاعدة بيانات Calibre الحالية. من الممكن أيضًا دمج جوجل درايف وتحرير البيانات الوصفية ومكتبتك الخاصة من خلال التطبيق نفسه.
+    de_de: Calibre-web ist eine Web-App, die eine saubere Schnittstelle für das Durchsuchen, Lesen und Herunterladen von E-Books mit einer vorhandenen Calibre-Datenbank bietet. Es ist auch möglich, Google Drive zu integrieren und Metadaten und Ihre Calibre-Bibliothek über die App selbst zu bearbeiten.
+    es_es: Calibre-web es una aplicación web que proporciona una interfaz limpia para navegar, leer y descargar libros electrónicos utilizando una base de datos Calibre existente. También es posible integrar Google Drive y editar metadatos y tu biblioteca de Calibre a través de la propia aplicación.
+    fr_fr: Calibre-web est une application Web offrant une interface propre pour parcourir, lire et télécharger des livres électroniques à l'aide d'une base de données Calibre existante. Il est également possible d'intégrer Google Drive et de modifier les métadonnées et votre bibliothèque Calibre via l'application elle-même.
+    hu_hu: A Calibre-web egy webalkalmazás, amely egy tiszta felületet biztosít a könyvek böngészéséhez, olvasásához és letöltéséhez egy meglévő Calibre adatbázis használatával. Lehetőség van továbbá a Google Drive integrálására és a metaadatok és a Calibre könyvtár szerkesztésére az alkalmazás magában.
+    it_it: Calibre-web è un'applicazione web che fornisce un'interfaccia pulita per esplorare, leggere e scaricare eBook utilizzando un database Calibre esistente. È anche possibile integrare Google Drive e modificare i metadati e la tua libreria di Calibre attraverso l'applicazione stessa.
+    ru_ru: Calibre-web - это веб-приложение, предоставляющее чистый интерфейс для просмотра, чтения и загрузки электронных книг с использованием существующей базы данных Calibre. Также возможно интегрировать Google Drive и редактировать метаданные и вашу библиотеку Calibre через само приложение.
+    pl_pl: Calibre-web to aplikacja internetowa zapewniająca czysty interfejs do przeglądania, czytania i pobierania e-booków za pomocą istniejącej bazy danych Calibre. Możliwe jest również zintegrowanie Google Drive i edycja metadanych i biblioteki Calibre za pośrednictwem samej aplikacji.
+    pt_br: Calibre-web é um aplicativo da web que fornece uma interface limpa para navegar, ler e baixar eBooks usando um banco de dados Calibre existente. Também é possível integrar o Google Drive e editar metadados e sua biblioteca Calibre através do próprio aplicativo.
+    sv_se: Calibre-web är en webbapplikation som ger en ren gränssnitt för att bläddra, läsa och ladda ner e-böcker med hjälp av en befintlig Calibre-databas. Det är också möjligt att integrera Google Drive och redigera metadata och din Calibre-bibliotek via appen själv.
+    uk_ua: Calibre-web - це веб-застосунок, який надає чистий інтерфейс для перегляду, читання та завантаження електронних книг з використанням існуючої бази даних Calibre. Також можлива інтеграція з Google Drive та редагування метаданих та вашої бібліотеки Calibre через сам додаток.
+  developer: linuxserver
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Calibre-web/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Calibre-web/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Calibre-web/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Calibre-web/screenshot-3.png
+  tagline:
+    en_us: Web app for browsing, reading and downloading eBooks stored in a Calibre database
+    zh_cn: 用于浏览，阅读和下载存储在Calibre数据库中的电子书的Web应用程序
+    ar_sa: تطبيق ويب للتصفح والقراءة وتنزيل الكتب الإلكترونية المخزنة في قاعدة بيانات Calibre
+    de_de: Web-App zum Durchsuchen, Lesen und Herunterladen von E-Books, die in einer Calibre-Datenbank gespeichert sind
+    es_es: Aplicación web para navegar, leer y descargar libros electrónicos almacenados en una base de datos Calibre
+    fr_fr: Application Web pour parcourir, lire et télécharger des livres électroniques stockés dans une base de données Calibre
+    hu_hu: Webalkalmazás a Calibre adatbázisban tárolt könyvek böngészéséhez, olvasásához és letöltéséhez
+    it_it: Applicazione web per esplorare, leggere e scaricare eBook memorizzati in un database Calibre
+    ru_ru: Веб-приложение для просмотра, чтения и загрузки электронных книг, хранящихся в базе данных Calibre
+    pl_pl: Aplikacja internetowa do przeglądania, czytania i pobierania e-booków przechowywanych w bazie danych Calibre
+    pt_br: Aplicativo da web para navegar, ler e baixar eBooks armazenados em um banco de dados Calibre
+    sv_se: Webbapplikation för att bläddra, läsa och ladda ner e-böcker som lagras i en Calibre-databas
+    uk_ua: Веб-застосунок для перегляду, читання та завантаження електронних книг, що зберігаються в базі даних Calibre
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Calibre-web/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        | Username | Password |
+        | -------- | -------- |
+        | `admin`    | `admin123` |
+      zh_cn: |
+        | 用户名 | 密码 |
+        | -------- | -------- |
+        | `admin`    | `admin123` |
+  title:
+    en_us: Calibre-web
+  index: /
+  port_map: "8083"

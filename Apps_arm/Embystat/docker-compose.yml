@@ -1,0 +1,88 @@
+name: embystat
+services:
+  embystat:
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/embystat:arm32v7-0.2.0
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 6555
+        published: "6555"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/embystat/config
+        target: /config
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+      ports:
+        - container: "6555"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+    container_name: embystat
+x-casaos:
+  architectures:
+    - arm
+  main: embystat
+  author: CasaOS Team
+  category: Media
+  description:
+    en_us: EmbyStat is a personal web server that can calculate all kinds of statistics from your (local) Emby or Jellyfin server. Just install this on your server and let him calculate all kinds of fun stuff. This project is still in Alpha phase, but feel free to pull in on your computer and test it out yourself. When the time is right I will host a full informational website/release for common platforms and Wiki pages.
+    zh_cn: EmbyStat是一个个人Web服务器，可以从您的（本地）Emby或Jellyfin服务器计算各种统计数据。只需在服务器上安装此程序，让它计算各种有趣的东西。这个项目仍处于Alpha阶段，但是请随时拉入您的计算机并自己测试它。当时机成熟时，我将为常见平台和Wiki页面托管一个完整的信息网站/发布。
+    ar_sa: EmbyStat هو خادم ويب شخصي يمكنه حساب جميع أنواع الإحصاءات من خادم Emby أو Jellyfin الخاص بك (محلي). ببساطة قم بتثبيت هذا على الخادم الخاص بك واسمح له بحساب جميع أنواع الأشياء الممتعة. هذا المشروع لا يزال في مرحلة ألفا ، ولكن يمكنك الاستمتاع بسحبه في حاسوبك واختباره بنفسك. عندما يكون الوقت مستعدًا ، سأستضيف موقعًا ويب معلوماتيًا كاملاً / إصدارًا للمنصات الشائعة وصفحات ويكي.
+    de_de: EmbyStat ist ein persönlicher Webserver, der aus Ihrem (lokalen) Emby- oder Jellyfin-Server alle möglichen Statistiken berechnen kann. Installieren Sie dies einfach auf Ihrem Server und lassen Sie ihn alle möglichen Spaß berechnen. Dieses Projekt befindet sich noch in der Alpha-Phase, aber Sie können es jederzeit auf Ihrem Computer herunterladen und selbst testen. Wenn die Zeit reif ist, werde ich eine vollständige Informationswebsite / Veröffentlichung für gängige Plattformen und Wiki-Seiten hosten.
+    es_es: EmbyStat es un servidor web personal que puede calcular todo tipo de estadísticas de su servidor Emby o Jellyfin (local). Simplemente instale esto en su servidor y déjelo calcular todo tipo de cosas divertidas. Este proyecto aún está en fase alfa, pero siéntase libre de descargarlo en su computadora y probarlo usted mismo. Cuando sea el momento, alojaré un sitio web informativo completo / lanzamiento para plataformas comunes y páginas de Wiki.
+    fr_fr: EmbyStat est un serveur Web personnel qui peut calculer toutes sortes de statistiques à partir de votre serveur Emby ou Jellyfin (local). Installez simplement cela sur votre serveur et laissez-le calculer toutes sortes de choses amusantes. Ce projet est toujours en phase alpha, mais n'hésitez pas à le télécharger sur votre ordinateur et à le tester vous-même. Lorsque le moment sera venu, j'hébergerai un site Web complet / une version pour les plates-formes courantes et des pages Wiki.
+    hu_hu: Az EmbyStat egy személyes webkiszolgáló, amely képes mindenféle statisztikát számolni a (helyi) Emby vagy Jellyfin szerveréből. Egyszerűen telepítse ezt a szerverén és hagyja, hogy mindenféle szórakoztató dolgot számoljon ki. Ez a projekt még mindig Alfa-fázisban van, de szabadon letöltheti a számítógépére és kipróbálhatja magának. Amikor az idő megfelelő lesz, egy teljes információs webhely / kiadást fogok szolgáltatni a közismert platformokhoz és Wiki oldalakhoz.
+    it_it: EmbyStat è un server web personale in grado di calcolare tutte le statistiche possibili dal tuo server Emby o Jellyfin (locale). Installa semplicemente questo sul tuo server e lascialo calcolare tutte le cose divertenti. Questo progetto è ancora in fase alpha, ma sentiti libero di scaricarlo sul tuo computer e provarlo da solo. Quando sarà il momento, ospiterò un sito web completo / rilascio per piattaforme comuni e pagine Wiki.
+    ru_ru: EmbyStat - это личный веб-сервер, который может вычислить все виды статистики с вашего (локального) сервера Emby или Jellyfin. Просто установите это на свой сервер и пусть он вычисляет все виды веселых вещей. Этот проект все еще находится в альфа-стадии, но вы можете скачать его на свой компьютер и самостоятельно протестировать. Когда наступит время, я размещу полный информационный веб-сайт / выпуск для распространенных платформ и вики-страниц.
+    pl_pl: EmbyStat to osobisty serwer sieci Web, który może obliczyć wszystkie rodzaje statystyk z Twojego (lokalnego) serwera Emby lub Jellyfin. Po prostu zainstaluj to na swoim serwerze i pozwól mu obliczyć wszystkie rodzaje zabawnych rzeczy. Ten projekt jest wciąż w fazie alfa, ale możesz pobrać go na swój komputer i przetestować go samodzielnie. Kiedy dojdzie do tego czasu, będę hostował pełną witrynę informacyjną / wydanie dla popularnych platform i stron Wiki.
+    pt_br: O EmbyStat é um servidor web pessoal que pode calcular todos os tipos de estatísticas do seu servidor Emby ou Jellyfin (local). Basta instalar isso em seu servidor e deixe-o calcular todos os tipos de coisas divertidas. Este projeto ainda está na fase alfa, mas sinta-se à vontade para baixá-lo em seu computador e testá-lo por conta própria. Quando for a hora, hospedarei um site completo / lançamento para plataformas comuns e páginas Wiki.
+    sv_se: EmbyStat är en personlig webbserver som kan beräkna alla typer av statistik från din (lokal) Emby- eller Jellyfin-server. Installera bara denna på din server och låt den räkna ut all sorts rolig information. Detta projekt är fortfarande i alfa-fasen, men du är välkommen att dra in det på din dator och testa det själv. När tiden är rätt kommer jag att ha en fullständig informativ webbplats/utgåva för vanliga plattformar och Wiki-sidor.
+    uk_ua: EmbyStat - це особистий веб-сервер, який може обчислити всі види статистики з вашого (локального) сервера Emby або Jellyfin. Просто встановіть це на свій сервер і дайте йому обчислити всі види веселих речей. Цей проект все ще знаходиться в альфа-стадії, але ви можете завантажити його на свій комп'ютер і самостійно протестувати. Коли настане час, я розмістю повну інформаційну веб-сторінку / випуск для поширених платформ і вікі-сторінок.
+  developer: Embystart Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/screenshot-3.png
+  tagline:
+    en_us: Calculate all kinds of statistics from your (local) Emby or Jellyfin server
+    zh_cn: 从您的（本地）Emby或Jellyfin服务器计算各种统计数据
+    ar_sa: حساب جميع أنواع الإحصاءات من خادم Emby أو Jellyfin (محلي)
+    de_de: Berechnen Sie alle Arten von Statistiken von Ihrem (lokalen) Emby- oder Jellyfin-Server
+    es_es: Calcule todas las estadísticas de su servidor Emby o Jellyfin (local)
+    fr_fr: Calculez toutes sortes de statistiques à partir de votre serveur Emby ou Jellyfin (local)
+    hu_hu: Számítsa ki az összesféle statisztikát a (helyi) Emby vagy Jellyfin szerveréből
+    it_it: Calcola tutti i tipi di statistiche dal tuo server Emby o Jellyfin (locale)
+    ru_ru: Вычислите все виды статистики с вашего (локального) сервера Emby или Jellyfin
+    pl_pl: Oblicz wszystkie rodzaje statystyk z Twojego (lokalnego) serwera Emby lub Jellyfin
+    pt_br: Calcule todos os tipos de estatísticas do seu servidor Emby ou Jellyfin (local)
+    sv_se: Beräkna alla typer av statistik från din (lokala) Emby- eller Jellyfin-server
+    uk_ua: Обчисліть всі види статистики з вашого (локального) сервера Emby або Jellyfin
+  thumbnail: ""
+  tips: {}
+  title:
+    en_us: Embystat
+  port_map: "6555"

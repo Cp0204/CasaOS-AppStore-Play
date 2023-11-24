@@ -1,0 +1,100 @@
+name: lidarr
+services:
+  lidarr:
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/lidarr:arm32v7-1.1.4
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 8686
+        published: "8686"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/lidarr/config
+        target: /config
+      - type: bind
+        source: /DATA/Media/Music
+        target: /music
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+      ports:
+        - container: "8686"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+        - container: /music
+          description:
+            en_us: ""
+        - container: /downloads
+          description:
+            en_us: ""
+    container_name: lidarr
+x-casaos:
+  architectures:
+    - arm
+  main: lidarr
+  author: CasaOS Team
+  category: Downloader
+  description:
+    en_us: Lidarr is a music collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new albums from your favorite artists and will interface with clients and indexers to grab, sort, and rename them. It can also be configured to automatically upgrade the quality of existing files in the library when a better quality format becomes available.
+    zh_cn: Lidarr是一个音乐收藏管理器，用于Usenet和BitTorrent用户。它可以监视多个RSS源以获取来自最喜欢的艺术家的新专辑，并且可以与客户端和索引器进行交互以获取，排序和重命名它们。它还可以配置为在更好的质量格式可用时自动升级库中现有文件的质量。
+    ar_sa: يمكن لـ Lidarr أن يكون مديرًا لمجموعة الموسيقى لمستخدمي Usenet و BitTorrent. يمكنه مراقبة مزيج RSS متعدد للألبومات الجديدة من الفنانين المفضلين لديك وسيتم تفاعله مع العملاء والمؤشرات للتقاط وفرز وإعادة تسمية. يمكنه أيضًا تكوينه لترقية الجودة التلقائية للملفات الموجودة في المكتبة عندما يصبح تنسيقًا أفضل متاحًا.
+    de_de: Lidarr ist ein Musiksammlungsmanager für Usenet- und BitTorrent-Nutzer. Es kann mehrere RSS-Feeds überwachen, um neue Alben von Ihren Lieblingskünstlern zu finden und mit Clients und Indexern zu kommunizieren, um sie zu holen, zu sortieren und umzubenennen. Es kann auch so konfiguriert werden, dass die Qualität vorhandener Dateien in der Bibliothek automatisch aktualisiert wird, wenn eine bessere Qualität verfügbar ist.
+    es_es: Lidarr es un administrador de colecciones de música para usuarios de Usenet y BitTorrent. Puede monitorear múltiples fuentes RSS para nuevos álbumes de sus artistas favoritos y se comunicará con clientes e indexadores para obtenerlos, ordenarlos y renombrarlos. También se puede configurar para actualizar automáticamente la calidad de los archivos existentes en la biblioteca cuando una calidad mejor está disponible.
+    fr_fr: Lidarr est un gestionnaire de collection de musique pour les utilisateurs de Usenet et de BitTorrent. Il peut surveiller plusieurs flux RSS pour de nouveaux albums de vos artistes préférés et communiquera avec des clients et des indexeurs pour les récupérer, les trier et les renommer. Il peut également être configuré pour mettre automatiquement à niveau la qualité des fichiers existants dans la bibliothèque lorsque une meilleure qualité est disponible.
+    hu_hu: A Lidarr egy zenei gyűjteménykezelő Usenet és BitTorrent felhasználók számára. Követni tudja a kedvenc előadói új albumainak megjelenését több RSS csatornán keresztül, és kommunikálhat a kliensekkel és indexelőkkel, hogy letöltsék, rendezzék és átnevezzék őket. Beállítható arra is, hogy automatikusan frissítse a könyvtárban lévő fájlok minőségét, ha egy jobb minőségű formátum érhető el.
+    it_it: Lidarr è un gestore di collezioni musicali per utenti di Usenet e BitTorrent. Può monitorare più feed RSS per nuovi album dei tuoi artisti preferiti e interfacciarsi con client e indexer per recuperarli, ordinarli e rinominarli. Può anche essere configurato per aggiornare automaticamente la qualità dei file esistenti nella libreria quando una qualità migliore è disponibile.
+    ru_ru: Lidarr - это менеджер музыкальных коллекций для пользователей Usenet и BitTorrent. Он может отслеживать несколько RSS-каналов для новых альбомов ваших любимых исполнителей и будет взаимодействовать с клиентами и индексаторами для получения, сортировки и переименования их. Он также может быть настроен для автоматического обновления качества существующих файлов в библиотеке, когда лучшее качество становится доступным.
+    pl_pl: Lidarr to menedżer kolekcji muzyki dla użytkowników Usenet i BitTorrent. Może monitorować wiele kanałów RSS dla nowych albumów ulubionych artystów i będzie komunikować się z klientami i indeksatorami, aby je pobierać, sortować i zmieniać nazwy. Może być również skonfigurowany do automatycznego uaktualnienia jakości istniejących plików w bibliotece, gdy lepsza jakość stanie się dostępna.
+    pt_br: Lidarr é um gerenciador de coleções de música para usuários de Usenet e BitTorrent. Ele pode monitorar vários feeds RSS para novos álbuns de seus artistas favoritos e se comunicará com clientes e indexadores para obtê-los, classificá-los e renomeá-los. Também pode ser configurado para atualizar automaticamente a qualidade dos arquivos existentes na biblioteca quando uma qualidade melhor estiver disponível.
+    sv_se: Lidarr är en musiksamling för användare av Usenet och BitTorrent. Den kan övervaka flera RSS-flöden för nya album från dina favoritartister och kommunicera med klienter och indexerare för att hämta, sortera och döpa om dem. Den kan också konfigureras för att automatiskt uppdatera kvaliteten på befintliga filer i biblioteket när en bättre kvalitet är tillgänglig.
+    uk_ua: Lidarr - це менеджер музичних колекцій для користувачів Usenet і BitTorrent. Він може відстежувати декілька RSS-каналів для нових альбомів ваших улюблених виконавців і буде взаємодіяти з клієнтами і індексаторами для отримання, сортування і перейменування їх. Він також може бути налаштований для автоматичного оновлення якості існуючих файлів в бібліотеці, коли краща якість стає доступною.
+  developer: lidarr Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/screenshot-3.png
+  tagline:
+    en_us: Music collection manager for Usenet and BitTorrent users
+    zh_cn: 用于Usenet和BitTorrent用户的音乐收藏管理器
+    ar_sa: مدير مجموعة الموسيقى لمستخدمي Usenet و BitTorrent
+    de_de: Musiksammlungsmanager für Usenet- und BitTorrent-Nutzer
+    es_es: Gestor de colecciones de música para usuarios de Usenet y BitTorrent
+    fr_fr: Gestionnaire de collection de musique pour les utilisateurs de Usenet et de BitTorrent
+    hu_hu: Zenei gyűjteménykezelő Usenet és BitTorrent felhasználók számára
+    it_it: Gestore di collezioni musicali per utenti di Usenet e BitTorrent
+    ru_ru: Менеджер музыкальных коллекций для пользователей Usenet и BitTorrent
+    pl_pl: Menadżer kolekcji muzyki dla użytkowników Usenet i BitTorrent
+    pt_br: Gerenciador de coleções de música para usuários de Usenet e BitTorrent
+    sv_se: Musiksamling för användare av Usenet och BitTorrent
+    uk_ua: Менеджер музичних колекцій для користувачів Usenet і BitTorrent
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/thumbnail.png
+  tips: {}
+  title:
+    en_us: Lidarr
+  port_map: "8686"

@@ -1,0 +1,111 @@
+name: grafana
+services:
+  grafana:
+    image: grafana/grafana:8.4.3-armv7
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 3000
+        published: "3003"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /var/lib/grafana
+    x-casaos:
+      ports:
+        - container: "3000"
+          description:
+            en_us: ""
+      volumes:
+        - container: /var/lib/grafana
+          description:
+            en_us: Grafana database and plugins directory.
+            zh_cn: Grafana 数据库和插件目录
+
+    container_name: grafana
+x-casaos:
+  architectures:
+    - arm
+  main: grafana
+  author: CasaOS Team
+  category: Network
+  description:
+    en_us: |
+      Grafana open source is open source visualization and analytics software.Visualizations: Fast and flexible client side graphs with a multitude of options. Panel plugins offer many different ways to visualize metrics and logs. Dynamic Dashboards: Create dynamic & reusable dashboards with template variables that appear as dropdowns at the top of the dashboard. Explore Metrics: Explore your data through ad-hoc queries and dynamic drilldown. Split view and compare different time ranges, queries and data sources side by side. Explore Logs: Experience the magic of switching from metrics to logs with preserved label filters. Quickly search through all your logs or streaming them live. Alerting: Visually define alert rules for your most important metrics. Grafana will continuously evaluate and send notifications to systems like Slack, PagerDuty, VictorOps, OpsGenie. Mixed Data Sources: Mix different data sources in the same graph! You can specify a data source on a per-query basis. This works for even custom datasources.
+    zh_cn: |
+      Grafana开源是开源可视化和分析软件。可视化：快速灵活的客户端图形，多种选项。面板插件提供了许多不同的方式来可视化指标和日志。动态仪表板：使用模板变量创建动态和可重用的仪表板，该变量在仪表板顶部显示为下拉菜单。探索指标：通过即席查询和动态钻取来探索您的数据。分割视图并将不同的时间范围，查询和数据源并排比较。探索日志：体验从指标到日志的魔力，保留标签过滤器。快速搜索所有日志或实时流。警报：以可视方式为您最重要的指标定义警报规则。 Grafana将不断评估并将通知发送到Slack，PagerDuty，VictorOps，OpsGenie等系统。混合数据源：在同一图中混合不同的数据源！您可以在每个查询的基础上指定数据源。这适用于甚至自定义数据源。
+    ar_sa: |
+      Grafana مفتوح المصدر هو برنامج تصور وتحليل مفتوح المصدر.التصور: الرسوم البيانية السريعة والمرنة من جانب العميل مع مجموعة متنوعة من الخيارات. توفر ملحقات اللوحة العديد من الطرق المختلفة لتصور القياسات والسجلات. لوحات متحركة: إنشاء لوحات متحركة وقابلة للاستخدام مرة أخرى مع متغيرات القالب التي تظهر كقوائم منسدلة في أعلى لوحة القياسات. تصفح القياسات: تصفح بياناتك من خلال استعلامات متعددة وتنقيبات متحركة. تقسيم العرض ومقارنة مجالات زمنية مختلفة واستعلامات ومصادر بيانات جانبًا جانبًا. تصفح السجلات: تجربة السحر الذي يتم من خلاله التبديل من القياسات إلى السجلات مع ترشيحات العلامات المحفوظة. بحث سريع عبر جميع سجلاتك أو تدفقها مباشرة. التنبيه: تعريف القواعد الإنذارية بشكل مرئي لأهم قياساتك. سيواصل Grafana التقييم المستمر وإرسال الإخط
+    de_de: |
+      Grafana Open Source ist eine Open-Source-Visualisierungs- und Analyse-Software. Visualisierungen: Schnelle und flexible Client-Seite Graphen mit einer Vielzahl von Optionen. Panel-Plugins bieten viele verschiedene Möglichkeiten, Metriken und Protokolle zu visualisieren. Dynamische Dashboards: Erstellen Sie dynamische und wiederverwendbare Dashboards mit Vorlagenvariablen, die als Dropdowns am oberen Rand des Dashboards angezeigt werden. Erkunden Sie Metriken: Erkunden Sie Ihre Daten durch ad-hoc-Abfragen und dynamisches Bohren. Split View und vergleichen Sie verschiedene Zeitspannen, Abfragen und Datenquellen nebeneinander. Protokolle erkunden: Erfahren Sie die Magie des Wechsels von Metriken zu Protokollen mit erhaltenen Label-Filtern. Durchsuchen Sie alle Protokolle oder streamen Sie sie live. Alarmierung: Definieren Sie visuell Alarmregeln für Ihre wichtigsten Metriken. Grafana wird kontinuierlich auswerten und Benachrichtigungen an Systeme wie Slack, PagerDuty, VictorOps, OpsGenie senden. Gemischte Datenquellen: Mischen Sie verschiedene Datenquellen in einem Diagramm! Sie können eine Datenquelle pro Abfrage angeben. Dies funktioniert auch für benutzerdefinierte Datenquellen.
+    es_es: |
+      Grafana Open Source es un software de visualización y análisis de código abierto. Visualizaciones: Gráficos rápidos y flexibles en el lado del cliente con una variedad de opciones. Los complementos de panel ofrecen muchas formas diferentes de visualizar métricas y registros. Paneles dinámicos: Cree paneles dinámicos y reutilizables con variables de plantilla que se muestran como menús desplegables en la parte superior del panel. Explorar métricas: Explora tus datos con consultas ad hoc y perforación dinámica. Dividir la vista y comparar diferentes rangos de tiempo, consultas y fuentes de datos al lado de uno. Explorar registros: Experimenta la magia de cambiar de métricas a registros con filtros de etiquetas guardadas. Buscar rápidamente todos los registros o transmitirlos en vivo. Alertas: Definir reglas de alerta visuales para sus métricas más importantes. Grafana continuará evaluando y enviará notificaciones a sistemas como Slack, PagerDuty, VictorOps, OpsGenie. Fuentes de datos mixtas: ¡Mezcle diferentes fuentes de datos en un gráfico! Puede especificar una fuente de datos por consulta. Esto también funciona para fuentes de datos personalizadas.
+    fr_fr: |
+      Grafana Open Source est un logiciel de visualisation et d'analyse open source. Visualisations: Graphiques rapides et flexibles côté client avec une variété d'options. Les plugins de panneau offrent de nombreuses façons différentes de visualiser des métriques et des journaux. Tableaux de bord dynamiques: Créez des tableaux de bord dynamiques et réutilisables avec des variables de modèle qui s'affichent comme des listes déroulantes en haut du tableau de bord. Explorer des métriques: Explorez vos données avec des requêtes ad hoc et des forages dynamiques. Diviser la vue et comparer différentes périodes, requêtes et sources de données côte à côte. Explorer les journaux: Expérimentez la magie de passer des métriques aux journaux avec des filtres de balises sauvegardés. Recherchez rapidement tous les journaux ou diffusez-les en direct. Alertes: Définissez des règles d'alerte visuelles pour vos métriques les plus importantes. Grafana continuera à évaluer et à envoyer des notifications à des systèmes tels que Slack, PagerDuty, VictorOps, OpsGenie. Sources de données mixtes: Mélangez différentes sources de données dans un graphique! Vous pouvez spécifier une source de données par requête. Cela fonctionne également pour les sources de données personnalisées.
+    hu_hu: |
+      A Grafana nyílt forráskódú vizualizációs és elemzési szoftver. Vizuális megjelenítés: Gyors és rugalmas kliensoldali grafikonok széles körű lehetőségekkel. A panelbővítmények sokféle módon teszik lehetővé a metrikák és a naplók megjelenítését. Dinamikus műszerfalak: Hozzon létre dinamikus és újrafelhasználható műszerfalakat sablonváltozókkal, amelyek legördülő menüként jelennek meg a műszerfal tetején. Metrikák felfedezése: Fedezze fel az adatokat ad-hoc lekérdezésekkel és dinamikus fúrással. Osztott nézet és összehasonlítás: Összehasonlítsa a különböző időtartamokat, lekérdezéseket és adatforrásokat egymással. Naplók felfedezése: Fedezze fel a metrikák és a naplók csodáját mentett címkés szűrőkkel. Keressen gyorsan az összes naplóban vagy élőben kövessen. Riasztások: Definiáljon látható riasztási szabályokat a legfontosabb metrikáihoz. A Grafana folyamatosan kiértékel és értesítést küld a Slack, PagerDuty, VictorOps, OpsGenie stb. rendszereknek. Vegyes adatforrások: Kevert adatforrások egy grafikonban! Egy lekérdezéshez megadhat egy adatforrást. Ez ugyanúgy működik egyéni adatforrások esetén is.
+    it_it: |
+      Grafana Open Source è un software di visualizzazione e analisi open source. Visualizzazioni: Grafici veloci e flessibili lato client con una varietà di opzioni. I plugin del pannello offrono molte modalità diverse per visualizzare metriche e registri. Pannelli dinamici: Crea pannelli dinamici e riutilizzabili con variabili di modello che vengono visualizzate come menu a discesa in alto sul pannello. Esplorare le metriche: Esplora i tuoi dati con query ad hoc e foratura dinamica. Dividere la vista e confrontare diversi intervalli di tempo, query e fonti di dati accanto a uno. Esplorare i registri: Esplora la magia di passare dalle metriche ai registri con filtri di etichetta salvati. Cerca rapidamente tutti i registri o trasmettili in diretta. Avvisi: Definisci regole di avviso visive per le tue metriche più importanti. Grafana continuerà a valutare e inviare notifiche a sistemi come Slack, PagerDuty, VictorOps, OpsGenie. Fonti dati miste: Mescola diverse fonti dati in un grafico! È possibile specificare una fonte dati per query. Ciò funziona anche per fonti dati personalizzate.
+    ru_ru: |
+      Grafana Open Source - это программное обеспечение открытого исходного кода для визуализации и анализа. Визуализация: Быстрые и гибкие клиентские графики с широкими возможностями. Плагины панели предлагают множество способов отображения метрик и журналов. Динамические панели: Создайте динамические и переиспользуемые панели с переменными шаблонов, которые отображаются в виде выпадающих списков в верхней части панели. Исследование метрик: Исследуйте свои данные с помощью ad hoc запросов и динамического сверления. Разделить вид и сравнить разные периоды, запросы и источники данных рядом. Исследование журналов: Исследуйте магию перехода от метрик к журналам с сохраненными фильтрами меток. Быстро ищите все журналы или прослушивайте их в режиме реального времени. Оповещения: Определите правила визуальных оповещений для ваших самых важных метрик. Grafana продолжит оценивать и отправлять уведомления в системы, такие как Slack, PagerDuty, VictorOps, OpsGenie. Смешанные источники данных: Смешанные источники данных в графике! Вы можете указать источник данных для каждого запроса. Это также работает для настраиваемых источников данных.
+    pl_pl: |
+      Grafana Open Source to oprogramowanie open source do wizualizacji i analizy. Wizualizacja: Szybkie i elastyczne wykresy klienta z szerokimi możliwościami. Wtyczki panelu oferują wiele sposobów wyświetlania metryk i dzienników. Dynamiczne panele: Twórz dynamiczne i wielokrotne panele z zmiennymi szablonów, które są wyświetlane jako menu rozwijane na górze panelu. Odkrywanie metryk: Odkrywaj swoje dane za pomocą ad hoc zapytań i dynamicznego wiercenia. Podziel widok i porównaj różne okresy, zapytania i źródła danych obok siebie. Odkrywanie dzienników: Odkryj magię przejścia od metryk do dzienników z zapisanymi filtrami etykiet. Szybko szukaj wszystkich dzienników lub odtwarzaj je na żywo. Powiadomienia: Zdefiniuj widoczne reguły powiadomień dla najważniejszych metryk. Grafana będzie nadal oceniać i wysyłać powiadomienia do systemów takich jak Slack, PagerDuty, VictorOps, OpsGenie. Mieszane źródła danych: Mieszane źródła danych w wykresie! Możesz określić źródło danych dla każdego zapytania. Działa to również dla niestandardowych źródeł danych.
+    pt_br: |
+      Grafana Open Source é um software de visualização e análise de código aberto. Visualização: Gráficos rápidos e flexíveis do lado do cliente com uma variedade de opções. Os plugins do painel oferecem muitas maneiras diferentes de exibir métricas e registros. Painéis dinâmicos: Crie painéis dinâmicos e reutilizáveis com variáveis de modelo que são exibidas como menus suspensos no topo do painel. Explorar métricas: Explore seus dados com consultas ad hoc e perfuração dinâmica. Divida a visão e compare diferentes intervalos de tempo, consultas e fontes de dados lado a lado. Explorar registros: Explore a magia de passar de métricas para registros com filtros de rótulo salvos. Encontre rapidamente todos os registros ou transmita-os ao vivo. Alertas: Defina regras de alerta visuais para suas métricas mais importantes. O Grafana continuará avaliando e enviando notificações para sistemas como Slack, PagerDuty, VictorOps, OpsGenie. Fontes de dados mistas: Fontes de dados mistas em gráficos! Você pode especificar uma fonte de dados para cada consulta. Isso também funciona para fontes de dados personalizadas.
+    sv_se: |
+      Grafana Open Source är ett öppen källkod för visualisering och analys. Visualisering: Snabba och flexibla klientgrafik med många alternativ. Panelplugin erbjuder många sätt att visa metriker och loggar. Dynamiska paneler: Skapa dynamiska och återanvändbara paneler med variabelmönster som visas som rullgardinsmenyer längst upp på panelen. Utforska metriker: Utforska dina data med ad hoc-frågor och dynamisk borrning. Dela vy och jämför olika tidsperioder, frågor och datakällor bredvid varandra. Utforska loggar: Utforska magin med att gå från metriker till loggar med sparade etikettfilter. Hitta alla loggar snabbt eller spela upp dem i realtid. Alarm: Definiera visuella regler för dina viktigaste metriker. Grafana fortsätter att bedöma och skicka notifieringar till system som Slack, PagerDuty, VictorOps, OpsGenie. Blandade datakällor: Blandade datakällor i diagram! Du kan specificera en datakälla för varje fråga. Det fungerar också för anpassade datakällor.
+    uk_ua: |
+      Grafana Open Source - це програмне забезпечення відкритого коду для візуалізації та аналізу. Візуалізація: Швидкі та гнучкі графіки клієнта з широкими можливостями. Плагіни панелі пропонують багато способів відображення метрик та журналів. Динамічні панелі: Створюйте динамічні та повторно використовувані панелі з змінними шаблонів, які відображаються як випадаючі меню згори панелі. Відкриття метрик: Відкривайте свої дані за допомогою ad hoc-запитів та динамічного буріння. Розділіть перегляд та порівняйте різні періоди, запити та джерела даних поруч. Відкриття журналів: Відкрийте магію переходу від метрик до журналів з збереженими фільтрами міток. Швидко шукайте всі журнали або відтворюйте їх у режимі реального часу. Повідомлення: Визначте видимі правила сповіщень для найважливіших метрик. Grafana продовжуватиме оцінювати та відправляти спов
+  developer: grafana
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/screenshot-3.png
+  tagline:
+    en_us: |
+      Grafana is a complete observability stack that allows you to monitor and analyze metrics, logs and traces. It allows you to query, visualize, alert on and understand your data no matter where it is stored.
+    zh_cn: |
+      Grafana是一个完整的可观察性堆栈，允许您监视和分析指标，日志和跟踪。无论数据存储在何处，它都允许您查询，可视化，警报和理解数据。
+    ar_sa: |
+      Grafana هي مكتبة كاملة للمراقبة التي تسمح لك بمراقبة وتحليل البيانات والسجلات والتتبع. يسمح لك بالاستعلام والرسم البياني والتنبيه وفهم البيانات بغض النظر عن مكان تخزينها.
+    de_de: |
+      Grafana ist ein vollständiges Observabilitäts-Stack, der es Ihnen ermöglicht, Metriken, Protokolle und Spuren zu überwachen und zu analysieren. Es ermöglicht Ihnen, Ihre Daten abzufragen, zu visualisieren, zu alarmieren und zu verstehen, egal wo sie gespeichert sind.
+    es_es: |
+      Grafana es una pila de observabilidad completa que le permite monitorear y analizar métricas, registros y rastros. Le permite consultar, visualizar, alertar y comprender sus datos, sin importar dónde se almacenen.
+    fr_fr: |
+      Grafana est une pile d'observabilité complète qui vous permet de surveiller et d'analyser les métriques, les journaux et les traces. Il vous permet de requêter, de visualiser, d'alerter et de comprendre vos données, peu importe où elles sont stockées.
+    hu_hu: |
+      A Grafana egy teljes figyelhetőségi verem, amely lehetővé teszi a metrikák, naplók és nyomkövetések figyelését és elemzését. Lehetővé teszi a lekérdezést, a vizualizációt, az értesítést és az adatok megértését, függetlenül attól, hogy hol vannak tárolva.
+    it_it: |
+      Grafana è una pila di osservabilità completa che consente di monitorare e analizzare metriche, log e tracce. Consente di interrogare, visualizzare, allertare e comprendere i dati, indipendentemente dal luogo in cui vengono memorizzati.
+    ru_ru: |
+      Grafana - это полный стек наблюдаемости, который позволяет вам мониторить и анализировать метрики, журналы и трассы. Он позволяет вам запрашивать, визуализировать, оповещать и понимать ваши данные, независимо от того, где они хранятся.
+    pl_pl: |
+      Grafana to kompletny stos obserwowalności, który pozwala monitorować i analizować metryki, dzienniki i ślady. Pozwala na zapytanie, wizualizację, alarmowanie i zrozumienie danych, niezależnie od miejsca ich przechowywania.
+    pt_br: |
+      Grafana é uma pilha de observabilidade completa que permite monitorar e analisar métricas, registros e trilhas. Permite que você consulte, visualize, alerte e entenda seus dados, independentemente de onde eles estejam armazenados.
+    sv_se: |
+      Grafana är en komplett observabilitetsstapel som gör det möjligt att övervaka och analysera metriker, loggar och spår. Det gör det möjligt att fråga, visualisera, varna och förstå dina data, oavsett var de är lagrade.
+    uk_ua: |
+      Grafana - це повний стек наглядності, який дозволяє вам моніторити та аналізувати метрики, журнали та траси. Він дозволяє вам запитувати, візуалізувати, сповіщати та розуміти ваших даних, незалежно від того, де вони зберігаються.
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        | username | password |
+        | -------- | -------- |
+        | `admin`    | `admin`    |
+      zh_cn: |
+        | 用户名 | 密码 |
+        | -------- | -------- |
+        | `admin`    | `admin`    |
+  title:
+    en_us: Grafana
+  index: /
+  port_map: "3003"

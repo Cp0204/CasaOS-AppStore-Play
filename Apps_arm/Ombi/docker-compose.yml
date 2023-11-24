@@ -1,0 +1,92 @@
+name: ombi
+services:
+  ombi:
+    environment:
+      BASE_URL: /ombi
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/London
+    image: linuxserver/ombi:arm32v7-4.39.1
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 3579
+        published: "3579"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/ombi/config
+        target: /config
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+        - container: BASE_URL
+          description:
+            en_us: ""
+      ports:
+        - container: "3579"
+          description:
+            en_us: ""
+
+      volumes:
+        - container: /config
+          description:
+            en_us: ""
+    container_name: ombi
+x-casaos:
+  architectures:
+    - arm
+  main: ombi
+  author: CasaOS Team
+  category: Media
+  description:
+    en_us: Ombi is a self-hosted web application that automatically gives your shared Plex or Emby users the ability to request content by themselves! Ombi can be linked to multiple TV Show and Movie DVR tools to create a seamless end-to-end experience for your users.
+    zh_cn: Ombi是一个自托管的Web应用程序，它可以自动为您的共享Plex或Emby用户提供自助请求内容的功能！ Ombi可以链接到多个电视节目和电影DVR工具，为用户提供无缝的端到端体验。
+    ar_sa: يمكن لـ Ombi أن يكون تطبيقًا ويبًا مستضافًا بشكل ذاتي يمنح مستخدمي Plex أو Emby المشتركين بشكل ذاتي القدرة على طلب المحتوى بنفسهم! يمكن لـ Ombi أن يربط بعدة أدوات DVR للمسلسلات التلفزيونية والأفلام لإنشاء تجربة نهائية للمستخدمين بدون توقف.
+    de_de: Ombi ist eine selbst gehostete Webanwendung, mit der Ihre freigegebenen Plex- oder Emby-Nutzer sich selbst um Inhalte bewerben können! Ombi kann mit mehreren TV-Show- und Movie-DVR-Tools verbunden werden, um eine nahtlose End-to-End-Erfahrung für Ihre Benutzer zu schaffen.
+    es_es: Ombi es una aplicación web autohospedada que le permite a sus usuarios de Plex o Emby compartir solicitar contenido por sí mismos. ¡Ombi se puede vincular a varias herramientas DVR de TV Show y Movie para crear una experiencia sin interrupciones para sus usuarios!
+    fr_fr: Ombi est une application Web auto-hébergée qui permet à vos utilisateurs de Plex ou d'Emby de demander du contenu par eux-mêmes. Ombi peut être lié à plusieurs outils DVR de TV Show et Movie pour créer une expérience sans interruption pour vos utilisateurs!
+    hu_hu: Az Ombi egy önálló webalkalmazás, amely automatikusan megadja a megosztott Plex vagy Emby felhasználóknak a lehetőséget arra, hogy önállóan kérjenek tartalmat! Az Ombi több TV Show és Movie DVR eszközhöz is csatlakozhat, hogy egy folyamatos végponti élményt biztosítsanak a felhasználóknak.
+    it_it: Ombi è un'applicazione web autohosted che consente ai tuoi utenti di Plex o Emby di richiedere autonomamente contenuti. Ombi può essere collegato a più strumenti DVR TV Show e Movie per creare un'esperienza senza interruzioni per i tuoi utenti!
+    ru_ru: Ombi - это самохостинговое веб-приложение, которое автоматически предоставляет вашим общим пользователям Plex или Emby возможность самостоятельно запрашивать контент! Ombi может быть связан с несколькими инструментами DVR TV Show и Movie для создания беспрерывного конечного опыта для ваших пользователей.
+    pl_pl: Ombi to aplikacja sieciowa, która automatycznie udostępnia użytkownikom udostępnionych serwerów Plex lub Emby możliwość samodzielnego żądania treści! Ombi może być połączony z wieloma narzędziami DVR TV Show i Movie, aby stworzyć bezprzerwową końcową doświadczenie dla użytkowników.
+    pt_br: O Ombi é um aplicativo da Web auto-hospedado que permite que seus usuários do Plex ou do Emby solicitem conteúdo por conta própria. O Ombi pode ser vinculado a várias ferramentas DVR de TV Show e Movie para criar uma experiência sem interrupções para seus usuários!
+    sv_se: Ombi är en självvärd webbapplikation som automatiskt ger dina delade Plex- eller Emby-användare självbetjäningsmöjligheter för att begära innehåll! Ombi kan kopplas samman med flera TV-program och film-DVR-verktyg för en sömlös helhetsupplevelse för användarna.
+    uk_ua: Ombi є самохостованою веб-додатком, який автоматично надає можливості самообслуговування для запитування вмісту вашим спільними користувачами Plex або Emby! Ombi може бути пов'язаний з декількома інструментами для запису телевізійних шоу та фільмів, що забезпечує користувачам безшовний досвід від початку до кінця.
+  developer: Sabnzbd Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/screenshot-3.png
+  tagline:
+    en_us: Friendly media request tool, automatically syncs with your media servers!
+    zh_cn: 友好的媒体请求工具，自动与您的媒体服务器同步！
+    ar_sa: أداة طلب الوسائط الصديقة ، تتزامن تلقائيًا مع خوادم الوسائط الخاصة بك!
+    de_de: Freundliches Medienanforderungstool, das automatisch mit Ihren Medienservern synchronisiert wird!
+    es_es: ¡Herramienta de solicitud de medios amigable, sincroniza automáticamente con tus servidores de medios!
+    fr_fr: Outil de demande de médias amical, synchronise automatiquement avec vos serveurs multimédia!
+    hu_hu: Barátságos média kérési eszköz, automatikusan szinkronizálja a médiaszervereivel!
+    it_it: Strumento di richiesta di media amichevole, sincronizza automaticamente con i tuoi server multimediali!
+    ru_ru: Дружественный инструмент запроса медиа, автоматически синхронизируется с вашими медиа-серверами!
+    pl_pl: Przyjazny narzędzie do żądania mediów, automatycznie synchronizuje się z twoimi serwerami mediów!
+    pt_br: Ferramenta de solicitação de mídia amigável, sincroniza automaticamente com seus servidores de mídia!
+    sv_se: Vänlig mediaförfrågan, synkroniserar automatiskt med dina mediaservrar!
+    uk_ua: Дружній інструмент запиту медіа, автоматично синхронізується з вашими медіа-серверами!
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/thumbnail.png
+  tips: {}
+  title:
+    en_us: Ombi
+  port_map: "3579"
