@@ -1,4 +1,4 @@
-name: mariadb
+name: mariadb-arm
 services:
   mariadb:
     image: linuxserver/mariadb:arm32v7-10.6.13

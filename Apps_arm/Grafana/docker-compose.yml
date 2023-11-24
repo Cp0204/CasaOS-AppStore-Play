@@ -1,4 +1,4 @@
-name: grafana
+name: grafana-arm
 services:
   grafana:
     image: grafana/grafana:8.4.3-armv7

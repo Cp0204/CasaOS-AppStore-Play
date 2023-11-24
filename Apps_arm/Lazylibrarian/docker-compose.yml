@@ -1,4 +1,4 @@
-name: lazylibrarian
+name: lazylibrarian-arm
 services:
   lazylibrarian:
     environment:

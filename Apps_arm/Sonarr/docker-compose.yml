@@ -1,4 +1,4 @@
-name: sonarr
+name: sonarr-arm
 services:
   sonarr:
     environment:

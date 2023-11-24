@@ -1,4 +1,4 @@
-name: lidarr
+name: lidarr-arm
 services:
   lidarr:
     environment:

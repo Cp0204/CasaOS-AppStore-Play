@@ -1,4 +1,4 @@
-name: transmission
+name: transmission-arm
 services:
   transmission:
     environment:

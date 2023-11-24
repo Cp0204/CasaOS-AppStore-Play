@@ -1,4 +1,4 @@
-name: smokeping
+name: smokeping-arm
 services:
   smokeping:
     environment:

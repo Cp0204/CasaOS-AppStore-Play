@@ -1,4 +1,4 @@
-name: unifi-controller
+name: unifi-controller-arm
 services:
   unifi-controller:
     environment:

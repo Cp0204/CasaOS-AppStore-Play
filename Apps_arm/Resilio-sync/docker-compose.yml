@@ -1,4 +1,4 @@
-name: resilio-sync
+name: resilio-sync-arm
 services:
   resilio-sync:
     environment:

@@ -1,4 +1,4 @@
-name: radarr
+name: radarr-arm
 services:
   radarr:
     environment:

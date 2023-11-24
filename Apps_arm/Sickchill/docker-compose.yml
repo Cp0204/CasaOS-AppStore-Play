@@ -1,4 +1,4 @@
-name: sickchill
+name: sickchill-arm
 services:
   sickchill:
     environment:

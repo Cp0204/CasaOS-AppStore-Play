@@ -1,4 +1,4 @@
-name: plex
+name: plex-arm
 services:
   plex:
     devices:

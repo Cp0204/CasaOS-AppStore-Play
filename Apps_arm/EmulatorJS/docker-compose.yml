@@ -1,4 +1,4 @@
-name: emulatorjs
+name: emulatorjs-arm
 services:
   emulatorjs:
     environment:

@@ -1,4 +1,4 @@
-name: mylar3
+name: mylar3-arm
 services:
   mylar3:
     environment:

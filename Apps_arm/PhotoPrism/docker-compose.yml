@@ -1,4 +1,4 @@
-name: photoprism
+name: photoprism-arm
 services:
   photoprism:
     environment:

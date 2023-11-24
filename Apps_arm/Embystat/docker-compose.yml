@@ -1,4 +1,4 @@
-name: embystat
+name: embystat-arm
 services:
   embystat:
     environment:

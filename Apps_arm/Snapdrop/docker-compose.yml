@@ -1,4 +1,4 @@
-name: snapdrop
+name: snapdrop-arm
 services:
   snapdrop:
     environment:

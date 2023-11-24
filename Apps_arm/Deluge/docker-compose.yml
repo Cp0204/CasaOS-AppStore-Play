@@ -1,4 +1,4 @@
-name: deluge
+name: deluge-arm
 services:
   deluge:
     environment:

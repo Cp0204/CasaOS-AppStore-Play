@@ -1,4 +1,4 @@
-name: prowlarr
+name: prowlarr-arm
 services:
   prowlarr:
     environment:

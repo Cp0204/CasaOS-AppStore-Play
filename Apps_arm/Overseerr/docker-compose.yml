@@ -1,4 +1,4 @@
-name: overseerr
+name: overseerr-arm
 services:
   overseerr:
     image: linuxserver/overseerr:arm32v7-1.32.5

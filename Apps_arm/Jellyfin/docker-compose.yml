@@ -1,4 +1,4 @@
-name: jellyfin
+name: jellyfin-arm
 services:
   jellyfin:
     devices:

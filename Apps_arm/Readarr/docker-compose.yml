@@ -1,4 +1,4 @@
-name: readarr
+name: readarr-arm
 services:
   readarr:
     environment:

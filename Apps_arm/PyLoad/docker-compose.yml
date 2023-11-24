@@ -1,4 +1,4 @@
-name: pyload
+name: pyload-arm
 services:
   pyload:
     container_name: pyload

@@ -1,4 +1,4 @@
-name: emby
+name: emby-arm
 services:
   emby:
     devices:

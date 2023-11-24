@@ -1,4 +1,4 @@
-name: gotify
+name: gotify-arm
 services:
   gotify:
     image: gotify/server-arm7:latest

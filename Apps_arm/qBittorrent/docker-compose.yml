@@ -1,4 +1,4 @@
-name: qbittorrent
+name: qbittorrent-arm
 services:
   qbittorrent:
     environment:

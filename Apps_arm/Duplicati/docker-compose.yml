@@ -1,4 +1,4 @@
-name: duplicati
+name: duplicati-arm
 services:
   duplicati:
     environment:

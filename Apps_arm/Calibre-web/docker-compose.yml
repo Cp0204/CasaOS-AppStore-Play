@@ -1,4 +1,4 @@
-name: calibre-web
+name: calibre-web-arm
 services:
   calibre-web:
     environment:
