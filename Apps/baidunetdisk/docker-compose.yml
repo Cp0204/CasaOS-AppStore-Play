@@ -27,6 +27,7 @@ x-casaos:
   main: baidunetdisk
   store_app_id: baidunetdisk
   author: Cp0204
+  developer: Baidu Inc.
   category: Downloader
   description:
     en_us: Baidu Netdisk is a cloud storage product carefully crafted by Baidu for users, providing huge space. Full format files such as photos, videos, documents, and compressed files can be backed up to the cloud with just one click, providing you with comprehensive data protection. No matter the size of the files, you can share them with others with just one click, improving work and learning efficiency.
