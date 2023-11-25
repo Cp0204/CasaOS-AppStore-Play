@@ -1,0 +1,49 @@
+name: baidunetdisk
+services:
+  baidunetdisk:
+    container_name: baidunetdisk
+    image: johnshine/baidunetdisk-crossover-vnc:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 1024M
+    ports:
+      - target: 5901
+        published: "5901"
+        protocol: tcp
+      - target: 6080
+        published: "6080"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/Downloads
+        target: /home/baidu/baidunetdiskdownload
+    network_mode: bridge
+    privileged: false
+x-casaos:
+  architectures:
+    - amd64
+  main: baidunetdisk
+  store_app_id: baidunetdisk
+  author: Cp0204
+  category: Downloader
+  description:
+    en_us: Baidu Netdisk is a cloud storage product carefully crafted by Baidu for users, providing huge space. Full format files such as photos, videos, documents, and compressed files can be backed up to the cloud with just one click, providing you with comprehensive data protection. No matter the size of the files, you can share them with others with just one click, improving work and learning efficiency.
+    zh_cn: 百度网盘是百度为用户精心打造的云存储产品，提供超大空间。照片、视频、文档、压缩包等全格式文件一键备份到云端，全方位为你数据保驾护航，无论文件大小一键分享他人，提升工作学习效率。
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/baidunetdisk/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/baidunetdisk/screenshot-1.png
+  tagline:
+    en_us: Run BaiduNetDisk with Crossover and VNC support
+    zh_cn: VNC运行百度网盘
+  tips:
+    before_install:
+      en_us: The default VNC port is 5901, which can also be accessed through a browser using Novnc. Please note! Access is not password protected, please confirm network environment security yourself!
+      zh_cn: 默认VNC端口5901，也可以通过浏览器用novnc访问，注意！访问均无密码保护，请自行确认网络环境安全！
+  index: /
+  port_map: "6080"
+  scheme: http
+  title:
+    en_us: BaiduNetDisk
+    zh_cn: 百度网盘
