@@ -7,7 +7,7 @@ services:
     environment:
       TS_EXTRA_ARGS: --advertise-exit-node
       TS_ROUTES: 192.168.100.0/24
-      TS_STATE_DIR: /config
+      TS_STATE_DIR: /var/lib/tailscale
     image: tailscale/tailscale:latest
     container_name: tailscaled
     deploy:
@@ -18,14 +18,11 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID
-        target: /config
-      - type: bind
         source: /dev/net/tun
         target: /dev/net/tun
       - type: bind
-        source: /var/lib
-        target: /var/lib
+        source: /DATA/AppData/$AppID/config
+        target: /var/lib/tailscale
 x-casaos:
   architectures:
     - amd64
@@ -45,7 +42,7 @@ x-casaos:
   thumbnail:
   tips:
     before_install:
-      en_us: After installation, view the authentication url in the log.
-      zh_cn: 安装完成后，请在日志中查看认证链接。
+      en_us: After installation, view the authentication url in the `App Settings-Logs`.
+      zh_cn: 安装完成后，请在`应用设置-日志`中查看认证链接。
   title:
     en_us: Tailscaled
