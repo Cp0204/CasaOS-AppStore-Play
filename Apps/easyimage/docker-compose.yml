@@ -1,0 +1,69 @@
+name: easyimage
+services:
+  easyimage:
+    image: ddsderek/easyimage:latest
+    container_name: easyimage
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: '80'
+        published: '8080'
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /app/web/config
+      - type: bind
+        source: /DATA/AppData/$AppID/i
+        target: /app/web/i
+    environment:
+      TZ: Asia/Shanghai
+      PUID: '1000'
+      PGID: '1000'
+      DEBUG: 'false'
+    x-casaos:
+      ports:
+        - container: '8080'
+          description:
+            en_us: Port
+            zh_cn: 端口
+      volumes:
+        - container: /app/web/config
+          description:
+            en_us: Config directory.
+            zh_cn: 配置目录
+        - container: /app/web/i
+          description:
+            en_us: Img directory.
+            zh_cn: 图片目录
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: Cp0204
+  category: WEB
+  description:
+    en_us: 'Supporting multi -file upload, simple countless data library, returning picture URL, Markdown, bbscode, html picture warehouse program. Demo: https://png.cm/'
+    zh_cn: '支持多文件上传，简单无数据库，返回图片url、markdown、bbscode、html的一款图床程序，演示地址：https://png.cm/ '
+  developer: icret
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/easyimage/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/easyimage/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/easyimage/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/easyimage/screenshot-3.png
+  main: easyimage
+  tagline:
+    en_us: A powerful picture warehouse without database
+    zh_cn: 一款功能强大无数据库的图床
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/easyimage/thumbnail.png
+  title:
+    en_us: EasyImage
+    zh_cn: 简单图床
+  port_map: '8080'
+  scheme: http
+  index: /
