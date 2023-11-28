@@ -9,7 +9,7 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-      - target: '80'
+      - target: 80
         published: '8080'
         protocol: tcp
     restart: unless-stopped

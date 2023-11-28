@@ -30,6 +30,7 @@ https://play.cuse.eu.org/Cp0204-AppStore-Play.zip
 <summary>arm/armv7/armhf (玩客云 等)</summary>
 
 Adds older versions of some applications that [LinuxServer has dropped support](https://www.linuxserver.io/blog/a-farewell-to-arm-hf) for, and fixes an issue where the official app store fails to install and upgrade.
+
 添加部分 [LinuxServer 已放弃支持](https://www.linuxserver.io/blog/a-farewell-to-arm-hf)的应用的旧版本，修复官方应用商店无法安装和升级的问题.
 
 ```
