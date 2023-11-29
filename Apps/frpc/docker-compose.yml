@@ -11,8 +11,8 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/frp/frpc.ini
-        target: /etc/frp/frpc.ini
+        source: /DATA/AppData/frp/frpc.toml
+        target: /etc/frp/frpc.toml
       - type: bind
         source: /etc/localtime
         target: /etc/localtime
@@ -38,8 +38,8 @@ x-casaos:
   thumbnail:
   tips:
     before_install:
-      en_us: Before installation, please create a file named `frpc.ini` in the `/DATA/AppData/frp/` directory.
-      zh_cn: 安装前，请先在 `/DATA/AppData/frp/` 目录下建立 `frpc.ini` 文件。
+      en_us: Before installation, please create a file named `frpc.toml` in the `/DATA/AppData/frp/` directory.
+      zh_cn: 安装前，请先在 `/DATA/AppData/frp/` 目录下建立 `frpc.toml` 文件。
   title:
     en_us: frpc
   index:

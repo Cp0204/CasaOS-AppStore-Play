@@ -11,8 +11,8 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/frp/frps.ini
-        target: /etc/frp/frps.ini
+        source: /DATA/AppData/frp/frps.toml
+        target: /etc/frp/frps.toml
       - type: bind
         source: /etc/localtime
         target: /etc/localtime
@@ -38,8 +38,8 @@ x-casaos:
   thumbnail:
   tips:
     before_install:
-      en_us: Before installation, please create a file named `frps.ini` in the `/DATA/AppData/frp/` directory.
-      zh_cn: 安装前，请先在 `/DATA/AppData/frp/` 目录下建立 `frps.ini` 文件。
+      en_us: Before installation, please create a file named `frps.toml` in the `/DATA/AppData/frp/` directory.
+      zh_cn: 安装前，请先在 `/DATA/AppData/frp/` 目录下建立 `frps.toml` 文件。
   title:
     en_us: frps
   index:
