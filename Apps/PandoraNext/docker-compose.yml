@@ -1,0 +1,50 @@
+name: pandora-next
+services:
+  pandora-next:
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    image: pengzhile/pandora-next:latest
+    container_name: pandora-next
+    network_mode: bridge
+    ports:
+      - target: 8181
+        published: "8181"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /data
+      - type: bind
+        source: /DATA/AppData/$AppID/sessions
+        target: /root/.cache/PandoraNext
+    restart: unless-stopped
+    privileged: false
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: Cp0204
+  category: Chat
+  description:
+    en_us: Pandora Cloud + Pandora Server + Shared Chat + BackendAPI Proxy + Chat2API = PandoraNext. New GPTs(Gizmo) UI, All in one!
+    zh_cn: Pandora Cloud + Pandora Server + Shared Chat + BackendAPI Proxy + Chat2API = PandoraNext. New GPTs(Gizmo) UI, All in one!
+  developer: pengzhile
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Pandora/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Pandora/screenshot-1.png
+  tagline:
+    en_us: A ChatGPT that lets you breathe smoothly
+    zh_cn: 一个让你呼吸顺畅的ChatGPT
+  tips:
+    before_install:
+      en_us: Please [read the documentation](https://github.com/pandora-next/deploy), download [config.json](https://github.com/pandora-next/deploy/raw/master/data/config.json ) to `/DATA/AppData/pandora-next/config.json` and [get license_id](https://github.com/pandora-next/deploy#%E5%85%B3%E4%BA%8E-license_id) fill in the in `config.json`, **otherwise it won't start**.
+      zh_cn: 请[阅读文档](https://github.com/pandora-next/deploy)，下载[config.json](https://github.com/pandora-next/deploy/raw/master/data/config.json)到`/DATA/AppData/pandora-next/config.json`，并[获取license_id](https://github.com/pandora-next/deploy#%E5%85%B3%E4%BA%8E-license_id)填写在`config.json`中，**否则无法启动**。
+  main: pandora-next
+  title:
+    en_us: PandoraNext
+  index: /
+  port_map: "8181"
+  scheme: http
