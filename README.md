@@ -4,6 +4,8 @@
 
 🤪 一个不是很正经的 CasaOS 应用商店。
 
+🛠 [YAML Generator 生成器](https://play.cuse.eu.org/generate) : It is easy for user to make the appstore yaml files.
+
 🔽 [App List / 应用列表](#app-list--应用列表)
 
 ## Features / 特色
@@ -22,6 +24,9 @@
 ```
 https://play.cuse.eu.org/Cp0204-AppStore-Play.zip
 ```
+Please add sources for the corresponding architecture wherever possible for best support.
+
+请尽可能添加对应架构的源，以获得最佳支持。
 
 ### Arch-specific Source / 分架构专属源
 

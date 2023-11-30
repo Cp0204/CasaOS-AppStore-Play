@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CasaOS AppStore YAML Generator</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    textarea {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h3,
+    h4 {
+      color: #007bff;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #6c757d;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class="container">
+    <div class="row">
+      <div id="left" class="col-md-6">
+        <h3>App Parameters:</h3>
+        <form class="form">
+
+          <div class="form-group row">
+            <label for="appId" class="col-md-3 col-form-label">AppID:</label>
+            <input v-model="appId" required class="col-md-9 form-control">
+          </div>
+
+          <h4>service:</h4>
+
+          <div class="form-group row">
+            <label for="image" class="col-md-3 col-form-label">Image:</label>
+            <input v-model="image" required class="col-md-9 form-control">
+          </div>
+
+          <div class="form-group row">
+            <label for="reservationsMemory" class="col-md-3 col-form-label">Memory:</label>
+            <input v-model="reservationsMemory" type="number" class="col-md-9 form-control">
+          </div>
+
+          <div class="form-group row">
+            <label for="networkMode" class="col-md-3 col-form-label">Network:</label>
+            <select v-model="networkMode" class="col-md-9 form-control">
+              <option value="bridge">Bridge</option>
+              <option value="host">Host</option>
+            </select>
+          </div>
+
+          <div v-if="networkMode == 'bridge'" class="form-group">
+            <label for="ports" class="mr-2">Ports:</label>
+            <button type="button" @click="addPort" class="btn btn-outline-secondary btn-sm">+</button>
+            <div v-for="(port, index) in ports" :key="index" class="input-group">
+              <input v-model="port.target" type="number" placeholder="Target" class="form-control form-control-sm">
+              <input v-model="port.published" type="number" placeholder="Published"
+                class="form-control form-control-sm">
+              <select v-model="port.protocol" class="form-control form-control-sm">
+                <option value="tcp">TCP</option>
+                <option value="udp">UDP</option>
+              </select>
+              <div class="input-group-append">
+                <button type="button" @click="removePort(index)" v-if="index >= 0"
+                  class="btn btn-sm btn-outline-danger">X</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="volumes" class="mr-2">Volumes:</label>
+            <button type="button" @click="addVolume" class="btn btn-outline-secondary btn-sm">+</button>
+            <div v-for="(volume, index) in volumes" :key="index" class="input-group">
+              <select v-model="volume.type" class="form-control form-control-sm">
+                <option value="bind">Bind</option>
+                <option value="volume">Volume</option>
+              </select>
+              <input v-model="volume.source" placeholder="Source" class="form-control form-control-sm">
+              <input v-model="volume.target" placeholder="Target" class="form-control form-control-sm">
+              <div class="input-group-append">
+                <button type="button" @click="removeVolume(index)" v-if="index >= 0"
+                  class="btn btn-sm btn-outline-danger">X</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="environment" class="mr-2">Environment:</label>
+            <button type="button" @click="addEnvironment" class="btn btn-outline-secondary btn-sm">+</button>
+            <div v-for="(env, index) in environment" :key="index" class="input-group">
+              <input v-model="env.key" placeholder="Key" class="form-control form-control-sm">
+              <input v-model="env.value" placeholder="Value" class="form-control form-control-sm">
+              <div class="input-group-append">
+                <button type="button" @click="removeEnvironment(index)" v-if="index >= 0"
+                  class="btn btn-sm btn-outline-danger">X</button>
+              </div>
+            </div>
+          </div>
+
+          <h4>x-casaos:</h4>
+
+          <div class="form-group row">
+            <label for="architectures" class="col-md-3 ">Architectures:</label>
+            <div v-for="item in ui_architectures" class="form-check form-check-inline">
+              <input v-model="architectures" :value="item" :id="item" class="form-check-input" type="checkbox">
+              <label class="form-check-label" :for="item">{{item}}</label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="category" class="col-md-3 col-form-label">Category:</label>
+            <select v-model="category" class="col-md-9 form-control">
+              <option v-for="item in categories" :value="item">{{ item }}</option>
+            </select>
+          </div>
+
+          <div class="form-group row">
+            <label for="author" class="col-md-3 col-form-label">Author:</label>
+            <input v-model="author" class="col-md-9 form-control">
+          </div>
+
+          <div class="form-group row">
+            <label for="developer" class="col-md-3 col-form-label">Developer:</label>
+            <input v-model="developer" class="col-md-9 form-control">
+          </div>
+
+          <label for="description">Description:</label>
+          <div v-for="(v, k) in description" :key="index" class="form-group d-flex align-items-center">
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <span class="input-group-text">{{ k }}</span>
+              </div>
+              <input v-model="description[k]" class="form-control" placeholder="">
+            </div>
+          </div>
+
+          <label for="tagline">Tagline:</label>
+          <div v-for="(v, k) in tagline" :key="index" class="form-group d-flex align-items-center">
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <span class="input-group-text">{{ k }}</span>
+              </div>
+              <input v-model="tagline[k]" class="form-control" placeholder="">
+            </div>
+          </div>
+
+          <label for="title">Title:</label>
+          <div v-for="(v, k) in title" :key="index" class="form-group d-flex align-items-center">
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <span class="input-group-text">{{ k }}</span>
+              </div>
+              <input v-model="title[k]" class="form-control" placeholder="">
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <label for="tips" class="mr-2">Tips:</label>
+            <div class="form-check form-check-inline">
+              <input v-model="tips.enable_before_install" type="checkbox" id="enableTipsCheckbox"
+                class="form-check-input">
+              <label class="form-check-label" for="enableTipsCheckbox">before_install</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input v-model="tips.enable_custom" type="checkbox" id="customCheckbox" class="form-check-input">
+              <label class="form-check-label" for="customCheckbox">custom</label>
+            </div>
+          </div>
+
+          <div v-if="tips.enable_before_install">
+            <label for="tagline">Before Install:</label>
+            <div v-for="(v, k) in tips.before_install" :key="index" class="form-group d-flex align-items-center">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">{{ k }}</span>
+                </div>
+                <input v-model="tips.before_install[k]" class="form-control" placeholder="">
+              </div>
+            </div>
+          </div>
+
+
+          <div v-if="tips.enable_custom" class="form-group row">
+            <label for="tips.custom" class="col-md-2 col-form-label">custom:</label>
+            <input v-model="tips.custom" class="col-md-10 form-control"><br>
+          </div>
+
+          <h4>WebUI Link</h4>
+
+          <div class="form-group row">
+            <label for="portMap" class="col-md-3 col-form-label">Port Map:</label>
+            <input v-model="portMap" type="number" class="col-md-9 form-control">
+          </div>
+
+          <div class="form-group row">
+            <label for="scheme" class="col-md-3 col-form-label">Scheme:</label>
+            <select v-model="scheme" class="col-md-9 form-control">
+              <option value="http">HTTP</option>
+              <option value="https">HTTPS</option>
+            </select>
+          </div>
+
+          <div class="form-group row">
+            <label for="index" class="col-md-3 col-form-label">Index:</label>
+            <input v-model="index" class="col-md-9 form-control">
+          </div>
+
+          <h4>Other</h4>
+
+          <div class="form-group row">
+            <label for="store" class="col-md-3 col-form-label">Store:</label>
+            <select v-model="store" class="col-md-9 form-control">
+              <option v-for="item in ui_store" :value="item">{{ item }}</option>
+            </select>
+          </div>
+
+        </form>
+        <p>Made with ❤️ by Cp0204 and ChatGPT!  <a href="https://github.com/Cp0204/CasaOS-AppStore-Play/blob/main/Tools/YAML-Generator.html" class="badge badge-secondary">Contribute Code</a></p>
+
+      </div>
+
+      <div id="right" class="col-md-6">
+        <h3>docker-compose.yml:</h3>
+        <textarea v-model="dockerComposeResult" readonly class="form-control" rows="30"></textarea>
+        <p>You may also need to edit some parameters manually.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        appId: '',
+        image: '',
+        reservationsMemory: '',
+        networkMode: 'bridge',
+        ports: [],
+        volumes: [],
+        environment: [],
+        architectures: [],
+        author: 'Cp0204',
+        category: '',
+        description: { en_us: '', zh_cn: '' },
+        developer: '',
+        portMap: '',
+        scheme: 'http',
+        index: '/',
+        title: { en_us: '', zh_cn: '' },
+        tips: { before_install: { en_us: '', zh_cn: '' }, custom: '' },
+        tagline: { en_us: '', zh_cn: '' },
+        categories: ["Analytics", "Backup", "Blog", "Chat", "Cloud", "Developer", "CRM", "Documents", "Email", "File Sync", "Finance", "Forum", "Gallery", "Games", "Learning", "Media", "Notes", "Project Management", "VPN", "WEB", "WiKi", "Dapps", "Downloader", "Utilities", "Home Automation", "Network"],
+        // Add more data properties as needed
+        dockerComposeResult: '',
+        store: '',
+        ui_store: ["Cp0204/CasaOS-AppStore-Play", "IceWhaleTech/CasaOS-AppStore"],
+        ui_architectures: ["amd64", "arm", "arm64"],
+      },
+      watch: {
+        // Watch for changes in data properties and update dockerComposeResult
+        appId: 'generateCompose',
+        image: 'generateCompose',
+        reservationsMemory: 'generateCompose',
+        networkMode: 'generateCompose',
+        ports: {
+          handler: 'generateCompose',
+          deep: true
+        },
+        volumes: {
+          handler: 'generateCompose',
+          deep: true
+        },
+        environment: {
+          handler: 'generateCompose',
+          deep: true
+        },
+        architectures: 'generateCompose',
+        author: 'generateCompose',
+        category: 'generateCompose',
+        description: {
+          handler: 'generateCompose',
+          deep: true
+        },
+        developer: 'generateCompose',
+        title: {
+          handler: 'generateCompose',
+          deep: true
+        },
+        tagline: {
+          handler: 'generateCompose',
+          deep: true
+        },
+        tips: {
+          handler: 'generateCompose',
+          deep: true
+        },
+        portMap: 'generateCompose',
+        scheme: 'generateCompose',
+        index: 'generateCompose',
+        // Add more properties as needed
+        store: 'generateCompose',
+      },
+      methods: {
+        generateCompose() {
+          // Generate docker-compose.yml content based on data properties
+          const ymlObject = {
+            name: this.appId,
+            services: {
+              [this.appId]: {
+                image: this.image,
+                container_name: this.appId,
+                deploy: {
+                  resources: {
+                    reservations: {
+                      memory: this.reservationsMemory ? `${this.reservationsMemory}M` : '0M',
+                    },
+                  },
+                },
+                network_mode: this.networkMode,
+                ports: this.ports
+                  .filter(port => port.target !== null && port.published !== null && port.protocol)
+                  .map(port => ({
+                    target: parseInt(port.target),
+                    published: parseInt(port.published),
+                    protocol: port.protocol,
+                  })),
+                restart: 'unless-stopped',
+                volumes: this.volumes
+                  .filter(volume => volume.type && volume.source && volume.target)
+                  .map(volume => ({
+                    type: volume.type,
+                    source: volume.source,
+                    target: volume.target,
+                  })),
+                environment: this.environment
+                  .filter(env => env.key && env.value)
+                  .reduce((acc, env) => {
+                    acc[env.key] = env.value;
+                    return acc;
+                  }, {}),
+                'x-casaos': {
+                  ports: this.ports
+                    .filter(port => port.target !== null && port.published !== null && port.protocol)
+                    .map(port => ({
+                      container: port.target,
+                      description: {
+                        en_us: 'Port',
+                        zh_cn: '端口',
+                      },
+                    })),
+                  volumes: this.volumes
+                    .filter(volume => volume.type && volume.source && volume.target)
+                    .map(volume => ({
+                      container: volume.target,
+                      description: {
+                        en_us: `Config directory.`,
+                        zh_cn: `配置目录`,
+                      },
+                    })),
+                },
+              },
+            },
+            'x-casaos': {
+              architectures: this.architectures,
+              main: this.appId,
+              category: this.category,
+              author: this.author,
+              developer: this.developer,
+              icon: `https://cdn.jsdelivr.net/gh/${this.store}@main/Apps/${this.appId}/icon.png`,
+              screenshot_link: [
+                `https://cdn.jsdelivr.net/gh/${this.store}@main/Apps/${this.appId}/screenshot-1.png`,
+                `https://cdn.jsdelivr.net/gh/${this.store}@main/Apps/${this.appId}/screenshot-2.png`,
+                `https://cdn.jsdelivr.net/gh/${this.store}@main/Apps/${this.appId}/screenshot-3.png`,
+              ],
+              thumbnail: `https://cdn.jsdelivr.net/gh/${this.store}@main/Apps/${this.appId}/thumbnail.png`,
+              description: this.description,
+              tagline: this.tagline,
+              title: this.title,
+              tips: {
+                before_install: this.tips.enable_before_install ? {
+                  en_us: this.tips.before_install.en_us,
+                  zh_cn: this.tips.before_install.zh_cn,
+                } : null,
+                custom: this.tips.enable_custom ? this.tips.custom : null,
+              },
+              port_map: this.portMap,
+              scheme: this.scheme,
+              index: this.index,
+            },
+          };
+
+          this.dockerComposeResult = jsyaml.dump(ymlObject, { lineWidth: -1 });
+        },
+        addPort() {
+          this.ports.push({ target: '', published: '', protocol: 'tcp' });
+        },
+        removePort(index) {
+          this.ports.splice(index, 1);
+        },
+        addVolume() {
+          this.volumes.push({ type: 'bind', source: '/DATA/AppData/$AppID/config', target: '/config' });
+        },
+        removeVolume(index) {
+          this.volumes.splice(index, 1);
+        },
+        addEnvironment() {
+          this.environment.push({ key: '', value: '' });
+        },
+        removeEnvironment(index) {
+          this.environment.splice(index, 1);
+        },
+      },
+    });
+  </script>
+
+</body>
+
+</html>
