@@ -1,0 +1,73 @@
+name: komga
+services:
+  komga:
+    image: gotson/komga
+    container_name: komga
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    network_mode: bridge
+    ports:
+      - target: 25600
+        published: 25600
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /data
+      - type: bind
+        source: /etc/timezone
+        target: /etc/timezone
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+    x-casaos:
+      ports:
+        - container: '25600'
+          description:
+            en_us: Port
+            zh_cn: 端口
+      volumes:
+        - container: /config
+          description:
+            en_us: Config directory.
+            zh_cn: 配置目录
+        - container: /data
+          description:
+            en_us: Date directory.
+            zh_cn: 数据目录
+        - container: /etc/timezone
+          description:
+            en_us: Time Zone Synchronization
+            zh_cn: 时区同步
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: komga
+  category: Media
+  author: Cp0204
+  developer: ' gotson'
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/komga/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/komga/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/komga/screenshot-2.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/komga/thumbnail.png
+  description:
+    en_us: Komga is a versatile platform that provides a responsive web UI for effortless browsing of libraries, series, and books across various devices. Users can efficiently organize their libraries using collections and read lists, while also having the ability to edit metadata for series and books.
+    zh_cn: Komga 是一个多功能平台，提供了响应式的 Web UI，让用户能够轻松浏览图书馆、系列和图书，适用于桌面、平板和手机等多种设备。用户可以通过集合和阅读列表高效地组织图书馆，同时还可以编辑系列和图书的元数据。该平台提供了具有多种阅读模式的 Web 阅读器，确保用户流畅的阅读体验。
+  tagline:
+    en_us: Media server for comics/mangas/BDs/magazines/eBooks
+    zh_cn: 用于漫画/漫画/BD/杂志/电子书的媒体服务器
+  title:
+    en_us: Komga
+    zh_cn: Komga
+  port_map: '25600'
+  scheme: http
+  index: /
