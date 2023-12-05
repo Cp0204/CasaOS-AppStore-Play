@@ -1,0 +1,50 @@
+name: homepage
+services:
+  homepage:
+    container_name: homepage
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    environment:
+      - PGID=1000
+      - PUID=1000
+    image: ghcr.io/gethomepage/homepage:latest
+    ports:
+      - target: 3000
+        published: "3000"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /app/config
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    network_mode: bridge
+    privileged: false
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: homepage
+  category: WEB
+  author: Cp0204
+  developer: benphelps
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/homepage/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/homepage/screenshot-1.png
+  description:
+    en_us: A modern, fully static, fast, secure fully proxied, highly customizable application dashboard with integrations for over 100 services and translations into multiple languages. Easily configured via YAML files or through docker label discovery.
+    zh_cn: 一个现代化的、完全静态的、快速的、安全的、完全代理的、高度可定制的应用程序仪表板，集成了100多种服务和多种语言的翻译。通过YAML文件或Docker标签发现轻松配置。
+  tagline:
+    en_us: A highly customizable homepage
+    zh_cn: 高度可定制的主页
+  title:
+    en_us: homepage
+    zh_cn: homepage
+  port_map: '3000'
+  scheme: http
+  index: /

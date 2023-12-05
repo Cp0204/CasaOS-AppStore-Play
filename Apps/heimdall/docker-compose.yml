@@ -1,0 +1,47 @@
+name: heimdall
+services:
+  heimdall:
+    container_name: heimdall
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Asia/Shanghai
+    image: linuxserver/heimdall:latest
+    ports:
+      - target: 80
+        published: "80"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /config
+    network_mode: bridge
+    privileged: false
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: heimdall
+  category: WEB
+  author: Cp0204
+  developer: heimdall.site
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/heimdall/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/heimdall/screenshot-1.png
+  description:
+    en_us: As the name suggests Heimdall Application Dashboard is a dashboard for all your web applications. It doesn't need to be limited to applications though, you can add links to anything you like.  Heimdall is an elegant solution to organise all your web applications.
+    zh_cn: 顾名思义，Heimdall Application Dashboard 是一个用于显示所有网络应用程序的仪表盘。但它并不局限于应用程序，你可以添加任何你喜欢的链接。 Heimdall 是组织所有网络应用程序的优雅解决方案。
+  tagline:
+    en_us: An Application dashboard and launcher
+    zh_cn: 应用程序面板和启动器
+  title:
+    en_us: Heimdall
+    zh_cn: Heimdall
+  port_map: '80'
+  scheme: http
+  index: /
