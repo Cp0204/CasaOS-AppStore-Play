@@ -76,16 +76,14 @@
             <label for="ports" class="mr-2">Ports:</label>
             <button type="button" @click="addPort" class="btn btn-outline-secondary btn-sm">+</button>
             <div v-for="(port, index) in ports" :key="index" class="input-group">
+              <input v-model="port.published" type="number" placeholder="Published" class="form-control form-control-sm">
               <input v-model="port.target" type="number" placeholder="Target" class="form-control form-control-sm">
-              <input v-model="port.published" type="number" placeholder="Published"
-                class="form-control form-control-sm">
               <select v-model="port.protocol" class="form-control form-control-sm">
                 <option value="tcp">TCP</option>
                 <option value="udp">UDP</option>
               </select>
               <div class="input-group-append">
-                <button type="button" @click="removePort(index)" v-if="index >= 0"
-                  class="btn btn-sm btn-outline-danger">X</button>
+                <button type="button" @click="removePort(index)" v-if="index >= 0" class="btn btn-sm btn-outline-danger">X</button>
               </div>
             </div>
           </div>
@@ -101,8 +99,7 @@
               <input v-model="volume.source" placeholder="Source" class="form-control form-control-sm">
               <input v-model="volume.target" placeholder="Target" class="form-control form-control-sm">
               <div class="input-group-append">
-                <button type="button" @click="removeVolume(index)" v-if="index >= 0"
-                  class="btn btn-sm btn-outline-danger">X</button>
+                <button type="button" @click="removeVolume(index)" v-if="index >= 0" class="btn btn-sm btn-outline-danger">X</button>
               </div>
             </div>
           </div>
@@ -114,8 +111,7 @@
               <input v-model="env.key" placeholder="Key" class="form-control form-control-sm">
               <input v-model="env.value" placeholder="Value" class="form-control form-control-sm">
               <div class="input-group-append">
-                <button type="button" @click="removeEnvironment(index)" v-if="index >= 0"
-                  class="btn btn-sm btn-outline-danger">X</button>
+                <button type="button" @click="removeEnvironment(index)" v-if="index >= 0" class="btn btn-sm btn-outline-danger">X</button>
               </div>
             </div>
           </div>
@@ -180,8 +176,7 @@
           <div class="d-flex align-items-center">
             <label for="tips" class="mr-2">Tips:</label>
             <div class="form-check form-check-inline">
-              <input v-model="tips.enable_before_install" type="checkbox" id="enableTipsCheckbox"
-                class="form-check-input">
+              <input v-model="tips.enable_before_install" type="checkbox" id="enableTipsCheckbox" class="form-check-input">
               <label class="form-check-label" for="enableTipsCheckbox">before_install</label>
             </div>
             <div class="form-check form-check-inline">
@@ -238,7 +233,7 @@
           </div>
 
         </form>
-        <p>Made with ❤️ by Cp0204 and ChatGPT!  <a href="https://github.com/Cp0204/CasaOS-AppStore-Play/blob/main/Tools/YAML-Generator.html" class="badge badge-secondary">Contribute Code</a></p>
+        <p>Made with ❤️ by Cp0204 and ChatGPT! <a href="https://github.com/Cp0204/CasaOS-AppStore-Play/blob/main/Tools/YAML-Generator.html" class="badge badge-secondary">Contribute Code</a></p>
 
       </div>
 
@@ -281,7 +276,10 @@
       },
       watch: {
         // Watch for changes in data properties and update dockerComposeResult
-        appId: 'generateCompose',
+        appId: function () {
+          this.appId = this.appId.toLowerCase();
+          this.generateCompose();
+        },
         image: 'generateCompose',
         reservationsMemory: 'generateCompose',
         networkMode: 'generateCompose',
