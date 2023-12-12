@@ -13,15 +13,12 @@ services:
         published: 3000
         protocol: tcp
     restart: unless-stopped
-    volumes: []
-    environment: {}
     x-casaos:
       ports:
         - container: '80'
           description:
             en_us: Port
             zh_cn: 端口
-      volumes: []
 x-casaos:
   architectures:
     - amd64
