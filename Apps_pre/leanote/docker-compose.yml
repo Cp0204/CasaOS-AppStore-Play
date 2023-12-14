@@ -1,0 +1,28 @@
+name: leanote
+services:
+  leanote:
+    depends_on:
+      - mongo
+    image: zxfishhack/leanote:2.6.1
+    links:
+      - mongo:mongodb
+    ports:
+      - 9001:9000
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /DATA/AppData/leanote/datas/files:/leanote/files
+      - /DATA/AppData/leanote/datas/upload:/leanote/public/upload
+      - /DATA/AppData/leanote/app.conf:/leanote/conf/app.conf
+  mongo:
+    environment:
+      - MONGO_INITDB_DATABASE=leanote
+      - MONGO_INITDB_ROOT_PASSWORD=leanote
+      - MONGO_INITDB_ROOT_USERNAME=admin
+    image: mongo:4
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/leanote/mongodb:/data/db
+      - /DATA/AppData/leanote/leanote_install_data:/leanote_install_data
+      - /DATA/AppData/leanote/dbinit.sh:/docker-entrypoint-initdb.d/dbinit.sh
+      - /DATA/AppData/leanote/leanote.js:/leanote.js
