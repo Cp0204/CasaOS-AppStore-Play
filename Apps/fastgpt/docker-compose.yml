@@ -1,0 +1,124 @@
+# 非 host 版本, 不使用本机代理
+# (不懂 Docker 的，只需要关心 OPENAI_BASE_URL 和 CHAT_API_KEY 即可！)
+version: '3.3'
+name: fastgpt
+services:
+  pg:
+    image: ankane/pgvector:v0.5.0 # git
+    # image: registry.cn-hangzhou.aliyuncs.com/fastgpt/pgvector:v0.5.0 # 阿里云
+    container_name: pg
+    restart: always
+    ports: # 生产环境建议不要暴露
+      - 5432:5432
+    networks:
+      - fastgpt
+    environment:
+      # 这里的配置只有首次运行生效。修改后，重启镜像是不会生效的。需要把持久化数据删除再重启，才有效果
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
+    volumes:
+      - /DATA/AppData/fastgpt/pg/data:/var/lib/postgresql/data
+  mongo:
+    image: mongo:5.0.18
+    # image: registry.cn-hangzhou.aliyuncs.com/fastgpt/mongo:5.0.18 # 阿里云
+    container_name: mongo
+    restart: always
+    ports: # 生产环境建议不要暴露
+      - 27017:27017
+    networks:
+      - fastgpt
+    environment:
+      # 这里的配置只有首次运行生效。修改后，重启镜像是不会生效的。需要把持久化数据删除再重启，才有效果
+      - MONGO_INITDB_ROOT_USERNAME=username
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - /DATA/AppData/fastgpt/mongo/data:/data/db
+  fastgpt:
+    container_name: fastgpt
+    image: ghcr.io/labring/fastgpt:latest # git
+    # image: registry.cn-hangzhou.aliyuncs.com/fastgpt/fastgpt:latest # 阿里云
+    ports:
+      - 3000:3000
+    networks:
+      - fastgpt
+    depends_on:
+      - mongo
+      - pg
+    restart: always
+    environment:
+      # root 密码，用户名为: root
+      - DEFAULT_ROOT_PSW=1234
+      # 中转地址，如果是用官方号，不需要管。务必加 /v1
+      - OPENAI_BASE_URL=https://api.openai.com/v1
+      - CHAT_API_KEY=sk-xxxx
+      - DB_MAX_LINK=5 # database max link
+      - TOKEN_KEY=any
+      - ROOT_KEY=root_key
+      - FILE_TOKEN_KEY=filetoken
+      # mongo 配置，不需要改. 如果连不上，可能需要去掉 ?authSource=admin
+      - MONGODB_URI=mongodb://username:password@mongo:27017/fastgpt?authSource=admin
+      # pg配置. 不需要改
+      - PG_URL=postgresql://username:password@pg:5432/postgres
+    volumes:
+      - /DATA/AppData/fastgpt/config.json:/app/data/config.json
+networks:
+  fastgpt:
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: fastgpt
+  category: Chat
+  author: Cp0204
+  developer: sealos.io
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fastgpt/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fastgpt/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fastgpt/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fastgpt/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fastgpt/screenshot-4.png
+  description:
+    en_us: FastGPT is a knowledge-based QA system built on the LLM, offers out-of-the-box data processing and model invocation capabilities, allows for workflow orchestration through Flow visualization!
+    zh_cn: FastGPT 是一个基于 LLM 大语言模型的知识库问答系统，提供开箱即用的数据处理、模型调用等能力。同时可以通过 Flow 可视化进行工作流编排，从而实现复杂的问答场景！
+  tagline:
+    en_us: Knowledge-based QA system built on the LLM
+    zh_cn: 大语言模型的知识库问答系统
+  title:
+    en_us: FastGPT
+    zh_cn: FastGPT
+  tips:
+    before_install:
+      en_us: Installation steps
+
+        1. Create the **config.json** file before installation and run it on the host
+
+        `mkdir -p /DATA/AppData/fastgpt ; wget -O /DATA/AppData/fastgpt/config.json https://raw.githubusercontent.com/labring/FastGPT/main/ projects/app/data/config.json
+
+
+        2. Log in with the username `root` and the password is the value of the environment variable `DEFAULT_ROOT_PSW`, which defaults to `1234`.
+
+
+        3. Modify the `OPENAI_BASE_URL`, `CHAT_API_KEY` environment variables in `fastgpt`.
+
+
+        [Documentation](https://doc.fastgpt.in/docs/development/docker/)
+      zh_cn: 安装步骤
+
+        1. 安装前先建立**config.json**文件，在宿主机运行
+
+        `mkdir -p /DATA/AppData/fastgpt ; wget -O /DATA/AppData/fastgpt/config.json https://raw.githubusercontent.com/labring/FastGPT/main/projects/app/data/config.json`
+
+
+        2. 登录用户名为`root`，密码为环境变量`DEFAULT_ROOT_PSW`的值，默认为`1234`。
+
+
+        3. 修改`fastgpt`中的`OPENAI_BASE_URL`、`CHAT_API_KEY`环境变量。
+
+
+        [官方文档](https://doc.fastgpt.in/docs/development/docker/)
+    custom: null
+  port_map: '3000'
+  scheme: http
+  index: /
