@@ -20,8 +20,9 @@ for compose_file in compose_files:
             title = data.get('x-casaos', {}).get('title', {}).get('en_us', '')
             description1 = data.get('x-casaos', {}).get('description', {}).get('en_us', '')
             description2 = data.get('x-casaos', {}).get('description', {}).get('zh_cn', '')
+            description = description1 if (description1==description2) else  f"{description1}<br>{description2}"
 
-            markdown_table += f"| ![{title}]({icon}) | [{title}](./Apps/{app_name}) | {description1}<br>{description2} |\n"
+            markdown_table += f"| ![{title}]({icon}) | [{title}](./Apps/{app_name}) | {description} |\n"
         except Exception as e:
             print(f"Error parsing {compose_file}: {e}")
 
