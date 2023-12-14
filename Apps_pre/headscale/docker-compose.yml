@@ -1,0 +1,89 @@
+name: headscale
+services:
+  headscale:
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_MODULE
+    command:
+      - headscale
+      - serve
+    container_name: headscale
+    image: headscale/headscale:latest
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
+      - target: 9090
+        published: "9090"
+        protocol: tcp
+    restart: unless-stopped
+    sysctls:
+      net.ipv4.ip_forward: "1"
+      net.ipv6.conf.all.forwarding: "1"
+    volumes:
+      - type: bind
+        source: /DATA/AppData/headscale/conf
+        target: /etc/headscale
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /DATA/AppData/headscale/data
+        target: /var/lib/headscale
+        bind:
+          create_host_path: true
+    networks:
+      - headscale
+    privileged: false
+
+  headscale-webui:
+    container_name: headscale-webui
+    environment:
+      - AUTH_TYPE=basic
+      - BASIC_AUTH_PASS=password
+      - BASIC_AUTH_USER=admin
+      - COLOR=red
+      - DOMAIN_NAME=https://yourdomian.com
+      - HS_SERVER=http://yourdomian.com:8080
+      - KEY=GeRUoEkw3zbzaWSp/sWpq+joeNPGa6Sg2oi2le+OKCc=
+      - LOG_LEVEL=info
+      - TZ=Asia/Shanghai
+    image: ifargle/headscale-webui:latest
+    ports:
+      - mode: ingress
+        target: 5000
+        published: "5000"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/headscale/data
+        target: /data
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /DATA/AppData/headscale/conf
+        target: /etc/headscale
+        bind:
+          create_host_path: true
+    networks:
+      - headscale
+    privileged: false
+
+networks:
+  headscale:
+    name: headscale
+
+x-casaos:
+  author: Cp0204
+  category: self
+  description:
+    en_us: An open source, self-hosted implementation of the Tailscale control server.
+    zh_cn: 开源、自托管的 Tailscale 控制服务器。
+  icon: https://github.com/juanfont/headscale/blob/main/docs/logo/headscale3-dots.png?raw=true
+  index: /
+  port_map: "5000"
+  scheme: http
+  title:
+    custom: headscale
