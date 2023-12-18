@@ -1,0 +1,72 @@
+name: wallabag
+services:
+  wallabag:
+    container_name: wallabag
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    environment:
+      - SYMFONY__ENV__DOMAIN_NAME=http://yourdomain:85
+    image: wallabag/wallabag
+    ports:
+      - target: 80
+        published: "85"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/wallabag/data
+        target: /var/www/wallabag/data
+      - type: bind
+        source: /DATA/AppData/wallabag/images
+        target: /var/www/wallabag/web/assets/images
+    network_mode: bridge
+    privileged: false
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: wallabag
+  category: Media
+  author: Cp0204
+  developer: wallabag.org
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wallabag/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wallabag/screenshot-1.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wallabag/thumbnail.png
+  description:
+    en_us: wallabag is a web application allowing you to save web pages for later reading. Click, save and read it when you want. It extracts content so that you won't be distracted by pop-ups and cie.
+    zh_cn: wallabag 是一款网络应用程序，允许您保存网页以供以后阅读。点击保存，随时阅读。它提取内容，以便您不会被弹出窗口等干扰。
+  tagline:
+    en_us: Multi-platform later reading
+    zh_cn: 多平台稍后阅读
+  title:
+    en_us: wallabag
+    zh_cn: wallabag
+  tips:
+    before_install:
+      en_us: 'There is a bug in the official image, you need to fix the permissions issue manually.
+
+        1. After installation, execute in **Container Settings - Terminal**:
+
+        `mkdir -p "/var/www/wallabag/data/db" && touch "/var/www/wallabag/data/db/wallabag.sqlite" && chown -R nobody:nobody "/var/www/wallabag/data"`
+
+        2. Modify the `SYMFONY__ENV__DOMAIN_NAME` environment variable to your access address.
+
+
+        See [#386](https://github.com/wallabag/docker/pull/386) for details.'
+      zh_cn: 官方镜像有个bug，需手动修复权限问题。
+
+        1. 安装后，在**容器设置-终端**中执行：
+
+        `mkdir -p "/var/www/wallabag/data/db" && touch "/var/www/wallabag/data/db/wallabag.sqlite" && chown -R nobody:nobody "/var/www/wallabag/data"`
+
+        2. 修改 `SYMFONY__ENV__DOMAIN_NAME` 环境变量为你的访问地址。
+
+
+        详见[#386](https://github.com/wallabag/docker/pull/386)
+  port_map: '85'
+  scheme: http
+  index: /
