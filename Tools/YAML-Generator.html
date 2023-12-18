@@ -339,7 +339,12 @@
                 },
                 network_mode: this.networkMode,
                 ports: this.ports
-                  .filter(port => port.target !== null && port.published !== null && port.protocol)
+                  .filter(port => port.target && port.published && port.protocol)
+                  // Short syntax
+                  //.map(port =>
+                  //  `${port.published}:${port.target}/${port.protocol}`
+                  //),
+                  // Long syntax
                   .map(port => ({
                     target: parseInt(port.target),
                     published: parseInt(port.published),
@@ -348,6 +353,11 @@
                 restart: 'unless-stopped',
                 volumes: this.volumes
                   .filter(volume => volume.type && volume.source && volume.target)
+                  // Short syntax
+                  // .map(volume =>
+                  //   `${volume.source}:${volume.target}`
+                  // ),
+                  // Long syntax
                   .map(volume => ({
                     type: volume.type,
                     source: volume.source,
