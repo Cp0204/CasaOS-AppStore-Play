@@ -1,0 +1,61 @@
+name: dsm
+services:
+  dsm:
+    cap_add:
+      - NET_ADMIN
+    container_name: dsm
+    deploy:
+      resources:
+        reservations:
+          memory: 2048M
+    devices:
+      - /dev/kvm:/dev/kvm
+    environment:
+      - DISK_SIZE=16G
+    image: vdsm/virtual-dsm:latest
+    ports:
+      - target: 5000
+        published: "5000"
+        protocol: tcp
+    restart: unless-stopped
+    stop_grace_period: 2m0s
+    volumes:
+      - type: bind
+        source: /DATA/AppData/dsm
+        target: /storage
+    network_mode: bridge
+    privileged: false
+x-casaos:
+  architectures:
+    - amd64
+  main: dsm
+  category: File Sync
+  author: Cp0204
+  developer: vDSM
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dsm/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dsm/screenshot-1.png
+  description:
+    en_us: Multiple disks, KVM acceleration, GPU passthrough, Upgrades supported
+    zh_cn: 多磁盘，KVM 加速，GPU直通，支持升级
+  tagline:
+    en_us: Virtual DSM in a docker container
+    zh_cn: 在docker容器中虚拟DSM
+  title:
+    en_us: Virtual DSM
+    zh_cn: Virtual DSM
+  tips:
+    before_install:
+      en_us: 1. Requires `DATA/AppData` free space 16G+
+
+        2. For the safety of your data, please read [documentation](https://hub.docker.com/r/vdsm/virtual-dsm) first
+
+        3. The first run will download the system package and initialization online, please be patient, you can check the progress in the container log.
+      zh_cn: 1. 需要 `/DATA/AppData` 空闲空间 16G+
+
+        2. 为了你的数据安全，请先阅读 [文档](https://hub.docker.com/r/vdsm/virtual-dsm)
+
+        3. 首次运行会在线下载系统包和初始化，请耐心等待，你可以在容器日志中查看进度。
+  port_map: '5000'
+  scheme: http
+  index: /

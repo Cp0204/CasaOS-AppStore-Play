@@ -16,9 +16,10 @@
  - Niche Featured Apps / 种花家小众特色应用
  - Support for Multi-arch & Fix armv7 / 多架构支持和修复armv7 [👇🏻](#arch-specific-source--分架构专属源)
 
-> Note: This store app uses the `:latest` tag, the ┆ check for updates function in the upper right corner of the app will be disabled, but **you can manually edit the app settings once (without changing anything) to get the latest image.** The good thing is that you can always get the latest version of the app even if the store is unmaintained.
-
-> 注意：本商店应用使用 `:latest` 标签，应用右上角┆检查更新功能会失效，但**你可以手动编辑一次应用设置（无需修改任何参数）获取最新镜像**。好处是即使商店无人维护，你总能获得应用的最新版本。
+> [!NOTE]
+> This store app uses the `:latest` tag, the `┆` check for updates function in the upper right corner of the app will be disabled, but **you can manually edit the app settings once (without changing anything) to get the latest image.** The good thing is that you can always get the latest version of the app even if the store source is unmaintained.
+>
+> 本商店应用使用 `:latest` 标签，应用右上角 `┆` 检查更新功能会失效，但**你可以手动编辑一次应用设置（无需修改任何参数）获取最新镜像。** 好处是即使商店源无人维护，你总能获得应用的最新版本。
 
 ## Source link / 源地址
 
@@ -32,37 +33,27 @@ This is just a generic version, please add the following sources corresponding t
 
 ### Arch-specific Source / 分架构专属源
 
-<details>
+- **arm/armv7/armhf** (玩客云 等)
 
-<summary>arm/armv7/armhf (玩客云 等)</summary>
+  Adds older versions of some applications that [LinuxServer has dropped support](https://www.linuxserver.io/blog/a-farewell-to-arm-hf) for, and fixes an issue where the official app store fails to install and upgrade.
 
-Adds older versions of some applications that [LinuxServer has dropped support](https://www.linuxserver.io/blog/a-farewell-to-arm-hf) for, and fixes an issue where the official app store fails to install and upgrade.
+  添加部分 [LinuxServer 已放弃支持](https://www.linuxserver.io/blog/a-farewell-to-arm-hf)的应用的旧版本，修复官方应用商店无法安装和升级的问题。
 
-添加部分 [LinuxServer 已放弃支持](https://www.linuxserver.io/blog/a-farewell-to-arm-hf)的应用的旧版本，修复官方应用商店无法安装和升级的问题.
+  ```
+  https://play.cuse.eu.org/Cp0204-AppStore-Play-arm.zip
+  ```
 
-```
-https://play.cuse.eu.org/Cp0204-AppStore-Play-arm.zip
-```
+- **arm64/armv8** (S905xx盒子、RK33xx 等)
 
-</details>
+  ```
+  https://play.cuse.eu.org/Cp0204-AppStore-Play-arm64.zip
+  ```
 
-<details>
+- **amd64/x86-64** (一般云主机、工控机 等)
 
-<summary>arm64/armv8 (S905盒子、RK33xx 等)</summary>
-
-```
-https://play.cuse.eu.org/Cp0204-AppStore-Play-arm64.zip
-```
-
-</details>
-
-<details>
-
-<summary>amd64/x86-64 (一般云主机、工控机 等)</summary>
-
-```
-https://play.cuse.eu.org/Cp0204-AppStore-Play-amd64.zip
-```
+  ```
+  https://play.cuse.eu.org/Cp0204-AppStore-Play-amd64.zip
+  ```
 
 </details>
 
@@ -87,6 +78,7 @@ If you think this project is helpful to you, you can give me a little support. T
 | ![ChatGPT Next Web](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ChatGPT-Next-Web/icon.png) | [ChatGPT Next Web](./Apps/ChatGPT-Next-Web) | An intelligent chat application based on ChatGPT, supports fast deployment, Markdown, beautiful UI, fluid response, privacy and security, and allows customization of preset roles for quick creation, sharing, and debugging of personalized conversations.<br>一个基于 ChatGPT 的智能聊天应用，支持快速部署、Markdown 支持、精美 UI、流式响应、隐私安全等多个功能，并且能够自定义预制角色快速创建、分享和调试个性化对话。 |
 | ![ddns-go](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ddns-go/icon.png) | [ddns-go](./Apps/ddns-go) | A simple and easy-to-use DDNS (Dynamic Domain Name System) that automatically updates your domain name resolution to your public IP address. It supports various cloud services such as Alibaba Cloud, Tencent Cloud, Dnspod, Cloudflare, Callback, Huawei Cloud, Baidu Cloud, Porkbun, GoDaddy, and Google Domain.<br>简单好用的DDNS。自动更新域名解析到公网IP(支持阿里云、腾讯云、Dnspod、Cloudflare、Callback、华为云、百度云、Porkbun、GoDaddy、Google Domain) |
 | ![Tailscale Derper](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Tailscale/icon.png) | [Tailscale Derper](./Apps/derper) | Tailscale Derper is a lightweight utility that allows you to serve your own Tailscale relays for better performance and control over your network traffic. Configure your DERP server with ease and enhance your Tailscale VPN experience.<br>Tailscale Derper是一个轻量级实用程序，允许您为Tailscale VPN服务提供自己的中继服务器，从而提供更好的性能和对网络流量的控制。轻松配置您的DERP服务器，增强Tailscale VPN体验。 |
+| ![Virtual DSM](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dsm/icon.png) | [Virtual DSM](./Apps/dsm) | Multiple disks, KVM acceleration, GPU passthrough, Upgrades supported<br>多磁盘，KVM 加速，GPU直通，支持升级 |
 | ![EasyImage](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/easyimage/icon.png) | [EasyImage](./Apps/easyimage) | Supporting multi -file upload, simple countless data library, returning picture URL, Markdown, bbscode, html picture warehouse program. Demo: https://png.cm/<br>支持多文件上传，简单无数据库，返回图片url、markdown、bbscode、html的一款图床程序，演示地址：https://png.cm/  |
 | ![Excalidraw](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Excalidraw/icon.png) | [Excalidraw](./Apps/Excalidraw) | Excalidraw is a virtual collaborative whiteboard tool that lets you easily sketch diagrams, illustrate ideas, and create beautiful illustrations remotely.<br>Excalidraw是一款虚拟协作白板工具，可以让您轻松绘制图表、阐明思想和远程创建精美的插图。 |
 | ![FAST OS DOCKER](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fast-os-docker/icon.png) | [FAST OS DOCKER](./Apps/fast-os-docker) | FAST OS DOCKER is a graphical management tool for Docker, providing users with Docker overview, local container management, remote image pulling, server disk mapping, server network management, and more. It can meet the container management needs of small to medium-sized organizations.<br>FAST OS DOCKER是Docker的图形化管理工具，为用户提供了Docker总览、本地容器管理、远程镜像拉取、服务器磁盘映射、服务器网络管理等功能，基本能满足中小型单位对容器管理的全部需求。 |
