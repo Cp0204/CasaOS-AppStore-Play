@@ -48,6 +48,10 @@ x-casaos:
 
         `docker exec -it bilibilitoolpro bash -c "dotnet Ray.BiliBiliTool.Console.dll --runTasks=Login"`
 
+        Or run in the container terminal (recommended)
+
+        `dotnet Ray.BiliBiliTool.Console.dll --runTasks=Login`
+
 
         [Documentation](https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md)
       zh_cn: 使用步骤
@@ -61,8 +65,12 @@ x-casaos:
 
         `docker exec -it bilibilitoolpro bash -c "dotnet Ray.BiliBiliTool.Console.dll --runTasks=Login"`
 
+        或容器终端中运行（推荐）
 
-        [官方文档](https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md)
+        `dotnet Ray.BiliBiliTool.Console.dll --runTasks=Login`
+
+
+        [项目文档](https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md)
   main: bilibilitoolpro
   title:
     en_us: BiliBiliToolPro
