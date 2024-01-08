@@ -1,0 +1,85 @@
+name: sun-panel
+services:
+  sun-panel:
+    image: hslr/sun-panel
+    container_name: sun-panel
+    deploy:
+      resources:
+        reservations:
+          memory: 32M
+    network_mode: bridge
+    ports:
+      - target: 3002
+        published: 3002
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/conf
+        target: /app/conf
+      - type: bind
+        source: /DATA/AppData/$AppID/uploads
+        target: /app/uploads
+      - type: bind
+        source: /DATA/AppData/$AppID/database
+        target: /app/database
+    environment: {}
+    x-casaos:
+      ports:
+        - container: '3002'
+          description:
+            en_us: Port
+            zh_cn: 端口
+      volumes:
+        - container: /app/conf
+          description:
+            en_us: Config directory.
+            zh_cn: 配置目录
+        - container: /app/uploads
+          description:
+            en_us: Uploads directory.
+            zh_cn: 上传目录
+        - container: /app/database
+          description:
+            en_us: Databases directory.
+            zh_cn: 数据库目录
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: sun-panel
+  store_app_id: sun-panel
+  category: WEB
+  author: Cp0204
+  developer: hslr-s
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sun-panel/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sun-panel/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sun-panel/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sun-panel/screenshot-3.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sun-panel/thumbnail.png
+  description:
+    en_us: 'A server , NAS navigation panel , Homepage , browser homepage . Features: simple , LAN internal and external network link switching , docker deployment , support for arm system , easy to get started , no modification of code , no need to connect to external databases , rich icon free with ( text icon + svg icon + built-in three-way icon library ) , support for web pages built-in small window to open ( part of the site to block this feature ) , small resource consumption .'
+    zh_cn: 一个服务器、NAS导航面板、Homepage、浏览器首页。 特点：简洁、局域网内外网链接切换、docker部署、对arm系统支持、上手简单，免修改代码、无需连接外部数据库、丰富图标自由搭配（文字图标+svg图标+内置三方图标库）、支持网页内置小窗口打开（部分网站屏蔽此功能）、占用资源小。
+  tagline:
+    en_us: NAS navigation panel
+    zh_cn: NAS导航面板
+  title:
+    en_us: Sun-Panel
+    zh_cn: Sun-Panel
+  tips:
+    before_install:
+      en_us: '## Default account password
+
+        Account number: admin@sun.cc
+
+        Password: 12345678'
+      zh_cn: '## 默认账号密码
+
+        账号：admin@sun.cc
+
+        密码：12345678'
+  port_map: '3002'
+  scheme: http
+  index: /
