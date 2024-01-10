@@ -1,0 +1,73 @@
+name: dockge
+services:
+  dockge:
+    image: louislam/dockge:1
+    container_name: dockge
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 5001
+        published: '5001'
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /app/data
+      - type: bind
+        source: /DATA/AppData/$AppID/stacks
+        target: /opt/stacks
+    environment:
+      DOCKGE_STACKS_DIR: /opt/stacks
+    x-casaos:
+      ports:
+        - container: '5001'
+          description:
+            en_us: WebUI Port
+            zh_cn: WebUI 端口
+      volumes:
+        - container: /var/run/docker.sock
+          description:
+            en_us: Docker Management Connector
+            zh_cn: Docker 管理连接器
+        - container: /app/data
+          description:
+            en_us: DATA directory.
+            zh_cn: 数据目录
+        - container: /opt/stacks
+          description:
+            en_us: Stacks directory.
+            zh_cn: 堆栈目录
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: dockge
+  store_app_id: dockge
+  category: Developer
+  author: Cp0204
+  developer: louislam
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dockge/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dockge/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dockge/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dockge/screenshot-3.png
+  description:
+    en_us: A fancy, easy-to-use and reactive self-hosted docker compose.yaml stack-oriented manager.
+    zh_cn: 一个花哨、易用、反应灵敏的自托管 docker compose.yaml 堆栈管理器。
+  tagline:
+    en_us: Stack-oriented manager
+    zh_cn: 堆栈管理器
+  title:
+    en_us: Dockge
+    zh_cn: Dockge
+  port_map: '5001'
+  scheme: http
+  index: /
