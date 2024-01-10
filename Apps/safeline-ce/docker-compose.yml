@@ -1,0 +1,151 @@
+name: safeline-ce
+
+networks:
+  safeline-ce:
+    name: safeline-ce
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - gateway: 172.22.222.1
+          subnet: 172.22.222.0/24
+    driver_opts:
+      com.docker.network.bridge.name: safeline-ce
+
+services:
+  postgres:
+    container_name: safeline-pg
+    restart: unless-stopped
+    image: postgres:15.2
+    volumes:
+      - /DATA/AppData/safeline-ce/resources/postgres/data:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - POSTGRES_USER=safeline-ce
+      - POSTGRES_PASSWORD=a8b1c19f06174fd9f5530616514990c3
+    networks:
+      safeline-ce:
+        ipv4_address: 172.22.222.2
+    command: [postgres, -c, max_connections=200]
+  mgt:
+    container_name: safeline-mgt
+    restart: unless-stopped
+    image: chaitin/safeline-mgt:latest
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /DATA/AppData/safeline-ce/resources/mgt:/app/data
+    ports:
+      - 9443:1443
+    environment:
+      - MGT_PG=postgres://safeline-ce:a8b1c19f06174fd9f5530616514990c3@safeline-pg/safeline-ce?sslmode=disable
+      - MGT_LICENSE_SERVER=https://safeline-ce-4463.rivers.chaitin.cn/
+    depends_on:
+      - postgres
+      - fvm
+    dns:
+      - 119.29.29.29
+      - 223.5.5.5
+      - 180.76.76.76
+      - 1.2.4.8
+      - 114.114.114.114
+      - 8.8.8.8
+    networks:
+      safeline-ce:
+        ipv4_address: 172.22.222.4
+  detect:
+    container_name: safeline-detector
+    restart: unless-stopped
+    image: chaitin/safeline-detector:latest
+    volumes:
+      - /DATA/AppData/safeline-ce/resources/detector:/resources/detector
+      - /DATA/AppData/safeline-ce/logs/detector:/logs/detector
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - LOG_DIR=/logs/detector
+    networks:
+      safeline-ce:
+        ipv4_address: 172.22.222.5
+  mario:
+    container_name: safeline-mario
+    restart: unless-stopped
+    image: chaitin/safeline-mario:latest
+    volumes:
+      - /DATA/AppData/safeline-ce/resources/mario:/resources/mario
+      - /DATA/AppData/safeline-ce/logs/mario:/logs/mario
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - LOG_DIR=/logs/mario
+      - GOGC=100
+      - DATABASE_URL=postgres://safeline-ce:a8b1c19f06174fd9f5530616514990c3@safeline-pg/safeline-ce
+    networks:
+      safeline-ce:
+        ipv4_address: 172.22.222.6
+  tengine:
+    container_name: safeline-tengine
+    restart: unless-stopped
+    image: chaitin/safeline-tengine:latest
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+      - /DATA/AppData/safeline-ce/resources/nginx:/etc/nginx
+      - /DATA/AppData/safeline-ce/resources/detector:/resources/detector
+      - /DATA/AppData/safeline-ce/logs/nginx:/var/log/nginx
+      - /DATA/AppData/safeline-ce/resources/cache:/usr/local/nginx/cache
+    environment:
+      - TCD_MGT_API=https://172.22.222.4:1443/api/open/publish/server
+      - TCD_SNSERVER=172.22.222.5:8000
+      # deprecated
+      - SNSERVER_ADDR=172.22.222.5:8000
+    ulimits:
+      nofile: 131072
+    network_mode: host
+  luigi:
+    container_name: safeline-luigi
+    restart: unless-stopped
+    image: chaitin/safeline-luigi:latest
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /DATA/AppData/safeline-ce/resources/luigi:/app/data
+    networks:
+      safeline-ce:
+        ipv4_address: 172.22.222.7
+  fvm:
+    container_name: safeline-fvm
+    restart: unless-stopped
+    image: chaitin/safeline-fvm:latest
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      safeline-ce:
+        ipv4_address: 172.22.222.8
+
+x-casaos:
+  architectures:
+    - amd64
+  main: mgt
+  store_app_id: safeline-ce
+  category: WEB
+  author: Cp0204
+  developer: chaitin
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/screenshot-1.png
+  #  - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/screenshot-2.png
+  #  - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/screenshot-3.png
+  #thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/thumbnail.png
+  description:
+    en_us: SafeLine is a WAF built by Changting Technology over a period of nearly 10 years, and its core detection capability is driven by intelligent semantic analysis algorithms. It is a free WAF that is simple enough, good enough, and strong enough to protect your website from hackers based on the industry-leading semantic engine detection technology and access as a reverse proxy.
+    zh_cn: 雷池（SafeLine）是长亭科技耗时近 10 年倾情打造的 WAF，核心检测能力由智能语义分析算法驱动。一款足够简单、足够好用、足够强的免费 WAF。基于业界领先的语义引擎检测技术，作为反向代理接入，保护你的网站不受黑客攻击。
+  tagline:
+    en_us: Popular community WAF
+    zh_cn: 广受好评的社区 WAF
+  title:
+    en_us: SafeLine
+    zh_cn: 雷池
+  tips:
+    before_install:
+      en_us: SafeLine needs to run on a CPU that supports the ssse3 instruction set, please configure the virtual machine to enable CPU ssse3 instruction set support.
+      zh_cn: 雷池需要运行在支持 ssse3 指令集的 CPU 上，虚拟机请自行配置开启 CPU ssse3 指令集支持。
+  port_map: "9443"
+  scheme: https
+  index: /

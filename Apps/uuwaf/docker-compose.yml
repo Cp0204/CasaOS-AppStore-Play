@@ -1,0 +1,89 @@
+name: uuwaf
+
+networks:
+  wafnet:
+    name: wafnet
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - gateway: 172.31.255.1
+          subnet: 172.31.255.0/24
+    driver_opts:
+      com.docker.network.bridge.name: wafnet
+
+services:
+  uuwaf:
+    image: uusec/nanqiang:latest
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 102400
+        hard: 102400
+    container_name: uuwaf
+    restart: unless-stopped
+    networks:
+      wafnet:
+    ports:
+      - "80:80"
+      - "443:443"
+      - "4443:4443"
+    volumes:
+      - wafshared:/uuwaf
+    command: ["/run.sh"]
+    environment:
+      - TZ=Asia/Shanghai
+      - UUWAF_MYSQL_PASSWORD=Safe3.WAF
+
+    links:
+      - wafdb
+    depends_on:
+      - wafdb
+
+  wafdb:
+    image: percona:8
+    container_name: wafdb
+    networks:
+      wafnet:
+    volumes:
+      - wafshared:/docker-entrypoint-initdb.d
+      - wafdata:/var/lib/mysql
+    environment:
+      - TZ=Asia/Shanghai
+      - INIT_ROCKSDB
+      - MYSQL_ROOT_PASSWORD=Safe3.WAF
+
+volumes:
+  wafshared:
+  wafdata:
+
+x-casaos:
+  architectures:
+    - amd64
+  main: uuwaf
+  store_app_id: uuwaf
+  category: WEB
+  author: Cp0204
+  developer: uusec.com
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/uuwaf/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/uuwaf/screenshot-1.png
+  #  - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/uuwaf/screenshot-2.png
+  #  - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/uuwaf/screenshot-3.png
+  #thumbnail: https://cdn.jsdelivr.net/gh/@main/Apps/uuwaf/thumbnail.png
+  description:
+    en_us: A community-driven, free, high-performance, high-extensibility top-of-the-line Web application and API security protection product.
+    zh_cn: 一款社区驱动的免费、高性能、高扩展顶级Web应用和API安全防护产品。
+  tagline:
+    en_us: WEB Application Firewall
+    zh_cn: WEB应用防火墙
+  title:
+    en_us: uuWAF
+    zh_cn: 南墙
+  tips:
+    before_install:
+      en_us: "uuWAF needs to run on a CPU that supports x86-64-v2, please enable support for the corresponding CPU instruction set. Default user name: `admin`, password: `wafadmin`"
+      zh_cn: 南墙需要运行在支持 x86-64-v2 的 CPU 上，请开启对应CPU指令集的支持。默认用户名：`admin`，密码：`wafadmin`
+  port_map: "4443"
+  scheme: https
+  index: /
