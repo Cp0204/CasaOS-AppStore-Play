@@ -1,0 +1,82 @@
+name: rustdesk-server
+services:
+  hbbr:
+    command:
+      - hbbr
+    container_name: rustdesk-server-hbbr
+    image: rustdesk/rustdesk-server:latest
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/rustdesk-server/hbbr:/root
+    network_mode: bridge
+    ports:
+      - "21117:21117/tcp"
+      - "21119:21119/tcp"
+    privileged: false
+
+  hbbs:
+    command:
+      - hbbs
+    container_name: rustdesk-server-hbbs
+    depends_on:
+      hbbr:
+        condition: service_started
+        required: true
+    image: rustdesk/rustdesk-server:latest
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/rustdesk-server/hbbs:/root
+    network_mode: bridge
+    ports:
+      - "21115:21115/tcp"
+      - "21118:21118/tcp"
+      - "21116:21116/tcp"
+      - "21116:21116/udp"
+    privileged: false
+
+  api:
+    container_name: rustdesk-server-api
+    image: ghcr.io/kingmo888/rustdesk-api-server:latest
+    ports:
+      - "21114:21114/tcp"
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/rustdesk-server/api/db:/rustdesk-api-server/db
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    network_mode: bridge
+    privileged: false
+
+x-casaos:
+  architectures:
+    - arm
+    - arm64
+    - amd64
+  main: api
+  store_app_id: rustdesk-server
+  category: Utilities
+  author: Cp0204
+  developer: rustdesk | kingmo888
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/screenshot-3.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/thumbnail.png
+  description:
+    en_us: RustDesk builds its own transit server, combining the official [rustdesk-server](https://github.com/rustdesk/rustdesk-server) and kingmo888's [rustdesk-api-server](https://github.com/kingmo888/rustdesk-api-server).
+    zh_cn: RustDesk 自建中转服务器，集合官方 [rustdesk-server](https://github.com/rustdesk/rustdesk-server) 与 kingmo888 的 [rustdesk-api-server](https://github.com/kingmo888/rustdesk-api-server) 服务。
+  tagline:
+    en_us: RustDesk Self-Hosted
+    zh_cn: RustDesk 自托管
+  title:
+    en_us: RustDesk Server
+    zh_cn: RustDesk Server
+  tips:
+    before_install:
+      en_us: In rustdesk-api-server, the first registered account is a super administrator, and the subsequent registered accounts are normal accounts.
+      zh_cn: rustdesk-api-server 中，第一个注册的账户为超级管理员，之后注册账户为普通账户。
+    custom: null
+  port_map: "21114"
+  scheme: http
+  index: /
