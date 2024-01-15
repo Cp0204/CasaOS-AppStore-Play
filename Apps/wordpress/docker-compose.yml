@@ -1,0 +1,95 @@
+version: "3.1"
+
+name: wordpress
+
+services:
+  web:
+    image: wordpress
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    restart: unless-stopped
+    container_name: wordpress-web
+    ports:
+      - target: 80
+        published: '8080'
+        protocol: tcp
+    environment:
+      WORDPRESS_DB_HOST: wordpress-db
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: wordpress_pass
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/web
+        target: /var/www/html
+    networks:
+      - wordpress
+
+  db:
+    image: mariadb:10.3
+    restart: unless-stopped
+    container_name: wordpress-db
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress_user
+      MARIADB_PASSWORD: wordpress_pass
+      MARIADB_ROOT_PASSWORD: root_pass
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/db
+        target: /var/lib/mysql
+    networks:
+      - wordpress
+
+  # # MySQL is Too Fat! Use Memory 300M+
+  # db:
+  #   image: mysql:8.0
+  #   restart: unless-stopped
+  #   container_name: wordpress-db
+  #   environment:
+  #     MYSQL_DATABASE: wordpress
+  #     MYSQL_USER: wordpress_user
+  #     MYSQL_PASSWORD: wordpress_pass
+  #     MYSQL_RANDOM_ROOT_PASSWORD: root_pass
+  #   volumes:
+  #     - type: bind
+  #       source: /DATA/AppData/$AppID/db
+  #       target: /var/lib/mysql
+  #   networks:
+  #     - wordpress
+
+networks:
+  wordpress:
+    name: wordpress
+    driver: bridge
+
+x-casaos:
+  architectures:
+    - arm64
+    - arm
+    - amd64
+  main: web
+  store_app_id: wordpress
+  category: WEB
+  author: Cp0204
+  developer: Automattic
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wordpress/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wordpress/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wordpress/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wordpress/screenshot-3.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wordpress/thumbnail.png
+  description:
+    en_us: "WordPress (also known as WP or WordPress.org) is a web content management system. It was originally created as a tool to publish blogs but has evolved to support publishing other web content, including more traditional websites, mailing lists and Internet forum, media galleries, membership sites, learning management systems and online stores. Available as free and open-source software, WordPress is among the most popular content management systems – it was used by 43.1% of the top 10 million websites as of December 2023."
+    zh_cn: WordPress是一个以PHP和MySQL为平台的自由开源的博客软件和内容管理系统。WordPress具有插件架构和模板系统。截至2018年4月，排名前1000万的网站中超过30.6%使用WordPress。WordPress是最受欢迎的网站内容管理系统。全球有大约43%的网站都是使用WordPress架设的。WordPress是目前因特网上最流行的博客系统，在最著名的网络发布阶段中脱颖而出。如今，它被使用在超过7000万个站点上。
+  tagline:
+    en_us: Famous Blog System
+    zh_cn: 著名博客系统
+  title:
+    en_us: WordPress
+    zh_cn: WordPress
+  port_map: "8080"
+  scheme: http
+  index: /
