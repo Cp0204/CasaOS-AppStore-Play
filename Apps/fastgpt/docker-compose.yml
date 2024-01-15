@@ -64,6 +64,7 @@ services:
       - /DATA/AppData/fastgpt/config.json:/app/data/config.json
 networks:
   fastgpt:
+    name: fastgpt
 
 x-casaos:
   architectures:
