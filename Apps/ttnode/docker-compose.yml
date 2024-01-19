@@ -5,10 +5,14 @@ services:
     container_name: ttnode
     deploy:
       resources:
-        limits:
-          memory: 256M
+        reservations:
+          memory: 512M
     network_mode: host
     privileged: true
+    cap_add:
+      - SYS_RAWIO
+    devices:
+      - "/dev/mem:/dev/mem"
     restart: unless-stopped
     volumes:
       - type: bind
@@ -48,7 +52,7 @@ x-casaos:
   main: ttnode
   title:
     en_us: ttnode
-    zh_cn: 甜糖星愿
+    zh_cn: 甜糖
   index: /
   port_map: "1024"
   scheme: http
