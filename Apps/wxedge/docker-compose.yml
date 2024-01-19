@@ -1,0 +1,46 @@
+name: wxedge
+services:
+  wxedge:
+    container_name: wxedge
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    hostname: wxedge
+    image: onething1/wxedge
+    privileged: true
+    restart: unless-stopped
+    tmpfs:
+      - /tmp
+      - /run
+    volumes:
+      - type: bind
+        source: /DATA/AppData/wxedge
+        target: /storage
+    network_mode: host
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: wxedge
+  store_app_id: wxedge
+  category: Utilities
+  author: Cp0204
+  developer: OnethingCloud
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wxedge/icon.png
+  description:
+    zh_cn: 「容器魔方」由网心云推出的一款docker容器镜像软件，通过简单安装后即可快速加入网心云共享计算生态网络，为网心科技星域云贡献带宽和存储资源，用户根据每日的贡献量可获得相应的现金收益回报。网心科技星域云通过先进的边缘编排技术，将千家万户的节点连接成一张边缘云计算网络，为B端客户提供全球领先的、优质低成本的边缘计算服务。目前支持：koolshare、群晖、树莓派等支持docker的设备（arm32、aarch64、x86_64）。
+  tagline:
+    en_us: OnethingCloud Container
+    zh_cn: 网心云容器版
+  title:
+    en_us: wxedge
+    zh_cn: 容器魔方
+  tips:
+    before_install:
+      en_us: After installation, please be sure to change the mapping directory for `/DATA/AppData/wxedge`. This directory will cache a large number of CDN files.
+      zh_cn: 安装后请务必更改 `/DATA/AppData/wxedge` 映射目录，该目录会大量缓存 CDN 文件。
+  port_map: '18888'
+  scheme: http
+  index: /
