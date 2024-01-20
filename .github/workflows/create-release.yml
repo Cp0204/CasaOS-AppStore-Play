@@ -56,3 +56,17 @@ jobs:
           draft: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload to OSS
+        id: upload_to_oss
+        uses: tvrcgo/upload-to-oss@master
+        with:
+          key-id: ${{ secrets.OSS_KEY_ID }}
+          key-secret: ${{ secrets.OSS_KEY_SECRET }}
+          endpoint: ${{ secrets.OSS_ENDPOINT }}
+          bucket: ${{ secrets.OSS_BUCKET }}
+          assets: |
+            AppStore.zip:Cp0204-AppStore-Play.zip
+            AppStore_arm.zip:Cp0204-AppStore-Play-arm.zip
+            AppStore_arm64.zip:Cp0204-AppStore-Play-arm64.zip
+            AppStore_amd64.zip:Cp0204-AppStore-Play-amd64.zip
