@@ -1,11 +1,11 @@
-name: chatgpt-next-web
+name: nextchat
 services:
-  chatgpt-next-web:
-    container_name: chatgpt-next-web
+  nextchat:
+    container_name: nextchat
     image: yidadaa/chatgpt-next-web
     deploy:
       resources:
-        limits:
+        reservations:
           memory: 64M
     ports:
       - target: 3000
@@ -13,7 +13,7 @@ services:
         protocol: tcp
     environment:
       - OPENAI_API_KEY=$OPENAI_API_KEY
-      - CODE=code1,code2,code3
+      - CODE=password1,password2,password3
       - BASE_URL=https://api.openai.com
     x-casaos:
       envs:
@@ -33,26 +33,26 @@ x-casaos:
   architectures:
     - amd64
     - arm64
-  main: chatgpt-next-web
+  main: nextchat
   author: Cp0204
   category: Chat
   description:
     en_us: An intelligent chat application based on ChatGPT, supports fast deployment, Markdown, beautiful UI, fluid response, privacy and security, and allows customization of preset roles for quick creation, sharing, and debugging of personalized conversations.
     zh_cn: 一个基于 ChatGPT 的智能聊天应用，支持快速部署、Markdown 支持、精美 UI、流式响应、隐私安全等多个功能，并且能够自定义预制角色快速创建、分享和调试个性化对话。
   developer: Yidadaa
-  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ChatGPT-Next-Web/icon.png
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nextchat/icon.png
   tagline:
-    en_us: A private ChatGPT web application
-    zh_cn: 一个私人 ChatGPT 网页应用
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ChatGPT-Next-Web/thumbnail.png
+    en_us: Private ChatGPT WebApp
+    zh_cn: 私人 ChatGPT 网页应用
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nextchat/thumbnail.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ChatGPT-Next-Web/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ChatGPT-Next-Web/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nextchat/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nextchat/screenshot-2.png
   tips:
     before_install:
-      en_us: After installation, set the environment variables OPENAI_API_KEY and CODE in the application settings. For more configuration items, please refer to https://github.com/Yidadaa/ChatGPT-Next-Web
-      zh_cn: 安装完成后，在应用设置中设置环境变量 OPENAI_API_KEY 和 CODE，更多配置项目请参考 https://github.com/Yidadaa/ChatGPT-Next-Web
+      en_us: After installation, set the environment variables OPENAI_API_KEY and CODE in the application settings. For more configuration items, please refer to https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web
+      zh_cn: 安装完成后，在应用设置中设置环境变量 OPENAI_API_KEY 和 CODE，更多配置项目请参考 https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web
   title:
-    en_us: ChatGPT Next Web
+    en_us: NextChat
   index: /
   port_map: "3000"
