@@ -67,8 +67,8 @@ x-casaos:
   author: Cp0204
   category: Downloader
   description:
-    en_us: Aria2 is currently the most powerful and versatile download tool. It supports various downloading protocols such as BT, magnet, HTTP, and FTP, and is commonly used as a server for offline downloading. https://p3terx.com/archives/docker-aria2-pro.html
-    zh_cn: Aria2 是目前最强大的全能型下载工具，它支持 BT、磁力、HTTP、FTP 等下载协议，常用做离线下载的服务端。https://p3terx.com/archives/docker-aria2-pro.html
+    en_us: Aria2 is currently the most powerful and versatile download tool. It supports various downloading protocols such as BT, magnet, HTTP, and FTP, and is commonly used as a server for offline downloading. [DOC](https://p3terx.com/archives/docker-aria2-pro.html)
+    zh_cn: Aria2 是目前最强大的全能型下载工具，它支持 BT、磁力、HTTP、FTP 等下载协议，常用做离线下载的服务端。[文档](https://p3terx.com/archives/docker-aria2-pro.html)
   developer: P3TERX
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/icon.png
   screenshot_link:
@@ -79,5 +79,12 @@ x-casaos:
     zh_cn: 更好用的 Aria2 Docker 容器
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/thumbnail.png
   tips:
+    before_install:
+      en_us: Aria2 is a download kernel without a WebUI and is recommended to be used with [AriaNg](http://ariang.mayswind.net/latest/#! /downloading).
+      zh_cn: Aria2 是一个下载核心，没有 WebUI，建议配合 [AriaNg](http://ariang.mayswind.net/latest/#!/downloading) 使用。
   title:
     en_us: Aria2 Pro
+  scheme: http
+  hostname: ariang.mayswind.net
+  port_map: ""
+  index: /latest
