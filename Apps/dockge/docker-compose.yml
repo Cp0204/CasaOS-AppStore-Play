@@ -61,7 +61,7 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dockge/screenshot-3.png
   description:
     en_us: A fancy, easy-to-use and reactive self-hosted docker compose.yaml stack-oriented manager.
-    zh_cn: 一个花哨、易用、反应灵敏的自托管 docker compose.yaml 堆栈管理器。
+    zh_cn: 一个美观、易用、反应灵敏的自托管 docker compose.yaml 堆栈管理器。
   tagline:
     en_us: Stack-oriented manager
     zh_cn: 堆栈管理器
