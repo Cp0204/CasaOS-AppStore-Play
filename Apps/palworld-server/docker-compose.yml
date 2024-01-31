@@ -1,0 +1,97 @@
+name: palworld-server
+services:
+  palworld-server:
+    image: thijsvanloef/palworld-server-docker:latest
+    restart: unless-stopped
+    container_name: palworld-server
+    ports:
+      - 8211:8211/udp
+      - 27015:27015/udp
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - PORT=8211 # 可选但推荐
+      - PLAYERS=8 # 可选但推荐
+      - MULTITHREADING=true
+      - RCON_ENABLED=true
+      - RCON_PORT=25575
+      - TZ=Asia/Shanghai
+      - COMMUNITY=false  # 如果您希望服务器显示在社区服务器页中，请启用此选项（注意配置SERVER_PASSWORD!）
+      - SERVER_NAME="World of Pals"
+      - SERVER_PASSWORD="worldofpals" # 可选但推荐
+      - ADMIN_PASSWORD="adminPasswordHere"
+    volumes:
+      - /DATA/AppData/palworld-server:/palworld/
+    deploy:
+      resources:
+        reservations:
+          memory: 4096M
+
+x-casaos:
+  architectures:
+    - amd64
+  main: palworld-server
+  store_app_id: palworld-server
+  category: Games
+  author: Cp0204
+  developer: thijsvanloef
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server/screenshot-3.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server/thumbnail.png
+  description:
+    en_us: Get started with hosting your own Palworld dedicated server. Palworld is an action-adventure, survival, and monster-taming game created and published by Japanese developer Pocket Pair. The game is set in an open world populated with animal-like creatures called "Pals", which players can battle and capture to use for base building, traversal, and combat.
+    zh_cn: 创建你自己的《幻兽帕鲁》专用服务器。《幻兽帕鲁》是由日本开发商Pocket Pair推出的一款动作冒险生存游戏。游戏设定在一个居住着类似动物的生物“帕鲁”的开放世界中，玩家可以战斗并捕捉帕鲁，然后用它们来建造基地、骑乘和战斗。《幻兽帕鲁》可单人游玩，也可通过私人多人服务器来让最多4名玩家同时在线游戏，还支持最多32名玩家在一个服务器上进行网络游戏。
+  tagline:
+    en_us: Easily run a Palworld dedicated server
+    zh_cn: 轻松运行《Palworld 幻兽帕鲁》专用服务器
+  title:
+    en_us: Palworld Dedicated Server
+    zh_cn: 《幻兽帕鲁》私服
+  tips:
+    before_install:
+      en_us: |
+        This application is a game private service with high performance requirements:
+
+        | Resources | Minimum | Recommended |
+        | ---- | ---- | ---- |
+        | CPU | 4-core | 4-core+ |
+        | RAM | 16GB | 32GB+ |
+        | Storage | 4GB | 12GB+ |
+
+        > Has been tested 1 player logged in to play 2GB RAM usage.
+
+        Environment variables that should be modified after installation:
+
+        | Variables | Information | Defaults |
+        | ---- | ---- | ------ |
+        | SERVER_NAME | Server Name | `World of Pals` |
+        | SERVER_PASSWORD | Server Password | `worldofpals` |
+        | ADMIN_PASSWORD | Server administrator password | `adminPasswordHere` |
+
+        Other parameters of the game server can be set in the environment variables, please read the [documentation](https://github.com/thijsvanloef/palworld-server-docker?tab=readme-ov-file#editing-server-settings).
+      zh_cn: |
+        本应用属于游戏私服，性能要求较高：
+
+        | 资源 | 最小 | 推荐 |
+        | ---- | ---- | ---- |
+        | CPU  | 4核| 4核以上 |
+        | 运存   | 16GB | 32GB+ |
+        | 存储空间 | 4GB | 12GB+ |
+
+        > 经测试单人登入游玩约 2GB RAM 占用。
+
+        安装后应修改的环境变量：
+
+        | 变量 | 信息 | 默认值 |
+        | ---- | ---- | ------ |
+        | `SERVER_NAME` | 服务器名称  | `World of Pals` |
+        | `SERVER_PASSWORD` | 服务器密码 | `worldofpals` |
+        | `ADMIN_PASSWORD` | 服务器管理员密码 | `adminPasswordHere` |
+
+        在环境变量中还可以设置游戏服务器其他参数，请阅读[文档](https://github.com/thijsvanloef/palworld-server-docker/blob/main/docs/zh-CN/README.md#编辑服务器配置)。
+  port_map: ''
+  scheme: http
+  index: /
