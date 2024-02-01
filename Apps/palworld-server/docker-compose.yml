@@ -42,10 +42,10 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server/screenshot-3.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server/thumbnail.png
   description:
-    en_us: Get started with hosting your own Palworld dedicated server. Palworld is an action-adventure, survival, and monster-taming game created and published by Japanese developer Pocket Pair. The game is set in an open world populated with animal-like creatures called "Pals", which players can battle and capture to use for base building, traversal, and combat.
+    en_us: Get started with hosting your own Palworld Dedicated Server. Palworld is an action-adventure, survival, and monster-taming game created and published by Japanese developer Pocket Pair. The game is set in an open world populated with animal-like creatures called "Pals", which players can battle and capture to use for base building, traversal, and combat.
     zh_cn: 创建你自己的《幻兽帕鲁》专用服务器。《幻兽帕鲁》是由日本开发商Pocket Pair推出的一款动作冒险生存游戏。游戏设定在一个居住着类似动物的生物“帕鲁”的开放世界中，玩家可以战斗并捕捉帕鲁，然后用它们来建造基地、骑乘和战斗。《幻兽帕鲁》可单人游玩，也可通过私人多人服务器来让最多4名玩家同时在线游戏，还支持最多32名玩家在一个服务器上进行网络游戏。
   tagline:
-    en_us: Easily run a Palworld dedicated server
+    en_us: Easily run a Palworld Dedicated Server
     zh_cn: 轻松运行《Palworld 幻兽帕鲁》专用服务器
   title:
     en_us: Palworld Dedicated Server
@@ -57,9 +57,9 @@ x-casaos:
 
         | Resources | Minimum | Recommended |
         | ---- | ---- | ---- |
-        | CPU | 4-core | 4-core+ |
+        | CPU | 4 core | 4+ core |
         | RAM | 16GB | 32GB+ |
-        | Storage | 4GB | 12GB+ |
+        | Storage | 8GB | 20GB |
 
         > Has been tested 1 player logged in to play 2GB RAM usage.
 
@@ -77,9 +77,9 @@ x-casaos:
 
         | 资源 | 最小 | 推荐 |
         | ---- | ---- | ---- |
-        | CPU  | 4核| 4核以上 |
+        | CPU  | 4核| 4核+ |
         | 运存   | 16GB | 32GB+ |
-        | 存储空间 | 4GB | 12GB+ |
+        | 存储空间 | 8GB | 20GB |
 
         > 经测试单人登入游玩约 2GB RAM 占用。
 
