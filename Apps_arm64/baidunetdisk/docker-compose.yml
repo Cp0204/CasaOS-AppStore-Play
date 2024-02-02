@@ -1,7 +1,7 @@
 name: baidunetdisk
 services:
   baidunetdisk:
-    image: johngong/baidunetdisk:latest
+    image: emuqi/baidunetdisk-arm64-vnc:latest
     container_name: baidunetdisk
     deploy:
       resources:
@@ -21,7 +21,6 @@ services:
 
 x-casaos:
   architectures:
-    - amd64
     - arm64
   main: baidunetdisk
   store_app_id: baidunetdisk
@@ -48,7 +47,7 @@ x-casaos:
         3. Note: If Baidu.com pops up an upgrade prompt inside the container, Please ignore it.
 
 
-        [Project documentation](https://hub.docker.com/r/johngong/baidunetdisk)"
+        [Project documentation](https://hub.docker.com/r/emuqi/baidunetdisk-arm64-vnc)"
       zh_cn: 默认访问密码：`vncpassword`，可通过环境变量`VNC_PASSWORD`修改。
 
         1. 默认VNC端口5900，如果不用VNC客户端连接可删除5900映射。
@@ -58,7 +57,7 @@ x-casaos:
         3. 注意：如果容器内部百度网盘弹出升级提示，请忽略。
 
 
-        [项目文档](https://hub.docker.com/r/johngong/baidunetdisk)
+        [项目文档](https://hub.docker.com/r/emuqi/baidunetdisk-arm64-vnc)
   index: /
   port_map: "5800"
   scheme: http
