@@ -11,7 +11,7 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: $TZ
-    image: linuxserver/emby:arm32v7-4.8.0-beta
+    image: emby/embyserver_arm32v7:latest
     deploy:
       resources:
         reservations:

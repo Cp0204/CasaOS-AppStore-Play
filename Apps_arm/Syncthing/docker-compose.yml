@@ -5,7 +5,7 @@ services:
       PGID: $PGID
       PUID: $PUID
       TZ: $TZ
-    image: linuxserver/syncthing:arm32v7-1.23.5
+    image: syncthing/syncthing:latest
     deploy:
       resources:
         reservations:
@@ -27,8 +27,8 @@ services:
     restart: unless-stopped
     volumes:
     - type: bind
-      source: /DATA/AppData/$AppID/config
-      target: /config
+      source: /DATA/AppData/$AppID
+      target: /var/syncthing
     - type: bind
       source: /DATA
       target: /DATA
