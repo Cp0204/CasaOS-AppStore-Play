@@ -347,7 +347,7 @@
                   // Long syntax
                   .map(port => ({
                     target: parseInt(port.target),
-                    published: parseInt(port.published),
+                    published: port.published,
                     protocol: port.protocol,
                   })),
                 restart: 'unless-stopped',
