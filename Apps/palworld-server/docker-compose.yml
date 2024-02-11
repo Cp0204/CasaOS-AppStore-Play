@@ -22,6 +22,7 @@ services:
       - ADMIN_PASSWORD="adminPasswordHere"
     volumes:
       - /DATA/AppData/palworld-server:/palworld/
+    network_mode: bridge
     deploy:
       resources:
         reservations:

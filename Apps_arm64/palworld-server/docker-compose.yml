@@ -20,6 +20,7 @@ services:
     #   - /DATA/AppData/palworld-server:/home/steam/Steam/steamapps/common/PalServer
     restart: unless-stopped
     container_name: palworld-server
+    network_mode: bridge
     deploy:
       resources:
         reservations:
