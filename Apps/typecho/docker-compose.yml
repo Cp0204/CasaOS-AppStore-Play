@@ -1,0 +1,64 @@
+name: typecho
+services:
+  typecho:
+    image: joyqi/typecho:nightly-php7.4-apache
+    container_name: typecho
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 80
+        published: '8080'
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID
+        target: /app/usr
+    environment:
+      TYPECHO_SITE_URL: https://your-domain.com
+    x-casaos:
+      ports:
+        - container: '80'
+          description:
+            en_us: Port
+            zh_cn: 端口
+      volumes:
+        - container: /app/usr
+          description:
+            en_us: Config directory.
+            zh_cn: 配置目录
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: typecho
+  store_app_id: typecho
+  category: Blog
+  author: Cp0204
+  developer: Typecho
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/typecho/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/typecho/screenshot-1.png
+  description:
+    en_us: Typecho is a PHP-based blog software and is designed to be the most powerful blog engine in the world. Typecho is released under the GNU General Public License 2.0.
+    zh_cn: Typecho 是一个基于 PHP 的博客软件，旨在成为世界上最强大的博客引擎。Typeecho 是在 GNU通用公共许可协议2.0下发布的。
+  tagline:
+    en_us: A PHP Blogging Platform. Simple and Powerful
+    zh_cn: 一个简单而强大的 PHP 博客平台
+  title:
+    en_us: typecho
+    zh_cn: typecho
+  tips:
+    before_install:
+      en_us: 1. For light use, select SQLite database during initialization. For advanced use, please install a separate database (Mysql, PostgreSQL).
+
+        2. When the container is installed a second time, it will be re-initialized and the original data can be used by entering the same database name.
+      zh_cn: 1. 如轻量使用，初始化过程中选SQLite数据库即可。如需进阶使用，请另行安装数据库（Mysql, PostgreSQL）。
+
+        2. 容器二次安装时，将重新初始化，输入相同的数据库名可使用原有数据。
+  port_map: '8080'
+  scheme: http
+  index: /
