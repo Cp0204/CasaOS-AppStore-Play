@@ -31,6 +31,7 @@ services:
 x-casaos:
   architectures:
     - amd64
+    - arm64
   main: palworld-server
   store_app_id: palworld-server
   category: Games
