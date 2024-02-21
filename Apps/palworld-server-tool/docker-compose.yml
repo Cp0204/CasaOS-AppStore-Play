@@ -1,0 +1,69 @@
+name: palworld-server-tool
+services:
+  palworld-server-tool:
+    image: jokerwho/palworld-server-tool:latest
+    container_name: palworld-server-tool
+    ports:
+      - 8080:8080
+    memswap_limit: 1G
+    volumes:
+      - /DATA/AppData/palworld-server/Pal/Saved:/game
+    environment:
+      - WEB__PASSWORD=password
+      - RCON__ADDRESS=172.17.0.1:25575
+      - RCON__PASSWORD=adminPasswordHere
+      - SAVE__PATH=/game
+      - SAVE__SYNC_INTERVAL=120
+    network_mode: bridge
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+        limits:
+          memory: 256M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: palworld-server-tool
+  store_app_id: palworld-server-tool
+  category: Games
+  author: Cp0204
+  developer: zaigie
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server-tool/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server-tool/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server-tool/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server-tool/screenshot-3.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server/thumbnail.png
+  description:
+    en_us: Through parse Level.sav and RCON, visual interface management PalWorld dedicated server. [documentation](https://github.com/zaigie/palworld-server-tool)
+    zh_cn: 基于Level.sav存档解析和RCON优雅地用可视化界面管理幻兽帕鲁专用服务器。[文档](https://github.com/zaigie/palworld-server-tool)
+  tagline:
+    en_us: Visual Management of PalWorld dedicated server.
+    zh_cn: 可视化管理幻兽帕鲁专用服务器
+  title:
+    en_us: PalWorld Server Tool
+    zh_cn: 《幻兽帕鲁》服务器管理工具
+  tips:
+    before_install:
+      en_us: |
+        Environment variables that should be modified after installation:
+
+        | Variables | Information | Defaults |
+        | ---- | ---- | ------ |
+        | WEB__PASSWORD | WebUI password | `password` |
+        | RCON__ADDRESS | RCON service address | `172.17.0.1:25575` |
+        | RCON__PASSWORD | Server administrator password | `adminPasswordHere` |
+      zh_cn: |
+        安装后应修改的环境变量：
+
+        | 变量 | 信息 | 默认值 |
+        | ---- | ---- | ------ |
+        | `WEB__PASSWORD` | Web界面管理密码  | `password` |
+        | `RCON__ADDRESS` | RCON服务对应的地址 | `172.17.0.1:25575` |
+        | `RCON__PASSWORD` | 服务器管理员密码 | `adminPasswordHere` |
+  port_map: "8080"
+  scheme: http
+  index: /
