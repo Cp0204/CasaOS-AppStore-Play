@@ -1,0 +1,60 @@
+name: quark-auto-save
+services:
+  quark-auto-save:
+    image: ghcr.io/cp0204/quark-auto-save:latest
+    container_name: quark-auto-save
+    deploy:
+      resources:
+        reservations:
+          memory: 32M
+    network_mode: bridge
+    ports:
+      - target: 5005
+        published: '5005'
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /app/config
+    x-casaos:
+      ports:
+        - container: '5005'
+          description:
+            en_us: Port
+            zh_cn: 端口
+      volumes:
+        - container: /app/config
+          description:
+            en_us: Config directory.
+            zh_cn: 配置目录
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: quark-auto-save
+  store_app_id: quark-auto-save
+  category: Cloud
+  author: Cp0204
+  developer: Cp0204
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/quark-auto-save/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/quark-auto-save/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/quark-auto-save/screenshot-2.png
+  description:
+    en_us: For some continuously updated resources, it is very troublesome to dump them every now and then.  Execute this script regularly to automatically dump and organize file names, together with Alist, rclone, Emby, you can achieve the effect of automatic updating. 🥳
+    zh_cn: 对于一些持续更新的资源，隔段时间去转存十分麻烦。  定期执行本脚本自动转存、文件名整理，配合 Alist, rclone, Emby 可达到自动追更的效果。🥳
+  tagline:
+    en_us: Pan.quark.cn's sign, automatic dumping, naming and organizing, sending push alerts and refreshing media libraries all in one
+    zh_cn: 夸克网盘签到、自动转存、命名整理、发推送提醒和刷新媒体库一条龙
+  title:
+    en_us: QuarkAutoSave
+    zh_cn: 夸克网盘自动转存
+  tips:
+    before_install:
+      en_us: 'WebUI default admin account: `admin`, password `admin123`, only support change in `quark_config.json`. Currently WebUI is not perfect, only for auxiliary use, you should also understand how to [configure manually](https://github.com/Cp0204/quark-auto-save/blob/main/README.md#%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE).'
+      zh_cn: WebUI 默认管理账号： `admin` ，密码 `admin123`，仅支持在 `quark_config.json` 中修改。目前 WebUI 并不完善，只供辅助使用，你也应该了解如何[手动配置](https://github.com/Cp0204/quark-auto-save/blob/main/README.md#%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE)。
+  port_map: '5005'
+  scheme: http
+  index: /
