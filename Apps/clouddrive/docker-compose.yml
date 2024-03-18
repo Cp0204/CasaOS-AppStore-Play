@@ -12,28 +12,15 @@ services:
     privileged: true
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /DATA/AppData/$AppID/Config
-        target: /Config
-      - type: bind
-        source: /mnt
-        target: /mnt
-        shared: true
-      - type: bind
-        source: /media
-        target: /media
-        shared: true
+      - /DATA/AppData/clouddrive/Config:/Config
+      - /mnt:/mnt:shared
+      - /media:/media:shared
     devices:
       - /dev/fuse:/dev/fuse
     environment:
       CLOUDDRIVE_HOME: /Config
       TZ: Asia/Shanghai
     x-casaos:
-      ports:
-        - container: ''
-          description:
-            en_us: Port
-            zh_cn: 端口
       volumes:
         - container: /Config
           description:
@@ -68,7 +55,37 @@ x-casaos:
     en_us: The infinite possibility of unlocking cloud storage
     zh_cn: 解锁云存储的无限可能
   title:
-    en_us: CloudDrive
+    en_us: CloudDrive2
+  tips:
+    before_install:
+      en_us: |
+        **Must step before installing** Execute the following command on the host machine before proceeding to the next step:
+        ```
+        sudo mkdir -p /etc/systemd/system/docker.service.d/
+        sudo cat <<EOF > /etc/systemd/system/docker.service.d/clear_mount_propagation_flags.conf
+        [Service]
+        MountFlags=shared
+        EOF
+        sudo systemctl restart docker.service
+        ```
+        ---
+        ⚠️⚠️⚠️ **IMPORTANT**: Do not edit the application settings in CasaOS UI after installation! Otherwise it will result in unsuccessful mounting!
+
+        📁 Mount to the host using the `/mnt` or `/media` directory.
+      zh_cn: |
+        **安装前必须步骤**，先在宿主机执行以下命令，再进行下一步：
+        ```
+        sudo mkdir -p /etc/systemd/system/docker.service.d/
+        sudo cat <<EOF > /etc/systemd/system/docker.service.d/clear_mount_propagation_flags.conf
+        [Service]
+        MountFlags=shared
+        EOF
+        sudo systemctl restart docker.service
+        ```
+        ---
+        ⚠️⚠️⚠️ **重要提醒**：安装后请勿在CasaOS UI中编辑应用设置！否则将导致无法成功挂载！
+
+        📁 使用 `/mnt` 或 `/media` 目录挂载到宿主机。
   port_map: '19798'
   scheme: http
   index: /
