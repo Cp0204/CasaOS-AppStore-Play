@@ -1,0 +1,74 @@
+name: clouddrive
+services:
+  clouddrive:
+    image: cloudnas/clouddrive2
+    container_name: clouddrive
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: host
+    pid: "host"
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/Config
+        target: /Config
+      - type: bind
+        source: /mnt
+        target: /mnt
+        shared: true
+      - type: bind
+        source: /media
+        target: /media
+        shared: true
+    devices:
+      - /dev/fuse:/dev/fuse
+    environment:
+      CLOUDDRIVE_HOME: /Config
+      TZ: Asia/Shanghai
+    x-casaos:
+      ports:
+        - container: ''
+          description:
+            en_us: Port
+            zh_cn: 端口
+      volumes:
+        - container: /Config
+          description:
+            en_us: Config directory.
+            zh_cn: 配置目录
+        - container: /mnt
+          description:
+            en_us: Mount directory.
+            zh_cn: 挂载目录
+        - container: /media
+          description:
+            en_us: Mount directory.
+            zh_cn: 挂载目录
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: clouddrive
+  store_app_id: clouddrive
+  category: Cloud
+  author: Cp0204
+  developer: waytechcloudfs
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/clouddrive/icon.png
+  # screenshot_link:
+  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/clouddrive/screenshot-1.png
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/clouddrive/thumbnail.png
+  description:
+    en_us: A powerful multi -cloud disk management tool provides users with a one -stop multi -cloud disk solution containing a cloud -mounted local mount.
+    zh_cn: 一个强大的多云盘管理工具，为用户提供包含云盘本地挂载的一站式的多云盘解决方案。
+  tagline:
+    en_us: The infinite possibility of unlocking cloud storage
+    zh_cn: 解锁云存储的无限可能
+  title:
+    en_us: CloudDrive
+  port_map: '19798'
+  scheme: http
+  index: /
