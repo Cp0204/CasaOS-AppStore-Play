@@ -1,0 +1,84 @@
+version: '3'
+
+name: vanblog
+
+services:
+  vanblog:
+    # 阿里云镜像源
+    # image: registry.cn-beijing.aliyuncs.com/mereith/van-blog:latest
+    image: mereith/van-blog:latest
+    container_name: vanblog-web
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    restart: unless-stopped
+    environment:
+      TZ: 'Asia/Shanghai'
+      # 邮箱地址，用于自动申请 https 证书
+      EMAIL: 'someone@mereith.com'
+      # mongoDB URL
+      VAN_BLOG_DATABASE_URL: 'mongodb://vanblog-mongo:27017/vanBlog?authSource=admin'
+    volumes:
+      # 图床文件的存放地址，按需修改。
+      - /DATA/AppData/$AppID/data/static:/app/static
+      # 日志文件
+      - /DATA/AppData/$AppID/log:/var/log
+      # caddy 配置存储
+      - /DATA/AppData/$AppID/caddy/config:/root/.config/caddy
+      # caddy 证书存储
+      - /DATA/AppData/$AppID/caddy/data:/root/.local/share/caddy
+    ports:
+      # 前面的是映射到宿主机的端口号，改端口的话该前面的
+      - 8880:80
+      - 4443:443
+    networks:
+      - vanblog
+
+  mongo:
+    # 某些机器不支持 avx 会报错，所以默认用 v4 版本。有的话用最新的。
+    image: mongo:4.4.16
+    container_name: vanblog-mongo
+    restart: unless-stopped
+    environment:
+      TZ: 'Asia/Shanghai'
+    volumes:
+      - /DATA/AppData/$AppID/data/mongo:/data/db
+    networks:
+      - vanblog
+
+networks:
+  vanblog:
+    name: vanblog
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: vanblog
+  store_app_id: vanblog
+  category: Blog
+  author: Cp0204
+  developer: Mereithhh
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vanblog/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vanblog/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vanblog/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vanblog/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vanblog/screenshot-4.png
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vanblog/thumbnail.png
+  description:
+    en_us: VanBlog is a simple, practical and elegant high-performance personal blog system. It supports HTTPS certificate fully automated on-demand application, dark mode, support for mobile adaptive and commenting, built-in traffic statistics and image bed, embedded commenting system, complete with, support for dark mode, support for mobile, support for one-click upload of clipboard images to the image bed, backend administration panel with a powerful editor.  Translated with DeepL.com (free version)
+    zh_cn: VanBlog 是一款简洁实用优雅的高性能个人博客系统。支持 HTTPS 证书全自动按需申请、黑暗模式、支持移动端自适应和评论，内置流量统计与图床，内嵌评论系统，配有完备的、支持黑暗模式、支持移动端、支持一键上传剪切板图片到图床、带有强大的编辑器的后台管理面板。
+  tagline:
+    en_us: A simple, practical and elegant personal blog system
+    zh_cn: 一款简洁实用优雅的个人博客系统
+  title:
+    en_us: VanBlog
+  tips:
+    before_install:
+      en_us: After deploying VanBlog, please open the homepage and click the avatar in the upper right corner, and follow the instructions to complete the initialization. You can refer to [Site Configuration](https://vanblog.mereith.com/features/config.html) for specific settings.
+      zh_cn: 部署 VanBlog 后，请打开首页点击右上角头像，并按照指引完成初始化。具体设置项可以参考 [站点配置](https://vanblog.mereith.com/features/config.html)。
+  port_map: '8880'
+  scheme: http
+  index: /
