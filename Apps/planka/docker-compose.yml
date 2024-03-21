@@ -1,0 +1,96 @@
+version: '3'
+name: planka
+services:
+  planka:
+    image: ghcr.io/plankanban/planka:latest
+    container_name: planka-app
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/$AppID/user-avatars:/app/public/user-avatars
+      - /DATA/AppData/$AppID/project-background-images:/app/public/project-background-images
+      - /DATA/AppData/$AppID/attachments:/app/private/attachments
+    ports:
+      - 3000:1337
+    environment:
+      - BASE_URL=http://localhost:3000
+      - DATABASE_URL=postgresql://postgres@planka-postgres/planka
+      - SECRET_KEY=69835c14ebf1ae57bef69f87a73cabde6e0925f47ce74a8eca2edc5f51375f1e7fea9c327d5ab764fd326abc8e303ad75caa0445aedeb1230f3e336906f5533a
+      - TOKEN_EXPIRES_IN=365 # In days
+      - DEFAULT_ADMIN_EMAIL=demo@demo.demo # Do not remove if you want to prevent this user from being edited/deleted
+      - DEFAULT_ADMIN_PASSWORD=demo@demo.demo
+      - DEFAULT_ADMIN_NAME=Demo Demo
+      - DEFAULT_ADMIN_USERNAME=demo
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - planka
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: planka-postgres
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/$AppID/db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=planka
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d planka"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - planka
+
+networks:
+  planka:
+    name: planka
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: planka
+  store_app_id: planka
+  category: Project Management
+  author: Cp0204
+  developer: plankanban
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/planka/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/planka/screenshot-1.png
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/planka/thumbnail.png
+  description:
+    en_us: Planka is an elegant open-source project tracking tool designed to help teams efficiently manage project progress and task allocation. It supports creating projects, boards, cards, labels, and tasks, as well as real-time updates, internal notifications, and multi-language interfaces.
+    zh_cn: Planka 是一个优雅的开源项目跟踪工具，帮助团队高效管理项目进度和任务分配。它支持创建项目、看板、卡片、标签和任务，以及实时更新、内部通知和多语言界面。
+  tagline:
+    en_us: Free open source kanban board for workgroups
+    zh_cn: 免费开源的团队工作看板
+  title:
+    en_us: Planka
+  tips:
+    before_install:
+      en_us: |
+        After installation, you should modify the environment variables:
+
+        | Name | description |
+        | --- | --- |
+        | BASE_URL | Access URL |
+        | SECRET_KEY | 64-bit rand 0-f key |
+        | DEFAULT_ADMIN_*** | Admin Info |
+      zh_cn: |
+        安装后，你应修改环境变量：
+
+        | 变量名 | 说明 |
+        | --- | --- |
+        | BASE_URL | 访问URL |
+        | SECRET_KEY | 64位随机0-f秘钥 |
+        | DEFAULT_ADMIN_*** | 管理员信息 |
+  port_map: '3000'
+  scheme: http
+  index: /
