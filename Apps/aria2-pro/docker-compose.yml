@@ -1,7 +1,7 @@
-name: aria2-pro-complete
+name: aria2-pro
 services:
   ariang:
-    container_name: aria-ng
+    container_name: aria2-ariang
     image: p3terx/ariang:latest
     logging:
       options:
@@ -9,6 +9,7 @@ services:
     restart: unless-stopped
     ports:
       - 6880:6880
+
   aria2-pro:
     environment:
       LISTEN_PORT: "6888"
@@ -68,6 +69,7 @@ services:
               description:
                 en_us: DHT listening port (UDP) mapping, which is the port defined in the dht-listen-port option in Aria2 configuration.
                 zh_cn: DHT 监听端口（UDP）映射，即 Aria2 配置中 dht-listen-port 选项定义的端口。
+
 x-casaos:
   architectures:
     - amd64
@@ -81,19 +83,40 @@ x-casaos:
   developer: P3TERX
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/icon.png
   screenshot_link:
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/thumbnail.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/screenshot-2.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/thumbnail.png
   main: aria2-pro
   tagline:
     en_us: A better Aria2 Docker container
     zh_cn: 更好用的 Aria2 Docker 容器
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/thumbnail.png
   tips:
     before_install:
-      en_us: Aria2 complete body,The token of aria2-pro is TOKEN.
-      zh_cn: Aria2 完全体,秘钥是 TOKEN。
+      en_us: |
+        Aria2 itself is a download kernel with no admin panel. This application integrates with WebUI [AriaNg](http://ariang.mayswind.net) for graphical management, but you still **need to set up the AriaNg connection information manually** after installation:
+
+        | Environment | Default | Description |
+        | --- | --- | --- |
+        | RPC_SECRET | `TOKEN` | RPC SecretKey |
+        | RPC_PORT | `6800` | RPC Port |
+
+        Alternatively, you can use a mobile app to connect to the management, e.g. [Aria2App](https://github.com/devgianlu/Aria2App).
+
+        **NOTE**: Changes to Aria2 settings using the third-party panel will only be saved for that sub-process, and will not modify the configuration file; if permanently modified, you should manually modify the Aria2 configuration file.
+      zh_cn: |
+        Aria2 本身是一个下载核心，没有管理面板。本应用集成 WebUI [AriaNg](http://ariang.mayswind.net) 供图形化管理，但安装后你仍然**需要手动设置 AriaNg 连接信息**：
+
+        | 环境变量 | 默认值 | 说明 |
+        | --- | --- | --- |
+        | RPC_SECRET | `TOKEN` | RPC秘钥 |
+        | RPC_PORT | `6800` | RPC端口 |
+
+        此外，你也可以使用手机应用连接管理，例如：[Aria2App](https://github.com/devgianlu/Aria2App)。
+
+        **注意**：使用第三方面板对 Aria2 设置的修改只会保存在该次进程中，不会修改配置文件，如果永久修改，你应该手动修改Aria2配置文件。
   title:
     en_us: Aria2 Pro
   scheme: http
-  hostname: ariang.mayswind.net
-  port_map: ""
-  index: /latest
+  hostname: ""
+  port_map: "6880"
+  index: "/#!/downloading"
