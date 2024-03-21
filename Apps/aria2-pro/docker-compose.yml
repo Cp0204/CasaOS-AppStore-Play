@@ -1,5 +1,14 @@
-name: aria2-pro
+name: aria2-pro-complete
 services:
+  ariang:
+    container_name: aria-ng
+    image: p3terx/ariang:latest
+    logging:
+      options:
+        max-size: "1m"
+    restart: unless-stopped
+    ports:
+      - 6880:6880
   aria2-pro:
     environment:
       LISTEN_PORT: "6888"
@@ -80,8 +89,8 @@ x-casaos:
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/thumbnail.png
   tips:
     before_install:
-      en_us: Aria2 is a download kernel without a WebUI and is recommended to be used with [AriaNg](http://ariang.mayswind.net/latest/#! /downloading).
-      zh_cn: Aria2 是一个下载核心，没有 WebUI，建议配合 [AriaNg](http://ariang.mayswind.net/latest/#!/downloading) 使用。
+      en_us: Aria2 complete body,The token of aria2-pro is TOKEN.
+      zh_cn: Aria2 完全体,秘钥是 TOKEN。
   title:
     en_us: Aria2 Pro
   scheme: http
