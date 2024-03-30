@@ -1,0 +1,63 @@
+version: "3"
+name: codimd
+services:
+  database:
+    image: postgres:11.6-alpine
+    container_name: codimd-db
+    environment:
+      - POSTGRES_USER=codimd
+      - POSTGRES_PASSWORD=change_password
+      - POSTGRES_DB=codimd
+    volumes:
+      - /DATA/AppData/codimd/database:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - codimd
+
+  codimd:
+    image: hackmdio/hackmd:latest
+    container_name: codimd-app
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    environment:
+      - CMD_DB_URL=postgres://codimd:change_password@database/codimd
+      - CMD_USECDN=false
+    depends_on:
+      - database
+    ports:
+      - "3000:3000"
+    volumes:
+      - /DATA/AppData/codimd/uploads:/home/hackmd/app/public/uploads
+    restart: unless-stopped
+    networks:
+      - codimd
+
+networks:
+  codimd:
+    name: codimd
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: codimd
+  store_app_id: codimd
+  category: Documents
+  author: Cp0204
+  developer: hackmd.io
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/codimd/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/codimd/screenshot-1.png
+  description:
+    en_us: CodiMD lets you collaborate in real-time with markdown. Built on HackMD source code, CodiMD lets you host and control your team's content with speed and ease.
+    zh_cn: CodiMD 可让您使用 Markdown 进行实时协作。CodiMD 基于 HackMD 源代码构建，可让您快速、轻松地托管和控制团队内容。
+  tagline:
+    en_us: Realtime collaborative markdown notes on all platforms.
+    zh_cn: 全平台 Markdown 实时协作
+  title:
+    en_us: CodiMD
+  port_map: "3000"
+  scheme: http
+  index: /
