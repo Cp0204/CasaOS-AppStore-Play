@@ -1,0 +1,86 @@
+version: "3"
+name: halo
+services:
+  halo:
+    image: halohub/halo:2
+    container_name: halo-app
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    restart: unless-stopped
+    depends_on:
+      halodb:
+        condition: service_healthy
+    networks:
+      - halo
+    volumes:
+      - /DATA/AppData/halo2/app:/root/.halo2
+    ports:
+      - "8090:8090"
+    healthcheck:
+      test:
+        ["CMD", "curl", "-f", "http://localhost:8090/actuator/health/readiness"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    command:
+      - --spring.r2dbc.url=r2dbc:pool:postgresql://halodb/halo
+      - --spring.r2dbc.username=halo
+      # PostgreSQL 的密码，请保证与下方 POSTGRES_PASSWORD 的变量值一致。
+      - --spring.r2dbc.password=openpostgresql
+      - --spring.sql.init.platform=postgresql
+      # 外部访问地址，请根据实际需要修改
+      - --halo.external-url=http://localhost:8090/
+
+  halodb:
+    image: postgres:15.4
+    container_name: halo-db
+    restart: unless-stopped
+    networks:
+      - halo
+    volumes:
+      - /DATA/AppData/halo/db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_PASSWORD=openpostgresql
+      - POSTGRES_USER=halo
+      - POSTGRES_DB=halo
+      - PGUSER=halo
+
+networks:
+  halo:
+    name: halo
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: halo
+  store_app_id: halo
+  category: Blog
+  author: Cp0204
+  developer: www.halo.run
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/screenshot-4.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/thumbnail.png
+  description:
+    en_us: Halo is an open source blog system , written in Java , with a simple and easy to use interface and rich functionality features .
+    zh_cn: Halo 是一个开源的博客系统，采用 Java 编写，具有简洁易用的界面和丰富的功能特性。
+  tagline:
+    en_us: Open source powerful and easy to use website builder
+    zh_cn: 强大易用的开源建站工具
+  title:
+    en_us: Halo
+  port_map: "8090"
+  scheme: http
+  index: /
