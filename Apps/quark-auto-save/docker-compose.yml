@@ -1,7 +1,7 @@
 name: quark-auto-save
 services:
   quark-auto-save:
-    image: ghcr.io/cp0204/quark-auto-save:latest
+    image: cp0204/quark-auto-save:latest
     container_name: quark-auto-save
     deploy:
       resources:
@@ -17,6 +17,9 @@ services:
       - type: bind
         source: /DATA/AppData/$AppID/config
         target: /app/config
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
     x-casaos:
       ports:
         - container: '5005'
