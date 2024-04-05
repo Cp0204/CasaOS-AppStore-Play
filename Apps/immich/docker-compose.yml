@@ -8,7 +8,7 @@ services:
           memory: 1024M
     container_name: immich-server
     hostname: immich-server
-    image: altran1502/immich-server:v1.100.0
+    image: altran1502/immich-server:v1.101.0
     command: ["start.sh", "immich"]
     volumes:
       - /DATA/Gallery/immich:/usr/src/app/upload
@@ -32,7 +32,7 @@ services:
   immich-microservices:
     container_name: immich-microservices
     hostname: immich-microservices
-    image: altran1502/immich-server:v1.100.0
+    image: altran1502/immich-server:v1.101.0
     command: ["start.sh", "microservices"]
     volumes:
       - /DATA/Gallery/immich:/usr/src/app/upload
@@ -54,7 +54,7 @@ services:
   immich-machine-learning:
     container_name: immich-machine-learning
     hostname: immich-machine-learning
-    image: altran1502/immich-machine-learning:v1.100.0
+    image: altran1502/immich-machine-learning:v1.101.0
     environment:
       - DB_DATABASE_NAME=immich
       - DB_HOSTNAME=immich-postgres
