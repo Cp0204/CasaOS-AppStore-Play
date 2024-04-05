@@ -38,7 +38,7 @@ x-casaos:
       zh_cn: 默认登录账号 `666`，默认登录密码 `666`
   title:
     en_us: Lucky
-    zh_cn: 大吉
+    zh_cn: 万吉
   index: /
   port_map: "16601"
   scheme: http
