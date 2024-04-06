@@ -10,7 +10,7 @@ services:
       - 4999:80
     volumes:
       - /DATA/AppData/showdoc/html:/var/www/html/
-    image: star7th/showdoc
+    image: star7th/showdoc:arm-latest
     deploy:
       resources:
         reservations:
@@ -18,7 +18,7 @@ services:
 
 x-casaos:
   architectures:
-    - amd64
+    - arm64
   main: showdoc
   store_app_id: showdoc
   category: Developer
