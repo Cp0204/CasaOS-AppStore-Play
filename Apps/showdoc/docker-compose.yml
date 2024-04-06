@@ -1,0 +1,43 @@
+name: showdoc
+services:
+  showdoc:
+    container_name: showdoc
+    user: root
+    restart: unless-stopped
+    network_mode: bridge
+    privileged: true
+    ports:
+      - 4999:80
+    volumes:
+      - /DATA/AppData/showdoc/html:/var/www/html/
+    image: star7th/showdoc
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: showdoc
+  store_app_id: showdoc
+  category: Developer
+  author: Cp0204
+  developer: star7th
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/showdoc/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/showdoc/screenshot-1.png
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/showdoc/thumbnail.png
+  description:
+    en_us: ShowDoc is a tool greatly applicable for an IT team to share documents online. It can promote communication efficiency among members of the team.
+    zh_cn: ShowDoc是一个非常适合IT团队的在线API文档、技术文档工具。通过showdoc，你可以方便地使用markdown语法来书写出美观的API文档、数据字典文档、技术文档、在线excel文档等等。
+  tagline:
+    en_us: A tool greatly applicable for an IT team to share documents online
+    zh_cn: 一个非常适合IT团队的API文档、技术文档工具
+  title:
+    en_us: ShowDoc
+  port_map: "4999"
+  scheme: http
+  index: /
