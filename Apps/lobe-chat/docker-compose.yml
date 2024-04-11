@@ -1,0 +1,50 @@
+name: lobe-chat
+services:
+  lobe-chat:
+    ports:
+      - 3210:3210
+    environment:
+      - OPENAI_API_KEY=sk-xxxx
+      - OPENAI_PROXY_URL=https://api.openai.com/v1
+      - ACCESS_CODE=lobe66
+    container_name: lobe-chat
+    image: lobehub/lobe-chat:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    restart: unless-stopped
+    network_mode: bridge
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: lobe-chat
+  store_app_id: lobe-chat
+  category: Chat
+  author: Cp0204
+  developer: LobeHub
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lobe-chat/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lobe-chat/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lobe-chat/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lobe-chat/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lobe-chat/screenshot-4.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lobe-chat/screenshot-5.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lobe-chat/thumbnail.png
+  description:
+    en_us: An open-source, modern-design LLMs/AI chat framework. Supports Multi AI Providers( OpenAI / Claude 3 / Gemini / Perplexity / Bedrock / Azure / Mistral / Ollama ), Multi-Modals (Vision/TTS) and plugin system. One-click FREE deployment of your private ChatGPT chat application.
+    zh_cn: 一个开源、现代设计的LLMs/AI聊天框架。支持多个AI供应商（OpenAI / Claude 3 / Gemini / Perplexity / Bedrock / Azure / Mistral / Ollama）、多模态（视觉/TTS）和插件系统。一键免费部署您的私人ChatGPT聊天应用程序。
+  tagline:
+    en_us: Built for you the Super Individual
+    zh_cn: 在 LobeChat 中将你的 AI 团队汇聚一处
+  title:
+    en_us: LobeChat
+  tips:
+    before_install:
+      en_us: LobeChat provides some additional configuration items during deployment, which can be customized using [environment-variables](https://lobehub.com/docs/self-hosting/environment-variables/basic).
+      zh_cn: LobeChat 在部署时提供了一些额外的配置项，你可以使用[环境变量](https://lobehub.com/zh/docs/self-hosting/environment-variables/basic)进行自定义设置。
+  port_map: "3210"
+  scheme: http
+  index: /
