@@ -1,0 +1,54 @@
+version: "3.8"
+name: casamod
+services:
+  casamod:
+    #build: .
+    container_name: casamod
+    image: cp0204/casamod:latest
+    volumes:
+      - /DATA/AppData/casamod:/DATA/AppData/casamod
+      - /var/lib/casaos/www:/var/lib/casaos/www
+    network_mode: bridge
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 8M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: casamod
+  store_app_id: casamod
+  category: Developer
+  author: Cp0204
+  developer: Cp0204
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/icon.png
+  # screenshot_link:
+  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-1.png
+  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-2.png
+  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-3.png
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/thumbnail.png
+  description:
+    en_us: Modding CasaOS's frontend like it's a game, adding all sorts of bells and whistles.
+    zh_cn: 像游戏一样打MOD，为 CasaOS 前端做一些花里胡哨的修改。
+  tagline:
+    en_us: MOD for CasaOS
+    zh_cn: 给 CasaOS 打 MOD
+  title:
+    en_us: CasaMOD
+  tips:
+    before_install:
+      en_us: |
+        1. Install CasaMOD
+        2. Put the mod directory you want to enable into the `/DATA/AppData/casamod/mod` directory.
+        3. Restart CasaMOD and finish!
+      zh_cn: |
+        1. 安装 CasaMOD
+        2. 把要启用的MOD目录放到 `/DATA/AppData/casamod/mod` 目录
+        3. 重启 CasaMOD ，完成！
+  port_map: ''
+  scheme: http
+  index: /
