@@ -26,29 +26,33 @@ x-casaos:
   author: Cp0204
   developer: Cp0204
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/icon.png
-  # screenshot_link:
-  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-1.png
-  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-2.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-2.png
   #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-3.png
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/thumbnail.png
   description:
     en_us: Modding CasaOS's frontend like it's a game, adding all sorts of bells and whistles.
     zh_cn: 像游戏一样打MOD，为 CasaOS 前端做一些花里胡哨的修改。
   tagline:
-    en_us: MOD for CasaOS
-    zh_cn: 给 CasaOS 打 MOD
+    en_us: MOD for CasaOS, Make your CasaOS unique
+    zh_cn: 给 CasaOS 打 MOD, 让你的 CasaOS 独一无二
   title:
     en_us: CasaMOD
   tips:
     before_install:
       en_us: |
         1. Install CasaMOD
-        2. Put the mod directory you want to enable into the `/DATA/AppData/casamod/mod` directory.
+        2. Put the MOD directory you want to enable into the `/DATA/AppData/casamod/mod` directory.
         3. Restart CasaMOD and finish!
+
+        You can find new MOD, and contribute your MOD [here](https://github.com/Cp0204/CasaMOD) 😉
       zh_cn: |
         1. 安装 CasaMOD
         2. 把要启用的MOD目录放到 `/DATA/AppData/casamod/mod` 目录
         3. 重启 CasaMOD ，完成！
+
+        你可以在[这里](https://github.com/Cp0204/CasaMOD/blob/main/README_CN.md)查找新MOD，和贡献你的MOD 😉
   port_map: ''
   scheme: http
   index: /
