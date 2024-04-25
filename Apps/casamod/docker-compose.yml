@@ -32,11 +32,11 @@ x-casaos:
   #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-3.png
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/thumbnail.png
   description:
-    en_us: Modding CasaOS's frontend like it's a game, adding all sorts of bells and whistles.
-    zh_cn: 像游戏一样打MOD，为 CasaOS 前端做一些花里胡哨的修改。
+    en_us: Add MODs like a game, and elegantly make some fancy modifications to the CasaOS frontend. Examples include mouse effects, animated wallpapers, modified themes, and more.
+    zh_cn: 像游戏一样打 MOD （模组），优雅地为 CasaOS 前端做一些花里胡哨的修改。例如鼠标特效、动态背景、修改主题，等等。
   tagline:
     en_us: MOD for CasaOS, Make your CasaOS unique
-    zh_cn: 给 CasaOS 打 MOD, 让你的 CasaOS 独一无二
+    zh_cn: 给 CasaOS 打 MOD ，让你的 CasaOS 独一无二
   title:
     en_us: CasaMOD
   tips:
