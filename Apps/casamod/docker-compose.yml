@@ -53,6 +53,7 @@ x-casaos:
         3. 重启 CasaMOD ，完成！
 
         你可以在[这里](https://github.com/Cp0204/CasaMOD/blob/main/README_CN.md)查找新MOD，和贡献你的MOD 😉
+  scheme: https
+  hostname: github.com
   port_map: ''
-  scheme: http
-  index: /
+  index: /Cp0204/CasaMOD

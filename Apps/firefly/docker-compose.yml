@@ -1,5 +1,4 @@
-
-version: '3'
+version: "3"
 name: firefly
 services:
   firefly:
@@ -43,7 +42,7 @@ x-casaos:
     en_us: Firefly is a simple and easy to install WireGuard server software, which can be widely used in scenarios such as remote networking, remote work, and expose a local server behind a NAT or firewall to the internet.  🎯 Features 🟢 Provide a simple and easy-to-use web management UI  🟣 Supports access to all WireGuard clients  🟡 No need for system installation of WireGuard components  🟠 Single file, no additional library dependencies  🔴 Automatically apply for free SSL certificate
     zh_cn: 萤火虫是一款简单、易架设的 WireGuard 服务端软件，可广泛用于异地组网、远程办公、内网穿透等场景。  🎯 特色 🟢 提供简单、易用的web管理后台  🟣 支持所有 WireGuard 客户端接入  🟡 无需系统安装 WireGuard 组件  🟠 单文件、无额外库依赖  🔴 自动申请免费SSL证书
   tagline:
-    en_us: 'Firefly, the easiest using of WireGuard VPN server, plus version of wg-easy.'
+    en_us: "Firefly, the easiest using of WireGuard VPN server, plus version of wg-easy."
     zh_cn: 最简单易用的WireGuard服务器。可广泛应用于内网穿透、异地组网、远程办公等场景。
   title:
     en_us: Firefly
@@ -53,6 +52,6 @@ x-casaos:
       en_us: Default password for admin background `firefly`, you can modify it in environment variables.
       zh_cn: 管理后台默认密码 `firefly`，你可以在环境变量中修改。
     custom: null
-  port_map: '50121'
+  port_map: "50121"
   scheme: http
   index: /
