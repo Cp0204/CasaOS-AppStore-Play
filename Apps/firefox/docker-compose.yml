@@ -1,0 +1,64 @@
+name: firefox
+services:
+  firefox:
+    container_name: firefox
+    image: linuxserver/firefox:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 768M
+    environment:
+      - CUSTOM_USER=admin
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
+      - FIREFOX_CLI=https://www.google.com/
+      - INSTALL_PACKAGES=font-noto-cjk
+      - LC_ALL=zh_CN.UTF-8
+      - PASSWORD=firefoxadmin
+      - PGID=1000
+      - PUID=1000
+      - TZ=Asia/Shanghai
+      - NO_DECOR=1
+    hostname: firefox
+    ports:
+      - target: 3000
+        published: "3000"
+        protocol: tcp
+      - target: 3001
+        published: "3001"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/firefox/config
+        target: /config
+    network_mode: bridge
+    privileged: false
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: firefox
+  store_app_id: firefox
+  category: WEB
+  author: Cp0204
+  developer: LinuxServer.io
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/firefox/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/firefox/screenshot-1.png
+  description:
+    en_us: Firefox Browser, is a free and open-source web browser developed by the Mozilla Foundation and its subsidiary, the Mozilla Corporation. Firefox uses the Gecko layout engine to render web pages, which implements current and anticipated web standards.
+    zh_cn: Firefox 浏览器，是由 Mozilla 基金会及其子公司 Mozilla Corporation 开发的免费开源 Web 浏览器。Firefox 使用 Gecko 布局引擎来渲染网页，该引擎实现了当前和预期的 Web 标准。
+  tagline:
+    en_us: This is a Docker container for Firefox, it can access the intranet
+    zh_cn: 容器中的火狐浏览器，可访问内网
+  title:
+    en_us: Firefox
+  tips:
+    before_install:
+      en_us: Default login `admin` Password `firefoxadmin`, you can change it in environment variables. More [description](https://hub.docker.com/r/linuxserver/firefox).
+      zh_cn: 默认登录账号 `admin` 密码 `firefoxadmin`，你可以在环境变量中更改。更多[说明](https://hub.docker.com/r/linuxserver/firefox)。
+    custom: null
+  port_map: "3000"
+  scheme: http
+  index: /
