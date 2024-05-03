@@ -56,8 +56,12 @@ x-casaos:
     en_us: Firefox
   tips:
     before_install:
-      en_us: Default login `admin` Password `firefoxadmin`, you can change it in environment variables. More [description](https://hub.docker.com/r/linuxserver/firefox).
-      zh_cn: 默认登录账号 `admin` 密码 `firefoxadmin`，你可以在环境变量中更改。更多[说明](https://hub.docker.com/r/linuxserver/firefox)。
+      en_us: |
+        Default login `admin` Password `firefoxadmin`, you can change it in environment variables. More [description](https://hub.docker.com/r/linuxserver/firefox).
+        > When you start the program for the first time, it will take about 1~5min to download and install the language support package depending on the network condition, if you can't open it immediately, please wait.
+      zh_cn: |
+        默认登录账号 `admin` 密码 `firefoxadmin`，你可以在环境变量中更改。更多[说明](https://hub.docker.com/r/linuxserver/firefox)。
+        > 首次启动时，根据网络情况，下载和安装语言支持包需要1~5分钟，如果无法立即打开，请稍候。
     custom: null
   port_map: "3000"
   scheme: http
