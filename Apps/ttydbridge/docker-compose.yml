@@ -1,0 +1,48 @@
+version: "3.8"
+name: ttydbridge
+services:
+  ttydbridge:
+    # build: .
+    # image: ttydbridge
+    image: cp0204/ttydbridge:latest
+    container_name: ttydbridge
+    environment:
+      EXEC_DIR: "/opt"
+      START_COMMAND: "login"
+      PORT: "2222"
+    volumes:
+      - /opt:/opt
+    network_mode: bridge
+    pid: host
+    privileged: true
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 8M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: ttydbridge
+  store_app_id: ttydbridge
+  category: Developer
+  author: Cp0204
+  developer: Cp0204
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ttydbridge/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ttydbridge/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ttydbridge/screenshot-2.png
+  description:
+    en_us: ttydBridge acts as a "bridge" to the host environment, allowing you to easily access and use the host terminal in a web. It is built on ttyd and runs in a containerized manner, providing a secure and convenient remote endpoint experience.
+    zh_cn: ttydBridge 如一座“桥”，连通了宿主机环境，让你在浏览器中轻松访问和使用宿主机终端。它基于 ttyd 构建，并以容器化的方式运行，提供了安全、便捷的远程终端体验。
+  tagline:
+    en_us: Easy access to the host terminal in a browser
+    zh_cn: 在浏览器中轻松访问宿主机终端
+  title:
+    en_us: ttydBridge
+  port_map: "2222"
+  scheme: http
+  index: /
