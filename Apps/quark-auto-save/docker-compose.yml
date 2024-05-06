@@ -10,9 +10,12 @@ services:
     network_mode: bridge
     ports:
       - target: 5005
-        published: '5005'
+        published: "5005"
         protocol: tcp
     restart: unless-stopped
+    environment:
+      WEBUI_USERNAME: "admin"
+      WEBUI_PASSWORD: "admin123"
     volumes:
       - type: bind
         source: /DATA/AppData/$AppID/config
@@ -22,7 +25,7 @@ services:
         target: /etc/localtime
     x-casaos:
       ports:
-        - container: '5005'
+        - container: "5005"
           description:
             en_us: Port
             zh_cn: 端口
@@ -56,8 +59,20 @@ x-casaos:
     zh_cn: 夸克网盘自动转存
   tips:
     before_install:
-      en_us: 'WebUI default admin account: `admin`, password `admin123`, only support change in `quark_config.json`. Currently WebUI is not perfect, only for auxiliary use, you should also understand how to [configure manually](https://github.com/Cp0204/quark-auto-save/blob/main/README.md#%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE).'
-      zh_cn: WebUI 默认管理账号： `admin` ，密码 `admin123`，仅支持在 `quark_config.json` 中修改。目前 WebUI 并不完善，只供辅助使用，你也应该了解如何[手动配置](https://github.com/Cp0204/quark-auto-save/blob/main/README.md#%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE)。
-  port_map: '5005'
+      en_us: |
+        | Environment      | Default    | Remarks  |
+        | ---------------- | ---------- | -------- |
+        | `WEBUI_USERNAME` | `admin`    | Admin username |
+        | `WEBUI_PASSWORD` | `admin123` | admin password |
+
+        Currently WebUI is not perfect, only for auxiliary use, you should also understand how to [configure manually](https://github.com/Cp0204/quark-auto-save/blob/main/README.md#%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE).
+      zh_cn: |
+        | 环境变量         | 默认       | 备注     |
+        | ---------------- | ---------- | -------- |
+        | `WEBUI_USERNAME` | `admin`    | 管理账号 |
+        | `WEBUI_PASSWORD` | `admin123` | 管理密码 |
+
+        目前 WebUI 并不完善，只供辅助使用，你也应该了解如何[手动配置](https://github.com/Cp0204/quark-auto-save/blob/main/README.md#%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE)。
+  port_map: "5005"
   scheme: http
   index: /
