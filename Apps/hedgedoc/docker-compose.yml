@@ -1,0 +1,75 @@
+version: "3"
+name: hedgedoc
+services:
+  database:
+    image: postgres:13.4-alpine
+    container_name: hedgedoc-db
+    environment:
+      - POSTGRES_USER=hedgedoc
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=hedgedoc
+    volumes:
+      - /DATA/AppData/hedgedoc/database:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - hedgedoc
+
+  hedgedoc:
+    # Make sure to use the latest release from https://hedgedoc.org/latest-release
+    image: quay.io/hedgedoc/hedgedoc:1.9.9-alpine
+    container_name: hedgedoc-app
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    environment:
+      - CMD_CONFIG_FILE=/config/config.json
+      - CMD_DB_URL=postgres://hedgedoc:password@database:5432/hedgedoc
+      - CMD_DOMAIN=
+      - CMD_URL_ADDPORT=true
+      - CMD_CSP_ENABLE=false
+      - CMD_ALLOW_EMAIL_REGISTER=true
+      - CMD_ALLOW_ANONYMOUS=false
+      - CMD_ALLOW_ANONYMOUS_EDITS=true
+    volumes:
+      - /DATA/AppData/hedgedoc/uploads:/hedgedoc/public/uploads
+      - /DATA/AppData/hedgedoc/config:/config
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      - database
+    networks:
+      - hedgedoc
+
+networks:
+  hedgedoc:
+    name: hedgedoc
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  main: hedgedoc
+  store_app_id: hedgedoc
+  category: Documents
+  author: Cp0204
+  developer: HedgeDoc
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hedgedoc/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hedgedoc/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hedgedoc/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hedgedoc/screenshot-3.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hedgedoc/thumbnail.png
+  description:
+    en_us: "HedgeDoc (formerly known as CodiMD) is an open-source, web-based, self-hosted, collaborative markdown editor.  You can use it to easily collaborate on notes, graphs and even presentations in real-time. All you need to do is to share your note-link to your co-workers and they’re ready to go."
+    zh_cn: "HedgeDoc（前身为 CodiMD）是一款开源、基于网络、自托管的协作式标记符编辑器。 你可以用它轻松地实时协作编写笔记、图表甚至演示文稿。您只需将笔记链接分享给您的同事，他们就可以开始工作了。  "
+  tagline:
+    en_us: Real-time collaborative markdown notes.
+    zh_cn: 实时协作 markdown 笔记
+  title:
+    en_us: HedgeDoc
+  port_map: "3000"
+  scheme: http
+  index: /
