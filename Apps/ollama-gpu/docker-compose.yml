@@ -35,7 +35,7 @@ x-casaos:
     zh_cn: Olama 使你轻松在本地启动和运行大语言模型。
   tagline:
     en_us: The easiest way to get up and running with large language models.
-    zh_cn: 便捷地使用大语言模型
+    zh_cn: 便捷地使用本地大语言模型
   title:
     en_us: Ollama[GPU]
   tips:
@@ -55,7 +55,7 @@ x-casaos:
         本应用仅安装 Ollama ，你可能还需要：
         - 自行部署[模型](https://ollama.com/library)
         - 根据硬件微调 Tag 和容器参数
-        - 配合 Open WebUI 或其他 UI 使用
+        - 配合 `Open WebUI` 或其他 UI 使用
 
         示例，下载并运行 llama3 模型：
         ```shell
