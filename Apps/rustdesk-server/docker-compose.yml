@@ -36,7 +36,7 @@ services:
 
   api:
     container_name: rustdesk-server-api
-    image: ghcr.io/kingmo888/rustdesk-api-server:latest
+    image: kingmo888/rustdesk-api-server:latest
     ports:
       - "21114:21114/tcp"
     restart: unless-stopped
@@ -71,7 +71,6 @@ x-casaos:
     zh_cn: RustDesk 自托管
   title:
     en_us: RustDesk Server
-    zh_cn: RustDesk Server
   tips:
     before_install:
       en_us: In rustdesk-api-server, the first registered account is a super administrator, and the subsequent registered accounts are normal accounts.
