@@ -10,7 +10,7 @@
 
 ## Features / 特色
 
- - Rich third-party applications / 丰富的第三方应用 <sup>60+🤩</sup>
+ - Rich third-party applications / 丰富的第三方应用 <sup>70+🤩</sup>
  - Use of the `:latest` tag / 使用 `:latest` 标签 <sup>[Why?](https://github.com/Cp0204/CasaOS-AppStore-Play/issues/2#issuecomment-1647335915)</sup>
  - Unsuitable for official AppStore / 不适宜官方上架的
  - Niche Featured Apps / 种花家小众特色应用
