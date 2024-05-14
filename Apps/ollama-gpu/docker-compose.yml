@@ -1,0 +1,67 @@
+name: ollama-gpu
+services:
+  ollama-gpu:
+    container_name: ollama-gpu
+    deploy:
+      resources:
+        reservations:
+          memory: 1024M
+          devices:
+            - capabilities: [gpu]
+    hostname: ollama
+    image: ollama/ollama:latest
+    ports:
+      - 11434:11434
+    restart: unless-stopped
+    environment:
+      - OLLAMA_ORIGINS=*
+    volumes:
+      - /DATA/AppData/ollama:/root/.ollama
+    network_mode: bridge
+    privileged: false
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: ollama-gpu
+  store_app_id: ollama-gpu
+  category: Chat
+  author: Cp0204
+  developer: Ollama
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ollama/icon.svg
+  description:
+    en_us: Ollama makes it easy to get up and running with large language models locally.
+    zh_cn: Olama 使你轻松在本地启动和运行大语言模型。
+  tagline:
+    en_us: The easiest way to get up and running with large language models.
+    zh_cn: 便捷地使用大语言模型
+  title:
+    en_us: Ollama[GPU]
+  tips:
+    before_install:
+      en_us: |
+        This app only installs Ollama, which you may also need:
+        - Self-deployment [model](https://ollama.com/library)
+        - Fine-tune Tag and container parameters to hardware
+        - Work with other UIs
+
+        Example, download and run the llama3 model:
+        ```shell
+        docker exec -it ollama ollama run llama3
+        ```
+        [Documentation](https://hub.docker.com/r/ollama/ollama)
+      zh_cn: |
+        本应用仅安装 Ollama ，你可能还需要：
+        - 自行部署[模型](https://ollama.com/library)
+        - 根据硬件微调 Tag 和容器参数
+        - 配合其他 UI 使用
+
+        示例，下载并运行 llama3 模型：
+        ```shell
+        docker exec -it ollama ollama run llama3
+        ```
+        [文档](https://hub.docker.com/r/ollama/ollama)
+  port_map: "11434"
+  scheme: http
+  index: /
