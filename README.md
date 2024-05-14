@@ -1,3 +1,8 @@
+> [!CAUTION]
+> # As CasaOS v0.4.8 has a bug that prevents new apps from being installed, it has seriously affected daily use. The original purpose of this store is to facilitate their own exploration of Docker applications born, I have abandoned the use of CasaOS, so this store source is expected to stop service on July 1, 2024, the repository will continue to be retained. Please understand the inconvenience caused.
+> # 由于 CasaOS v0.4.8 存在无法安装新应用的bug，已经严重影响了日常使用。本商店的初衷是为了方便自己探索 Docker 应用程序而生，目前本人已放弃使用CasaOS，因此本商店源预计于2024年7月1日停止服务，仓库将继续保留。由此带来的不便敬请谅解。
+
+
 # CasaOS-AppStore-Play
 
 🤪 A not-so-serious CasaOS App Store.
