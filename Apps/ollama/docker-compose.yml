@@ -42,7 +42,7 @@ x-casaos:
         This app only installs Ollama, which you may also need:
         - Self-deployment [model](https://ollama.com/library)
         - Fine-tune Tag and container parameters to hardware
-        - Work with other UIs
+        - Work with Open WebUI or other UIs
 
         Example, download and run the llama3 model:
         ```shell
@@ -53,7 +53,7 @@ x-casaos:
         本应用仅安装 Ollama ，你可能还需要：
         - 自行部署[模型](https://ollama.com/library)
         - 根据硬件微调 Tag 和容器参数
-        - 配合其他 UI 使用
+        - 配合 Open WebUI 或其他 UI 使用
 
         示例，下载并运行 llama3 模型：
         ```shell
