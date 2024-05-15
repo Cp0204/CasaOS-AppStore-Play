@@ -67,7 +67,22 @@ x-casaos:
     zh_cn: 堆栈管理器
   title:
     en_us: Dockge
-    zh_cn: Dockge
+  tips:
+    before_install:
+      en_us: |
+        If you wish to manage CasaOS installed App in Dockge, run this command:
+        ```shell
+        mkdir -p /DATA/AppData/dockge/stacks
+        cp -r /var/lib/casaos/apps/* /DATA/AppData/dockge/stacks
+        ```
+        This copies the stacks from CasaOS to Dockge
+      zh_cn: |
+        如果你希望在 Dockge 中管理 CasaOS 安裝的应用，请执行这个命令：
+        ```shell
+        mkdir -p /DATA/AppData/dockge/stacks
+        cp -r /var/lib/casaos/apps/* /DATA/AppData/dockge/stacks
+        ```
+        作用是从 CasaOS 中复制堆栈到 Dockge
   port_map: '5001'
   scheme: http
   index: /
