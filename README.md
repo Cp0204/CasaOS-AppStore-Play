@@ -62,7 +62,7 @@ This is just a generic version, please add the following sources corresponding t
 
 本仓库后续的方向是改造成通用的 compose 仓库。
 
-- [ ] 取消所有 $AppID 变量
+- [x] 取消所有 $AppID 变量
 - [ ] 一键脚本选择安装的应用
 - [ ] 为 dockge 适配字段
 
