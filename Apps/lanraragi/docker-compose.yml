@@ -13,10 +13,10 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/content
+        source: /DATA/AppData/lanraragi/content
         target: /home/koyomi/lanraragi/content
       - type: bind
-        source: /DATA/AppData/$AppID/database
+        source: /DATA/AppData/lanraragi/database
         target: /home/koyomi/lanraragi/database
     network_mode: bridge
     privileged: false

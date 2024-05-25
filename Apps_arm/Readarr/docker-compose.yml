@@ -12,50 +12,50 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-    - target: 8787
-      published: "8787"
-      protocol: tcp
+      - target: 8787
+        published: "8787"
+        protocol: tcp
     restart: unless-stopped
     volumes:
-    - type: bind
-      source: /DATA/AppData/readarr/config
-      target: /config
-    - type: bind
-      source: /path/to/books
-      target: /books
-    - type: bind
-      source: /DATA/Downloads
-      target: /downloads
+      - type: bind
+        source: /DATA/AppData/readarr/config
+        target: /config
+      - type: bind
+        source: /path/to/books
+        target: /books
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
     x-casaos:
       envs:
-      - container: PUID
-        description:
-          en_us: ""
-      - container: PGID
-        description:
-          en_us: ""
-      - container: TZ
-        description:
-          en_us: ""
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
       ports:
-      - container: "8787"
-        description:
-          en_us: ""
+        - container: "8787"
+          description:
+            en_us: ""
 
       volumes:
-      - container: /config
-        description:
-          en_us: ""
-      - container: /books
-        description:
-          en_us: ""
-      - container: /downloads
-        description:
-          en_us: ""
+        - container: /config
+          description:
+            en_us: ""
+        - container: /books
+          description:
+            en_us: ""
+        - container: /downloads
+          description:
+            en_us: ""
     container_name: readarr-arm
 x-casaos:
   architectures:
-  - arm
+    - arm
   main: readarr-arm
   author: CasaOS Team
   category: Media
@@ -76,10 +76,10 @@ x-casaos:
   developer: Readarr Team
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-1.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-2.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-3.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-4.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/screenshot-4.png
   tagline:
     en_us: Ebook and audiobook collection manager for Usenet and BitTorrent users.
     zh_cn: 用于Usenet和BitTorrent用户的电子书和有声书收藏管理器。

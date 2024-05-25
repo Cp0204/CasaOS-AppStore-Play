@@ -62,7 +62,6 @@ x-casaos:
       zh_cn: |
         默认登录账号 `admin` 密码 `firefoxadmin`，你可以在环境变量中更改。更多[说明](https://hub.docker.com/r/linuxserver/firefox)。
         > 首次启动时，根据网络情况，下载和安装语言支持包需要1~5分钟，如果无法立即打开，请稍候。
-    custom: null
   port_map: "3000"
   scheme: http
   index: /

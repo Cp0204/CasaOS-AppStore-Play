@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID
+        source: /DATA/AppData/ddns-go
         target: /root
     x-casaos:
       volumes:

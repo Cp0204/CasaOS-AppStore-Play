@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/data
+        source: /DATA/AppData/filecodebox/data
         target: /app/data
     x-casaos:
       ports:
@@ -56,7 +56,6 @@ x-casaos:
     before_install:
       en_us: 'Default open is admin backend, password: `FileCodeBox2023`; remove `/#/admin` is user frontend.'
       zh_cn: 默认打开为管理后台，密码：`FileCodeBox2023`；去掉 `/#/admin` 是用户前端。
-    custom: null
   port_map: '12345'
   scheme: http
   index: /#/admin

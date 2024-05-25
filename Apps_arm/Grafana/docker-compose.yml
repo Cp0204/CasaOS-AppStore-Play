@@ -8,29 +8,29 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-    - target: 3000
-      published: "3003"
-      protocol: tcp
+      - target: 3000
+        published: "3003"
+        protocol: tcp
     restart: always
     volumes:
-    - type: bind
-      source: /DATA/AppData/$AppID/data
-      target: /var/lib/grafana
+      - type: bind
+        source: /DATA/AppData/grafana-arm/data
+        target: /var/lib/grafana
     x-casaos:
       ports:
-      - container: "3000"
-        description:
-          en_us: ""
+        - container: "3000"
+          description:
+            en_us: ""
       volumes:
-      - container: /var/lib/grafana
-        description:
-          en_us: Grafana database and plugins directory.
-          zh_cn: Grafana 数据库和插件目录
+        - container: /var/lib/grafana
+          description:
+            en_us: Grafana database and plugins directory.
+            zh_cn: Grafana 数据库和插件目录
 
     container_name: grafana-arm
 x-casaos:
   architectures:
-  - arm
+    - arm
   main: grafana-arm
   author: CasaOS Team
   category: Network
@@ -64,9 +64,9 @@ x-casaos:
   developer: grafana
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/screenshot-1.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/screenshot-2.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/screenshot-3.png
   tagline:
     en_us: |
       Grafana is a complete observability stack that allows you to monitor and analyze metrics, logs and traces. It allows you to query, visualize, alert on and understand your data no matter where it is stored.

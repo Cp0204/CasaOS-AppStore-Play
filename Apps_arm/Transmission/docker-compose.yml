@@ -16,77 +16,77 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-    - target: 9091
-      published: "9091"
-      protocol: tcp
-    - target: 51413
-      published: "51413"
-      protocol: tcp
-    - target: 51413
-      published: "51413"
-      protocol: UDP
+      - target: 9091
+        published: "9091"
+        protocol: tcp
+      - target: 51413
+        published: "51413"
+        protocol: tcp
+      - target: 51413
+        published: "51413"
+        protocol: UDP
     restart: unless-stopped
     volumes:
-    - type: bind
-      source: /DATA/AppData/$AppID/config
-      target: /config
-    - type: bind
-      source: /DATA/Downloads
-      target: /downloads
-    - type: bind
-      source: /DATA/Downloads/watch
-      target: /watch
+      - type: bind
+        source: /DATA/AppData/transmission-arm/config
+        target: /config
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
+      - type: bind
+        source: /DATA/Downloads/watch
+        target: /watch
     x-casaos:
       envs:
-      - container: PUID
-        description:
-          en_us: ""
-      - container: PGID
-        description:
-          en_us: ""
-      - container: TZ
-        description:
-          en_us: ""
-      - container: TRANSMISSION_WEB_HOME
-        description:
-          en_us: ""
-      - container: USER
-        description:
-          en_us: ""
-      - container: PASS
-        description:
-          en_us: ""
-      - container: PEERPORT
-        description:
-          en_us: ""
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
+        - container: TRANSMISSION_WEB_HOME
+          description:
+            en_us: ""
+        - container: USER
+          description:
+            en_us: ""
+        - container: PASS
+          description:
+            en_us: ""
+        - container: PEERPORT
+          description:
+            en_us: ""
       ports:
-      - container: "9091"
-        description:
-          en_us: ""
+        - container: "9091"
+          description:
+            en_us: ""
 
-      - container: "51413"
-        description:
-          en_us: ""
+        - container: "51413"
+          description:
+            en_us: ""
 
-      - container: "51413"
-        description:
-          en_us: ""
-        protocol: udp
+        - container: "51413"
+          description:
+            en_us: ""
+          protocol: udp
 
       volumes:
-      - container: /config
-        description:
-          en_us: ""
-      - container: /downloads
-        description:
-          en_us: ""
-      - container: /watch
-        description:
-          en_us: ""
+        - container: /config
+          description:
+            en_us: ""
+        - container: /downloads
+          description:
+            en_us: ""
+        - container: /watch
+          description:
+            en_us: ""
     container_name: transmission-arm
 x-casaos:
   architectures:
-  - arm
+    - arm
   main: transmission-arm
   author: CasaOS Team
   category: Downloader
@@ -120,9 +120,9 @@ x-casaos:
   developer: Transmission
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/screenshot-1.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/screenshot-2.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/screenshot-3.png
   tagline:
     en_us: Transmission is a cross-platform BitTorrent client
     zh_cn: Transmission 是一个跨平台的 BitTorrent 客户端

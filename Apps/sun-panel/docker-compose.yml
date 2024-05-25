@@ -15,13 +15,13 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/conf
+        source: /DATA/AppData/sun-panel/conf
         target: /app/conf
       - type: bind
-        source: /DATA/AppData/$AppID/uploads
+        source: /DATA/AppData/sun-panel/uploads
         target: /app/uploads
       - type: bind
-        source: /DATA/AppData/$AppID/database
+        source: /DATA/AppData/sun-panel/database
         target: /app/database
     environment: {}
     x-casaos:

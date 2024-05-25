@@ -13,33 +13,33 @@ services:
     network_mode: host
     restart: unless-stopped
     volumes:
-    - type: bind
-      source: /DATA/AppData/$AppID/config
-      target: /config
+      - type: bind
+        source: /DATA/AppData/homeassistant-arm/config
+        target: /config
     x-casaos:
       envs:
-      - container: TZ
-        description:
-          en_us: TimeZone
-          zh_cn: 时区
-      - container: PUID
-        description:
-          en_us: Run HomeAssistant as specified uid.
-          zh_cn: 以指定的uid运行HomeAssistant
-      - container: PGID
-        description:
-          en_us: Run HomeAssistant as specified gid.
-          zh_cn: 以指定的gid运行HomeAssistant
+        - container: TZ
+          description:
+            en_us: TimeZone
+            zh_cn: 时区
+        - container: PUID
+          description:
+            en_us: Run HomeAssistant as specified uid.
+            zh_cn: 以指定的uid运行HomeAssistant
+        - container: PGID
+          description:
+            en_us: Run HomeAssistant as specified gid.
+            zh_cn: 以指定的gid运行HomeAssistant
 
       volumes:
-      - container: /config
-        description:
-          en_us: HomeAssistant config directory.
-          zh_cn: HomeAssistant配置目录
+        - container: /config
+          description:
+            en_us: HomeAssistant config directory.
+            zh_cn: HomeAssistant配置目录
     container_name: homeassistant-arm
 x-casaos:
   architectures:
-  - arm
+    - arm
   main: homeassistant-arm
   author: CasaOS Team
   category: Home Automation
@@ -60,10 +60,10 @@ x-casaos:
   developer: Home Assistant
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-1.jpg
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-2.jpg
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-3.jpg
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-4.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-1.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-2.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-3.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/screenshot-4.jpg
   tagline:
     en_us: Awaken your home
     zh_cn: 唤醒你的家

@@ -9,17 +9,17 @@ services:
           memory: "16M"
     network_mode: bridge
     ports:
-    - target: 80
-      published: "86"
-      protocol: tcp
+      - target: 80
+        published: "86"
+        protocol: tcp
     restart: unless-stopped
     volumes:
-    - type: bind
-      source: /DATA/AppData/gotify
-      target: /app/data
+      - type: bind
+        source: /DATA/AppData/gotify
+        target: /app/data
 x-casaos:
   architectures:
-  - arm
+    - arm
   author: Cp0204
   category: Dapps
   description:
@@ -28,8 +28,8 @@ x-casaos:
   developer: jmattheis
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/screenshot-1.png
-  - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/screenshot-2.png
   main: gotify-arm
   tagline:
     en_us: a simple server for sending and receiving messages

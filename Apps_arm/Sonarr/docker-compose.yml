@@ -12,57 +12,57 @@ services:
           memory: "256M"
     network_mode: bridge
     ports:
-    - target: 8989
-      published: "8989"
-      protocol: tcp
+      - target: 8989
+        published: "8989"
+        protocol: tcp
     restart: unless-stopped
     volumes:
-    - type: bind
-      source: /DATA/AppData/$AppID/config
-      target: /config
-    - type: bind
-      source: /DATA/Media/TV Shows
-      target: /tv
-    - type: bind
-      source: /DATA/Downloads
-      target: /downloads
+      - type: bind
+        source: /DATA/AppData/sonarr-arm/config
+        target: /config
+      - type: bind
+        source: /DATA/Media/TV Shows
+        target: /tv
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
     x-casaos:
       envs:
-      - container: TZ
-        description:
-          en_us: TimeZone
-          zh_cn: 时区
-      - container: PUID
-        description:
-          en_us: Run Sonarr as specified uid.
-          zh_cn: 以指定的uid运行Sonarr
-      - container: PGID
-        description:
-          en_us: Run Sonarr as specified gid.
-          zh_cn: 以指定的gid运行Sonarr
+        - container: TZ
+          description:
+            en_us: TimeZone
+            zh_cn: 时区
+        - container: PUID
+          description:
+            en_us: Run Sonarr as specified uid.
+            zh_cn: 以指定的uid运行Sonarr
+        - container: PGID
+          description:
+            en_us: Run Sonarr as specified gid.
+            zh_cn: 以指定的gid运行Sonarr
       ports:
-      - container: "8989"
-        description:
-          en_us: WebUI HTTP Port
-          zh_cn: WebUI HTTP端口
+        - container: "8989"
+          description:
+            en_us: WebUI HTTP Port
+            zh_cn: WebUI HTTP端口
 
       volumes:
-      - container: /config
-        description:
-          en_us: Sonarr config directory.
-          zh_cn: Sonarr配置目录
-      - container: /tv
-        description:
-          en_us: Sonarr tv directory.
-          zh_cn: Sonarr TV目录
-      - container: /downloads
-        description:
-          en_us: Sonarr downloads directory.
-          zh_cn: Sonarr下载目录
+        - container: /config
+          description:
+            en_us: Sonarr config directory.
+            zh_cn: Sonarr配置目录
+        - container: /tv
+          description:
+            en_us: Sonarr tv directory.
+            zh_cn: Sonarr TV目录
+        - container: /downloads
+          description:
+            en_us: Sonarr downloads directory.
+            zh_cn: Sonarr下载目录
     container_name: sonarr-arm
 x-casaos:
   architectures:
-  - arm
+    - arm
   main: sonarr-arm
   author: CasaOS Team
   category: Media
@@ -83,10 +83,10 @@ x-casaos:
   developer: Sonarr
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-1.jpg
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-2.jpg
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-3.jpg
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-4.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-1.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-2.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-3.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/screenshot-4.jpg
   tagline:
     en_us: The PVR for Usenet and BitTorrent users
     zh_cn: 用于Usenet和BitTorrent用户的PVR

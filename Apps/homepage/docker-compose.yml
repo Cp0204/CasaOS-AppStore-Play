@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/config
+        source: /DATA/AppData/homepage/config
         target: /app/config
       - type: bind
         source: /var/run/docker.sock

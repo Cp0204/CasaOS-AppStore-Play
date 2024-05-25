@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/config
+        source: /DATA/AppData/heimdall/config
         target: /config
     network_mode: bridge
     privileged: false

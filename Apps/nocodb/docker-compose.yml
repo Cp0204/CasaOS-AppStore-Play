@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/data
+        source: /DATA/AppData/nocodb/data
         target: /usr/app/data
     x-casaos:
       ports:

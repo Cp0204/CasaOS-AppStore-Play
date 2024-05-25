@@ -11,47 +11,47 @@ services:
           memory: 256M
     network_mode: bridge
     ports:
-    - target: 3000
-      published: "3002"
-      protocol: tcp
-    - target: 22
-      published: "222"
-      protocol: tcp
+      - target: 3000
+        published: "3002"
+        protocol: tcp
+      - target: 22
+        published: "222"
+        protocol: tcp
     restart: unless-stopped
     volumes:
-    - type: bind
-      source: /DATA/AppData/$AppID/data
-      target: /data
+      - type: bind
+        source: /DATA/AppData/gitea-arm/data
+        target: /data
     x-casaos:
       envs:
-      - container: USER_UID
-        description:
-          en_us: The UID (Unix user ID) of the user that runs Gitea
-          zh_cn: Gitea 运行的用户的 UID（Unix 用户 ID）
-      - container: USER_GID
-        description:
-          en_us: The GID (Unix group ID) of the user that runs Gitea
-          zh_cn: Gitea 运行的用户的 GID（Unix 组 ID）
+        - container: USER_UID
+          description:
+            en_us: The UID (Unix user ID) of the user that runs Gitea
+            zh_cn: Gitea 运行的用户的 UID（Unix 用户 ID）
+        - container: USER_GID
+          description:
+            en_us: The GID (Unix group ID) of the user that runs Gitea
+            zh_cn: Gitea 运行的用户的 GID（Unix 组 ID）
       ports:
-      - container: "3000"
-        description:
-          en_us: WebUI Port
-          zh_cn: WebUI 端口
+        - container: "3000"
+          description:
+            en_us: WebUI Port
+            zh_cn: WebUI 端口
 
-      - container: "22"
-        description:
-          en_us: SSH Port
-          zh_cn: SSH 端口
+        - container: "22"
+          description:
+            en_us: SSH Port
+            zh_cn: SSH 端口
 
       volumes:
-      - container: /data
-        description:
-          en_us: Gitea data directory.
-          zh_cn: Gitea 数据目录。
+        - container: /data
+          description:
+            en_us: Gitea data directory.
+            zh_cn: Gitea 数据目录。
     container_name: gitea-arm
 x-casaos:
   architectures:
-  - arm
+    - arm
   main: gitea-arm
   author: CasaOS Team
   category: Developer
@@ -72,12 +72,12 @@ x-casaos:
   developer: Gitea
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-1.jpg
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-2.jpg
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-3.jpg
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-4.jpg
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-5.jpg
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-6.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-1.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-2.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-3.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-4.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-5.jpg
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/screenshot-6.jpg
   tagline:
     en_us: Git with a cup of tea
     zh_cn: Git 与一杯茶

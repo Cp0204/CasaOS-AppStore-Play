@@ -9,71 +9,71 @@ services:
       TZ: $TZ
     x-casaos:
       envs:
-      - container: PUID
-        description:
-          en_us: for UserID
-      - container: PGID
-        description:
-          en_us: for GroupID
-      - container: TZ
-        description:
-          en_us: Specify a timezone to use, see this list.
-          zh_cn: "指定要使用的时区，请参阅此列表。"
-          ar_sa: "حدد المنطقة الزمنية التي ترغب في استخدامها، انظر هذه القائمة."
-          de_de: "Geben Sie eine Zeitzone an, die verwendet werden soll. Siehe diese Liste."
-          es_es: "Especifica una zona horaria para utilizar, consulta esta lista."
-          fr_fr: "Spécifiez un fuseau horaire à utiliser, consultez cette liste."
-          hu_hu: "Adja meg a használni kívánt időzónát, tekintse meg ezt a listát."
-          it_it: "Specifica un fuso orario da utilizzare, consulta questa lista."
-          ru_ru: "Укажите часовой пояс для использования, смотрите этот список."
-          pl_pl: "Określ strefę czasową do użycia, zobacz tę listę."
-          pt_br: "Especifique um fuso horário a ser usado, consulte esta lista."
-          sv_se: "Ange en tidszon att använda, se denna lista."
-          uk_ua: "Вкажіть часовий пояс, який буде використовуватися, подивіться цей список."
+        - container: PUID
+          description:
+            en_us: for UserID
+        - container: PGID
+          description:
+            en_us: for GroupID
+        - container: TZ
+          description:
+            en_us: Specify a timezone to use, see this list.
+            zh_cn: "指定要使用的时区，请参阅此列表。"
+            ar_sa: "حدد المنطقة الزمنية التي ترغب في استخدامها، انظر هذه القائمة."
+            de_de: "Geben Sie eine Zeitzone an, die verwendet werden soll. Siehe diese Liste."
+            es_es: "Especifica una zona horaria para utilizar, consulta esta lista."
+            fr_fr: "Spécifiez un fuseau horaire à utiliser, consultez cette liste."
+            hu_hu: "Adja meg a használni kívánt időzónát, tekintse meg ezt a listát."
+            it_it: "Specifica un fuso orario da utilizzare, consulta questa lista."
+            ru_ru: "Укажите часовой пояс для использования, смотрите этот список."
+            pl_pl: "Określ strefę czasową do użycia, zobacz tę listę."
+            pt_br: "Especifique um fuso horário a ser usado, consulte esta lista."
+            sv_se: "Ange en tidszon att använda, se denna lista."
+            uk_ua: "Вкажіть часовий пояс, який буде використовуватися, подивіться цей список."
       volumes:
-      - container: /config
-        description:
-          en_us: Contains all relevant configuration files.
-          zh_cn: 包含所有相关配置文件。
-          ar_sa: يحتوي على جميع ملفات التكوين ذات الصلة.
-          de_de: Enthält alle relevanten Konfigurationsdateien.
-          es_es: Contiene todos los archivos de configuración relevantes.
-          fr_fr: Contient tous les fichiers de configuration pertinents.
-          hu_hu: Tartalmazza az összes releváns konfigurációs fájlt.
-          it_it: Contiene tutti i file di configurazione rilevanti.
-          ru_ru: Содержит все соответствующие файлы конфигурации.
-          pl_pl: Zawiera wszystkie istotne pliki konfiguracyjne.
-          pt_br: Contém todos os arquivos de configuração relevantes.
-          sv_se: Innehåller alla relevanta konfigurationsfiler.
-          uk_ua: Містить всі відповідні файлів конфігурації.
+        - container: /config
+          description:
+            en_us: Contains all relevant configuration files.
+            zh_cn: 包含所有相关配置文件。
+            ar_sa: يحتوي على جميع ملفات التكوين ذات الصلة.
+            de_de: Enthält alle relevanten Konfigurationsdateien.
+            es_es: Contiene todos los archivos de configuración relevantes.
+            fr_fr: Contient tous les fichiers de configuration pertinents.
+            hu_hu: Tartalmazza az összes releváns konfigurációs fájlt.
+            it_it: Contiene tutti i file di configurazione rilevanti.
+            ru_ru: Содержит все соответствующие файлы конфигурации.
+            pl_pl: Zawiera wszystkie istotne pliki konfiguracyjne.
+            pt_br: Contém todos os arquivos de configuração relevantes.
+            sv_se: Innehåller alla relevanta konfigurationsfiler.
+            uk_ua: Містить всі відповідні файлів конфігурації.
       ports:
-      - container: '5055'
-        description:
-          en_us: Port for Overseerr's web interface.
-          zh_cn: Overseerr 网络界面的端口。
-          ar_sa: منفذ واجهة Overseerr الويب.
-          de_de: Port für die Web-Oberfläche von Overseerr.
-          es_es: Puerto para la interfaz web de Overseerr.
-          fr_fr: Port pour l'interface web d'Overseerr.
-          hu_hu: Port az Overseerr webes felületéhez.
-          it_it: Porta per l'interfaccia web di Overseerr.
-          ru_ru: Порт для веб-интерфейса Overseerr.
-          pl_pl: Port dla interfejsu webowego Overseerr.
-          pt_br: Porta para a interface web do Overseerr.
-          sv_se: Port för Overseerrs webbgränssnitt.
-          uk_ua: Порт для веб-інтерфейсу Overseerr.
+        - container: '5055'
+          description:
+            en_us: Port for Overseerr's web interface.
+            zh_cn: Overseerr 网络界面的端口。
+            ar_sa: منفذ واجهة Overseerr الويب.
+            de_de: Port für die Web-Oberfläche von Overseerr.
+            es_es: Puerto para la interfaz web de Overseerr.
+            fr_fr: Port pour l'interface web d'Overseerr.
+            hu_hu: Port az Overseerr webes felületéhez.
+            it_it: Porta per l'interfaccia web di Overseerr.
+            ru_ru: Порт для веб-интерфейса Overseerr.
+            pl_pl: Port dla interfejsu webowego Overseerr.
+            pt_br: Porta para a interface web do Overseerr.
+            sv_se: Port för Overseerrs webbgränssnitt.
+            uk_ua: Порт для веб-інтерфейсу Overseerr.
     ports:
-    - target: 5055
-      published: 5055
-      protocol: tcp
+      - target: 5055
+        published: 5055
+        protocol: tcp
     volumes:
-    - type: bind
-      source: /DATA/AppData/overseerr/config
-      target: /config
+      - type: bind
+        source: /DATA/AppData/overseerr/config
+        target: /config
     container_name: overseerr-arm
 x-casaos:
   architectures:
-  - arm
+    - arm
   main: overseerr-arm
   description:
     en_us: Overseerr is a free and open source software application for managing requests for your media library. It integrates with your existing services, such as Sonarr, Radarr, and Plex!
@@ -107,9 +107,9 @@ x-casaos:
   author: WisdomSky
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/screenshot-1.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/screenshot-2.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/screenshot-3.png
   thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/icon.png
   title:
     en_us: Overseerr

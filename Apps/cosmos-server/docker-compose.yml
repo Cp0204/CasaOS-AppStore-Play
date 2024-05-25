@@ -9,14 +9,14 @@ services:
         reservations:
           memory: 0M
     ports:
-        - 2080:80
-        - 2443:443
-        - 4242:4242/udp
+      - 2080:80
+      - 2443:443
+      - 4242:4242/udp
     privileged: true
     volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - /:/mnt/host
-        - /DATA/AppData/cosmos-server/config:/config
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /:/mnt/host
+      - /DATA/AppData/cosmos-server/config:/config
     network_mode: bridge
     restart: unless-stopped
 

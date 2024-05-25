@@ -12,10 +12,10 @@ services:
         protocol: tcp
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/config
+        source: /DATA/AppData/mariadb/config
         target: /etc/mysql/conf.d
       - type: bind
-        source: /DATA/AppData/$AppID/data
+        source: /DATA/AppData/mariadb/data
         target: /var/lib/mysql
     deploy:
       resources:

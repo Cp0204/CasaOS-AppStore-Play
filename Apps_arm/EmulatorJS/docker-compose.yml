@@ -2,48 +2,48 @@ name: emulatorjs-arm
 services:
   emulatorjs-arm:
     environment:
-    - PGID=$PGID
-    - PUID=$PUID
-    - SUBFOLDER=/
-    - TZ=$TZ
+      - PGID=$PGID
+      - PUID=$PUID
+      - SUBFOLDER=/
+      - TZ=$TZ
     image: lscr.io/linuxserver/emulatorjs:arm32v7-1.7.2
     network_mode: bridge
     ports:
-    - target: 3000
-      published: "3001"
-      protocol: tcp
-    - target: 4001
-      published: "4001"
-      protocol: tcp
-    - target: 80
-      published: "88"
-      protocol: tcp
+      - target: 3000
+        published: "3001"
+        protocol: tcp
+      - target: 4001
+        published: "4001"
+        protocol: tcp
+      - target: 80
+        published: "88"
+        protocol: tcp
     privileged: true
     restart: unless-stopped
     volumes:
-    - type: bind
-      source: /DATA/AppData/$AppID/config
-      target: /config
-    - type: bind
-      source: /DATA/AppData/$AppID/data
-      target: /data
-    - type: bind
-      source: /ROMS/nes
-      target: /data/nes/roms
+      - type: bind
+        source: /DATA/AppData/emulatorjs-arm/config
+        target: /config
+      - type: bind
+        source: /DATA/AppData/emulatorjs-arm/data
+        target: /data
+      - type: bind
+        source: /ROMS/nes
+        target: /data/nes/roms
     x-casaos:
       ports:
-      - container: "80"
-        description:
-          en_us: Play Game
-          zh_cn: 玩游戏
-      - container: "3000"
-        description:
-          en_us: Manage ROMS
-          zh_cn: ROM 管理
+        - container: "80"
+          description:
+            en_us: Play Game
+            zh_cn: 玩游戏
+        - container: "3000"
+          description:
+            en_us: Manage ROMS
+            zh_cn: ROM 管理
     container_name: emulatorjs-arm
 x-casaos:
   architectures:
-  - arm
+    - arm
   description:
     en_us: EmulatorJS is a Docker-based emulator application that can simulate various operating systems and device environments within containers for development, testing, and learning purposes.
     zh_cn: EmulatorJS是一个基于Docker的模拟器应用程序，可以在容器中模拟多种操作系统和设备环境，用于开发、测试和学习目的。
@@ -60,7 +60,7 @@ x-casaos:
     uk_ua: EmulatorJS - це застосунок емулятора, заснований на Docker, який може моделювати різні операційні систем
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/EmulatorJS/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/EmulatorJS/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/EmulatorJS/screenshot-1.png
   tagline:
   en_us: Unlock the power of emulation with EmulatorJS – Explore, experiment, and innovate across diverse operating systems and device environments.
   zh_cn: 发掘模拟的力量，与EmulatorJS一同探索、实验和创新于多样化的操作系统和设备环境。

@@ -17,7 +17,7 @@ services:
         source: /etc/resolv.conf
         target: /etc/resolv.conf
       - type: bind
-        source: /DATA/AppData/$AppID
+        source: /DATA/AppData/v2raya
         target: /etc/v2raya
       - type: bind
         source: /lib/modules

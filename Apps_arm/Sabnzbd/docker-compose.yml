@@ -12,50 +12,50 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-    - target: 8080
-      published: "8282"
-      protocol: tcp
+      - target: 8080
+        published: "8282"
+        protocol: tcp
     restart: unless-stopped
     volumes:
-    - type: bind
-      source: /DATA/Downloads
-      target: /incomplete-downloads
-    - type: bind
-      source: /DATA/AppData/sabnzbd/config
-      target: /config
-    - type: bind
-      source: /DATA/Downloads
-      target: /downloads
+      - type: bind
+        source: /DATA/Downloads
+        target: /incomplete-downloads
+      - type: bind
+        source: /DATA/AppData/sabnzbd/config
+        target: /config
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
     x-casaos:
       envs:
-      - container: PUID
-        description:
-          en_us: ""
-      - container: PGID
-        description:
-          en_us: ""
-      - container: TZ
-        description:
-          en_us: ""
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: TZ
+          description:
+            en_us: ""
       ports:
-      - container: "8080"
-        description:
-          en_us: ""
+        - container: "8080"
+          description:
+            en_us: ""
 
       volumes:
-      - container: /incomplete-downloads
-        description:
-          en_us: ""
-      - container: /config
-        description:
-          en_us: ""
-      - container: /downloads
-        description:
-          en_us: ""
+        - container: /incomplete-downloads
+          description:
+            en_us: ""
+        - container: /config
+          description:
+            en_us: ""
+        - container: /downloads
+          description:
+            en_us: ""
     container_name: sabnzbd-arm
 x-casaos:
   architectures:
-  - arm
+    - arm
   main: sabnzbd-arm
   author: CasaOS Team
   category: Media
@@ -76,13 +76,13 @@ x-casaos:
   developer: Sabnzbd Team
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-1.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-2.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-3.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-4.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-5.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-6.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-7.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-4.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-5.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-6.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/screenshot-7.png
   tagline:
     en_us: Free and easy binary newsreader
     zh_cn: 免费易用的二进制新闻阅读器

@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/data
+        source: /DATA/AppData/alist/data
         target: /opt/alist/data
     x-casaos:
       ports:

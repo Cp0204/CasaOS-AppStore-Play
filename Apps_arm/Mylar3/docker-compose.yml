@@ -11,47 +11,47 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-    - target: 8090
-      published: "8090"
-      protocol: tcp
+      - target: 8090
+        published: "8090"
+        protocol: tcp
     restart: unless-stopped
     volumes:
-    - type: bind
-      source: /DATA/AppData/mylar3/config
-      target: /config
-    - type: bind
-      source: /path/to/comics
-      target: /comics
-    - type: bind
-      source: /DATA/Downloads
-      target: /downloads
+      - type: bind
+        source: /DATA/AppData/mylar3/config
+        target: /config
+      - type: bind
+        source: /path/to/comics
+        target: /comics
+      - type: bind
+        source: /DATA/Downloads
+        target: /downloads
     x-casaos:
       envs:
-      - container: PUID
-        description:
-          en_us: ""
-      - container: PGID
-        description:
-          en_us: ""
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
       ports:
-      - container: "8090"
-        description:
-          en_us: ""
+        - container: "8090"
+          description:
+            en_us: ""
 
       volumes:
-      - container: /config
-        description:
-          en_us: ""
-      - container: /comics
-        description:
-          en_us: ""
-      - container: /downloads
-        description:
-          en_us: ""
+        - container: /config
+          description:
+            en_us: ""
+        - container: /comics
+          description:
+            en_us: ""
+        - container: /downloads
+          description:
+            en_us: ""
     container_name: mylar3-arm
 x-casaos:
   architectures:
-  - arm
+    - arm
   main: mylar3-arm
   author: CasaOS Team
   category: Downloader
@@ -72,10 +72,10 @@ x-casaos:
   developer: Mylar3 Team
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-1.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-2.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-3.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-4.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/screenshot-4.png
   tagline:
     en_us: Automatic comic book (cbr/cbz) downloader
     zh_cn: 自动漫画（cbr/cbz）下载程序

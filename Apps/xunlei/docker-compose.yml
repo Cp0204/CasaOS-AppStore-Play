@@ -15,7 +15,7 @@ services:
       XL_BA_PASSWORD: "casaos"
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/data
+        source: /DATA/AppData/xunlei/data
         target: /xunlei/data
       - type: bind
         source: /DATA/Downloads/ThunderDownloads
@@ -60,9 +60,9 @@ x-casaos:
     en_us: Popular download manager in China
     zh_cn: 迅雷远程下载
   tips:
-      before_install:
-        en_us: The environment variables `XL_BA_USER` and `XL_BA_PASSWORD` add basic authentication to the Thunderbolt panel, the default user password is `casaos`, removing the environment variables removes the authentication. [Documentation](https://hub.docker.com/r/cnk3x/xunlei)
-        zh_cn: 环境变量 `XL_BA_USER` 和 `XL_BA_PASSWORD` 给迅雷面板添加基本验证，默认用户密码为 `casaos` ，删除环境变量可去除验证。[文档](https://hub.docker.com/r/cnk3x/xunlei)
+    before_install:
+      en_us: The environment variables `XL_BA_USER` and `XL_BA_PASSWORD` add basic authentication to the Thunderbolt panel, the default user password is `casaos`, removing the environment variables removes the authentication. [Documentation](https://hub.docker.com/r/cnk3x/xunlei)
+      zh_cn: 环境变量 `XL_BA_USER` 和 `XL_BA_PASSWORD` 给迅雷面板添加基本验证，默认用户密码为 `casaos` ，删除环境变量可去除验证。[文档](https://hub.docker.com/r/cnk3x/xunlei)
   title:
     en_us: Thunder
     zh_cn: 迅雷

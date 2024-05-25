@@ -21,7 +21,7 @@ services:
         source: /dev/net/tun
         target: /dev/net/tun
       - type: bind
-        source: /DATA/AppData/$AppID/config
+        source: /DATA/AppData/tailscaled/config
         target: /var/lib/tailscale
 x-casaos:
   architectures:

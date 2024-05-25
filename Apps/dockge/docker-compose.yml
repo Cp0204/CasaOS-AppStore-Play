@@ -18,10 +18,10 @@ services:
         source: /var/run/docker.sock
         target: /var/run/docker.sock
       - type: bind
-        source: /DATA/AppData/$AppID/data
+        source: /DATA/AppData/dockge/data
         target: /app/data
       - type: bind
-        source: /DATA/AppData/$AppID/stacks
+        source: /DATA/AppData/dockge/stacks
         target: /opt/stacks
     environment:
       DOCKGE_STACKS_DIR: /opt/stacks

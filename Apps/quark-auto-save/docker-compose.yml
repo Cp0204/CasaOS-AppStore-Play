@@ -18,7 +18,7 @@ services:
       WEBUI_PASSWORD: "admin123"
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/config
+        source: /DATA/AppData/quark-auto-save/config
         target: /app/config
       - type: bind
         source: /etc/localtime

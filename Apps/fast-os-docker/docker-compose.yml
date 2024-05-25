@@ -25,7 +25,7 @@ services:
         source: /etc/docker/
         target: /etc/docker/
       - type: bind
-        source: /DATA/AppData/$AppID/data
+        source: /DATA/AppData/fastosdocker/data
         target: /fast/data
 x-casaos:
   architectures:

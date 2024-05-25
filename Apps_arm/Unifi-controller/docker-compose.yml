@@ -13,98 +13,98 @@ services:
           memory: 64M
     network_mode: bridge
     ports:
-    - target: 3478
-      published: "3478"
-      protocol: udp
-    - target: 10001
-      published: "10001"
-      protocol: udp
-    - target: 8080
-      published: "8383"
-      protocol: tcp
-    - target: 8443
-      published: "8443"
-      protocol: tcp
-    - target: 1900
-      published: "1900"
-      protocol: udp
-    - target: 8843
-      published: "8843"
-      protocol: tcp
-    - target: 8880
-      published: "8880"
-      protocol: tcp
-    - target: 6789
-      published: "6789"
-      protocol: tcp
-    - target: 5514
-      published: "5514"
-      protocol: udp
+      - target: 3478
+        published: "3478"
+        protocol: udp
+      - target: 10001
+        published: "10001"
+        protocol: udp
+      - target: 8080
+        published: "8383"
+        protocol: tcp
+      - target: 8443
+        published: "8443"
+        protocol: tcp
+      - target: 1900
+        published: "1900"
+        protocol: udp
+      - target: 8843
+        published: "8843"
+        protocol: tcp
+      - target: 8880
+        published: "8880"
+        protocol: tcp
+      - target: 6789
+        published: "6789"
+        protocol: tcp
+      - target: 5514
+        published: "5514"
+        protocol: udp
     restart: unless-stopped
     volumes:
-    - type: bind
-      source: /DATA/AppData/$AppID/config
-      target: /config
+      - type: bind
+        source: /DATA/AppData/unifi-controller-arm/config
+        target: /config
     x-casaos:
       envs:
-      - container: PUID
-        description:
-          en_us: ""
-      - container: PGID
-        description:
-          en_us: ""
-      - container: MEM_LIMIT
-        description:
-          en_us: ""
-      - container: MEM_STARTUP
-        description:
-          en_us: ""
+        - container: PUID
+          description:
+            en_us: ""
+        - container: PGID
+          description:
+            en_us: ""
+        - container: MEM_LIMIT
+          description:
+            en_us: ""
+        - container: MEM_STARTUP
+          description:
+            en_us: ""
       ports:
-      - container: "3478"
-        description:
-          en_us: ""
-        protocol: udp
-      - container: "10001"
-        description:
-          en_us: ""
-        protocol: udp
-      - container: "8080"
-        description:
-          en_us: ""
+        - container: "3478"
+          description:
+            en_us: ""
+          protocol: udp
+        - container: "10001"
+          description:
+            en_us: ""
+          protocol: udp
+        - container: "8080"
+          description:
+            en_us: ""
 
-      - container: "8443"
-        description:
-          en_us: ""
+        - container: "8443"
+          description:
+            en_us: ""
 
-      - container: "1900"
-        description:
-          en_us: ""
-        protocol: udp
-      - container: "8843"
-        description:
-          en_us: ""
+        - container: "1900"
+          description:
+            en_us: ""
+          protocol: udp
+        - container: "8843"
+          description:
+            en_us: ""
 
-      - container: "8880"
-        description:
-          en_us: ""
+        - container: "8880"
+          description:
+            en_us: ""
 
-      - container: "6789"
-        description:
-          en_us: ""
+        - container: "6789"
+          description:
+            en_us: ""
 
-      - container: "5514"
-        description:
-          en_us: ""
-        protocol: udp
+        - container: "5514"
+          description:
+            en_us: ""
+          protocol: udp
 
       volumes:
-      - container: /config
-        description:
-          en_us: ""
+        - container: /config
+          description:
+            en_us: ""
     container_name: unifi-controller-arm
 x-casaos:
   architectures:
-  - arm
+    - arm
   main: unifi-controller-arm
   author: CasaOS Team
   category: Network
@@ -125,9 +125,9 @@ x-casaos:
   developer: LinuxServer.io
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/icon.png
   screenshot_link:
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/screenshot-1.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/screenshot-2.png
-  - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/screenshot-3.png
   tagline:
     en_us: The Unifi-controller software is a powerful, enterprise wireless software engine ideal for high-density client deployments requiring low latency and high uptime performance.
     zh_cn: Unifi控制器软件是一种功能强大的企业级无线软件引擎，适用于需要低延迟和高可用性性能的高密度客户端部署。

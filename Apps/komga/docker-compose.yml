@@ -15,10 +15,10 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/config
+        source: /DATA/AppData/komga/config
         target: /config
       - type: bind
-        source: /DATA/AppData/$AppID/data
+        source: /DATA/AppData/komga/data
         target: /data
       - type: bind
         source: /etc/timezone

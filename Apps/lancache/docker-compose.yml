@@ -38,10 +38,10 @@ services:
         protocol: tcp
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/cache
+        source: /DATA/AppData/lancache/cache
         target: /data/cache
       - type: bind
-        source: /DATA/AppData/$AppID/logs
+        source: /DATA/AppData/lancache/logs
         target: /data/logs
 
 x-casaos:

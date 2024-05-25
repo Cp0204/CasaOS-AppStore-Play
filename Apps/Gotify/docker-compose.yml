@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID
+        source: /DATA/AppData/gotify
         target: /app/data
 x-casaos:
   architectures:

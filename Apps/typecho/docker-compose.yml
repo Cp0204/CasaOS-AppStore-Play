@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID
+        source: /DATA/AppData/typecho
         target: /app/usr
     environment:
       TYPECHO_SITE_URL: https://your-domain.com

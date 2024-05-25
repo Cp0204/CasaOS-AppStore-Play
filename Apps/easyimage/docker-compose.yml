@@ -15,10 +15,10 @@ services:
     restart: unless-stopped
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/config
+        source: /DATA/AppData/easyimage/config
         target: /app/web/config
       - type: bind
-        source: /DATA/AppData/$AppID/i
+        source: /DATA/AppData/easyimage/i
         target: /app/web/i
     environment:
       TZ: Asia/Shanghai
