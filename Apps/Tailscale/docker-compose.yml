@@ -8,6 +8,7 @@ services:
       TS_EXTRA_ARGS: --advertise-exit-node
       TS_ROUTES: 192.168.100.0/24
       TS_STATE_DIR: /var/lib/tailscale
+      TS_HOSTNAME: CasaOS-1
     image: tailscale/tailscale:latest
     container_name: tailscaled
     deploy:
