@@ -78,6 +78,7 @@ If you think this project is helpful to you, you can give me a little support. T
 
 | Icon | AppName | Description |
 |:----:|---------|-------------|
+| ![1Panel](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/1panel/icon.png) | [1Panel](./Apps/1panel) | Modern and Open-Source Linux Server Operation and Management Panel<br>现代化、开源的 Linux 服务器运维管理面板 |
 | ![Adminer](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/adminer/icon.png) | [Adminer](./Apps/adminer) | Adminer is a database management tool that allows you to manage your databases with a simple and intuitive interface.<br>Adminer 是一个数据库管理工具，它通过简单直观的界面帮助您管理数据库。 |
 | ![Alist](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Alist/icon.png) | [Alist](./Apps/Alist) | A file list program that supports multiple storage, powered by Gin and Solidjs.<br>一个支持多种存储的文件列表程序，使用 Gin 和 Solidjs。 |
 | ![Aria2 Pro](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/icon.png) | [Aria2 Pro](./Apps/aria2-pro) | Aria2 is currently the most powerful and versatile download tool. It supports various downloading protocols such as BT, magnet, HTTP, and FTP, and is commonly used as a server for offline downloading. [DOC](https://p3terx.com/archives/docker-aria2-pro.html)<br>Aria2 是目前最强大的全能型下载工具，它支持 BT、磁力、HTTP、FTP 等下载协议，常用做离线下载的服务端。[文档](https://p3terx.com/archives/docker-aria2-pro.html) |
