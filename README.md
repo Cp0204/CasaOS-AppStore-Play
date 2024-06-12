@@ -8,6 +8,19 @@
 
 🔽 [App List / 应用列表](#app-list--应用列表)
 
+## 国内网络环境优化
+
+```bash
+# CasaOS 安装优化脚本
+# 主要解决 2024-6-6 起国内环境 get.docker.com 安装失败的问题，以及增加了换镜像源的步骤
+sudo bash -c "$(wget -qO- https://play.cuse.eu.org/get_casaos.sh)"
+```
+
+```bash
+# 优雅地为 docker pull 设置代理，和设置 dockerhub 镜像二选一即可
+bash <(wget -qO- https://play.cuse.eu.org/casaos_newbie.sh) set_docker_proxy
+```
+
 ## Features / 特色
 
  - Rich third-party applications / 丰富的第三方应用 <sup>70+🤩</sup>
