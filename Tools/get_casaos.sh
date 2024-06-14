@@ -703,18 +703,16 @@ Welcome_Banner() {
     echo -e "${COLOUR_RESET}"
 }
 
-# Switch Docker Source
-switch_docker_source() {
-    local CHOICE=$(echo -e "\nCasaOS 已安装完成\n└─ 是否执行 Docker 换源脚本(LinuxMirrors第三方)? [Y/n]")
+casaos_newbie() {
+    local CHOICE=$(echo -e "\nCasaOS 已安装完成\n└─ 是否执行小白辅助脚本（非官方）? [Y/n]")
     read -p "${CHOICE}" INPUT
     [[ -z "${INPUT}" ]] && INPUT=Y
     case $INPUT in
     [Yy] | [Yy][Ee][Ss])
-        bash <(curl -sSL https://linuxmirrors.cn/docker.sh)
+        bash <(wget -qO- https://play.cuse.eu.org/casaos_newbie.sh)
         ;;
     *)
-        echo "跳过换源"
-        ;;
+        break ;;
     esac
 }
 
@@ -783,5 +781,5 @@ Check_Service_status
 # Step 10: Clear Term and Show Welcome Banner
 Welcome_Banner
 
-# Step 11: Switch Docker Source
-switch_docker_source
+# Step 11:
+casaos_newbie

@@ -12,13 +12,14 @@
 
 ```bash
 # CasaOS 安装优化脚本
-# 主要解决 2024-6-6 起国内环境 get.docker.com 安装失败的问题，以及增加了换镜像源的步骤
+# 主要解决 2024-6-6 起国内环境 get.docker.com 安装失败的问题
 sudo bash -c "$(wget -qO- https://play.cuse.eu.org/get_casaos.sh)"
 ```
 
 ```bash
-# 优雅地为 docker pull 设置代理，和设置 dockerhub 镜像二选一即可
-bash <(wget -qO- https://play.cuse.eu.org/casaos_newbie.sh) set_docker_proxy
+# CasaOS 小白辅助脚本
+# 换 DockerHub 源、为 docker pull 设置代理，等多个一键功能合集
+bash <(wget -qO- https://play.cuse.eu.org/casaos_newbie.sh)
 ```
 
 ## Features / 特色

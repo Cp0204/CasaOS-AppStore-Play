@@ -21,123 +21,87 @@ echo '
  bash <(wget -qO- https://play.cuse.eu.org/casaos_newbie.sh)
 '
 
-update_system() {
-    echo "更新系统"
-    # 备份sources.list文件
-    echo "正在备份原有的 sources.list 文件，请稍候..."
-    if [ -f "/etc/apt/sources.list" ]; then
-        cp /etc/apt/sources.list /etc/apt/sources.list.bak
-        if [ $? -eq 0 ]; then
-            echo "原有 sources.list 文件已备份为 sources.list.bak。"
-        else
-            echo "警告：备份 sources.list 文件失败！"
-            exit 1
-        fi
-    else
-        echo "警告：未找到 sources.list 文件，跳过备份步骤。"
-    fi
-
-    # 更改sources.list内容
-    echo "正在清除原有的 sources.list 内容并添加国内镜像源地址，请稍候..."
-    rm -f /etc/apt/sources.list
-    if [ $? -eq 0 ]; then
-        echo 'deb https://mirrors.aliyun.com/debian/  bookworm main non-free non-free-firmware contrib\n' | tee /etc/apt/sources.list
-        echo 'deb-src https://mirrors.aliyun.com/debian/  bookworm main non-free non-free-firmware contrib\n' | tee -a /etc/apt/sources.list
-        echo 'deb https://mirrors.aliyun.com/debian-security/  bookworm-security main\n' | tee -a /etc/apt/sources.list
-        echo 'deb-src https://mirrors.aliyun.com/debian-security/  bookworm-security main\n' | tee -a /etc/apt/sources.list
-        echo 'deb https://mirrors.aliyun.com/debian/  bookworm-updates main non-free non-free-firmware contrib\n' | tee -a /etc/apt/sources.list
-        echo 'deb-src https://mirrors.aliyun.com/debian/  bookworm-updates main non-free non-free-firmware contrib\n' | tee -a /etc/apt/sources.list
-        echo 'deb https://mirrors.aliyun.com/debian/  bookworm-backports main non-free non-free-firmware contrib\n' | tee -a /etc/apt/sources.list
-        echo 'deb-src https://mirrors.aliyun.com/debian/  bookworm-backports main non-free non-free-firmware contrib\n' | tee -a /etc/apt/sources.list
-
-        if [ -f "/etc/apt/sources.list" ] && grep -q "mirrors.aliyun.com" /etc/apt/sources.list; then
-            echo "已成功将国内镜像源地址添加到 sources.list。"
-        else
-            echo "警告：未能成功添加国内镜像源地址！"
-            exit 1
-        fi
-    else
-        echo "警告：清除 sources.list 文件内容失败！"
-        exit 1
-    fi
+chenge_linuxmirrors() {
+    echo "> 更换系统软件源"
+    bash <(curl -sSL https://linuxmirrors.cn/main.sh)
 }
 
-# 定义安装必要的软件包的函数
-install_softwares() {
-    echo "安装必要的软件包"
-    # 更新软件包列表并升级系统
-    echo "正在更新软件包列表并升级系统，请稍候..."
+# 更新系统软件
+update_softwares() {
+    echo "> 更新系统软件"
     apt update && apt -y upgrade
     if [ $? -eq 0 ]; then
-        echo "软件包列表已更新且系统已成功升级。"
+        echo "系统软件已更新。"
     else
-        echo "警告：更新软件包列表或升级系统过程中发生错误！"
+        echo "警告：更新软件过程中发生错误！"
     fi
 
-    # 安装curl、sudo、jq、procps
-    echo "正在安装curl、sudo、jq、procps..."
-    apt-get install -y curl sudo jq procps || {
-        echo "安装软件包失败。"
-        exit 1
-    }
+    # 定义需要安装的软件包数组
+    packages=("sudo" "curl" "procps")
 
-    # 检查curl是否安装成功
-    if dpkg -s curl >/dev/null 2>&1; then
-        echo "curl 已成功安装。"
-    else
-        echo "警告：curl 安装失败！"
-    fi
+    # 检查是否有软件包需要安装
+    need_install=false
+    for package in "${packages[@]}"; do
+        if ! dpkg -l | grep -q "^ii  $package"; then
+            need_install=true
+            break
+        fi
+    done
 
-    # 检查sudo是否安装成功
-    if dpkg -s sudo >/dev/null 2>&1; then
-        echo "sudo 已成功安装。"
+    # 询问用户安装软件包
+    if $need_install; then
+        echo "> 将安装以下常用软件包（如果尚未安装）"
+        echo "- curl (用于网络传输)"
+        echo "- sudo (用于管理权限)"
+        echo "- procps (用于查看进程信息)"
+        read -p "是否继续？(Y/n): " choice
+        [[ -z "${INPUT}" ]] && INPUT=Y
+        case "$choice" in
+        [Yy] | [Yy][Ee][Ss])
+            # 安装软件包，并对异常情况做出处理
+            for package in "${packages[@]}"; do
+                # 检查软件包是否已经安装
+                if dpkg -l | grep -q "^ii  $package"; then
+                    echo "$package 已安装，跳过"
+                else
+                    echo "正在安装 $package..."
+                    apt-get install -y "$package"
+                fi
+            done
+            # 检查软件包是否安装成功
+            for package in "${packages[@]}"; do
+                if dpkg -l | grep -q "^ii  $package"; then
+                    echo "$package 已成功安装。"
+                else
+                    echo "警告：$package 安装失败！"
+                fi
+            done
+            ;;
+        n | N) exit 0 ;;
+        *) echo "输入错误，请重新输入。" && update_softwares ;;
+        esac
     else
-        echo "警告：sudo 安装失败！"
-    fi
-
-    # 检查jq是否安装成功
-    if dpkg -s procps >/dev/null 2>&1; then
-        echo "procps 已成功安装。"
-    else
-        echo "警告：procps 安装失败！"
+        echo "> 所有常用软件包都已经安装。"
     fi
 }
 
 # 定义安装CasaOS的函数
 install_casaos() {
-    echo "安装CasaOS"
+    echo "> 安装CasaOS"
     # 安装CasaOS（需确认用户选择）
-    echo "正在安装CasaOS，请输入 y 或 Y 以继续..."
-    read -p "是否继续安装CasaOS？[y/n]: " choice
+    read -p "将执行 CasaOS 安装脚本，是否继续？[Y/n]: " choice
+    [[ -z "${choice}" ]] && choice=Y
     if [ "$choice" = "y" -o "$choice" = "Y" ]; then
         echo "开始安装CasaOS..."
-        desired_path="./casaos_installer.sh"
-        curl -fsSL https://play.cuse.eu.org/get_casaos.sh -o "$desired_path"
-        echo "" >>"$desired_path"
-        echo "exit 0" >>"$desired_path"
-        if [ $? -eq 0 ]; then
-            chmod +x "$desired_path"
-            echo "CasaOS 安装脚本已下载并保存到 $desired_path。"
-            echo "开始执行CasaOS安装脚本..."
-            sudo bash "$desired_path" >>"./casaos_install.log" 2>&1
-            if [ $? -eq 0 ]; then
-                echo "CasaOS 安装脚本已成功执行。"
-                echo "CasaOS 安装日志已保存到 ./casaos_install.log。"
-            else
-                echo "警告：执行 CasaOS 安装脚本时发生错误！查看 ./casaos_install.log 了解更多信息。"
-            fi
-        else
-            echo "警告：下载 CasaOS 安装脚本时发生错误！"
-            exit 1 # 添加错误处理，脚本终止
-        fi
+        sudo bash -c "$(wget -qO- https://play.cuse.eu.org/get_casaos.sh)"
     else
-        echo "用户取消安装CasaOS。"
+        echo "取消安装CasaOS。"
     fi
 }
 
 # 定义配置IPv6的函数
 configure_ipv6() {
-    echo "配置IPv6"
+    echo "> 配置IPv6"
     # 检查IPv6是否启用
     ipv6_enabled=$(/sbin/sysctl -n net.ipv6.conf.all.disable_ipv6)
     if [ "$ipv6_enabled" -ne 0 ]; then
@@ -253,7 +217,7 @@ set_docker_proxy() {
     DEFAULT_PROXY="127.0.0.1:10809"
     DEFAULT_NO_PROXY="localhost,127.0.0.1,.example.com"
 
-    echo -e "为Docker设置代理\n输入均为空则取消代理"
+    echo -e "> 为Docker设置代理，输入均为空则取消代理"
 
     # 获取用户输入的代理地址
     read -p "请输入 HTTP 代理地址 (例如 ${DEFAULT_PROXY}): " HTTP_PROXY
@@ -284,7 +248,7 @@ Environment=\"NO_PROXY=$NO_PROXY\"" | sudo tee /etc/systemd/system/docker.servic
     # 询问是否重启 docker
     read -p "是否重启 docker 服务使其立即生效? (y/n): " choice
     case "$choice" in
-    y | Y)
+    [Yy] | [Yy][Ee][Ss])
         sudo systemctl daemon-reload
         sudo systemctl restart docker
         echo "Docker 服务已重启."
@@ -296,6 +260,37 @@ Environment=\"NO_PROXY=$NO_PROXY\"" | sudo tee /etc/systemd/system/docker.servic
     read -s -n1 -p "按任意键继续... "
 }
 
+switch_docker_source() {
+    echo "> 切换Docker镜像源"
+    bash <(curl -sSL https://linuxmirrors.cn/docker.sh)
+}
+
+disk_usage() {
+    echo "> 磁盘使用情况分析"
+    # 检查 gdu 命令是否存在。
+    command -v gdu >/dev/null 2>&1 || {
+        # 请求用户安装
+        read -r -p "未找到 gdu 命令。是否要安装? [Y/n]" INPUT
+        [[ -z "${INPUT}" ]] && INPUT=Y
+        case "$INPUT" in
+        [Yy] | [Yy][Ee][Ss])
+            # 安装 gdu
+            apt-get update && apt-get install -y gdu # Debian/Ubuntu
+            # yum install -y gdu # CentOS/RHEL
+            ;;
+        *)
+            echo "取消安装 gdu 无法分析"
+            return 1
+            ;;
+        esac
+    }
+    # 输入分析的目录
+    read -r -p "请输入要分析的目录(默认为/): " target_dir
+    target_dir="${target_dir:-/}"
+    # 使用 gdu 分析磁盘使用情况。
+    gdu "$target_dir"
+}
+
 # 脚本入口
 if [ $# -gt 0 ]; then
     # 如果有命令行参数，则直接执行对应的函数
@@ -305,28 +300,33 @@ if [ $# -gt 0 ]; then
     shift
     $function_name "$@"
 else
+    echo ""
+    echo "本脚本大部分操作基于 Debian 12 系统，搭配使用教程：https://post.smzdm.com/p/a607edoe"
     while true; do
-        echo "本脚本大部分操作基于 Debian 12 系统，搭配使用教程：https://post.smzdm.com/p/a607edoe/"
         echo ""
         echo "请选择以下功能："
-        echo "1. 添加国内源"
-        echo "2. 安装必要的软件包"
-        echo "3. 安装CasaOS"
-        echo "4. 配置IPv6"z
+        echo "1. 更换系统软件源"
+        echo "2. 更新系统软件"
+        echo "3. 安装CasaOS(国内优化脚本)"
+        echo "4. 配置IPv6"
         echo "5. 禁用自动休眠"
-        echo "6. 设置默认语言为中文"
+        echo "6. 设置系统语言为中文"
         echo "7. 为Docker设置代理"
+        echo "8. 换Docker镜像源(和7二选一即可)"
+        echo "9. 磁盘用量分析"
         echo "q. 退出"
         echo ""
         read -p "请输入功能序号: " input
         case $input in
-        1) update_system ;;
-        2) install_softwares ;;
+        1) chenge_linuxmirrors ;;
+        2) update_softwares ;;
         3) install_casaos ;;
         4) configure_ipv6 ;;
         5) disable_autosleep ;;
         6) set_locales ;;
         7) set_docker_proxy ;;
+        8) switch_docker_source ;;
+        9) disk_usage ;;
         'q') break ;;
         *) ;;
         esac
