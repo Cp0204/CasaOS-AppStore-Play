@@ -211,17 +211,76 @@ set_locales() {
     fi
 }
 
-# 为Docker设置代理
+# Docker网络优化
+docker_network_optimization() {
+    echo "> Docker网络优化"
+    # 获取 Docker 当前设置
+    docker_info=$(sudo docker info)
+    http_proxy=$(echo "$docker_info" | grep 'HTTP Proxy' | awk -F ': ' '{print $2}')
+    https_proxy=$(echo "$docker_info" | grep 'HTTPS Proxy' | awk -F ': ' '{print $2}')
+    no_proxy=$(echo "$docker_info" | grep 'No Proxy' | awk -F ': ' '{print $2}')
+    registry_mirrors=$(echo "$docker_info" | grep 'Registry Mirrors' -A 1 | tail -n 1 | sed 's/  //')
+    echo "==========当前 Docker 设置=============="
+    echo "代理:"
+    echo "- HTTP Proxy: $http_proxy"
+    echo "- HTTPS Proxy: $https_proxy"
+    echo "- No Proxy: $no_proxy"
+    echo ""
+    echo "Docker Registry 源:"
+    echo "- $registry_mirrors"
+    echo "======================================="
+    echo "请选择网络优化方式（二选一即可）："
+    echo "1. 设置 Docker 代理"
+    echo "2. 更换 Docker Registry 源"
+    echo "q. 退出"
+
+    read -p "选择: " choice
+    case "$choice" in
+    1)
+        set_docker_proxy
+        ;;
+    2)
+        switch_docker_source
+        ;;
+    "q")
+        return
+        ;;
+    *)
+        echo "未正确选择，退出"
+        return
+        ;;
+    esac
+
+    # 询问是否重启 docker
+    if [ "$choice" = "1" -o "$choice" = "2" ]; then
+        read -p "是否重启 docker 服务使其立即生效? (Y/n): " choice
+        [[ -z "${choice}" ]] && choice=Y
+        case "$choice" in
+        [Yy] | [Yy][Ee][Ss])
+            sudo systemctl restart docker
+            echo "Docker 服务已重启."
+            ;;
+        *)
+            echo "Docker 服务未重启."
+            ;;
+        esac
+    fi
+    read -s -n1 -p "按任意键继续... "
+}
+
 set_docker_proxy() {
     # 默认参数
     DEFAULT_PROXY="127.0.0.1:10809"
     DEFAULT_NO_PROXY="localhost,127.0.0.1,.example.com"
 
-    echo -e "> 为Docker设置代理，输入均为空则取消代理"
+    echo -e "> 为Docker设置代理，输入均为空则取消代理，q退出"
 
     # 获取用户输入的代理地址
     read -p "请输入 HTTP 代理地址 (例如 ${DEFAULT_PROXY}): " HTTP_PROXY
     HTTP_PROXY=${HTTP_PROXY:-""}
+    if [ "$HTTP_PROXY" = "q" ]; then
+        return
+    fi
 
     read -p "请输入 HTTPS 代理地址 (默认同 HTTP 代理 ${HTTP_PROXY}): " HTTPS_PROXY
     HTTPS_PROXY=${HTTPS_PROXY:-$HTTP_PROXY}
@@ -244,20 +303,7 @@ Environment=\"NO_PROXY=$NO_PROXY\"" | sudo tee /etc/systemd/system/docker.servic
         echo "  - HTTPS_PROXY: $HTTPS_PROXY"
         echo "  - NO_PROXY:    $NO_PROXY"
     fi
-
-    # 询问是否重启 docker
-    read -p "是否重启 docker 服务使其立即生效? (y/n): " choice
-    case "$choice" in
-    [Yy] | [Yy][Ee][Ss])
-        sudo systemctl daemon-reload
-        sudo systemctl restart docker
-        echo "Docker 服务已重启."
-        ;;
-    *)
-        echo "Docker 服务未重启."
-        ;;
-    esac
-    read -s -n1 -p "按任意键继续... "
+    sudo systemctl daemon-reload
 }
 
 switch_docker_source() {
@@ -311,9 +357,8 @@ else
         echo "4. 配置IPv6"
         echo "5. 禁用自动休眠"
         echo "6. 设置系统语言为中文"
-        echo "7. 为Docker设置代理"
-        echo "8. 换Docker镜像源(和7二选一即可)"
-        echo "9. 磁盘用量分析"
+        echo "7. Docker网络优化"
+        echo "8. 磁盘用量分析"
         echo "q. 退出"
         echo ""
         read -p "请输入功能序号: " input
@@ -324,9 +369,8 @@ else
         4) configure_ipv6 ;;
         5) disable_autosleep ;;
         6) set_locales ;;
-        7) set_docker_proxy ;;
-        8) switch_docker_source ;;
-        9) disk_usage ;;
+        7) docker_network_optimization ;;
+        8) disk_usage ;;
         'q') break ;;
         *) ;;
         esac
