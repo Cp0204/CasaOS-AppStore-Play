@@ -1,7 +1,7 @@
-name: motioneye
+name: motioneye-arm
 services:
-  motioneye:
-    container_name: motioneye
+  motioneye-arm:
+    container_name: motioneye-arm
     image: ccrisan/motioneye:master-armhf
     ports:
       - target: 8765
@@ -35,9 +35,7 @@ services:
     privileged: false
 x-casaos:
   architectures:
-    - amd64
     - arm
-    - arm64
   author: f4bio
   category: Utilities
   description:
@@ -46,19 +44,16 @@ x-casaos:
   developer: Motioneye
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Motioneye/icon.png
   index: /
-  main: motioneye
+  main: motioneye-arm
   port_map: "8765"
   scheme: http
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Motioneye/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Motioneye/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Motioneye/screenshot-3.png
-  store_app_id: motioneye
+  store_app_id: motioneye-arm
   tagline:
     en_us: A web frontend for the motion daemon.
     zh_cn: 用于motion的Web前端守护程序。
   title:
     en_us: Motioneye
-     tips:
-    before_install: |
-    The default username is admin and the password is blank
