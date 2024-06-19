@@ -1,0 +1,59 @@
+name: motioneye-arm
+services:
+  motioneye-arm:
+    container_name: motioneye-arm
+    image: ccrisan/motioneye:master-armhf
+    ports:
+      - target: 8765
+        published: "8765"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/motioneye/config
+        target: /etc/motioneye
+      - type: bind
+        source: /DATA/Media/motioneye
+        target: /var/lib/motioneye
+    x-casaos:
+      ports:
+        - container: "8765"
+          description:
+            en_us: Motioneye Web Port
+            zh_cn: Motioneye Web端口
+          host: "8765"
+      volumes:
+        - container: /etc/motioneye
+          description:
+            en_us: Config files
+            zh_cn: 配置文件
+        - container: /var/lib/motioneye
+          description:
+            en_us: Media files
+            zh_cn: 媒体文件
+    network_mode: bridge
+    privileged: false
+x-casaos:
+  architectures:
+    - arm
+  author: f4bio
+  category: Utilities
+  description:
+    en_us: motionEye is a web-based frontend for motion. Check out the wiki for more details. Changelog is available on the releases page. https://github.com/motioneye-project/motioneye
+    zh_cn: motionEye是motion的基于Web的前端。查看Wiki以获取更多详细信息。更改日志请参阅发布页面。https://github.com/motioneye-project/motioneye
+  developer: Motioneye
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Motioneye/icon.png
+  index: /
+  main: motioneye-arm
+  port_map: "8765"
+  scheme: http
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Motioneye/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Motioneye/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Motioneye/screenshot-3.png
+  store_app_id: motioneye-arm
+  tagline:
+    en_us: A web frontend for the motion daemon.
+    zh_cn: 用于motion的Web前端守护程序。
+  title:
+    en_us: Motioneye
