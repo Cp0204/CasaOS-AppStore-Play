@@ -1,0 +1,77 @@
+name: aria2
+services:
+  aria2:
+    image: johngong/aria2:latest
+    container_name: aria2
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - "6881:6881"
+      - "6881:6881/udp"
+      - "6800:6800"
+      - "6880:8080"
+    environment:
+      - ARIA2_RPC_SECRET=token
+      - ARIA2_RPC_LISTEN_PORT=6800
+      - ARIA2_LISTEN_PORT=6881
+      - UID=1000
+      - GID=1000
+      - UMASK=022
+    volumes:
+      - /DATA/AppData/aria2/config:/config
+      - /DATA/Downloads:/Downloads
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: Cp0204
+  category: Downloader
+  description:
+    en_us: Aria2 is a lightweight multi-protocol & multi-source command-line download utility. It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink.
+    zh_cn: Aria2 是一款轻量级的多协议和多源命令行下载工具。它支持 HTTP/HTTPS、FTP、SFTP、BitTorrent 和 Metalink 。
+  developer: johngong
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2/screenshot-2.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2/thumbnail.png
+  main: aria2
+  tagline:
+    en_us: The lightweight multi-protocol & multi-source command-line download utility
+    zh_cn: 轻量级的多协议和多源命令行下载工具
+  tips:
+    before_install:
+      en_us: |
+        Aria2 itself is a download kernel with no admin panel. This application integrates with WebUI [AriaNg](http://ariang.mayswind.net) for graphical management, but you still **need to set up the AriaNg connection information manually** after installation:
+
+        | Environment | Default | Description |
+        | --- | --- | --- |
+        | ARIA2_RPC_SECRET | `token` | RPC SecretKey |
+        | ARIA2_RPC_LISTEN_PORT | `6800` | RPC Port |
+
+        Alternatively, you can use a mobile app to connect to the management, e.g. [Aria2App](https://github.com/devgianlu/Aria2App).
+
+        **NOTE**: Changes to Aria2 settings using the third-party panel will only be saved for that sub-process, and will not modify the configuration file; if permanently modified, you should manually modify the Aria2 configuration file.
+      zh_cn: |
+        Aria2 本身是一个下载核心，没有管理面板。本应用集成 WebUI [AriaNg](http://ariang.mayswind.net) 供图形化管理，但安装后你仍然**需要手动设置 AriaNg 连接信息**：
+
+        | 环境变量 | 默认值 | 说明 |
+        | --- | --- | --- |
+        | ARIA2_RPC_SECRET | `token` | RPC秘钥 |
+        | ARIA2_RPC_LISTEN_PORT | `6800` | RPC端口 |
+
+        此外，你也可以使用手机应用连接管理，例如：[Aria2App](https://github.com/devgianlu/Aria2App)。
+
+        **注意**：使用第三方面板对 Aria2 设置的修改只会保存在该次进程中，不会修改配置文件，如果永久修改，你应该手动修改Aria2配置文件。
+  title:
+    en_us: Aria2
+  scheme: http
+  hostname: ""
+  port_map: "6880"
+  index: "/#!/downloading"
