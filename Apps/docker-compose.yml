@@ -1,0 +1,96 @@
+name: aria2-pro
+services:
+  aria2-pro:
+    image: johngong/aria2:latest
+    container_name: aria2-pro
+    deploy:
+      resources:
+        reservations:
+          memory: 0M
+    network_mode: bridge
+    ports:
+      - target: 6881
+        published: '6881'
+        protocol: tcp
+      - target: 6881
+        published: '6881'
+        protocol: udp
+      - target: 6800
+        published: '6800'
+        protocol: tcp
+      - target: 8080
+        published: '6880'
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/Aria2
+        target: /config
+      - type: bind
+        source: /DATA/AppData/Downloads
+        target: /Downloads
+    environment:
+      ARIA2_LISTEN_PORT: '6881'
+      ARIA2_RPC_LISTEN_PORT: '6800'
+      ARIA2_RPC_SECRET: secret
+      GID: '1000'
+      UID: '1000'
+      UMASK: '022'
+    x-casaos:
+      ports:
+        - container: '6881'
+          description:
+            en_us: Port
+            zh_cn: 端口
+        - container: '6881'
+          description:
+            en_us: Port
+            zh_cn: 端口
+        - container: '6800'
+          description:
+            en_us: Port
+            zh_cn: 端口
+        - container: '8080'
+          description:
+            en_us: Port
+            zh_cn: 端口
+      volumes:
+        - container: /config
+          description:
+            en_us: Config directory.
+            zh_cn: 配置目录
+        - container: /Downloads
+          description:
+            en_us: Config directory.
+            zh_cn: 配置目录
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: aria2-pro
+  store_app_id: aria2-pro
+  category: Downloader
+  author: Cp0204
+  developer: ''
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/screenshot-3.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2-pro/thumbnail.png
+  description:
+    en_us: Aria2 is currently the most powerful and versatile download tool. It supports various downloading protocols such as BT, magnet, HTTP, and FTP, and is commonly used as a server for offline downloading
+    zh_cn: ''
+  tagline:
+    en_us: A better Aria2 Docker container
+    zh_cn: ''
+  title:
+    en_us: Aria2
+    zh_cn: ''
+  tips:
+    before_install: null
+    custom: null
+  port_map: '6880'
+  scheme: http
+  index: /
