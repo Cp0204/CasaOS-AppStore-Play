@@ -1,0 +1,46 @@
+name: maxkb
+services:
+  maxkb:
+    image: cr2.fit2cloud.com/1panel/maxkb:latest
+    # image: 1panel/maxkb:latest
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 2048M
+    ports:
+      - "18080:8080"
+    volumes:
+      - type: bind
+        source: /DATA/AppData/maxkb/data
+        target: /var/lib/postgresql/data
+    container_name: maxkb
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: maxkb
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: MaxKB is a knowledge base question answering system based on LLM. MaxKB = Max Knowledge Base, aims to be the most powerful brain of the enterprise.
+    zh_cn: MaxKB 是一款基于 LLM 大语言模型的知识库问答系统。MaxKB = Max Knowledge Base，旨在成为企业的最强大脑。
+  developer: Fit2Cloud
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/maxkb/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/maxkb/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/maxkb/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/maxkb/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/maxkb/screenshot-4.png
+  tagline:
+    en_us: A knowledge base question answering system based on LLM
+    zh_cn: 基于 LLM 大语言模型的知识库问答系统
+  tips:
+    before_install:
+      en_us: 'Default username: `admin`, Password: `MaxKB@123..`'
+      zh_cn: '默认用户名: `admin`，密码: `MaxKB@123..`'
+  title:
+    en_us: MaxKB
+  index: /
+  port_map: "18080"
