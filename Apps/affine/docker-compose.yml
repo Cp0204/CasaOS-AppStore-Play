@@ -1,0 +1,124 @@
+name: affine
+services:
+  affine:
+    image: ghcr.io/toeverything/affine-graphql:stable
+    container_name: affine-app
+    command:
+      ['sh', '-c', 'node ./scripts/self-host-predeploy && node ./dist/index.js']
+    ports:
+      - "3010:3010"
+      - "5555:5555"
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    volumes:
+      # custom configurations
+      - /DATA/AppData/affine/config:/root/.affine/config
+      # blob storage
+      - /DATA/AppData/affine/storage:/root/.affine/storage
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '1000m'
+    restart: unless-stopped
+    environment:
+      - NODE_OPTIONS="--import=./scripts/register.js"
+      - AFFINE_CONFIG_PATH=/root/.affine/config
+      - REDIS_SERVER_HOST=redis
+      - DATABASE_URL=postgres://affine:affine@postgres:5432/affine
+      - NODE_ENV=production
+      - AFFINE_ADMIN_EMAIL=affine@acme.sh
+      - AFFINE_ADMIN_PASSWORD=affine
+      # Telemetry allows us to collect data on how you use the affine. This data will helps us improve the app and provide better features.
+      # Uncomment next line if you wish to quit telemetry.
+      # - TELEMETRY_ENABLE=false
+    deploy:
+      resources:
+        reservations:
+          memory: 1024M
+    networks:
+      - affine
+
+  redis:
+    image: redis:latest
+    container_name: affine-redis
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/affine/redis:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', '--raw', 'incr', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - affine
+
+  postgres:
+    image: postgres:latest
+    container_name: affine-postgres
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/affine/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U affine']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_USER: affine
+      POSTGRES_PASSWORD: affine
+      POSTGRES_DB: affine
+      PGDATA: /var/lib/postgresql/data/pgdata
+    networks:
+      - affine
+
+networks:
+  affine:
+    name: affine
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: affine
+  author: Cp0204
+  category: Documents
+  description:
+    en_us: A privacy-focused, local-first, open-source, and ready-to-use alternative for Notion & Miro. One hyper-fused platform for wildly creative minds. AFFiNE is a next-gen knowledge base that brings planning, sorting and creating all together. Privacy first, open-source, customizable and ready to use.
+    zh_cn: AFFiNE 是一个注重隐私、本地优先、开源且即时可用的 Notion 和 Miro 替代方案。这是一个专为狂野创意人士打造的超融合平台。AFFiNE 是一个下一代知识库，它将计划、分类和创建融为一体。隐私至上，开源，可定制，开箱即用。
+  developer: toeverything
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/affine/icon.svg
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/affine/screenshot-1.jpg
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/affine/screenshot-2.jpg
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/affine/screenshot-2.jpg
+  tagline:
+    en_us: Open source alternative to Notion and Miro
+    zh_cn: Notion 和 Miro 的开源替代品
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/affine/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        The application can not be opened immediately at the first launch, it takes about 10 minutes to initialize, please be patient.
+
+        Default username and password:
+
+        **AFFINE_ADMIN_EMAIL**: `affine@acme.sh`
+        **AFFINE_ADMIN_PASSWORD**: `affine`
+
+        **Please change it before installation, changes may not take effect after initialization** and you need to remove the configuration file manually. `/DATA/AppData/affine`
+      zh_cn: |
+        应用首次启动无法立即打开，大约需要10分钟初始化，请耐心等待。
+
+        默认用户名和密码：
+
+        **AFFINE_ADMIN_EMAIL**: `affine@acme.sh`
+        **AFFINE_ADMIN_PASSWORD**: `affine`
+
+        **请在安装前修改，初始化后修改可能无法生效**，需要手动移除配置文件。`/DATA/AppData/affine`
+  title:
+    en_us: AFFiNE
+  index: /
+  port_map: "3010"
