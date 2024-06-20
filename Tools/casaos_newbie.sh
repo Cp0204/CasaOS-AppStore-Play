@@ -308,7 +308,8 @@ Environment=\"NO_PROXY=$NO_PROXY\"" | sudo tee /etc/systemd/system/docker.servic
 
 switch_docker_source() {
     echo "> 切换Docker镜像源"
-    bash <(curl -sSL https://linuxmirrors.cn/docker.sh)
+    # bash <(curl -sSL https://linuxmirrors.cn/docker.sh)
+    bash <(curl -sSL https://gitee.com/xjxjin/scripts/raw/main/check_docker_registry.sh)
 }
 
 disk_usage() {
