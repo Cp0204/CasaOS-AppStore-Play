@@ -1,0 +1,127 @@
+name: penpot
+services:
+  penpot-frontend:
+    image: "penpotapp/frontend:latest"
+    container_name: penpot-frontend
+    restart: unless-stopped
+    ports:
+      - published: "9001"
+        target: 80
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/penpot/assets
+        target: /opt/data/assets
+    depends_on:
+      - penpot-backend
+      - penpot-exporter
+    networks:
+      - penpot
+    environment:
+      - PENPOT_FLAGS=enable-registration enable-login-with-password
+
+  penpot-backend:
+    image: "penpotapp/backend:latest"
+    container_name: penpot-backend
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/penpot/assets
+        target: /opt/data/assets
+    depends_on:
+      - penpot-postgres
+      - penpot-redis
+    networks:
+      - penpot
+    environment:
+      - PENPOT_FLAGS=enable-registration enable-login-with-password disable-email-verification enable-smtp enable-prepl-server disable-secure-session-cookies
+      - PENPOT_PUBLIC_URI=http://localhost:9001
+      - PENPOT_DATABASE_URI=postgresql://penpot-postgres/penpot
+      - PENPOT_DATABASE_USERNAME=penpot
+      - PENPOT_DATABASE_PASSWORD=penpot
+      - PENPOT_REDIS_URI=redis://penpot-redis/0
+      - PENPOT_ASSETS_STORAGE_BACKEND=assets-fs
+      - PENPOT_STORAGE_ASSETS_FS_DIRECTORY=/opt/data/assets
+      - PENPOT_TELEMETRY_ENABLED=true
+      - PENPOT_SMTP_DEFAULT_FROM=no-reply@example.com
+      - PENPOT_SMTP_DEFAULT_REPLY_TO=no-reply@example.com
+      - PENPOT_SMTP_HOST=penpot-mailcatch
+      - PENPOT_SMTP_PORT=1025
+      - PENPOT_SMTP_TLS=false
+      - PENPOT_SMTP_SSL=false
+
+  penpot-exporter:
+    image: "penpotapp/exporter:latest"
+    container_name: penpot-exporter
+    restart: unless-stopped
+    networks:
+      - penpot
+    environment:
+      - PENPOT_PUBLIC_URI=http://penpot-frontend
+      - PENPOT_REDIS_URI=redis://penpot-redis/0
+
+  penpot-postgres:
+    image: "postgres:15"
+    container_name: penpot-postgres
+    restart: unless-stopped
+    stop_signal: SIGINT
+    volumes:
+      - type: bind
+        source: /DATA/AppData/penpot/data
+        target: /var/lib/postgresql/data
+    networks:
+      - penpot
+    environment:
+      - POSTGRES_INITDB_ARGS=--data-checksums
+      - POSTGRES_DB=penpot
+      - POSTGRES_USER=penpot
+      - POSTGRES_PASSWORD=penpot
+
+  penpot-redis:
+    image: redis:7
+    container_name: penpot-redis
+    restart: always
+    networks:
+      - penpot
+
+  penpot-mailcatch:
+    image: sj26/mailcatcher:latest
+    container_name: penpot-mailcatch
+    restart: unless-stopped
+    expose:
+      - '1025'
+    ports:
+      - published: "1080"
+        target: 1080
+        protocol: tcp
+    networks:
+      - penpot
+
+networks:
+  penpot:
+    name: penpot
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: penpot-frontend
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: Penpot is the first open-source design and prototyping platform meant for cross-domain teams. Designers craft beautiful interfaces with professional vector tools, while developers inspect the code in real-time.
+    zh_cn: Penpot是第一个开源的设计和原型平台，专为跨领域团队打造。设计人员可以使用专业的矢量工具制作精美的界面，而开发人员可以实时检查代码。
+  developer: Penpot
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/penpot/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/penpot/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/penpot/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/penpot/screenshot-3.png
+  tagline:
+    en_us: The Open Source design & prototyping platform
+    zh_cn: 开源的设计和原型平台
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/penpot/thumbnail.png
+  title:
+    en_us: Penpot
+  index: /
+  port_map: "9001"
