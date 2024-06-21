@@ -1,0 +1,73 @@
+name: xiaoju-survey
+services:
+  mongo:
+    image: mongo:4
+    container_name: xiaoju-survey-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: xiaoju-survey
+      MONGO_INITDB_ROOT_PASSWORD: xiaoju-survey
+    ports:
+      - published: "27018"
+        target: 27017
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/xiaoju-survey/db
+        target: /data/db
+    networks:
+      - xiaoju-survey
+
+  xiaoju-survey:
+    image: xiaojusurvey/xiaoju-survey:1.1.2-slim
+    container_name: xiaoju-survey
+    restart: unless-stopped
+    ports:
+      - published: "8081"
+        target: 80
+        protocol: tcp
+    environment:
+      XIAOJU_SURVEY_MONGO_URL: mongodb://xiaoju-survey:xiaoju-survey@xiaoju-survey-mongo:27017
+    depends_on:
+      - mongo
+    networks:
+      - xiaoju-survey
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+networks:
+  xiaoju-survey:
+    name: xiaoju-survey
+    driver: bridge
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: xiaoju-survey
+  author: Cp0204
+  category: Analytics
+  description:
+    en_us: XIAOJUSURVEY is a lightweight and secure questionnaire system base, providing individuals and enterprises with a one-stop product-level solution to quickly meet various online survey scenarios.
+    zh_cn: 「快速」打造「专属」问卷系统, 让调研「更轻松」。XIAOJUSURVEY是一套轻量、安全的问卷系统基座，提供面向个人和企业的一站式产品级解决方案，快速满足各类线上调研场景。
+  developer: didi.cn
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xiaoju-survey/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xiaoju-survey/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xiaoju-survey/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xiaoju-survey/screenshot-3.png
+  tagline:
+    en_us: Lightweight and safe questionnaire system base
+    zh_cn: 轻量安全的问卷系统基座
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xiaoju-survey/thumbnail.png
+  title:
+    en_us: XIAOJUSURVEY
+    zh_cn: 小橘调研
+  tips:
+    before_install:
+      en_us: 'No default account, register first before using.'
+      zh_cn: '没有默认账号，先注册后使用。'
+  index: /
+  port_map: "8081"
