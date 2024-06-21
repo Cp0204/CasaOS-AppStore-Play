@@ -1,0 +1,39 @@
+name: myip
+services:
+  myip:
+    container_name: myip
+    image: jason5ng32/myip:latest
+    restart: unless-stopped
+    ports:
+      - target: 18966
+        published: "18966"
+        protocol: tcp
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: myip
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: The best IP Toolbox. Easy to check what's your IPs, IP geolocation, check for DNS leaks, examine WebRTC connections, speed test, ping test, MTR test, check website availability, whois search and more!
+    zh_cn: 可能是最好用的IP工具箱。轻松检查你的 IP，IP 地理位置，检查DNS泄漏，检查 WebRTC 连接，速度测试，ping 测试，MTR测试，检查网站可用性，查询 Whois 信息等等。
+  developer: jason5ng32
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/icon.webp
+  # screenshot_link:
+  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/screenshot-1.png
+  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/screenshot-2.png
+  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/screenshot-3.png
+  tagline:
+    en_us: A Better IP Toolbox
+    zh_cn: 更好的IP工具箱
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/thumbnail.png
+  title:
+    en_us: MyIP
+    zh_cn: IP工具箱
+  index: /
+  port_map: "18966"
