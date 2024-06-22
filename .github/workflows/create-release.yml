@@ -22,15 +22,20 @@ jobs:
         id: get_commit_messages
         run: |
           # Get the previous tag
-          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^)
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 --always HEAD^)
           # If there is no previous tag, get only the latest commit message
-          if [[ -z "$PREVIOUS_TAG" ]]; then
+          if [[ "$PREVIOUS_TAG" == "HEAD"* ]]; then
+            # No previous tag, get only the latest commit message
             COMMITS=$(git log -1 --pretty=format:'- %s (%h)')
           else
-            # If there is a previous tag, get all commits between the previous tag and the current HEAD
+            # Previous tag exists, get commits between the tag and HEAD
             COMMITS=$(git log --pretty=format:'- %s (%h)' --no-merges "$PREVIOUS_TAG"..HEAD)
           fi
           echo "::set-output name=commits::$COMMITS"
+
+          # Get the release date
+          RELEASE_DATE=$(date +'%Y%m%d')
+          echo "::set-output name=release_date::$RELEASE_DATE"
 
       - name: Delete tag and release
         uses: dev-drprasad/delete-tag-and-release@v1.0
@@ -75,6 +80,7 @@ jobs:
             AppStore_arm64.zip
             AppStore_amd64.zip
           tag_name: new
+          name: "v${{ steps.get_commit_messages.outputs.release_date }}"
           draft: false
           prerelease: false
           body: "## What's Changed\n\n${{ steps.get_commit_messages.outputs.commits }}\n\n📊 **App Counts:** ${{ steps.create_release.outputs.app_counts }}"
