@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Delete tag and release
         uses: dev-drprasad/delete-tag-and-release@v1.0
@@ -44,8 +44,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get Commit Messages
+        id: get_commit_messages
+        run: |
+          echo "::set-output name=commits::$(git log --pretty=format:'- %s (%h)' --no-merges)"
+
       - name: Upload New Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             AppStore.zip
@@ -54,6 +59,8 @@ jobs:
             AppStore_amd64.zip
           tag_name: new
           draft: false
+          prerelease: false
+          body: "## What's Changed\n\n${{ steps.get_commit_messages.outputs.commits }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
