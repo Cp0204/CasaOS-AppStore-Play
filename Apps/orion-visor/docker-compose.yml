@@ -73,7 +73,7 @@ services:
       - type: bind
         source: /DATA/AppData/orion-visor/redis/data
         target: /data
-    command: sh -c "redis-server /usr/local/redis.conf --requirepass Data@123456"
+    command: sh -c "redis-server /usr/local/redis.conf --requirepass $${REDIS_PASSWORD}"
     restart: unless-stopped
     container_name: orion-visor-redis
     networks:
