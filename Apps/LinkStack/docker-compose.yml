@@ -1,0 +1,62 @@
+name: linkstack
+services:
+  linkstack:
+    image: linkstackorg/linkstack:latest
+    container_name: linkstack
+    deploy:
+      resources:
+        reservations:
+          memory: 3946M
+    network_mode: bridge
+    ports:
+      - target: 80
+        published: '8080'
+        protocol: tcp
+      - target: 443
+        published: '4433'
+        protocol: tcp
+    restart: unless-stopped
+    volumes: []
+    environment: {}
+    x-casaos:
+      ports:
+        - container: '80'
+          description:
+            en_us: Port
+            zh_cn: 端口
+        - container: '443'
+          description:
+            en_us: Port
+            zh_cn: 端口
+      volumes: []
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: linkstack
+  store_app_id: linkstack
+  category: WEB
+  author: yassinyl
+  developer: LinkStackOrg
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkstack/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkstack/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkstack/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkstack/screenshot-3.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkstack/thumbnail.png
+  description:
+    en_us: A simple to set up docker variant of LinkStack. LinkStack is a highly customizable link sharing platform with an intuitive, easy to use user interface.
+    zh_cn: ''
+  tagline:
+    en_us: ''
+    zh_cn: ''
+  title:
+    en_us: LinkStack
+    zh_cn: ''
+  tips:
+    before_install: null
+    custom: null
+  port_map: '8080'
+  scheme: http
+  index: /
