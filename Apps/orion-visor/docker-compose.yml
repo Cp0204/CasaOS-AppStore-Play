@@ -1,0 +1,121 @@
+name: orion-visor
+services:
+  orion-visor:
+    image: registry.cn-hangzhou.aliyuncs.com/lijiahangmax/orion-visor-service:2.0.9
+    privileged: true
+    ports:
+      - published: "1081"
+        target: 80
+        protocol: tcp
+    environment:
+      MYSQL_HOST: orion-visor-mysql
+      MYSQL_PORT: '3306'
+      MYSQL_DATABASE: orion_visor
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Data@123456
+      REDIS_HOST: orion-visor-redis
+      REDIS_PASSWORD: Data@123456
+      SECRET_KEY: uQeacXV8b3isvKLK
+      DEMO_MODE: 'false'
+    volumes:
+      - type: bind
+        source: /DATA/AppData/orion-visor/service/root-orion
+        target: /root/orion
+    depends_on:
+      - orion-visor-mysql
+      - orion-visor-redis
+    restart: unless-stopped
+    container_name: orion-visor
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    networks:
+      - orion-visor
+
+  orion-visor-mysql:
+    image: registry.cn-hangzhou.aliyuncs.com/lijiahangmax/orion-visor-mysql:2.0.9
+    privileged: true
+    # ports:
+    #   - published: "3307"
+    #     target: 3306
+    #     protocol: tcp
+    environment:
+      MYSQL_DATABASE: orion_visor
+      MYSQL_USER: orion
+      MYSQL_PASSWORD: Data@123456
+      MYSQL_ROOT_PASSWORD: Data@123456
+    volumes:
+      - type: bind
+        source: /DATA/AppData/orion-visor/mysql/var-lib-mysql
+        target: /var/lib/mysql
+      - type: bind
+        source: /DATA/AppData/orion-visor/mysql/var-lib-mysql-files
+        target: /var/lib/mysql-files
+      - type: bind
+        source: /DATA/AppData/orion-visor/mysql/etc-mysql
+        target: /etc/mysql
+    restart: unless-stopped
+    container_name: orion-visor-db
+    networks:
+      - orion-visor
+
+  orion-visor-redis:
+    image: registry.cn-hangzhou.aliyuncs.com/lijiahangmax/orion-visor-redis:2.0.9
+    privileged: true
+    # ports:
+    #   - published: "6380"
+    #     target: 6379
+    #     protocol: tcp
+    environment:
+      REDIS_PASSWORD: Data@123456
+    volumes:
+      - type: bind
+        source: /DATA/AppData/orion-visor/redis/data
+        target: /data
+    command: sh -c "redis-server /usr/local/redis.conf --requirepass $${REDIS_PASSWORD}"
+    restart: unless-stopped
+    container_name: orion-visor-redis
+    networks:
+      - orion-visor
+
+networks:
+  orion-visor:
+    name: orion-visor
+
+x-casaos:
+  architectures:
+    - amd64
+  main: orion-visor
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Orion Visor is a high-value, modern intelligent operation and maintenance & lightweight bastion platform. Orion-visor provides a one-stop server operation and maintenance solution.
+    zh_cn: Orion Visor 是一款颜值高、体验好的开源轻量级堡垒机，致力于提高运维效率，解放双手。支持常见Linux系统，强大的Web终端，完善的WEB管理界面，开箱即用。
+  developer: lijiahangmax
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/orion-visor/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/orion-visor/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/orion-visor/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/orion-visor/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/orion-visor/screenshot-4.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/orion-visor/screenshot-5.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/orion-visor/screenshot-6.png
+  tagline:
+    en_us:  A high-value, modern intelligent operation and maintenance & lightweight bastion platform.
+    zh_cn:  一款高颜值、现代化的智能运维&轻量堡垒机平台
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/orion-visor/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        Wait for the backend service to start (≈2min) and visit
+        Account: `admin`
+        Password: `admin`
+      zh_cn: |
+        等待后端服务启动后 (≈2min) 访问
+        账号: `admin`
+        密码: `admin`
+  title:
+    en_us: Orion Visor
+  index: /
+  port_map: "1081"

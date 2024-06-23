@@ -1,0 +1,46 @@
+name: ntfy
+services:
+  ntfy:
+    image: binwiederhier/ntfy:latest
+    container_name: ntfy
+    command:
+      - serve
+    environment:
+      - TZ=UTC    # optional: Change to your desired timezone
+    # user: UID:GID # optional: Set custom user/group or uid/gid
+    volumes:
+      - /DATA/AppData/ntfy/cache:/var/cache/ntfy
+      - /DATA/AppData/ntfy/config:/etc/ntfy
+    ports:
+      - target: 80
+        published: "3380"
+        protocol: tcp
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+x-casaos:
+  architectures:
+    - arm
+    - arm64
+    - amd64
+  main: ntfy
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Send push notifications to your phone or desktop using PUT/POST ntfy (pronounced "notify") is a simple HTTP-based pub-sub notification service. With ntfy, you can send notifications to your phone or desktop via scripts from any computer, without having to sign up or pay any fees. If you'd like to run your own instance of the service, you can easily do so since ntfy is open source.
+    zh_cn: 使用 PUT/POST 向您的手机或桌面发送推送通知 ntfy（发音为“notify”）是一个简单的基于 HTTP 的发布-订阅通知服务。使用 ntfy，您可以从任何计算机通过脚本向您的手机或桌面发送通知，而无需注册或支付任何费用。如果您想运行自己的服务实例，您可以轻松地做到这一点，因为 ntfy 是开源的。
+  developer: binwiederhier
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ntfy/icon.svg
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ntfy/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ntfy/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ntfy/screenshot-3.png
+  tagline:
+    en_us: A simple HTTP-based pub-sub notification service.
+    zh_cn: 一个简单的基于 HTTP 的发布-订阅通知服务。
+  title:
+    en_us: ntfy
+  index: /
+  port_map: "3380"

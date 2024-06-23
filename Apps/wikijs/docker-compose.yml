@@ -1,0 +1,62 @@
+name: wikijs
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: wikijs-db
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_PASSWORD: wikijsrocks
+      POSTGRES_USER: wikijs
+    logging:
+      driver: "none"
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/wikijs/data
+        target: /var/lib/postgresql/data
+
+  wikijs:
+    image: ghcr.io/requarks/wiki:2
+    container_name: wikijs-app
+    depends_on:
+      - db
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: wikijs
+      DB_PASS: wikijsrocks
+      DB_NAME: wiki
+    restart: unless-stopped
+    ports:
+      - target: 3000
+        published: "3000"
+        protocol: tcp
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+x-casaos:
+  architectures:
+    - arm
+    - arm64
+    - amd64
+  main: wikijs
+  author: Cp0204
+  category: Wiki
+  description:
+    en_us: Wiki.js is a powerful and extensible open source wiki software built on Node.js.
+    zh_cn: Wiki.js 是一款基于 Node.js 构建的功能强大且可扩展的开源 Wiki 软件。
+  developer: requarks.io
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wikijs/icon.svg
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wikijs/screenshot-1.png
+  tagline:
+    en_us: A modern, lightweight and powerful wiki app
+    zh_cn: 现代化、轻量级、功能强大的 wiki 应用程序
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wikijs/thumbnail.png
+  title:
+    zh_cn: Wiki.js
+  index: /
+  port_map: "3000"

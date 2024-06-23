@@ -14,7 +14,28 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch the full commit history
+
+      - name: Get Commit Messages
+        id: get_commit_messages
+        run: |
+          # Get the previous tag
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 --always HEAD^)
+          # If there is no previous tag, get only the latest commit message
+          if [[ "$PREVIOUS_TAG" == "HEAD"* ]]; then
+            # No previous tag, get only the latest commit message
+            COMMITS=$(git log -1 --pretty=format:'- %s (%h)')
+          else
+            # Previous tag exists, get commits between the tag and HEAD
+            COMMITS=$(git log --pretty=format:'- %s (%h)' --no-merges "$PREVIOUS_TAG"..HEAD)
+          fi
+          echo "::set-output name=commits::$COMMITS"
+
+          # Get the release date
+          RELEASE_DATE=$(date +'%Y%m%d')
+          echo "::set-output name=release_date::$RELEASE_DATE"
 
       - name: Delete tag and release
         uses: dev-drprasad/delete-tag-and-release@v1.0
@@ -27,25 +48,31 @@ jobs:
         run: |
           # Build universal
           zip AppStore.zip $(find . -type f \( -wholename "./*.json" -o -wholename "./Apps/*.yml" \))
+          universal_count=$(find ./Apps/ -name "*.yml" | wc -l)
 
           # Build arm
           [ -d "./Apps_arm" ] && cp -rfu ./Apps_arm/*   ./Apps/
           zip AppStore_arm.zip   $(find . -type f -wholename "./*.json" && find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-]*- arm\s*\n' {} \;)
+          arm_count=$(find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-]*- arm\s*\n' {} \; | wc -l)
           git checkout -- ./Apps && git clean -df ./Apps
 
           # Build arm64
           [ -d "./Apps_arm64" ] && cp -rfu ./Apps_arm64/* ./Apps/
           zip AppStore_arm64.zip $(find . -type f -wholename "./*.json" && find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-]*- arm64\s*\n' {} \;)
+          arm64_count=$(find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-]*- arm64\s*\n' {} \; | wc -l)
           git checkout -- ./Apps && git clean -df ./Apps
 
           # Build amd64
           [ -d "./Apps_amd64" ] && cp -rfu ./Apps_amd64/* ./Apps/
           zip AppStore_amd64.zip $(find . -type f -wholename "./*.json" && find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-]*- amd64\s*\n' {} \;)
+          amd64_count=$(find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-]*- amd64\s*\n' {} \; | wc -l)
+
+          echo "::set-output name=app_counts::universal($universal_count), arm($arm_count), arm64($arm64_count), amd64($amd64_count)"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload New Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             AppStore.zip
@@ -53,7 +80,10 @@ jobs:
             AppStore_arm64.zip
             AppStore_amd64.zip
           tag_name: new
+          name: "v${{ steps.get_commit_messages.outputs.release_date }}"
           draft: false
+          prerelease: false
+          body: "## What's Changed\n\n${{ steps.get_commit_messages.outputs.commits }}\n\n📊 **App Counts:** ${{ steps.create_release.outputs.app_counts }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

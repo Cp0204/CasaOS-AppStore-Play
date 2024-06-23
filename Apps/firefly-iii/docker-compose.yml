@@ -1,0 +1,234 @@
+version: '3.3'
+
+#
+# The Firefly III Data Importer will ask you for the Firefly III URL and a "Client ID".
+# You can generate the Client ID at http://localhost/profile (after registering)
+# The Firefly III URL is: http://app:8080
+#
+# Other URL's will give 500 | Server Error
+#
+
+name: firefly-iii
+services:
+  app:
+    image: fireflyiii/core:latest
+    hostname: app
+    container_name: firefly-iii-core
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    networks:
+      - firefly-iii
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/fireflyiii/upload:/var/www/html/storage/upload
+    environment:
+      # Firefly III
+      APP_ENV: production
+      APP_DEBUG: "false"
+      SITE_OWNER: mail@example.com
+      APP_KEY: SomeRandomStringOf32CharsExactly
+      DEFAULT_LANGUAGE: en_US
+      DEFAULT_LOCALE: equal
+      TZ: Europe/Amsterdam
+      TRUSTED_PROXIES: ''
+      LOG_CHANNEL: stack
+      APP_LOG_LEVEL: notice
+      AUDIT_LOG_LEVEL: emergency
+      AUDIT_LOG_CHANNEL: ''
+      PAPERTRAIL_HOST: ''
+      PAPERTRAIL_PORT: ''
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_DATABASE: firefly
+      DB_USERNAME: firefly
+      DB_PASSWORD: secret_firefly_password
+      DB_SOCKET: ''
+      MYSQL_USE_SSL: "false"
+      MYSQL_SSL_VERIFY_SERVER_CERT: "true"
+      MYSQL_SSL_CAPATH: /etc/ssl/certs/
+      MYSQL_SSL_CA: ''
+      MYSQL_SSL_CERT: ''
+      MYSQL_SSL_KEY: ''
+      MYSQL_SSL_CIPHER: ''
+      PGSQL_SSL_MODE: prefer
+      PGSQL_SSL_ROOT_CERT: ''
+      PGSQL_SSL_CERT: ''
+      PGSQL_SSL_KEY: ''
+      PGSQL_SSL_CRL_FILE: ''
+      PGSQL_SCHEMA: public
+      CACHE_DRIVER: file
+      SESSION_DRIVER: file
+      REDIS_SCHEME: tcp
+      REDIS_PATH: ''
+      REDIS_HOST: '127.0.0.1'
+      REDIS_PORT: "6379"
+      REDIS_USERNAME: ''
+      REDIS_PASSWORD: ''
+      REDIS_DB: "0"
+      REDIS_CACHE_DB: "1"
+      COOKIE_PATH: "/"
+      COOKIE_DOMAIN: ''
+      COOKIE_SECURE: "false"
+      COOKIE_SAMESITE: lax
+      MAIL_MAILER: log
+      MAIL_HOST: ''
+      MAIL_PORT: "2525"
+      MAIL_FROM: changeme@example.com
+      MAIL_USERNAME: ''
+      MAIL_PASSWORD: ''
+      MAIL_ENCRYPTION: ''
+      MAIL_SENDMAIL_COMMAND: ''
+      MAILGUN_DOMAIN: ''
+      MAILGUN_SECRET: ''
+      MAILGUN_ENDPOINT: api.mailgun.net
+      MANDRILL_SECRET: ''
+      SPARKPOST_SECRET: ''
+      SEND_ERROR_MESSAGE: "true"
+      SEND_REPORT_JOURNALS: "true"
+      ENABLE_EXTERNAL_MAP: "false"
+      ENABLE_EXCHANGE_RATES: "false"
+      ENABLE_EXTERNAL_RATES: "false"
+      MAP_DEFAULT_LAT: "51.983333"
+      MAP_DEFAULT_LONG: "5.916667"
+      MAP_DEFAULT_ZOOM: "6"
+      VALID_URL_PROTOCOLS: ''
+      AUTHENTICATION_GUARD: web
+      AUTHENTICATION_GUARD_HEADER: REMOTE_USER
+      AUTHENTICATION_GUARD_EMAIL: ''
+      PASSPORT_PRIVATE_KEY: ''
+      PASSPORT_PUBLIC_KEY: ''
+      CUSTOM_LOGOUT_URL: ''
+      DISABLE_FRAME_HEADER: "false"
+      DISABLE_CSP_HEADER: "false"
+      TRACKER_SITE_ID: ''
+      TRACKER_URL: ''
+      ALLOW_WEBHOOKS: "false"
+      STATIC_CRON_TOKEN: 'd4f39d7ee52630bcdde3181762ac1439'
+      DKR_BUILD_LOCALE: "false"
+      DKR_CHECK_SQLITE: "true"
+      APP_NAME: FireflyIII
+      BROADCAST_DRIVER: log
+      QUEUE_DRIVER: sync
+      CACHE_PREFIX: firefly
+      PUSHER_KEY: ''
+      IPINFO_TOKEN: ''
+      PUSHER_SECRET: ''
+      PUSHER_ID: ''
+      DEMO_USERNAME: ''
+      DEMO_PASSWORD: ''
+      FIREFLY_III_LAYOUT: v1
+      APP_URL: http://localhost
+    ports:
+      - target: 8080
+        published: "38080"
+        protocol: tcp
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:lts
+    hostname: db
+    container_name: firefly-iii-db
+    networks:
+      - firefly-iii
+    restart: unless-stopped
+    environment:
+      # Database
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      MYSQL_USER: firefly
+      MYSQL_PASSWORD: secret_firefly_password
+      MYSQL_DATABASE: firefly
+    volumes:
+      - /DATA/AppData/fireflyiii/db:/var/lib/mysql
+
+  importer:
+    image: fireflyiii/data-importer:latest
+    hostname: importer
+    restart: unless-stopped
+    container_name: firefly-iii-importer
+    networks:
+      - firefly-iii
+    environment:
+      # Data Importer
+      FIREFLY_III_URL: 'http://app:8080'
+      VANITY_URL: 'http://localhost'
+      FIREFLY_III_ACCESS_TOKEN: ''
+      FIREFLY_III_CLIENT_ID: ''
+      NORDIGEN_ID: ''
+      NORDIGEN_KEY: ''
+      NORDIGEN_SANDBOX: "false"
+      SPECTRE_APP_ID: ''
+      SPECTRE_SECRET: ''
+      USE_CACHE: "false"
+      IGNORE_DUPLICATE_ERRORS: "false"
+      IGNORE_NOT_FOUND_TRANSACTIONS: "false"
+      AUTO_IMPORT_SECRET: ''
+      CAN_POST_AUTOIMPORT: "false"
+      CAN_POST_FILES: "false"
+      IMPORT_DIR_ALLOWLIST: ''
+      FALLBACK_IN_DIR: "false"
+      VERIFY_TLS_SECURITY: "true"
+      JSON_CONFIGURATION_DIR: ''
+      CONNECTION_TIMEOUT: "31.41"
+      LOG_RETURN_JSON: "false"
+      LOG_LEVEL: debug
+      ENABLE_MAIL_REPORT: "false"
+      EXPECT_SECURE_URL: "false"
+      MAIL_DESTINATION: noreply@example.com
+      MAIL_FROM_ADDRESS: noreply@example.com
+      POSTMARK_TOKEN: ''
+      QUEUE_CONNECTION: sync
+      SESSION_LIFETIME: "120"
+      IS_EXTERNAL: "false"
+      ASSET_URL: ''
+    ports:
+      - target: 8080
+        published: "38081"
+        protocol: tcp
+    depends_on:
+      - app
+
+  cron:
+    #
+    # To make this work, set STATIC_CRON_TOKEN in your .env file or as an environment variable and replace REPLACEME below
+    # The STATIC_CRON_TOKEN must be *exactly* 32 characters long
+    #
+    image: alpine:latest
+    container_name: firefly-iii-cron
+    restart: unless-stopped
+    command: sh -c "echo \"0 3 * * * wget -qO- http://app:8080/api/v1/cron/d4f39d7ee52630bcdde3181762ac1439\" | crontab - && crond -f -L /dev/stdout"
+    networks:
+      - firefly-iii
+
+networks:
+  firefly-iii:
+    name: firefly-iii
+    driver: bridge
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  main: app
+  author: Cp0204
+  category: Finance
+  description:
+    en_us: Firefly III is a (self-hosted) manager for your personal finances. It can help you keep track of your expenses and income, so you can spend less and save more. Firefly III supports the use of budgets, categories and tags. It can import data from external sources and it has many neat financial reports available.
+    zh_cn: Firefly III 是一款 (自托管) 个人理财管理工具，它可以帮助你追踪支出和收入，让你少花钱、多存钱。Firefly III 支持使用预算、分类和标签，可以导入外部数据，并提供许多简洁的财务报告。
+  developer: Firefly III
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/firefly-iii/icon.svg
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/firefly-iii/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/firefly-iii/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/firefly-iii/screenshot-3.png
+  tagline:
+    en_us: Your personal finance manager
+    zh_cn: 您的个人财务经理
+  title:
+    en_us: Firefly III
+  index: /
+  port_map: "38080"

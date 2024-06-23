@@ -14,7 +14,7 @@ services:
       - /DATA/AppData/baidunetdisk/config:/config
       - /DATA/Downloads:/config/Downloads
     environment:
-      - VNC_PASSWORD="vncpassword"
+      - VNC_PASSWORD=vncpassword
     restart: unless-stopped
     network_mode: bridge
     privileged: false

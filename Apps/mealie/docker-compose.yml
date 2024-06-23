@@ -1,0 +1,66 @@
+name: mealie
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest
+    container_name: mealie
+    restart: always
+    ports:
+      - target: 9000
+        published: "9925"
+        protocol: tcp
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    volumes:
+      - type: bind
+        source: /DATA/AppData/mealie/data
+        target: /app/data/
+    environment:
+      # Set Backend ENV Variables Here
+      ALLOW_SIGNUP: "true"
+      PUID: "1000"
+      PGID: "1000"
+      TZ: ${TZ}
+      MAX_WORKERS: "1"
+      WEB_CONCURRENCY: "1"
+      BASE_URL: https://mealie.yourdomain.com
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: mealie
+  author: Cp0204
+  category: Home Automation
+  description:
+    en_us: Mealie is a self hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family.
+    zh_cn: Mealie 是一款自托管的菜谱管理器和膳食计划工具，它拥有 RestAPI 后端和使用 Vue 构建的响应式前端应用程序，为整个家庭提供愉快的用户体验。
+  developer: mealie
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/mealie/icon.svg
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/mealie/screenshot-1.png
+  tagline:
+    en_us: An open source recipe manager
+    zh_cn: 开源菜谱管理器
+  tips:
+    before_install:
+      en_us: |
+        You need to change the environment variable `BASE_URL` before using it.
+
+        **Default Credentials**
+        Username: `changeme@example.com`
+        Password: `MyPassword`
+
+        For more information on settings such as email and OpenAI integration, please [read the documentation](https://docs.mealie.io/documentation/getting-started/installation/backend-config/)
+      zh_cn: |
+        使用前你需要修改环境变量 `BASE_URL`
+
+        **默认凭据**
+        用户名: changeme@example.com
+        密码: MyPassword
+
+        有关邮件和 OpenAI 集成等更多设置，请[阅读文档](https://docs.mealie.io/documentation/getting-started/installation/backend-config/)
+  title:
+    en_us: Mealie
+  index: /
+  port_map: "9925"

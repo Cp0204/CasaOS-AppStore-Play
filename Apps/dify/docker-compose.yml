@@ -1,0 +1,318 @@
+name: dify
+services:
+  api:
+    image: langgenius/dify-api:0.6.11
+    container_name: dify-api
+    restart: unless-stopped
+    environment:
+      MODE: api
+      LOG_LEVEL: INFO
+      SECRET_KEY: sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U
+      CONSOLE_WEB_URL: 'CONSOLE_WEB_URL/../../../..'
+      INIT_PASSWORD: ''
+      CONSOLE_API_URL: 'CONSOLE_API_URL/../../../..'
+      SERVICE_API_URL: 'SERVICE_API_URL/../../../..'
+      APP_WEB_URL: 'APP_WEB_URL/../../../..'
+      FILES_URL: ''
+      FILES_ACCESS_TIMEOUT: '300'
+      MIGRATION_ENABLED: 'true'
+      DB_USERNAME: postgres
+      DB_PASSWORD: difyai123456
+      DB_HOST: db
+      DB_PORT: '5432'
+      DB_DATABASE: dify
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: difyai123456
+      REDIS_DB: '0'
+      CELERY_BROKER_URL: redis://:difyai123456@redis:6379/1
+      WEB_API_CORS_ALLOW_ORIGINS: '*'
+      CONSOLE_CORS_ALLOW_ORIGINS: '*'
+      STORAGE_TYPE: local
+      STORAGE_LOCAL_PATH: storage
+      VECTOR_STORE: weaviate
+      WEAVIATE_ENDPOINT: http://weaviate:8080
+      WEAVIATE_API_KEY: WVF5YThaHlkYwhGUSmCRgsX3tD5ngdN8pkih
+      CODE_EXECUTION_ENDPOINT: 'http://sandbox:8194'
+      CODE_EXECUTION_API_KEY: dify-sandbox
+      CODE_MAX_NUMBER: '9223372036854775807'
+      CODE_MIN_NUMBER: '-9223372036854775808'
+      CODE_MAX_STRING_LENGTH: '80000'
+      TEMPLATE_TRANSFORM_MAX_LENGTH: '80000'
+      CODE_MAX_STRING_ARRAY_LENGTH: '30'
+      CODE_MAX_OBJECT_ARRAY_LENGTH: '30'
+      CODE_MAX_NUMBER_ARRAY_LENGTH: '1000'
+      SSRF_PROXY_HTTP_URL: 'http://ssrf_proxy:3128'
+      SSRF_PROXY_HTTPS_URL: 'http://ssrf_proxy:3128'
+      INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH: '1000'
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - /DATA/AppData/dify/app/storage:/app/api/storage
+    # ports:
+    #   - "5001:5001"
+    networks:
+      - ssrf_proxy_network
+      - dify
+
+  worker:
+    image: langgenius/dify-api:0.6.11
+    container_name: dify-worker
+    restart: unless-stopped
+    environment:
+      MODE: worker
+      LOG_LEVEL: INFO
+      SECRET_KEY: sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U
+      DB_USERNAME: postgres
+      DB_PASSWORD: difyai123456
+      DB_HOST: db
+      DB_PORT: '5432'
+      DB_DATABASE: dify
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: difyai123456
+      REDIS_DB: '0'
+      REDIS_USE_SSL: 'false'
+      CELERY_BROKER_URL: redis://:difyai123456@redis:6379/1
+      STORAGE_TYPE: local
+      STORAGE_LOCAL_PATH: storage
+      VECTOR_STORE: weaviate
+      WEAVIATE_ENDPOINT: http://weaviate:8080
+      WEAVIATE_API_KEY: WVF5YThaHlkYwhGUSmCRgsX3tD5ngdN8pkih
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - /DATA/AppData/dify/app/storage:/app/api/storage
+    networks:
+      - ssrf_proxy_network
+      - dify
+
+  dify:
+    image: langgenius/dify-web:0.6.11
+    container_name: dify-web
+    restart: unless-stopped
+    environment:
+      CONSOLE_API_URL: "CONSOLE_API_URL/../../../.."
+      APP_API_URL: "APP_API_URL/../../../.."
+    # ports:
+    #   - "3000:3000"
+    deploy:
+      resources:
+        reservations:
+          memory: 2048M
+    networks:
+      - dify
+
+  db:
+    image: postgres:15-alpine
+    container_name: dify-db
+    restart: unless-stopped
+    environment:
+      PGUSER: postgres
+      POSTGRES_PASSWORD: difyai123456
+      POSTGRES_DB: dify
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - /DATA/AppData/dify/db/data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    networks:
+      - dify
+
+  redis:
+    image: redis:6-alpine
+    container_name: dify-redis
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/dify/redis/data:/data
+    command:
+      - redis-server
+      - --requirepass
+      - difyai123456
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+    networks:
+      - dify
+
+  weaviate:
+    image: semitechnologies/weaviate:1.19.0
+    container_name: dify-weaviate
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/dify/weaviate:/var/lib/weaviate
+    environment:
+      QUERY_DEFAULTS_LIMIT: '25'
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'false'
+      PERSISTENCE_DATA_PATH: /var/lib/weaviate
+      DEFAULT_VECTORIZER_MODULE: none
+      CLUSTER_HOSTNAME: node1
+      AUTHENTICATION_APIKEY_ENABLED: 'true'
+      AUTHENTICATION_APIKEY_ALLOWED_KEYS: WVF5YThaHlkYwhGUSmCRgsX3tD5ngdN8pkih
+      AUTHENTICATION_APIKEY_USERS: hello@dify.ai
+      AUTHORIZATION_ADMINLIST_ENABLED: 'true'
+      AUTHORIZATION_ADMINLIST_USERS: hello@dify.ai
+    networks:
+      - dify
+
+  sandbox:
+    image: langgenius/dify-sandbox:0.2.1
+    container_name: dify-sandbox
+    restart: unless-stopped
+    environment:
+      API_KEY: dify-sandbox
+      GIN_MODE: release
+      WORKER_TIMEOUT: '15'
+      ENABLE_NETWORK: 'true'
+      HTTP_PROXY: 'http://ssrf_proxy:3128'
+      HTTPS_PROXY: 'http://ssrf_proxy:3128'
+      SANDBOX_PORT: '8194'
+    volumes:
+      - /DATA/AppData/dify/sandbox/dependencies:/dependencies
+    networks:
+      - ssrf_proxy_network
+
+  ssrf_proxy:
+    image: ubuntu/squid:latest
+    container_name: dify-ssrf_proxy
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/dify/ssrf_proxy/squid.conf:/etc/squid/squid.conf
+
+    networks:
+      - ssrf_proxy_network
+      - dify
+
+  nginx:
+    image: nginx:latest
+    container_name: dify-nginx
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/dify/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /DATA/AppData/dify/nginx/proxy.conf:/etc/nginx/proxy.conf
+      - /DATA/AppData/dify/nginx/conf.d:/etc/nginx/conf.d
+      #- /DATA/AppData/dify/nginx/ssl:/etc/ssl
+    depends_on:
+      - api
+      - dify
+    ports:
+      - "3001:80"
+      #- "443:443"
+    networks:
+      - dify
+
+networks:
+  ssrf_proxy_network:
+    driver: bridge
+    internal: true
+  dify:
+    name: dify
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: dify
+  store_app_id: dify
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: Dify is an open-source large language model (LLM) application development platform. It combines the concepts of Backend-as-a-Service and LLMOps to enable developers to quickly build production-grade generative AI applications. Even non-technical personnel can participate in the definition and data operations of AI applications.
+    zh_cn: Dify 是一个开源的大语言模型 (LLM) 应用开发平台。它结合了后端即服务 (Backend-as-a-Service) 和 LLMOps 的概念，使开发者能够快速构建生产级的生成式 AI 应用。即使是非技术人员也可以参与 AI 应用的定义和数据操作。
+  developer: LangGenius
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/screenshot-3.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/thumbnail.png
+  tagline:
+    en_us: The Innovation Engine for GenAI Applications
+    zh_cn: 生成式 AI 应用创新引擎
+  title:
+    en_us: Dify
+  index: /
+  port_map: "3001"
+  tips:
+    before_install:
+      en_us: |
+        This is the most complex app to adapt from the Play store source, I did a lot of adaptation work but still couldn't get it to a one-click install, right out of the box.
+        With that said, please don't be deterred, it would be your loss to pass up on experiencing this excellent app.
+
+        If you do want to experience this app, **please read the following instructions** carefully, before installing, you will need:
+
+        ### 1 Preset files (required)
+
+        Manually download [all preset files](https://github.com/Cp0204/CasaOS-AppStore-Play/tree/main/Apps/dify/volumes) into the `/DATA/AppData/dify` directory. Or you can execute the following code (recommended) and it will do it for you:
+        ``bash
+        mkdir -p /DATA/AppData/dify/nginx/conf.d
+        mkdir -p /DATA/AppData/dify/ssrf_proxy
+        mkdir -p /DATA/AppData/dify/sandbox/dependencies
+        wget https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/volumes/nginx/conf.d/default.conf -O /DATA/AppData/dify/nginx/conf.d/default.conf
+        wget https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/volumes/nginx/nginx.conf -O /DATA/AppData/dify/nginx/nginx.conf
+        wget https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/volumes/nginx/proxy.conf -O /DATA/AppData/dify/nginx/proxy.conf
+        wget https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/volumes/ssrf_proxy/squid.conf -O /DATA/AppData/dify/ssrf_proxy/squid.conf
+        wget https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/volumes/sandbox/dependencies/python-requirements.txt -O /DATA/AppData/dify/sandbox/dependencies/python-requirements.txt
+        # Copy the above to execute on the host
+        ```
+
+        ### 2 Setting the access port (recommended)
+
+        The application uses port `3001` by default, which you can change in the `nginx` service.
+
+        ### 3 Configure the service address (recommended)
+
+        Modify the following environment variables to your address `http://yourhost:3001` with the same port as in 2.
+
+        - `api` service
+          - APP_WEB_URL
+          - CONSOLE_API_URL
+          - CONSOLE_WEB_URL
+          - SERVICE_API_URL
+          - SERVICE_API_URL
+        - `dify` service
+          - APP_API_URL
+          - CONSOLE_API_URL
+      zh_cn: |
+        这是 Play 商店源中我适配过最复杂的应用，我做了大量适配工作，但依然无法达到一键安装、开箱即用的状态。
+
+        虽然如此，请不要被吓退，放弃体验这个优秀的应用将会是你的损失。
+
+        如果你确实想要体验它，**请仔细阅读以下说明**，安装前，你需要：
+
+        ### 1 预置文件（必须）
+
+        手动下载[所有预置文件](https://github.com/Cp0204/CasaOS-AppStore-Play/tree/main/Apps/dify/volumes)放到 `/DATA/AppData/dify` 目录。或者**你可以执行以下代码（推荐），它会帮你完成**：
+        ```bash
+        mkdir -p /DATA/AppData/dify/nginx/conf.d
+        mkdir -p /DATA/AppData/dify/ssrf_proxy
+        mkdir -p /DATA/AppData/dify/sandbox/dependencies
+        wget https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/volumes/nginx/conf.d/default.conf -O /DATA/AppData/dify/nginx/conf.d/default.conf
+        wget https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/volumes/nginx/nginx.conf -O /DATA/AppData/dify/nginx/nginx.conf
+        wget https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/volumes/nginx/proxy.conf -O /DATA/AppData/dify/nginx/proxy.conf
+        wget https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/volumes/ssrf_proxy/squid.conf -O /DATA/AppData/dify/ssrf_proxy/squid.conf
+        wget https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/volumes/sandbox/dependencies/python-requirements.txt -O /DATA/AppData/dify/sandbox/dependencies/python-requirements.txt
+        # 复制以上在宿主机执行
+        ```
+
+        ### 2 设定访问端口（推荐）
+
+        应用默认使用 `3001` 端口，你可以在 `nginx` 服务中修改。
+
+        ### 3 配置服务地址（推荐）
+
+        修改以下环境变量为你的地址 `http://yourhost:3001` ，端口和 2 中保持一致。
+
+        - `api` 服务
+          - APP_WEB_URL
+          - CONSOLE_API_URL
+          - CONSOLE_WEB_URL
+          - SERVICE_API_URL
+          - SERVICE_API_URL
+        - `dify` 服务
+          - APP_API_URL
+          - CONSOLE_API_URL

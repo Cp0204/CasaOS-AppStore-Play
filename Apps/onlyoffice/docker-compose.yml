@@ -1,0 +1,62 @@
+name: onlyoffice
+services:
+
+  onlyoffice:
+    image: onlyoffice/documentserver:latest
+    container_name: onlyoffice
+    deploy:
+      resources:
+        reservations:
+          memory: 4096M
+    restart: unless-stopped
+    ports:
+      - '6080:80'
+      - '6443:443'
+    volumes:
+      - type: bind
+        source: /DATA/AppData/onlyoffice/DocumentServer/data
+        target: /var/www/onlyoffice/Data
+      - type: bind
+        source: /DATA/AppData/onlyoffice/DocumentServer/logs
+        target: /var/log/onlyoffice
+      - type: bind
+        source: /DATA/AppData/onlyoffice/DocumentServer/lib
+        target: /var/lib/onlyoffice
+      - type: bind
+        source: /DATA/AppData/onlyoffice/DocumentServer/db
+        target: /var/lib/postgresql
+    environment:
+      - JWT_ENABLED=true
+      - JWT_SECRET=your_secret_key
+      - JWT_HEADER=Authorization
+    network_mode: bridge
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: onlyoffice
+  store_app_id: onlyoffice
+  category: Documents
+  author: Cp0204
+  developer: AscensioSystem
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/onlyoffice/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/onlyoffice/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/onlyoffice/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/onlyoffice/screenshot-3.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/onlyoffice/thumbnail.png
+  description:
+    en_us: 'ONLYOFFICE Document Server is an online office suite comprising viewers and editors for texts, spreadsheets and presentations, fully compatible with Office Open XML formats: .docx, .xlsx, .pptx and enabling collaborative editing in real time.'
+    zh_cn: ONLYOFFICE 文档服务器是一个在线办公套件，包括文本、电子表格和演示文稿的查看器和编辑器，与Office Open XML格式完全兼容：.docx、.xlsx、.pptx，并支持实时协作编辑。
+  tagline:
+    en_us: Online office suite
+    zh_cn: 在线办公套件
+  title:
+    en_us: ONLYOFFICE
+  tips:
+    before_install:
+    custom:
+  port_map: '6080'
+  scheme: http
+  index: /
