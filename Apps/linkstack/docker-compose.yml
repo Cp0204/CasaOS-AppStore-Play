@@ -1,0 +1,62 @@
+name: linkstack
+services:
+  linkstack:
+    hostname: linkstack
+    image: linkstackorg/linkstack:latest
+    environment:
+      TZ: 'Europe/Berlin'
+      SERVER_ADMIN: 'admin@example.com'
+      HTTP_SERVER_NAME: 'example.com'
+      HTTPS_SERVER_NAME: 'example.com'
+      LOG_LEVEL: 'info'
+      PHP_MEMORY_LIMIT: '256M'
+      UPLOAD_MAX_FILESIZE: '8M'
+    ports:
+      - target: 80
+        published: '8081'
+        protocol: tcp
+      # - target: 443
+      #   published: '4431'
+      #   protocol: tcp
+    restart: unless-stopped
+    container_name: linkstack
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: linkstack
+  store_app_id: linkstack
+  category: WEB
+  author: yassinyl
+  developer: LinkStackOrg
+  description:
+    en_us: LinkStack is a highly customizable link sharing platform with an intuitive, easy to use user interface. The ultimate solution for creating a personalized & professional profile page. Showcase all your important links in one place, forget the limitation of one link on social media. Set up your personal site on your own server with just a few clicks.
+    zh_cn: LinkStack 是一个高度可定制的链接分享平台，拥有直观易用的用户界面。创建个性化和专业档案页面的终极解决方案。在一个地方展示你所有重要的链接，忘记社交媒体上一个链接的限制。只需点击几下，即可在您自己的服务器上建立您的个人网站。
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkstack/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkstack/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkstack/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkstack/screenshot-3.png
+  tagline:
+    en_us: The Ultimate Link Management Solution
+    zh_cn: 终极链接管理解决方案
+  tips:
+    before_install:
+      en_us: |
+        This application does not have persistent storage set by default, which means you will lose your application data once you reset the container!
+        
+        You can set up file mounts yourself to achieve persistent configuration directories, for more information [please refer](https://github.com/LinkStackOrg/linkstack-docker#persistent-storage)
+      zh_cn: |
+        本应用默认没有设置持久化存储，意味着你一旦重置容器，将丢失应用数据！
+
+        你可以自行设置文件挂载达到持久化配置的目录，更多信息[请参阅](https://github.com/LinkStackOrg/linkstack-docker#persistent-storage)
+  title:
+    en_us: LinkStack
+  index: /
+  port_map: "8081"
