@@ -1,0 +1,48 @@
+name: ws-scrcpy
+services:
+  ws-scrcpy:
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+    # image: haris132/:latest
+    image: scavin/ws-scrcpy:latest
+    command: ["sh", "-c", "adb connect 172.17.0.1:5555 && node dist/index.js"]
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 8000
+        published: "8000"
+        protocol: tcp
+    restart: unless-stopped
+    container_name: ws-scrcpy
+
+x-casaos:
+  architectures:
+    # - arm64
+    - amd64
+  main: ws-scrcpy
+  store_app_id: ws-scrcpy
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: ws-scrcpy is a WebSocket-based implementation of the scrcpy Android screen mirroring tool. It allows you to control your Android device from your web browser.
+    zh_cn: ws-scrcpy 是 scrcpy Android 屏幕镜像工具的基于 WebSocket 的实现。它允许您从 Web 浏览器控制您的 Android 设备。
+  developer: scavin
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ws-scrcpy/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ws-scrcpy/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ws-scrcpy/screenshot-2.png
+  tagline:
+    en_us: Control your Android device from your web browser
+    zh_cn: 从 Web 浏览器控制您的 Android 设备
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ws-scrcpy/thumbnail.png
+  tips:
+    before_install:
+      en_us: Make sure your Android device is connected to the same network as the server running ws-scrcpy.
+      zh_cn: 确保您的 Android 设备与运行 ws-scrcpy 的服务器连接在同一网络上。
+  title:
+    en_us: ws-scrcpy
+  index: /
+  port_map: "8000"
