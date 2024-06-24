@@ -1,0 +1,83 @@
+name: redroid
+services:
+  redroid:
+    command:
+      - androidboot.redroid_width=1080
+      - androidboot.redroid_height=1920
+      - androidboot.redroid_dpi=480
+      - androidboot.redroid_gpu_mode=guest
+      - ro.secure=0
+    privileged: true
+    deploy:
+      resources:
+        reservations:
+          memory: 2048M
+    image: redroid/redroid:14.0.0_64only-latest
+    network_mode: bridge
+    ports:
+      - target: 5555
+        published: "5555"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/redroid/data
+        target: /data
+    container_name: redroid
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: redroid
+  store_app_id: redroid
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: redroid (Remote-Android) is a multi-arch, GPU enabled, Android in Cloud solution. You can boot many instances in Linux host (Docker, podman, k8s etc.). redroid supports both arm64 and amd64 architectures. redroid is suitable for Cloud Gaming, Virtualise Phones, Automation Test and more.
+    zh_cn: redroid (Remote-Android) 是一款支持多架构、GPU加速的安卓云解决方案。您可以在 Linux 主机 (Docker、podman、k8s 等) 上运行多个实例。 redroid 支持 arm64 和 amd64 架构。 redroid 适用于云游戏、手机虚拟化、自动化测试等。
+  developer: zhouziyang
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/redroid/icon.png
+  tagline:
+    en_us: Android in Cloud solution
+    zh_cn: 云安卓解决方案
+  title:
+    en_us: redroid
+  tips:
+    before_install:
+      en_us: |
+        This app has no WebUI and is connected and controlled via network adb, you can use it with **ws-scrcpy**.
+
+        **Note: Do not open `5555` ports on the Internet. **
+
+        Default installation is `Android 14 64bit only`, you can change the tag to get other supported versions:
+
+        - Android 14 (`redroid/redroid:14.0.0-latest`)
+        - Android 14 64bit only (`redroid/redroid:14.0.0_64only-latest`)
+        - Android 13 (`redroid/redroid:13.0.0-latest`)
+        - Android 13 64bit only (`redroid/redroid:13.0.0_64only-latest`)
+        - Android 12 (`redroid/redroid:12.0.0-latest`)
+        - Android 12 64bit only (`redroid/redroid:12.0.0_64only-latest`)
+        - Android 11 (`redroid/redroid:11.0.0-latest`)
+        - Android 10 (`redroid/redroid:10.0.0-latest`)
+        - Android 9 (`redroid/redroid:9.0.0-latest`)
+        - Android 8.1 (`redroid/redroid:8.1.0-latest`)
+      zh_cn: |
+        本应用没有 WebUI ，通过网络adb连接和控制，你可以配合 **ws-scrcpy** 使用。
+
+        **注意：不要开放 `5555` 端口在互联网上。**
+
+        默认安装 `Android 14 64bit only` 你可以修改标签获得其他支持版本：
+
+        - Android 14 (`redroid/redroid:14.0.0-latest`)
+        - Android 14 64bit only (`redroid/redroid:14.0.0_64only-latest`)
+        - Android 13 (`redroid/redroid:13.0.0-latest`)
+        - Android 13 64bit only (`redroid/redroid:13.0.0_64only-latest`)
+        - Android 12 (`redroid/redroid:12.0.0-latest`)
+        - Android 12 64bit only (`redroid/redroid:12.0.0_64only-latest`)
+        - Android 11 (`redroid/redroid:11.0.0-latest`)
+        - Android 10 (`redroid/redroid:10.0.0-latest`)
+        - Android 9 (`redroid/redroid:9.0.0-latest`)
+        - Android 8.1 (`redroid/redroid:8.1.0-latest`)
+  index: /
+  port_map: "5555"
