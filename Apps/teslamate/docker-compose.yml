@@ -1,0 +1,138 @@
+name: teslamate
+services:
+  teslamate:
+    image: teslamate/teslamate:latest
+    restart: unless-stopped
+    environment:
+      - ENCRYPTION_KEY=secretkey #replace with a secure key to encrypt your Tesla API tokens
+      - DATABASE_USER=teslamate
+      - DATABASE_PASS=teslamate #insert your secure database password!
+      - DATABASE_NAME=teslamate
+      - DATABASE_HOST=database
+      - MQTT_HOST=mosquitto
+    ports:
+      - published: "4000"
+        target: 4000
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/teslamate/import
+        target: /opt/app/import
+    cap_drop:
+      - all
+    container_name: teslamate
+    deploy:
+      resources:
+        reservations:
+          memory: 1024M
+    networks:
+      - teslamate
+
+  database:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=teslamate
+      - POSTGRES_PASSWORD=password #insert your secure database password!
+      - POSTGRES_DB=teslamate
+    volumes:
+      - type: bind
+        source: /DATA/AppData/teslamate/db
+        target: /var/lib/postgresql/data
+    container_name: teslamate-db
+    networks:
+      - teslamate
+
+  grafana:
+    image: teslamate/grafana:latest
+    restart: unless-stopped
+    environment:
+      - DATABASE_USER=teslamate
+      - DATABASE_PASS=teslamate #insert your secure database password!
+      - DATABASE_NAME=teslamate
+      - DATABASE_HOST=database
+    ports:
+      - published: "3001"
+        target: 3000
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/teslamate/grafana-data
+        target: /var/lib/grafana
+    container_name: teslamate-grafana
+    networks:
+      - teslamate
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    command: mosquitto -c /mosquitto-no-auth.conf
+    # ports:
+    #   - published: "1883"
+    #     target: 1883
+    #     protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/teslamate/mosquitto/conf
+        target: /mosquitto/config
+      - type: bind
+        source: /DATA/AppData/teslamate/mosquitto/data
+        target: /mosquitto/data
+    container_name: teslamate-mosquitto
+    networks:
+      - teslamate
+
+networks:
+  teslamate:
+    name: teslamate
+
+x-casaos:
+  architectures:
+    - arm
+    - arm64
+    - amd64
+  main: teslamate
+  store_app_id: teslamate
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: A self-hosted data logger for your Tesla 🚘. A powerful, self-hosted data logger for your Tesla. Written in Elixir. Data is stored in a Postgres database. Visualization and data analysis with Grafana. Vehicle data is published to a local MQTT Broker.
+    zh_cn: 特斯拉汽车的自托管数据记录器 🚘。一个功能强大的特斯拉自托管数据记录器。使用 Elixir 编写。数据存储在 Postgres 数据库中。使用 Grafana 进行可视化和数据分析。车辆数据发布到本地 MQTT 代理。
+  developer: teslamate
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/teslamate/icon.svg
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/teslamate/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/teslamate/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/teslamate/screenshot-3.png
+  tagline:
+    en_us: A self-hosted data logger for your Tesla
+    zh_cn: 特斯拉汽车的自托管数据记录器
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/teslamate/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        ## Instructions
+
+        1. **Choose a secure encryption key** that will be used to encrypt your Tesla API tokens (insert as `ENCRYPTION_KEY`).
+        2. **Choose your secure database password** and insert it at every occurrence of `DATABASE_PASS` and `POSTGRES_PASSWORD`
+
+        ## Usage
+
+        1. Open the web interface [http://your-ip-address:4000](http://localhost:4000)
+        2. Sign in with your Tesla Account
+        3. The Grafana dashboards are available at [http://your-ip-address:3000](http://localhost:3000). Log in with the default user `admin` (initial password `admin`) and enter a secure password.
+      zh_cn: |
+        ## 说明
+
+        1.  **选择一个安全的加密密钥** 来加密您的 Tesla API 令牌（将其设为 `ENCRYPTION_KEY`）。
+        2.  **选择您的安全数据库密码** 并将其设为 `DATABASE_PASS` 和 `POSTGRES_PASSWORD`。
+
+        ## 使用方法
+
+        1.  打开网页界面 [http://your-ip-address:4000](http://your-ip-address:4000)
+        2.  使用您的 Tesla 账户登录
+        3.  Grafana 仪表板位于 [http://your-ip-address:3000](http://your-ip-address:3000)。使用默认用户 `admin`（初始密码 `admin`）登录并输入安全密码。
+  title:
+    en_us: TeslaMate
+  index: /
+  port_map: "4000"
