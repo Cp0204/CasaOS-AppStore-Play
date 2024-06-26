@@ -1,0 +1,54 @@
+name: one-api
+services:
+  one-api:
+    image: justsong/one-api:latest
+    container_name: one-api
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - type: bind
+        source: /DATA/AppData/one-api/data
+        target: /data
+    ports:
+      - target: 3000
+        published: "3000"
+        protocol: tcp
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: one-api
+  store_app_id: one-api
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: OpenAI API management & redistribution system, using a single API for all LLMs, and features an English UI.
+    zh_cn:  OpenAI 接口管理 & 分发系统，支持 Azure、Anthropic Claude、Google PaLM 2 & Gemini、智谱 ChatGLM、百度文心一言、讯飞星火认知、阿里通义千问、360 智脑以及腾讯混元，可用于二次分发管理 key，仅单可执行文件，已打包好 Docker 镜像，一键部署，开箱即用。
+  developer: songquanpeng
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/one-api/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/one-api/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/one-api/screenshot-2.png
+  tagline:
+    en_us: One API for All LLMs
+    zh_cn:  一个API分发所有大模型
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/one-api/thumbnail.png
+  title:
+    zh_cn: One API
+  index: /
+  port_map: "3000"
+  tips:
+    before_install:
+      en_us: |
+        The initial account username is `root` and the password is `123456`.
+
+        **Be sure to change the default password after logging in to the system with the root user for the first time!**
+      zh_cn: |
+        初始账号用户名为 `root`，密码为 `123456`。
+
+        **使用 root 用户初次登录系统后，务必修改默认密码！**
