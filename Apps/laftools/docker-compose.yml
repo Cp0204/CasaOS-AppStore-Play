@@ -1,0 +1,45 @@
+name: laftools
+services:
+  laftools:
+    # image: codegentoolbox/laftools-linux-arm64:latest
+    image: codegentoolbox/laftools-linux-x64:latest
+    container_name: laftools
+    environment:
+      - LAFREGION=CN
+      - APPLANG=zh_CN
+    volumes:
+      - type: bind
+        source: /DATA/AppData/laftools
+        target: /root/.miaoda
+    ports:
+      - "39899:39899"
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+
+x-casaos:
+  architectures:
+    # - arm64
+    - amd64
+  main: laftools
+  store_app_id: laftools
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Miaoda Toolbox is a privacy-first, self-deployable and completely open-source Chinese toolbox!
+    zh_cn: 秒达工具箱是一款隐私优先，可自部署且完全开源的中文工具箱！
+  developer: work7z
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/laftools/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/laftools/screenshot-1.png
+  tagline:
+    en_us: Free and secure one-click outbound toolbox
+    zh_cn: 免费安全的一键式呼出工具箱
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/laftools/thumbnail.png
+  title:
+    en_us: LafTools
+    zh_cn: 秒达工具箱
+  index: /
+  port_map: "39899"
