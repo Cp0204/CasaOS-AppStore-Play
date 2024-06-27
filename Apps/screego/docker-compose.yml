@@ -1,0 +1,47 @@
+name: screego
+services:
+  screego:
+    image: ghcr.io/screego/server:1.10.3
+    ports:
+      - 5050:5050
+      - 3478:3478
+      - 50000-50200:50000-50200/udp
+    environment:
+      SCREEGO_EXTERNAL_IP: "192.168.178.2" # Replace with your external IP or domain name
+      SCREEGO_TURN_PORT_RANGE: "50000:50200"
+    restart: unless-stopped
+    container_name: screego
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  main: screego
+  store_app_id: screego
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Screego is a high-performance, low-latency screen sharing solution designed for developers. Built using WebRTC, it provides secure and efficient screen sharing capabilities with excellent video quality.
+    zh_cn: Screego 是一款面向开发人员的高性能、低延迟屏幕共享解决方案。它使用 WebRTC 构建，提供安全高效的屏幕共享功能，并具有出色的视频质量。
+  developer: jmattheis
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/screego/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/screego/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/screego/screenshot-1.png
+  tagline:
+    en_us: High-performance screen sharing for developers
+    zh_cn: 面向开发人员的高性能屏幕共享
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/screego/thumbnail.png
+  title:
+    en_us: Screego
+  index: /
+  port_map: "5050"
+  tips:
+    before_install:
+      en_us: "Replace EXTERNALIP with your external IP. One way to find your external ip is with ipify. `curl 'https://api.ipify.org'`"
+      zh_cn: "将 EXTERNALIP 替换为您的外部 IP。查找外部 IP 的方法之一是使用 ipify。`curl 'https://api.ipify.org'`"
