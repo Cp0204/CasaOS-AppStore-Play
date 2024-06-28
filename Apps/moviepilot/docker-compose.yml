@@ -1,0 +1,83 @@
+name: moviepilot
+services:
+  moviepilot:
+    stdin_open: true
+    tty: true
+    container_name: moviepilot
+    hostname: moviepilot
+    # networks:
+    #   - moviepilot
+    ports:
+      - target: 3000
+        published: "3000"
+        protocol: tcp
+    volumes:
+      - "/DATA/Media:/media"
+      - "/DATA/AppData/moviepilot/config:/config"
+      - "/DATA/AppData/moviepilot/core:/moviepilot/.cache/ms-playwright"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    environment:
+      - "NGINX_PORT=3000"
+      - "PORT=3001"
+      - "PUID=0"
+      - "PGID=0"
+      - "UMASK=000"
+      - "TZ=Asia/Shanghai"
+      - "AUTH_SITE=iyuu"
+      - "IYUU_SIGN=xxxx"
+      - "SUPERUSER=admin"
+      - "API_TOKEN=moviepilot"
+    restart: unless-stopped
+    image: jxxghp/moviepilot:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+
+# networks:
+#   moviepilot:
+#     name: moviepilot
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: moviepilot
+  store_app_id: moviepilot
+  author: CasaOS Team & Cp0204
+  category: Media
+  developer: jxxghp
+  tagline:
+    en_us: NAS Media Library Automation Management Tool
+    zh_cn: NAS媒体库自动化管理工具
+  description:
+    en_us: |
+      Movie Pilot is a video management tool that can automatically download and manage movies.
+
+      Please note that this software is a bit complicated, you need to read the [documentation](https://wiki.movie-pilot.org/configuration)
+    zh_cn: |
+      Movie Pilot 是一个视频管理工具，可以自动下载和管理电影。
+
+      注意本软件比较复杂，你需要阅读[文档](https://wiki.movie-pilot.org/configuration)
+  title:
+    en_us: MoviePilot
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/moviepilot/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/moviepilot/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/moviepilot/screenshot-2.png
+  index: /
+  port_map: "3000"
+  tips:
+    before_install:
+      en_us: |
+        ## Default Account
+
+        | Username | Password |
+        |----------|----------|
+        | `admin` | Get from log |
+      zh_cn: |
+        ## 默认账号
+
+        | 用户名 | 密码 |
+        |----------|----------|
+        | `admin` | 从日志中获取 |
