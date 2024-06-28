@@ -3,7 +3,7 @@ services:
   mealie:
     image: ghcr.io/mealie-recipes/mealie:latest
     container_name: mealie
-    restart: always
+    restart: unless-stopped
     ports:
       - target: 9000
         published: "9925"
