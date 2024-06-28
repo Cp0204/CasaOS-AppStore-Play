@@ -89,6 +89,7 @@ If you think this project is helpful to you, you can give me a little support. T
 
 | Icon | AppName | Description |
 |:----:|---------|-------------|
+| ![0-dkTurbo](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/0-dkturbo/icon.png) | [0-dkTurbo](./Apps/0-dkturbo) | Docker image accelerator, automatically test the speed and apply the fastest image source.<br>Docker 镜像加速器，自动测速和应用最快镜像源。 |
 | ![1Panel](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/1panel/icon.png) | [1Panel](./Apps/1panel) | Modern and Open-Source Linux Server Operation and Management Panel<br>现代化、开源的 Linux 服务器运维管理面板 |
 | ![Adminer](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/adminer/icon.png) | [Adminer](./Apps/adminer) | Adminer is a database management tool that allows you to manage your databases with a simple and intuitive interface.<br>Adminer 是一个数据库管理工具，它通过简单直观的界面帮助您管理数据库。 |
 | ![AFFiNE](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/affine/icon.svg) | [AFFiNE](./Apps/affine) | A privacy-focused, local-first, open-source, and ready-to-use alternative for Notion & Miro. One hyper-fused platform for wildly creative minds. AFFiNE is a next-gen knowledge base that brings planning, sorting and creating all together. Privacy first, open-source, customizable and ready to use.<br>AFFiNE 是一个注重隐私、本地优先、开源且即时可用的 Notion 和 Miro 替代方案。这是一个专为狂野创意人士打造的超融合平台。AFFiNE 是一个下一代知识库，它将计划、分类和创建融为一体。隐私至上，开源，可定制，开箱即用。 |

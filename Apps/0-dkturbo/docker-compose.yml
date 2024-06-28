@@ -1,0 +1,67 @@
+name: 0-dkturbo
+services:
+  0-dkturbo:
+    # build: .
+    # image: dkturbo
+    image: registry.cn-shenzhen.aliyuncs.com/cp0204/dkturbo:main
+    container_name: dkturbo
+    hostname: dkturbo
+    volumes:
+      - /etc/docker:/etc/docker
+      - /opt:/opt
+    environment:
+      - REGISTRY=auto
+    network_mode: bridge
+    restart: unless-stopped
+    pid: host
+    privileged: true
+    deploy:
+      resources:
+        reservations:
+          memory: 8M
+
+x-casaos:
+  architectures:
+    - arm
+    - arm64
+    - amd64
+  main: 0-dkturbo
+  store_app_id: 0-dkturbo
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Docker image accelerator, automatically test the speed and apply the fastest image source.
+    zh_cn: Docker 镜像加速器，自动测速和应用最快镜像源。
+  developer: Cp0204
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/0-dkturbo/icon.png
+  tagline:
+    en_us: Docker Registry Mirror Turbo
+    zh_cn: Docker 镜像加速器，喂饭到你嘴里
+  title:
+    en_us: "dkTurbo"
+  scheme: https
+  hostname: github.com
+  port_map: ''
+  index: /Cp0204/CasaOS-AppStore-Play
+  tips:
+    before_install:
+      en_us: |
+        ### Startup = automatic source change
+
+        Automatically measure and modify the mirror source, you can see the work progress in the container log.
+
+        ### Grayed out = Source change succeeded
+
+        Automatically stop and restart system Docker service after source change, containers can be deleted.
+
+        [Online source list](https://gist.github.com/Cp0204/4330ca3b8bc68c4a4a8d57e3982a859b), you can participate in contributing.
+      zh_cn: |
+        ### 启动 = 自动换源
+
+        自动测速和修改镜像源，你可以在容器日志里看工作进度。
+
+        ### 变灰 = 换源成功
+
+        换源后自动停止，并重启系统 Docker 服务，容器可以删除。
+
+        [在线源列表](https://gist.github.com/Cp0204/4330ca3b8bc68c4a4a8d57e3982a859b)，你可以参与贡献。
