@@ -1,0 +1,69 @@
+name: movie-robot
+services:
+  movie-robot:
+    image: yipengfei/movie-robot:latest
+    container_name: movie-robot
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+    environment:
+      LICENSE_KEY: your_license_key
+      WORKDIR: /data
+    # network_mode: host
+    ports:
+      - "1329:1329"
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/movie-robot/data
+        target: /data
+      - type: bind
+        source: /DATA/Media/Movies
+        target: /video
+    x-casaos:
+      envs:
+        - container: LICENSE_KEY
+          description:
+            en_us: "License Key"
+            zh_cn: "许可证密钥"
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: movie-robot
+  store_app_id: movie-robot
+  author: CasaOS Team & Cp0204
+  category: Media
+  description:
+    en_us: |
+      Movie Robot is a smart movie and TV show automation tool. It connects to your existing media server (Plex, Emby) and downloader, allowing you to subscribe to your favorite movies and TV shows. When there are updates, Movie Robot will notify your downloader to download and organize them into your library.
+
+      **NOTE:** This software is a paid software, but can be tried for 30 days, you can get the application for trial and purchase license at https://moviebot.fun.
+    zh_cn: |
+      私人影视库自动化管理，从未如此简单！订阅、追新、自动下载、刮削，你专心看，我来管理。MovieBot 是一款“聪明”的影音自动化工具，它没有资源和下载功能，但可以抓取资源站点，连接 Plex、Emby 和下载器，轻点订阅，不会错过任何喜欢的影片。
+
+      **注意：** 本软件是一个付费软件，但是可以试用 30 天，你可以在 https://moviebot.fun 上获取试用码与购买码。
+  tagline:
+    en_us: Private film and television library automation management tool
+    zh_cn: 私人影视库自动化管理工具
+  developer: Yee(yipengfei)
+  title:
+    en_us: MovieRobot
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/movie-robot/icon.webp
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/movie-robot/screenshot-1.webp
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/movie-robot/screenshot-2.webp
+  index: /
+  port_map: "1329"
+  tips:
+    before_install:
+      en_us: |
+        **NOTE:** This is a paid software, but you can try it for 30 days, you can get the application for trial and purchase license at https://moviebot.fun.
+
+        **You need to change the environment variable `LICENSE_KEY` to a valid license, otherwise the application will not start. **
+      zh_cn: |
+        **注意：** 本软件是一个付费软件，但是可以试用 30 天，你可以在 https://moviebot.fun 上获取申请试用与购买许可证。
+
+        **你需要修改环境变量 `LICENSE_KEY` 为有效许可证，否则本应用无法启动。**
