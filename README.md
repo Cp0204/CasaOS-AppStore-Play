@@ -10,11 +10,8 @@
 
 ## 国内网络环境优化
 
-```bash
-# CasaOS 安装优化脚本
-# 主要解决 2024-6-6 起国内环境 get.docker.com 安装失败的问题
-sudo bash -c "$(wget -qO- https://play.cuse.eu.org/get_casaos.sh)"
-```
+> [!TIP]
+> CasaOS 添加本软件源后，安装 `dkTurbo` 应用，启动即可一键应用 Docker 镜像源，解决国内 20240606 起安装应用卡住（拉取镜像失败）的问题。
 
 ```bash
 # CasaOS 小白辅助脚本
@@ -89,7 +86,7 @@ If you think this project is helpful to you, you can give me a little support. T
 
 | Icon | AppName | Description |
 |:----:|---------|-------------|
-| ![0-dkTurbo](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/0-dkturbo/icon.png) | [0-dkTurbo](./Apps/0-dkturbo) | Docker image accelerator, automatically test the speed and apply the fastest image source.<br>Docker 镜像加速器，自动测速和应用最快镜像源。 |
+| ![dkTurbo](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/0-dkturbo/icon.png) | [dkTurbo](./Apps/0-dkturbo) | Docker image accelerator, automatically test the speed and apply the fastest image source.<br>Docker 镜像加速器，自动测速和应用最快镜像源。 |
 | ![1Panel](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/1panel/icon.png) | [1Panel](./Apps/1panel) | Modern and Open-Source Linux Server Operation and Management Panel<br>现代化、开源的 Linux 服务器运维管理面板 |
 | ![Adminer](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/adminer/icon.png) | [Adminer](./Apps/adminer) | Adminer is a database management tool that allows you to manage your databases with a simple and intuitive interface.<br>Adminer 是一个数据库管理工具，它通过简单直观的界面帮助您管理数据库。 |
 | ![AFFiNE](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/affine/icon.svg) | [AFFiNE](./Apps/affine) | A privacy-focused, local-first, open-source, and ready-to-use alternative for Notion & Miro. One hyper-fused platform for wildly creative minds. AFFiNE is a next-gen knowledge base that brings planning, sorting and creating all together. Privacy first, open-source, customizable and ready to use.<br>AFFiNE 是一个注重隐私、本地优先、开源且即时可用的 Notion 和 Miro 替代方案。这是一个专为狂野创意人士打造的超融合平台。AFFiNE 是一个下一代知识库，它将计划、分类和创建融为一体。隐私至上，开源，可定制，开箱即用。 |
@@ -135,6 +132,8 @@ If you think this project is helpful to you, you can give me a little support. T
 | ![MariaDB](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/MariaDB/icon.png) | [MariaDB](./Apps/MariaDB) | MariaDB is a community-developed fork of MySQL and aims to be an enhanced, drop-in replacement for it.<br>MariaDB 是 MySQL 的社区开发分支，旨在成为其增强版的兼容替代品。 |
 | ![MaxKB](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/maxkb/icon.png) | [MaxKB](./Apps/maxkb) | MaxKB is a knowledge base question answering system based on LLM. MaxKB = Max Knowledge Base, aims to be the most powerful brain of the enterprise.<br>MaxKB 是一款基于 LLM 大语言模型的知识库问答系统。MaxKB = Max Knowledge Base，旨在成为企业的最强大脑。 |
 | ![Mealie](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/mealie/icon.svg) | [Mealie](./Apps/mealie) | Mealie is a self hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family.<br>Mealie 是一款自托管的菜谱管理器和膳食计划工具，它拥有 RestAPI 后端和使用 Vue 构建的响应式前端应用程序，为整个家庭提供愉快的用户体验。 |
+| ![MovieRobot](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/movie-robot/icon.webp) | [MovieRobot](./Apps/movie-robot) | Movie Robot is a smart movie and TV show automation tool. It connects to your existing media server (Plex, Emby) and downloader, allowing you to subscribe to your favorite movies and TV shows. When there are updates, Movie Robot will notify your downloader to download and organize them into your library.**NOTE:** This software is a paid software, but can be tried for 30 days, you can get the application for trial and purchase license at https://moviebot.fun.<br>私人影视库自动化管理，从未如此简单！订阅、追新、自动下载、刮削，你专心看，我来管理。MovieBot 是一款“聪明”的影音自动化工具，它没有资源和下载功能，但可以抓取资源站点，连接 Plex、Emby 和下载器，轻点订阅，不会错过任何喜欢的影片。**注意：** 本软件是一个付费软件，但是可以试用 30 天，你可以在 https://moviebot.fun 上获取试用码与购买码。 |
+| ![MoviePilot](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/moviepilot/icon.png) | [MoviePilot](./Apps/moviepilot) | Movie Pilot is a video management tool that can automatically download and manage movies.Please note that this software is a bit complicated, you need to read the [documentation](https://wiki.movie-pilot.org/configuration)<br>Movie Pilot 是一个视频管理工具，可以自动下载和管理电影。注意本软件比较复杂，你需要阅读[文档](https://wiki.movie-pilot.org/configuration) |
 | ![MTG Proxy](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/mtg-proxy/icon.png) | [MTG Proxy](./Apps/mtg-proxy) | MTProto Proxy is a Telegram proxy server with support for all aspects of the protocol and multi-core processors. It provides a high level of privacy and security for your Telegram communication.<br>MTProto代理是一个支持Telegram协议的代理服务器，支持多核处理器。它为您的Telegram通信提供了高水平的隐私和安全性。 |
 | ![MyIP](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/icon.webp) | [MyIP](./Apps/myip) | The best IP Toolbox. Easy to check what's your IPs, IP geolocation, check for DNS leaks, examine WebRTC connections, speed test, ping test, MTR test, check website availability, whois search and more!<br>可能是最好用的IP工具箱。轻松检查你的 IP，IP 地理位置，检查DNS泄漏，检查 WebRTC 连接，速度测试，ping 测试，MTR测试，检查网站可用性，查询 Whois 信息等等。 |
 | ![NextChat](https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nextchat/icon.png) | [NextChat](./Apps/nextchat) | An intelligent chat application based on ChatGPT, supports fast deployment, Markdown, beautiful UI, fluid response, privacy and security, and allows customization of preset roles for quick creation, sharing, and debugging of personalized conversations.<br>一个基于 ChatGPT 的智能聊天应用，支持快速部署、Markdown 支持、精美 UI、流式响应、隐私安全等多个功能，并且能够自定义预制角色快速创建、分享和调试个性化对话。 |
