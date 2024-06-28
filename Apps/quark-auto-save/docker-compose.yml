@@ -1,7 +1,8 @@
 name: quark-auto-save
 services:
   quark-auto-save:
-    image: cp0204/quark-auto-save:latest
+    # image: cp0204/quark-auto-save:latest
+    image: registry.cn-shenzhen.aliyuncs.com/cp0204/quark-auto-save:latest
     container_name: quark-auto-save
     deploy:
       resources:
