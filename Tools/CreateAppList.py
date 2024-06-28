@@ -18,8 +18,8 @@ for compose_file in compose_files:
             app_name = os.path.basename(os.path.dirname(compose_file))
             icon = data.get('x-casaos', {}).get('icon', '')
             title = data.get('x-casaos', {}).get('title', {}).get('en_us', '')
-            description1 = data.get('x-casaos', {}).get('description', {}).get('en_us', '')
-            description2 = data.get('x-casaos', {}).get('description', {}).get('zh_cn', '')
+            description1 = data.get('x-casaos', {}).get('description', {}).get('en_us', '').replace("\n", "")
+            description2 = data.get('x-casaos', {}).get('description', {}).get('zh_cn', '').replace("\n", "")
             if (description1==description2):
                 description = description1
             elif (description1==""):
