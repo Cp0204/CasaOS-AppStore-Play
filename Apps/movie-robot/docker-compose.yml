@@ -40,11 +40,11 @@ x-casaos:
     en_us: |
       Movie Robot is a smart movie and TV show automation tool. It connects to your existing media server (Plex, Emby) and downloader, allowing you to subscribe to your favorite movies and TV shows. When there are updates, Movie Robot will notify your downloader to download and organize them into your library.
 
-      **NOTE:** This software is a paid software, but can be tried for 30 days, you can get the application for trial and purchase license at https://moviebot.fun.
+      **NOTE:** This is a paid software, but you can try it for 30 days, you can get the application for trial and purchase license at https://moviebot.fun.
     zh_cn: |
       私人影视库自动化管理，从未如此简单！订阅、追新、自动下载、刮削，你专心看，我来管理。MovieBot 是一款“聪明”的影音自动化工具，它没有资源和下载功能，但可以抓取资源站点，连接 Plex、Emby 和下载器，轻点订阅，不会错过任何喜欢的影片。
 
-      **注意：** 本软件是一个付费软件，但是可以试用 30 天，你可以在 https://moviebot.fun 上获取试用码与购买码。
+      **注意：** 本软件是一个付费软件，但是可以试用 30 天，你可以在 https://moviebot.fun 上获取申请试用与购买许可证。
   tagline:
     en_us: Private film and television library automation management tool
     zh_cn: 私人影视库自动化管理工具

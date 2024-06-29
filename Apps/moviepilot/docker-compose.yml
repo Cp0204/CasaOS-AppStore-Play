@@ -51,14 +51,8 @@ x-casaos:
     en_us: NAS Media Library Automation Management Tool
     zh_cn: NAS媒体库自动化管理工具
   description:
-    en_us: |
-      Movie Pilot is a video management tool that can automatically download and manage movies.
-
-      Please note that this software is a bit complicated, you need to read the [documentation](https://wiki.movie-pilot.org/configuration)
-    zh_cn: |
-      Movie Pilot 是一个视频管理工具，可以自动下载和管理电影。
-
-      注意本软件比较复杂，你需要阅读[文档](https://wiki.movie-pilot.org/configuration)
+    en_us: MoviePilot is a video management tool that can automatically download and manage movies.
+    zh_cn: MoviePilot 是一个视频管理工具，可以自动下载和管理电影。
   title:
     en_us: MoviePilot
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/moviepilot/icon.png
@@ -75,9 +69,13 @@ x-casaos:
         | Username | Password |
         |----------|----------|
         | `admin` | Get from log |
+
+        Please note that this software is a bit complicated, you need to read the [documentation](https://wiki.movie-pilot.org/configuration)
       zh_cn: |
         ## 默认账号
 
         | 用户名 | 密码 |
         |----------|----------|
         | `admin` | 从日志中获取 |
+
+        注意本软件比较复杂，你需要阅读[文档](https://wiki.movie-pilot.org/configuration)
