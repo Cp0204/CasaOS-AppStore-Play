@@ -10,6 +10,7 @@ services:
       - /etc/docker:/etc/docker
       - /opt:/opt
     environment:
+      - MODE=registry
       - REGISTRY=auto
     network_mode: bridge
     restart: unless-stopped
@@ -30,12 +31,12 @@ x-casaos:
   author: Cp0204
   category: Utilities
   description:
-    en_us: Docker image accelerator, automatically test the speed and apply the fastest image source.
+    en_us: Docker image accelerator, automatically test the speed and apply the fastest image source. **Non-Chinese users don’t need to use**
     zh_cn: Docker 镜像加速器，自动测速和应用最快镜像源。
   developer: Cp0204
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/0-dkturbo/icon.png
   tagline:
-    en_us: Docker Registry Mirror Turbo
+    en_us: Non-Chinese users don’t need to use
     zh_cn: Docker 镜像加速器，喂饭到你嘴里
   title:
     en_us: "dkTurbo"
@@ -46,15 +47,7 @@ x-casaos:
   tips:
     before_install:
       en_us: |
-        ### Startup = automatic source change
-
-        Automatically measure and modify the mirror source, you can see the work progress in the container log.
-
-        ### Grayed out = Source change succeeded
-
-        Automatically stop and restart system Docker service after source change, containers can be deleted.
-
-        [Online source list](https://gist.github.com/Cp0204/4330ca3b8bc68c4a4a8d57e3982a859b), you can participate in contributing.
+        **Non-Chinese users don’t need to use**
       zh_cn: |
         ### 启动 = 自动换源
 
@@ -65,3 +58,30 @@ x-casaos:
         换源后自动停止，并重启系统 Docker 服务，容器可以删除。
 
         [在线源列表](https://gist.github.com/Cp0204/4330ca3b8bc68c4a4a8d57e3982a859b)，你可以参与贡献。
+
+        ## ↓ 高阶使用 ↓
+
+        本应用提供两种加速模式，您可以根据网络环境和需求选择合适的模式：
+
+        **1. registry 模式 (默认)**
+
+        此模式下，应用会从指定的 registry 镜像源下载所需资源，无需配置代理，更加简单便捷。
+
+        | 环境变量 |  值  | 说明 |
+        |---|---|---|
+        | `MODE` | `registry` | 必须 |
+        | `REGISTRY` | `auto` (默认)  | 加载在线镜像列表，自动选择最快的镜像 |
+        |  | `local` | 使用内置列表，自动选择 |
+        |  | `your.domain.com` | 使用自定义镜像 |
+        |  | `none` | 取消镜像设置 |
+
+        **2. proxy 模式**
+
+        此模式下，docker pull 流量都会通过代理服务器，适合本地开有代理的用户。
+
+        | 环境变量 |  值  | 说明 |
+        |---|---|---|
+        | `MODE` | `proxy` | 必须 |
+        | `HTTP_PROXY` | 例 `172.17.0.1:1080` | HTTP 代理服务器地址 |
+        | `HTTPS_PROXY` | 例 `172.17.0.1:1080` | HTTPS 代理服务器地址 |
+        | `NO_PROXY` | `localhost,127.0.0.1,.example.com` | 不经过代理的域名或IP地址 |
