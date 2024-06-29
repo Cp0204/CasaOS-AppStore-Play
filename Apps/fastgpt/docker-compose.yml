@@ -7,7 +7,7 @@ services:
     image: ankane/pgvector:v0.5.0 # git
     # image: registry.cn-hangzhou.aliyuncs.com/fastgpt/pgvector:v0.5.0 # 阿里云
     container_name: pg
-    restart: always
+    restart: unless-stopped
     ports: # 生产环境建议不要暴露
       - 5432:5432
     networks:
@@ -23,7 +23,7 @@ services:
     image: mongo:5.0.18
     # image: registry.cn-hangzhou.aliyuncs.com/fastgpt/mongo:5.0.18 # 阿里云
     container_name: mongo
-    restart: always
+    restart: unless-stopped
     ports: # 生产环境建议不要暴露
       - 27017:27017
     networks:
@@ -45,7 +45,7 @@ services:
     depends_on:
       - mongo
       - pg
-    restart: always
+    restart: unless-stopped
     environment:
       # root 密码，用户名为: root
       - DEFAULT_ROOT_PSW=1234

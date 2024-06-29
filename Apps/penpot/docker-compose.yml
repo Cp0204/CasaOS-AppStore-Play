@@ -80,7 +80,7 @@ services:
   penpot-redis:
     image: redis:7
     container_name: penpot-redis
-    restart: always
+    restart: unless-stopped
     networks:
       - penpot
 
