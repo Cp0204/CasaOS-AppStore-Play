@@ -47,6 +47,8 @@ services:
         source: /DATA/AppData/mariadb/config
         target: /config
     container_name: mariadb-arm
+    network_mode: bridge
+
 x-casaos:
   architectures:
     - arm

@@ -49,6 +49,7 @@ services:
           description:
             en_us: Data Directory
             zh_cn: 数据目录
+    network_mode: bridge
 
 x-casaos:
   architectures:

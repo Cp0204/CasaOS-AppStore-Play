@@ -14,6 +14,8 @@ services:
           description:
             en_us: Adminer HTTP Port
             zh_cn: Adminer HTTP 端口
+    network_mode: bridge
+
 x-casaos:
   architectures:
     - amd64

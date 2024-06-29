@@ -41,6 +41,8 @@ services:
           description:
             en_us: MariaDB Port
             zh_cn: MariaDB 端口
+    network_mode: bridge
+
 x-casaos:
   architectures:
     - amd64

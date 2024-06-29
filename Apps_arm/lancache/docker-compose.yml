@@ -17,6 +17,7 @@ services:
       - target: 53
         published: 53
         protocol: udp
+    network_mode: bridge
 
   monolithic:
     image: jrcichra/lancachenet-monolithic:latest
@@ -43,6 +44,7 @@ services:
       - type: bind
         source: /DATA/AppData/lancache/logs
         target: /data/logs
+    network_mode: bridge
 
 x-casaos:
   architectures:

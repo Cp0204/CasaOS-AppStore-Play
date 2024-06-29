@@ -14,6 +14,8 @@ services:
       - /DATA/AppData/leanote/datas/files:/leanote/files
       - /DATA/AppData/leanote/datas/upload:/leanote/public/upload
       - /DATA/AppData/leanote/app.conf:/leanote/conf/app.conf
+    network_mode: bridge
+
   mongo:
     environment:
       - MONGO_INITDB_DATABASE=leanote
@@ -26,3 +28,4 @@ services:
       - /DATA/AppData/leanote/leanote_install_data:/leanote_install_data
       - /DATA/AppData/leanote/dbinit.sh:/docker-entrypoint-initdb.d/dbinit.sh
       - /DATA/AppData/leanote/leanote.js:/leanote.js
+    network_mode: bridge

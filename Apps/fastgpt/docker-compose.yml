@@ -91,7 +91,8 @@ x-casaos:
     zh_cn: FastGPT
   tips:
     before_install:
-      en_us: Installation steps
+      en_us: |
+        Installation steps
 
         1. Create the **config.json** file before installation and run it on the host
 
@@ -105,7 +106,8 @@ x-casaos:
 
 
         [Documentation](https://doc.fastgpt.in/docs/development/docker/)
-      zh_cn: 安装步骤
+      zh_cn: |
+        安装步骤
 
         1. 安装前先建立**config.json**文件，在宿主机运行
 

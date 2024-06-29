@@ -24,6 +24,7 @@ services:
       resources:
         reservations:
           memory: 256M
+    network_mode: bridge
 
 x-casaos:
   architectures:
@@ -50,7 +51,7 @@ x-casaos:
     before_install:
       en_us: |
         This application does not have persistent storage set by default, which means you will lose your application data once you reset the container!
-        
+
         You can set up file mounts yourself to achieve persistent configuration directories, for more information [please refer](https://github.com/LinkStackOrg/linkstack-docker#persistent-storage)
       zh_cn: |
         本应用默认没有设置持久化存储，意味着你一旦重置容器，将丢失应用数据！

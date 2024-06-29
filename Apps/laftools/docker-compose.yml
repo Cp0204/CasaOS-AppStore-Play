@@ -18,6 +18,7 @@ services:
       resources:
         reservations:
           memory: 256M
+    network_mode: bridge
 
 x-casaos:
   architectures:

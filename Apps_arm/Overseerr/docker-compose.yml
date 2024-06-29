@@ -71,6 +71,8 @@ services:
         source: /DATA/AppData/overseerr/config
         target: /config
     container_name: overseerr-arm
+    network_mode: bridge
+
 x-casaos:
   architectures:
     - arm

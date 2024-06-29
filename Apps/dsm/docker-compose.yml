@@ -46,12 +46,14 @@ x-casaos:
     zh_cn: Virtual DSM
   tips:
     before_install:
-      en_us: 1. Requires `DATA/AppData` free space 16G+
+      en_us: |
+        1. Requires `DATA/AppData` free space 16G+
 
         2. For the safety of your data, please read [documentation](https://hub.docker.com/r/vdsm/virtual-dsm) first
 
         3. The first run will download the system package and initialization online, please be patient, you can check the progress in the container log.
-      zh_cn: 1. 需要 `/DATA/AppData` 空闲空间 16G+
+      zh_cn: |
+        1. 需要 `/DATA/AppData` 空闲空间 16G+
 
         2. 为了你的数据安全，请先阅读 [文档](https://hub.docker.com/r/vdsm/virtual-dsm)
 

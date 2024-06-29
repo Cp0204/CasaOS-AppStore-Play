@@ -64,7 +64,8 @@ x-casaos:
     zh_cn: 管理您的书签和链接
   tips:
     before_install:
-      en_us: Steps
+      en_us: |
+        Steps
 
         1. Create the **.env** file before installation and run it on the host machine
 
@@ -78,7 +79,8 @@ x-casaos:
 
 
         [Official documentation](https://www.linkace.org/docs/v1/setup/setup-with-docker/simple/)
-      zh_cn: 使用步骤
+      zh_cn: |
+        使用步骤
 
         1. 安装前建立 **.env** 文件，在宿主机运行
 

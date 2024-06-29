@@ -117,7 +117,7 @@ services:
     volumes:
       - /DATA/AppData/dify/db/data:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD", "pg_isready" ]
+      test: ["CMD", "pg_isready"]
       interval: 1s
       timeout: 3s
       retries: 30
@@ -135,7 +135,7 @@ services:
       - --requirepass
       - difyai123456
     healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
+      test: ["CMD", "redis-cli", "ping"]
     networks:
       - dify
 
@@ -277,7 +277,7 @@ x-casaos:
         - `dify` service
           - APP_API_URL
           - CONSOLE_API_URL
-      zh_cn: |
+      zh_cn: |-
         这是 Play 商店源中我适配过最复杂的应用，我做了大量适配工作，但依然无法达到一键安装、开箱即用的状态。
 
         虽然如此，请不要被吓退，放弃体验这个优秀的应用将会是你的损失。

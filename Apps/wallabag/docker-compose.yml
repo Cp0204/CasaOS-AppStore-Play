@@ -47,7 +47,8 @@ x-casaos:
     zh_cn: wallabag
   tips:
     before_install:
-      en_us: 'There is a bug in the official image, you need to fix the permissions issue manually.
+      en_us: |
+        There is a bug in the official image, you need to fix the permissions issue manually.
 
         1. After installation, execute in **Container Settings - Terminal**:
 
@@ -56,8 +57,9 @@ x-casaos:
         2. Modify the `SYMFONY__ENV__DOMAIN_NAME` environment variable to your access address.
 
 
-        See [#386](https://github.com/wallabag/docker/pull/386) for details.'
-      zh_cn: 官方镜像有个bug，需手动修复权限问题。
+        See [#386](https://github.com/wallabag/docker/pull/386) for details.
+      zh_cn: |
+        官方镜像有个bug，需手动修复权限问题。
 
         1. 安装后，在**容器设置-终端**中执行：
 

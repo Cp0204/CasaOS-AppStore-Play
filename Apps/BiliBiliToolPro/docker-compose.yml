@@ -37,7 +37,8 @@ x-casaos:
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/thumbnail.png
   tips:
     before_install:
-      en_us: Steps
+      en_us: |
+        Steps
 
         1. Create a `cookies.json` file before installing, and run it on the host machine
 
@@ -54,7 +55,8 @@ x-casaos:
 
 
         [Documentation](https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md)
-      zh_cn: 使用步骤
+      zh_cn: |
+        使用步骤
 
         1. 安装前建立**cookies.json**文件，在宿主机运行
 

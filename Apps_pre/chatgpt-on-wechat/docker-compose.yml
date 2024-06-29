@@ -23,3 +23,4 @@ services:
       USE_LINKAI: 'False'
       LINKAI_API_KEY: ''
       LINKAI_APP_CODE: ''
+    network_mode: bridge

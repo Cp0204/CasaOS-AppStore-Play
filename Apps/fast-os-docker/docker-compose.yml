@@ -27,6 +27,8 @@ services:
       - type: bind
         source: /DATA/AppData/fastosdocker/data
         target: /fast/data
+    network_mode: bridge
+
 x-casaos:
   architectures:
     - amd64

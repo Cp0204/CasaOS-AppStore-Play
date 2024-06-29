@@ -27,6 +27,7 @@ services:
           description:
             en_us: "License Key"
             zh_cn: "许可证密钥"
+    network_mode: bridge
 
 x-casaos:
   architectures:

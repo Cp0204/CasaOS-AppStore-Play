@@ -15,6 +15,7 @@ services:
         source: /DATA/AppData/maxkb/data
         target: /var/lib/postgresql/data
     container_name: maxkb
+    network_mode: bridge
 
 x-casaos:
   architectures:

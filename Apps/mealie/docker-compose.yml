@@ -25,6 +25,8 @@ services:
       MAX_WORKERS: "1"
       WEB_CONCURRENCY: "1"
       BASE_URL: https://mealie.yourdomain.com
+    network_mode: bridge
+
 x-casaos:
   architectures:
     - arm64

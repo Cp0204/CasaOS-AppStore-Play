@@ -14,6 +14,7 @@ services:
       - type: bind
         source: /DATA/AppData/wikijs/data
         target: /var/lib/postgresql/data
+    network_mode: bridge
 
   wikijs:
     image: ghcr.io/requarks/wiki:2
@@ -36,6 +37,7 @@ services:
       resources:
         reservations:
           memory: 128M
+    network_mode: bridge
 
 x-casaos:
   architectures:

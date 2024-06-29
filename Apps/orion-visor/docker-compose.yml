@@ -102,8 +102,8 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/orion-visor/screenshot-5.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/orion-visor/screenshot-6.png
   tagline:
-    en_us:  A high-value, modern intelligent operation and maintenance & lightweight bastion platform.
-    zh_cn:  一款高颜值、现代化的智能运维&轻量堡垒机平台
+    en_us: A high-value, modern intelligent operation and maintenance & lightweight bastion platform.
+    zh_cn: 一款高颜值、现代化的智能运维&轻量堡垒机平台
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/orion-visor/thumbnail.png
   tips:
     before_install:

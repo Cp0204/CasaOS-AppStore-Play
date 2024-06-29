@@ -30,6 +30,7 @@ services:
           description:
             en_us: Config directory.
             zh_cn: 配置目录
+
 x-casaos:
   architectures:
     - arm64
@@ -53,11 +54,11 @@ x-casaos:
     zh_cn: typecho
   tips:
     before_install:
-      en_us: 1. For light use, select SQLite database during initialization. For advanced use, please install a separate database (Mysql, PostgreSQL).
-
+      en_us: |
+        "1. For light use, select SQLite database during initialization. For advanced use, please install a separate database (Mysql, PostgreSQL).
         2. When the container is installed a second time, it will be re-initialized and the original data can be used by entering the same database name.
-      zh_cn: 1. 如轻量使用，初始化过程中选SQLite数据库即可。如需进阶使用，请另行安装数据库（Mysql, PostgreSQL）。
-
+      zh_cn: |
+        1. 如轻量使用，初始化过程中选SQLite数据库即可。如需进阶使用，请另行安装数据库（Mysql, PostgreSQL）。
         2. 容器二次安装时，将重新初始化，输入相同的数据库名可使用原有数据。
   port_map: '8080'
   scheme: http

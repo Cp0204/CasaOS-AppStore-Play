@@ -39,7 +39,8 @@ x-casaos:
     zh_cn: VNC运行百度网盘
   tips:
     before_install:
-      en_us: "Default access password: `vncpassword`, can be changed by environment variable `VNC_PASSWORD`.
+      en_us: |
+        Default access password: `vncpassword`, can be changed by environment variable `VNC_PASSWORD`.
 
         1. default VNC port 5900, if you don't use VNC client to connect you can remove the 5900 mapping.
 
@@ -48,8 +49,9 @@ x-casaos:
         3. Note: If Baidu.com pops up an upgrade prompt inside the container, Please ignore it.
 
 
-        [Project documentation](https://hub.docker.com/r/johngong/baidunetdisk)"
-      zh_cn: 默认访问密码：`vncpassword`，可通过环境变量`VNC_PASSWORD`修改。
+        [Project documentation](https://hub.docker.com/r/johngong/baidunetdisk)
+      zh_cn: |
+        默认访问密码：`vncpassword`，可通过环境变量`VNC_PASSWORD`修改。
 
         1. 默认VNC端口5900，如果不用VNC客户端连接可删除5900映射。
 
