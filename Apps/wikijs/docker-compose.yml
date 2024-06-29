@@ -59,6 +59,6 @@ x-casaos:
     zh_cn: 现代化、轻量级、功能强大的 wiki 应用程序
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wikijs/thumbnail.png
   title:
-    zh_cn: Wiki.js
+    en_us: Wiki.js
   index: /
   port_map: "3000"
