@@ -103,3 +103,6 @@ jobs:
             AppStore_arm.zip:Cp0204-AppStore-Play-arm.zip
             AppStore_arm64.zip:Cp0204-AppStore-Play-arm64.zip
             AppStore_amd64.zip:Cp0204-AppStore-Play-amd64.zip
+            Tools/get_casaos.sh:get_casaos.sh
+            Tools/casaos_newbie.sh:casaos_newbie.sh
+            Tools/YAML-Generator.html:generate/index.html
