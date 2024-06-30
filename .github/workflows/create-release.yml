@@ -71,6 +71,9 @@ jobs:
           amd64_count=$(find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-#]*- amd64\s*\n' {} \; | wc -l)
 
           echo "app_counts=universal($universal_count), arm($arm_count), arm64($arm64_count), amd64($amd64_count)" >> $GITHUB_OUTPUT
+
+          # Proxy get.docker.com
+          wget https://get.docker.com -O get_docker.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -103,6 +106,7 @@ jobs:
             AppStore_arm.zip:Cp0204-AppStore-Play-arm.zip
             AppStore_arm64.zip:Cp0204-AppStore-Play-arm64.zip
             AppStore_amd64.zip:Cp0204-AppStore-Play-amd64.zip
+            get_docker.sh:get_docker.sh
             Tools/get_casaos.sh:get_casaos.sh
             Tools/casaos_newbie.sh:casaos_newbie.sh
             Tools/YAML-Generator.html:generate/index.html
