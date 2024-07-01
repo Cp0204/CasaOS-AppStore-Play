@@ -110,3 +110,20 @@ jobs:
             Tools/get_casaos.sh:get_casaos.sh
             Tools/casaos_newbie.sh:casaos_newbie.sh
             Tools/YAML-Generator.html:generate/index.html
+
+      - name: Cloudflare Purge Cached
+        run: |
+          # Cloudflare Purge Cached
+          # https://developers.cloudflare.com/api/operations/zone-purge#purge-cached-content-by-url
+          response=$(curl --silent --request POST \
+            --url https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache \
+            --header 'Content-Type: application/json' \
+            --header 'X-Auth-Email: ${{ secrets.CLOUDFLARE_EMAIL }}' \
+            --header 'X-Auth-Key: ${{ secrets.CLOUDFLARE_API_KEY }}' \
+            --data '{"purge_everything": true}')
+          if echo "$response" | grep -q '"success":false'; then
+            echo "Cloudflare Purge Cached Failed: $response"
+            exit 1
+          else
+            echo "Cloudflare Purge Cached Success."
+          fi
