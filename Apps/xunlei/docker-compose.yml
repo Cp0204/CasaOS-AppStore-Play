@@ -1,18 +1,23 @@
 name: xunlei
 services:
   xunlei:
-    image: cnk3x/xunlei:latest
+    # image: cnk3x/xunlei:latest
+    image: registry.cn-shenzhen.aliyuncs.com/cnk3x/xunlei:latest
     container_name: xunlei
     deploy:
       resources:
         reservations:
           memory: 128M
     privileged: true
-    network_mode: host
+    network_mode: bridge
+    ports:
+      - "2345:2345"
     environment:
-      XL_WEB_PORT: "4321"
-      XL_BA_USER: "casaos"
-      XL_BA_PASSWORD: "casaos"
+      XL_DASHBOARD_PORT: "2345"
+      XL_DASHBOARD_USERNAME: "admin"
+      XL_DASHBOARD_PASSWORD: "admin"
+      XL_DIR_DOWNLOAD: "/xunlei/downloads"
+      XL_DIR_DATA: "/xunlei/data"
     volumes:
       - type: bind
         source: /DATA/AppData/xunlei/data
@@ -29,7 +34,7 @@ services:
     restart: unless-stopped
     x-casaos:
       envs:
-        - container: XL_WEB_PORT
+        - container: XL_DASHBOARD_PORT
           description:
             en_us: Web UI Port
             zh_cn: Web UI端口
@@ -50,9 +55,9 @@ x-casaos:
   author: Cp0204
   category: Downloader
   description:
-    en_us: Xunlei remote download is a cross-regional remote control download mode, which can remotely control the remote downloader to download the task, which can really download the task anywhere.
-    zh_cn: 迅雷远程下载是一种跨地域远程控制的下载方式，可以远程遥控异地下载器来下载任务，真正做到随地随地下载任务。
-  developer: Xunlei Corporation
+    en_us: Thunder, a veteran download software in China, supports HTTP/FTP/BT and other protocols.
+    zh_cn: 迅雷下载，国内老牌下载软件，支持HTTP/FTP/BT等协议。
+  developer: Xunlei Limited
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xunlei/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xunlei/screenshot-1.png
@@ -61,10 +66,10 @@ x-casaos:
     zh_cn: 迅雷远程下载
   tips:
     before_install:
-      en_us: The environment variables `XL_BA_USER` and `XL_BA_PASSWORD` add basic authentication to the Thunderbolt panel, the default user password is `casaos`, removing the environment variables removes the authentication. [Documentation](https://hub.docker.com/r/cnk3x/xunlei)
-      zh_cn: 环境变量 `XL_BA_USER` 和 `XL_BA_PASSWORD` 给迅雷面板添加基本验证，默认用户密码为 `casaos` ，删除环境变量可去除验证。[文档](https://hub.docker.com/r/cnk3x/xunlei)
+      en_us: The environment variables `XL_DASHBOARD_USERNAME` and `XL_DASHBOARD_PASSWORD` add basic authentication to the Thunderbolt panel, the default user password is `admin`, removing the environment variables removes the authentication. [Documentation](https://hub.docker.com/r/cnk3x/xunlei)
+      zh_cn: 环境变量 `XL_DASHBOARD_USERNAME` 和 `XL_DASHBOARD_PASSWORD` 给迅雷面板添加基本验证，默认用户密码为 `admin` ，删除环境变量可去除验证。[文档](https://hub.docker.com/r/cnk3x/xunlei)
   title:
     en_us: Thunder
     zh_cn: 迅雷
   index: /
-  port_map: "4321"
+  port_map: "2345"
