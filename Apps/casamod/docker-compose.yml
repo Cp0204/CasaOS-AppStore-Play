@@ -29,7 +29,7 @@ x-casaos:
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-2.png
-  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-3.png
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/thumbnail.png
   description:
     en_us: Add MODs like a game, and elegantly make some fancy modifications to the CasaOS frontend. Examples include mouse effects, animated wallpapers, modified themes, and more.
@@ -46,13 +46,17 @@ x-casaos:
         2. Put the MOD directory you want to enable into the `/DATA/AppData/casamod/mod` directory.
         3. Restart CasaMOD and finish!
 
-        You can find new MOD, and contribute your MOD [here](https://github.com/Cp0204/CasaMOD) 😉
+        You can find new MOD, and contribute your MOD [here](https://github.com/Cp0204/CasaMOD). 😉
+
+        > Also, after installation you can access the icons in the `/DATA/AppData/casamod/icon` directory with `/icon/xx.png`.
       zh_cn: |
         1. 安装 CasaMOD
         2. 把要启用的MOD目录放到 `/DATA/AppData/casamod/mod` 目录
         3. 重启 CasaMOD ，完成！
 
-        你可以在[这里](https://github.com/Cp0204/CasaMOD/blob/main/README_CN.md)查找新MOD，和贡献你的MOD 😉
+        你可以在[这里](https://github.com/Cp0204/CasaMOD/blob/main/README_CN.md)查找新MOD，和贡献你的MOD。 😉
+
+        > 另外，安装后你可以用 `/icon/xx.png` 访问到 `/DATA/AppData/casamod/icon` 目录中的图标。
   scheme: https
   hostname: github.com
   port_map: ''
