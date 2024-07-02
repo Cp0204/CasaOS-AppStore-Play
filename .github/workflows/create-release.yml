@@ -5,8 +5,18 @@ permissions:
 
 on:
   push:
-    branches:
-      - main
+    # branches:
+    #   - main
+    paths:
+      - '**.yml'
+      - '**.json'
+      - '!Apps_pre/**'
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Test tags'
+        required: true
+        type: string
 
 jobs:
   build:
