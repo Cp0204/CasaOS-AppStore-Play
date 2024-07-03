@@ -1,0 +1,69 @@
+name: stirling-pdf
+services:
+  stirling-pdf:
+    image: frooodle/s-pdf:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 768M
+    network_mode: bridge
+    ports:
+      - target: 8080
+        published: "8081"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/stirling-pdf/trainingData
+        target: /usr/share/tessdata
+      - type: bind
+        source: /DATA/AppData/stirling-pdf/extraConfigs
+        target: /configs
+      - type: bind
+        source: ./customFiles
+        target: /customFiles/
+      - type: bind
+        source: ./logs
+        target: /logs/
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+      - SECURITY_ENABLE_LOGIN=true
+      - SECURITY_INITIALLOGIN_USERNAME=admin
+      - SECURITY_INITIALLOGIN_PASSWORD=stirling
+      - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
+      - LANGS=zh_CN
+    restart: unless-stopped
+    container_name: stirling-pdf
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: stirling-pdf
+  store_app_id: stirling-pdf
+  author: Cp0204
+  category: Documents
+  description:
+    en_us: Stirling PDF is a robust, locally hosted web-based PDF manipulation tool. It enables you to carry out various operations on PDF files, including splitting, merging, converting, reorganizing, adding images, rotating, compressing, and more.
+    zh_cn: Stirling PDF 是一款功能强大的本地托管的基于 Web 的 PDF 操作工具。它使您能够对 PDF 文件执行各种操作，包括拆分、合并、转换、重新组织、添加图像、旋转、压缩等。
+  developer: stirlingtools.com
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/stirling-pdf/icon.webp
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/stirling-pdf/screenshot-1.jpg
+  tagline:
+    en_us: A robust, locally hosted PDF Toolbox
+    zh_cn: 功能强大的自托管的 PDF 工具箱
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/stirling-pdf/thumbnail.png
+  title:
+    en_us: Stirling-PDF
+  index: /
+  port_map: "8081"
+  tips:
+    before_install:
+      en_us: |
+        Login authentication is not enabled by default, you can set it in [environment variables](https://github.com/Stirling-Tools/Stirling-PDF?tab=readme-ov-file#environment-only-parameters).
+
+        > If you enable login, need to download about 120M .jar package from Github at startup.
+      zh_cn: |
+        默认不开启登录验证，你可以在[环境变量](https://github.com/Stirling-Tools/Stirling-PDF?tab=readme-ov-file#environment-only-parameters)中设置。
+
+        > 开启登录的话，启动时需要从 Github 上下载约 120M 的 .jar 包。**国内网络有点障碍，会卡住。**
