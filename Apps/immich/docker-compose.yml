@@ -94,8 +94,8 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/immich/screenshot-1.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/immich/thumbnail.png
   description:
-    en_us: "Alex is a software engineer who, along with his wife, faced a common problem after the birth of their newborn: they didn't want to pay for a backup application anymore. So, he decided to develop an alternative focused on backing up photos and videos. This application prioritizes privacy protection and offers user-friendly access to photos and videos. Alex aims to give back to the open-source community through this project."
-    zh_cn: Alex 是一位软件工程师，他与妻子在新生儿出生后面对一个共同问题：不想再为付费备份应用买单了。于是，他决定开发一个替代品，专注于照片和视频备份。这款应用注重隐私保护，方便用户查看照片和视频，操作简单易用。Alex 希望通过这个项目回馈开源社区。
+    en_us: immich is a self-hosted photo and video backup solution for iOS and Android. It offers AI-powered features like object detection, people recognition, and location-based search, giving you complete control over your privacy and data.
+    zh_cn: immich 是一款适用于 iOS 和 Android 的自托管照片和视频备份解决方案。它提供了由 AI 支持的功能，例如对象检测、人物识别和基于位置的搜索，使您可以完全控制自己的隐私和数据。
   tagline:
     en_us: High performance self-hosted photo and video backup solution
     zh_cn: 高性能的自托管照片和视频备份方案
