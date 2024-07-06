@@ -1,0 +1,121 @@
+name: plant-it
+services:
+  plant-it:
+    image: msdeluise/plant-it-server:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    environment:
+      # DB
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      MYSQL_USERNAME: root
+      MYSQL_PSW: root
+      MYSQL_DATABASE: bootdb
+      MYSQL_ROOT_PASSWORD: root
+      # JWT
+      JWT_SECRET: putTheSecretHere
+      JWT_EXP: "1"
+      # Server config
+      USERS_LIMIT: "-1"
+      UPLOAD_DIR: /upload-dir
+      API_PORT: "8085"
+      TREFLE_KEY: ''
+      LOG_LEVEL: DEBUG
+      ALLOWED_ORIGINS: '*'
+      # Cache
+      CACHE_TTL: "86400"
+      CACHE_HOST: cache
+      CACHE_PORT: "6379"
+      # SSL
+      SSL_ENABLED: 'false'
+      CERTIFICATE_PATH: /certificates/
+    depends_on:
+      - db
+      - cache
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/plant-it/upload-dir
+        target: /upload-dir
+      - type: bind
+        source: /DATA/AppData/plant-it/certs
+        target: /certificates
+    ports:
+      - target: 8085
+        published: "8085"
+        protocol: tcp
+      - target: 3000
+        published: "3000"
+        protocol: tcp
+    container_name: plant-it
+    networks:
+      - plant-it
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      MYSQL_USERNAME: root
+      MYSQL_PSW: root
+      MYSQL_DATABASE: bootdb
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - type: bind
+        source: /DATA/AppData/plant-it/db
+        target: /var/lib/mysql
+    container_name: plant-it-db
+    networks:
+      - plant-it
+
+  cache:
+    image: redis:7.2.1
+    restart: unless-stopped
+    container_name: plant-it-cache
+    networks:
+      - plant-it
+
+networks:
+  plant-it:
+    name: plant-it
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: plant-it
+  store_app_id: plant-it
+  author: Cp0204
+  category: Home Automation
+  description:
+    en_us: Plant-it is a self-hosted gardening companion app. Useful for keeping track of plant care, receiving notifications about when to water plants, uploading plant images, and more.
+    zh_cn: Plant-it是一个自托管的园艺伴侣应用程序。 对于跟踪植物护理、接收有关何时给植物浇水的通知、上传植物图像等非常有用。
+  developer: msdeluise
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/plant-it/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/plant-it/screenshot-1.png
+  tagline:
+    en_us: Self-hosted, open source gardening companion app
+    zh_cn: 自托管的开源园艺伴侣应用程序
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/plant-it/thumbnail.png
+  title:
+      en_us: Plant-it
+  index: /
+  port_map: "3000"
+  tips:
+    before_install:
+      en_us: |
+        This app has a separate front-end and back-end, you need to manually enter the back-end API address by default:
+
+        `http://yourhost:8085`
+
+        The first time you enter it is in German, you can change it to English after entering the app.
+      zh_cn: |
+        本应用前后端分离，你需要手动输入后端API地址，默认为：
+
+        `http://yourhost:8085`
+
+        首次进入是德语，进入应用后可更改为英语。
