@@ -129,7 +129,7 @@ services:
       - db
 
   db:
-    image: mariadb:lts
+    image: linuxserver/mariadb:arm32v7-10.6.13
     hostname: db
     container_name: firefly-iii-db
     networks:
@@ -137,12 +137,12 @@ services:
     restart: unless-stopped
     environment:
       # Database
-      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      MYSQL_ROOT_PASSWORD: secret_firefly_password
       MYSQL_USER: firefly
       MYSQL_PASSWORD: secret_firefly_password
       MYSQL_DATABASE: firefly
     volumes:
-      - /DATA/AppData/fireflyiii/db:/var/lib/mysql
+      - /DATA/AppData/fireflyiii/db:/config
 
   importer:
     image: fireflyiii/data-importer:latest
@@ -210,8 +210,7 @@ networks:
 
 x-casaos:
   architectures:
-    - amd64
-    - arm64
+    - arm
   main: app
   author: Cp0204
   category: Finance
