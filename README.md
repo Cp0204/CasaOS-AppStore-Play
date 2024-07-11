@@ -76,11 +76,13 @@ This is just a generic version, please add the following sources corresponding t
 
 ## Donate / 赞助
 
-If you think this project is helpful to you, you can give me a little support. Thank you very much.
+Enjoyed the project? Consider buying me a coffee - it helps me keep going!
+
+<a href="https://buymeacoffee.com/cp0204"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" target="_blank"/></a>
 
 如果你觉得这个项目对你有帮助，可以给我一点点支持，非常感谢～
 
-![WeChatPay](https://github.com/Cp0204/CasaOS-AppStore-Play/assets/5239753/d6693654-a967-40f5-a879-ac5109136b4f)
+![WeChatPay](https://cdn.jsdelivr.net/gh/Cp0204/Cp0204@main/img/wechat_pay_qrcode.png)
 
 ## App List / 应用列表
 
