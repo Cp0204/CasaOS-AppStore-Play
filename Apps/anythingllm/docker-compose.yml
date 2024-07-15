@@ -1,0 +1,67 @@
+name: anythingllm
+services:
+  anythingllm:
+    image: mintplexlabs/anythingllm:latest
+    container_name: anythingllm
+    ports:
+      - published: "3001"
+        target: 3001
+        protocol: tcp
+    cap_add:
+      - SYS_ADMIN
+    environment:
+      - STORAGE_DIR=/app/server/storage
+      - JWT_SECRET="make this a large list of random numbers and letters 20+"
+      - LLM_PROVIDER=ollama
+      - OLLAMA_BASE_PATH=http://172.17.0.1:11434
+      - OLLAMA_MODEL_PREF=llama2
+      - OLLAMA_MODEL_TOKEN_LIMIT=4096
+      - EMBEDDING_ENGINE=ollama
+      - EMBEDDING_BASE_PATH=http://172.17.0.1:11434
+      - EMBEDDING_MODEL_PREF=nomic-embed-text:latest
+      - EMBEDDING_MODEL_MAX_CHUNK_LENGTH=8192
+      - VECTOR_DB=lancedb
+      - WHISPER_PROVIDER=local
+      - TTS_PROVIDER=native
+      - PASSWORDMINCHAR=8
+      - AGENT_SERPER_DEV_KEY="SERPER DEV API KEY"
+      - AGENT_SERPLY_API_KEY="Serply.io API KEY"
+    volumes:
+      - type: bind
+        source: /DATA/AppData/anythingllm/storage
+        target: /app/server/storage
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    network_mode: bridge
+
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: anythingllm
+  store_app_id: anythingllm
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: A full-stack application that enables you to turn any document, resource, or piece of content into context that any LLM can use as references during chatting. This application allows you to pick and choose which LLM or Vector Database you want to use as well as supporting multi-user management and permissions.
+    zh_cn: AnythingLLM 是一个全栈应用程序，您可以使用现成的商业大语言模型或流行的开源大语言模型，再结合向量数据库解决方案构建一个私有 ChatGPT，不再受制于人：您可以本地运行，也可以远程托管，并能够与您提供的任何文档智能聊天。
+  developer: Mintplex-Labs
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/anythingllm/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/anythingllm/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/anythingllm/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/anythingllm/screenshot-3.png
+  tagline:
+    en_us: One-click local AI private knowledge base
+    zh_cn: 一键搭建本地AI私有知识库
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/anythingllm/thumbnail.png
+  title:
+    en_us: AnythingLLM
+  index: /
+  port_map: "3001"
