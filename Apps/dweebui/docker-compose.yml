@@ -1,0 +1,50 @@
+name: dweebui
+services:
+  dweebui:
+    container_name: dweebui
+    image: lllllllillllllillll/dweebui:latest
+    environment:
+      PORT: "8000"
+      SECRET: MrWiskers
+    restart: unless-stopped
+    ports:
+      - published: "8000"
+        target: 8000
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/dweebui/config
+        target: /app/config
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    network_mode: bridge
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: dweebui
+  store_app_id: dweebui
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: DweebUI is a free and open-source WebUI for managing Docker containers. It provides a user-friendly dashboard for monitoring container performance, managing container lifecycles, and configuring container settings.
+    zh_cn: DweebUI 是一款用于管理 Docker 容器的免费开源 WebUI 。 它提供了一个用户友好的仪表板，用于监控容器性能、管理容器生命周期和配置容器设置。
+  developer: lllllllillllllillll
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dweebui/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dweebui/screenshot-1.png
+    # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dweebui/screenshot-2.png
+    # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dweebui/screenshot-3.png
+  tagline:
+    en_us: Free and Open-Source WebUI For Managing Your Containers
+    zh_cn: 又一个开源免费Docker管理器
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dweebui/thumbnail.png
+  title:
+    en_us: DweebUI
+  port_map: "8000"
