@@ -1,0 +1,50 @@
+name: glances
+services:
+  glances:
+    image: nicolargo/glances:latest-full
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    restart: unless-stopped
+    ports:
+      - target: 61208
+        published: "61208"
+        protocol: tcp
+      - target: 61209
+        published: "61209"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    environment:
+      - TZ=$TZ
+      - GLANCES_OPT=-w
+    pid: host
+    container_name: glances
+    hostname: CasaOS
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: glances
+  store_app_id: glances
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Glances is a top system monitoring tool. It provides a large amount of information about your system resources, such as CPU usage, memory usage, network traffic, disk I/O, processes, and sensors.
+    zh_cn: Glances 是一款顶级的系统监控工具。它提供了关于系统资源的大量信息，例如 CPU 使用率、内存使用率、网络流量、磁盘 I/O、进程和传感器。
+  developer: nicolargo
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/glances/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/glances/screenshot-1.png
+  tagline:
+    en_us: A top system monitoring tool.
+    zh_cn: 顶级的系统监控工具。
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/glances/thumbnail.png
+  title:
+    en_us: Glances
+  port_map: "61208"
