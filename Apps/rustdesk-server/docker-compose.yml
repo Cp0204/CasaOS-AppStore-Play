@@ -5,6 +5,8 @@ services:
       - hbbr
     container_name: rustdesk-server-hbbr
     image: rustdesk/rustdesk-server:latest
+    environment:
+      - KEY=_
     restart: unless-stopped
     volumes:
       - /DATA/AppData/rustdesk-server/hbbr:/root
@@ -23,6 +25,8 @@ services:
         condition: service_started
         required: true
     image: rustdesk/rustdesk-server:latest
+    environment:
+      - KEY=_
     restart: unless-stopped
     volumes:
       - /DATA/AppData/rustdesk-server/hbbs:/root
