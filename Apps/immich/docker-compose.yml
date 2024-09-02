@@ -22,9 +22,10 @@ services:
     ports:
       - 2283:3001
     restart: unless-stopped
+    healthcheck:
+      disable: false
     networks:
       - immich
-    privileged: false
 
   immich-machine-learning:
     container_name: immich-machine-learning
@@ -39,9 +40,10 @@ services:
     restart: unless-stopped
     volumes:
       - /DATA/AppData/immich/model-cache:/cache
+    healthcheck:
+      disable: false
     networks:
       - immich
-    privileged: false
 
   redis:
     container_name: immich-redis
@@ -67,7 +69,7 @@ services:
     volumes:
       - /DATA/AppData/immich/pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: pg_isready --dbname='${DB_DATABASE_NAME}' || exit 1; Chksum="$$(psql --dbname='${DB_DATABASE_NAME}' --username='${DB_USERNAME}' --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')"; echo "checksum failure count is $$Chksum"; [ "$$Chksum" = '0' ] || exit 1
+      test: pg_isready --dbname='immich' --username='postgres' || exit 1; Chksum="$$(psql --dbname='immich' --username='postgres' --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')"; echo "checksum failure count is $$Chksum"; [ "$$Chksum" = '0' ] || exit 1
       interval: 5m
       start_interval: 30s
       start_period: 5m
