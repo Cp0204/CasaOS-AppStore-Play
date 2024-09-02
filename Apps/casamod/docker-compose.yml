@@ -8,6 +8,8 @@ services:
     volumes:
       - /DATA/AppData/casamod:/DATA/AppData/casamod
       - /var/lib/casaos/www:/var/lib/casaos/www
+    pid: host
+    privileged: true
     network_mode: bridge
     restart: unless-stopped
     deploy:
