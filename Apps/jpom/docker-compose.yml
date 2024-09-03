@@ -1,0 +1,53 @@
+name: jpom
+services:
+  jpom:
+    image: jpomdocker/jpom:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    network_mode: bridge
+    ports:
+      - target: 2122
+        published: "2122"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/jpom/logs
+        target: /usr/local/jpom-server/logs
+      - type: bind
+        source: /DATA/AppData/jpom/data
+        target: /usr/local/jpom-server/data
+      - type: bind
+        source: /DATA/AppData/jpom/conf
+        target: /usr/local/jpom-server/conf
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+    container_name: jpom
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: jpom
+  store_app_id: jpom
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: Jpom is a low-invasive online construction, automatic deployment, daily operation and maintenance, project monitoring software.
+    zh_cn: Jpom是一款简而轻的低侵入式在线构建、自动部署、日常运维、项目监控软件。
+  developer: dromara
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/jpom/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/jpom/screenshot-1.png
+    # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/jpom/screenshot-2.png
+  tagline:
+    en_us: Simple and lightweight low-invasive online build, automated deployment, daily operations, and project monitoring software.
+    zh_cn: 简而轻的低侵入式在线构建、自动部署、日常运维、项目监控软件
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/jpom/thumbnail.png
+  title:
+    en_us: Jpom
+  port_map: "2122"
