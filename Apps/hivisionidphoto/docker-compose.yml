@@ -1,0 +1,39 @@
+name: hivisionidphoto
+services:
+  hivisionidphoto:
+    image: linzeyi/hivision_idphotos:v1
+    ports:
+      - target: 7860
+        published: "7860"
+        protocol: tcp
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    network_mode: bridge
+    restart: unless-stopped
+    container_name: hivisionidphoto
+
+x-casaos:
+  architectures:
+    - arm64
+  main: hivisionidphoto
+  store_app_id: hivisionidphoto
+  author: Cp0204
+  category: Media
+  description:
+    en_us: HivisionIDPhoto is an intelligent photo generation algorithm for ID photos, capable of recognizing various user scenarios, cutting out images, and generating standard ID photos.
+    zh_cn: HivisionIDPhoto 是一种智能证件照生成算法，能够识别多种用户场景，进行抠图并生成标准证件照。
+  developer: Zeyi-Lin
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hivisionidphoto/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hivisionidphoto/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hivisionidphoto/screenshot-2.png
+  tagline:
+    en_us: Create ID photos effortlessly with HivisionIDPhoto
+    zh_cn: 使用 HivisionIDPhoto 轻松制作证件照
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hivisionidphoto/thumbnail.png
+  title:
+    en_us: HivisionIDPhoto
+  index: /
+  port_map: "7860"
