@@ -39,8 +39,8 @@ x-casaos:
   author: Cp0204
   category: Finance
   description:
-    en_us: This project provides a RESTful API service (including front-end pages) for personal accounting and financial management based on beancount.\n\nBeancount is an excellent open-source double-entry bookkeeping tool. Because it is based on text recording, it is difficult to extend to the mobile terminal. This project aims to encapsulate common accounting behaviors into RESTful API. This repository uses Golang for text reading and writing and interface service support, uses bean-query to obtain and parse content, and returns it in Json format. And based on the implemented interface, the front-end page (adapted to the mobile terminal) is built in.
-    zh_cn: 本项目基于 beancount 提供个人记账财务管理的 RESTful API 服务（包含前端页面）。\n\nbeancount 是一个优秀的开源复式记账工具，因为其基于文本记录的特性，难以拓展到移动端；本项目旨在将常见的记账行为封装为 RESTful API。本仓库使用 Golang 进行文本的读写和接口服务支持，利用 bean-query 获取内容并解析，以 Json 格式返回。并基于已实现的接口内置实现了前端页面（适配移动端）。
+    en_us: This project provides a RESTful API service (including front-end pages) for personal accounting and financial management based on beancount.Beancount is an excellent open-source double-entry bookkeeping tool. Because it is based on text recording, it is difficult to extend to the mobile terminal. This project aims to encapsulate common accounting behaviors into RESTful API.
+    zh_cn: 本项目基于 beancount 提供个人记账财务管理的 RESTful API 服务（包含前端页面）。beancount 是一个优秀的开源复式记账工具，因为其基于文本记录的特性，难以拓展到移动端；本项目旨在将常见的记账行为封装为 RESTful API。
   developer: xdbin
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/beancount-gs/icon.png
   screenshot_link:
