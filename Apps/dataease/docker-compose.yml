@@ -12,12 +12,6 @@ services:
       - type: bind
         source: /DATA/AppData/dataease/mysql
         target: /var/lib/mysql
-    healthcheck:
-      test: mysql -h127.0.0.1 -uroot -p$$MARIADB_ROOT_PASSWORD -e 'SHOW DATABASES;'
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
     networks:
       - dataease
 
@@ -49,15 +43,6 @@ services:
       - type: bind
         source: /DATA/AppData/dataease/core/cache
         target: /opt/dataease2.0/cache
-    healthcheck:
-      test: check http://localhost:8100
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 90s
-    depends_on:
-      mysql:
-        condition: service_healthy
     networks:
       - dataease
     deploy:
