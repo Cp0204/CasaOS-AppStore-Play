@@ -1,0 +1,46 @@
+name: xray
+services:
+  xray:
+    container_name: xray
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    hostname: xray
+    image: teddysun/xray:latest
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/xray
+        target: /etc/xray
+    network_mode: host
+    privileged: false
+
+x-casaos:
+  architectures:
+    - arm
+    - arm64
+    - amd64
+  main: xray
+  store_app_id: xray
+  author: Cp0204
+  category: VPN
+  description:
+    en_us: Xray, Penetrates Everything. Also the best v2ray-core, with XTLS support. Fully compatible configuration.
+    zh_cn: Xray，万物皆可穿透。它也是支持 XTLS 的最佳 v2ray-core，且完全兼容 v2ray-core 的配置。
+  developer: RPRX
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xray/icon.png
+  # screenshot_link:
+  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xray/screenshot-1.png
+  tagline:
+    en_us: High-performance and configurable proxy software
+    zh_cn: 高性能、可配置的代理软件
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xray/thumbnail.png
+  tips:
+    before_install:
+      en_us: You must create a configuration file `/DATA/AppData/xray/config.json` in host at first.
+      zh_cn: 您首先必须在主机中创建一个配置文件 `/DATA/AppData/xray/config.json ` 。
+  title:
+    en_us: Xray
+  index: /
+  port_map: ""
