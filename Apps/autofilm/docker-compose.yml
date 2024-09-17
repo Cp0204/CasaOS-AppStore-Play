@@ -1,0 +1,54 @@
+name: autofilm
+services:
+  autofilm:
+    container_name: autofilm
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    hostname: autofilm
+    image: akimio/autofilm:latest
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/autofilm/config
+        target: /config
+      - type: bind
+        source: /DATA/AppData/autofilm/media
+        target: /media
+      - type: bind
+        source: /DATA/AppData/autofilm/logs
+        target: /logs
+    network_mode: host
+    privileged: false
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  author: Cp0204
+  category: Media
+  description:
+    en_us: AutoFilm obtains video playback links from cloud disks through Webdav provided by Alist and generates Strm files, which can be recognized and played directly by audio and video media servers such as Jellyfin/Emby.
+    zh_cn: AutoFilm 通过 Alist 提供的 Webdav 获取网盘视频播放链接并生成 Strm 文件，可被 Jellyfin/Emby 等影音媒体服务器识别并直接播放。
+  developer: akimio
+  hostname: ""
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/autofilm/icon.png
+  index: /
+  is_uncontrolled: false
+  main: autofilm
+  port_map: ""
+  scheme: http
+  # screenshot_link:
+  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/autofilm/screenshot-1.png
+  store_app_id: autofilm
+  tagline:
+    en_us: A project that provides Strm direct chain playback for Emby and Jellyfin servers
+    zh_cn: 一个为Emby、Jellyfin服务器提供Strm直链播放的小项目
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/autofilm/thumbnail.png
+  tips:
+    before_install:
+      en_us: '[AutoFilm README](https://blog.akimio.top/posts/1031/)'
+      zh_cn: '[AutoFilm说明文档](https://blog.akimio.top/posts/1031/)'
+  title:
+    en_us: AutoFilm
