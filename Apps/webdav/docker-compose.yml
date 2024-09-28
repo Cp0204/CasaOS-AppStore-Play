@@ -1,0 +1,51 @@
+name: webdav
+services:
+  webdav:
+    environment:
+      AUTH_TYPE: Digest
+      USERNAME: admin
+      PASSWORD: admin1234
+      TZ: $TZ
+    image: bytemark/webdav:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+    ports:
+      - target: 80
+        published: "8081"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/webdav
+        target: /var/lib/dav
+    container_name: webdav
+
+x-casaos:
+  architectures:
+    - amd64
+  main: webdav
+  store_app_id: webdav
+  author: bytemark
+  category: File Sync
+  description:
+    en_us: A simple WebDAV server.
+    zh_cn: 一个简单的WebDAV服务器。
+  developer: bytemark
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/webdav/icon.png
+  # screenshot_link:
+  #   - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/webdav/screenshot-1.png
+  tagline:
+    en_us: Simple WebDAV Server
+    zh_cn: 简单的WebDAV服务器
+  # thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/webdav/thumbnail.png
+  tips:
+    before_install:
+      en_us: 'Default username: `admin`, default password: `admin1234`'
+      zh_cn: '默认用户名：`admin` ，默认密码：`admin1234`'
+  title:
+    en_us: WebDAV
+  index: /
+  port_map: "8081"
