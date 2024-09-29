@@ -34,13 +34,13 @@ x-casaos:
     en_us: A simple WebDAV server.
     zh_cn: 一个简单的WebDAV服务器。
   developer: bytemark
-  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/webdav/icon.png
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/webdav/icon.png
   # screenshot_link:
-  #   - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/webdav/screenshot-1.png
+  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/webdav/screenshot-1.png
   tagline:
     en_us: Simple WebDAV Server
     zh_cn: 简单的WebDAV服务器
-  # thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/webdav/thumbnail.png
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/webdav/thumbnail.png
   tips:
     before_install:
       en_us: 'Default username: `admin`, default password: `admin1234`'
