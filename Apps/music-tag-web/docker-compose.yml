@@ -1,0 +1,59 @@
+name: music-tag-web
+services:
+  music-tag-web:
+    image: xhongc/music_tag_web:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    network_mode: bridge
+    ports:
+      - target: 8001
+        published: "8001"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/music-tag-web/media
+        target: /app/media
+      - type: bind
+        source: /DATA/AppData/music-tag-web/config
+        target: /app/data
+    container_name: music-tag-web
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: music-tag-web
+  store_app_id: music-tag-web
+  author: Cp0204
+  category: Media
+  description:
+    en_us: 'Music Tag Web is a music tag editor program that can edit song title, album, artist, lyrics, cover and other information, supporting FLAC, APE, WAV, AIFF, WV, TTA, MP3, M4A, OGG, MPC, OPUS, WMA, DSF, DFF, MP4 and other audio formats.'
+    zh_cn: '「音乐标签」Web版是一款可以编辑歌曲的标题，专辑，艺术家，歌词，封面等信息的音乐标签编辑器程序， 支持FLAC, APE, WAV, AIFF, WV, TTA, MP3, M4A, OGG, MPC, OPUS, WMA, DSF, DFF, MP4等音频格式。'
+  developer: xhongc
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/music-tag-web/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/music-tag-web/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/music-tag-web/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/music-tag-web/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/music-tag-web/screenshot-4.png
+  tagline:
+    en_us: A music tag editor
+    zh_cn: 音乐标签编辑器
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/music-tag-web/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        The default account password is admin/admin.
+        After entering the account password on the login interface, enter the management interface /admin, you can modify the default password.
+        If you use the reverse proxy to access the page and report a csrf error, please use the LAN address to enter.
+      zh_cn: |
+        默认账号密码为 admin/admin。
+        在登录界面输入账号密码后，进入管理界面 /admin，可以修改默认密码。
+        如果你反向代理页面进去报错 csrf 错误，请用局域网地址进入。
+  title:
+    en_us: Music Tag Web
+    zh_cn: 音乐标签
+  port_map: "8001"
