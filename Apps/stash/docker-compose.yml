@@ -2,6 +2,10 @@ name: stash
 services:
   stash:
     image: stashapp/stash:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
     container_name: stash
     restart: unless-stopped
     ports:
@@ -18,42 +22,42 @@ services:
       - STASH_CACHE=/cache/
       - STASH_PORT=9999
     volumes:
-      - type: bind
-        source: /DATA/AppData/stash/config
-        target: /root/.stash
-      - type: bind
-        source: /DATA/AppData/stash/data
-        target: /data
-      - type: bind
-        source: /DATA/AppData/stash/metadata
-        target: /metadata
-      - type: bind
-        source: /DATA/AppData/stash/cache
-        target: /cache
-      - type: bind
-        source: /DATA/AppData/stash/blobs
-        target: /blobs
-      - type: bind
-        source: /DATA/AppData/stash/generated
-        target: /generated
+      - /etc/localtime:/etc/localtime:ro
+      ## Adjust below paths (the left part) to your liking.
+      ## E.g. you can change ./config:/root/.stash to ./stash:/root/.stash
+
+      ## Keep configs, scrapers, and plugins here.
+      - /DATA/AppData/stash/config:/root/.stash
+      ## Point this at your collection.
+      - /DATA/AppData/stash/data:/data
+      ## This is where your stash's metadata lives
+      - /DATA/AppData/stash/metadata:/metadata
+      ## Any other cache content.
+      - /DATA/AppData/stash/cache:/cache
+      ## Where to store binary blob data (scene covers, images)
+      - /DATA/AppData/stash/blobs:/blobs
+      ## Where to store generated content (screenshots,previews,transcodes,sprites)
+      - /DATA/AppData/stash/generated:/generated
 
 x-casaos:
   architectures:
+    - arm
+    - arm64
     - amd64
   main: stash
   store_app_id: stash
   category: Media
   author: CorrectRoad
   developer: Stash
-  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/stash/logo.png
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/stash/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/stash/screenshot-1.png
   description:
-    en_us: An organizer for your porn, written in Go.
-    zh_cn: 一个用于整理你色情内容的组织器，用Go编写。
+    en_us: Stash is a self-hosted webapp written in Go which organizes and serves your porn.
+    zh_cn: Stash 是一个用 Go 编写的自托管网络应用程序，用于组织和提供成人内容。
   tagline:
-    en_us: An organizer for your porn, written in Go
-    zh_cn: 一个用于整理你色情内容的组织器，用Go编写。
+    en_us: Your self-hosted adult video library
+    zh_cn: 您的自托管成人视频库
   title:
     en_us: Stash
   port_map: "9999"
