@@ -1,0 +1,61 @@
+name: stash
+services:
+  stash:
+    image: stashapp/stash:latest
+    container_name: stash
+    restart: unless-stopped
+    ports:
+      - "9999:9999"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "2m"
+    environment:
+      - STASH_STASH=/data/
+      - STASH_GENERATED=/generated/
+      - STASH_METADATA=/metadata/
+      - STASH_CACHE=/cache/
+      - STASH_PORT=9999
+    volumes:
+      - type: bind
+        source: /DATA/AppData/stash/config
+        target: /root/.stash
+      - type: bind
+        source: /DATA/AppData/stash/data
+        target: /data
+      - type: bind
+        source: /DATA/AppData/stash/metadata
+        target: /metadata
+      - type: bind
+        source: /DATA/AppData/stash/cache
+        target: /cache
+      - type: bind
+        source: /DATA/AppData/stash/blobs
+        target: /blobs
+      - type: bind
+        source: /DATA/AppData/stash/generated
+        target: /generated
+
+x-casaos:
+  architectures:
+    - amd64
+  main: stash
+  store_app_id: stash
+  category: Media
+  author: CorrectRoad
+  developer: Stash
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/stash/logo.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/stash/screenshot-1.png
+  description:
+    en_us: An organizer for your porn, written in Go.
+    zh_cn: 一个用于整理你色情内容的组织器，用Go编写。
+  tagline:
+    en_us: An organizer for your porn, written in Go
+    zh_cn: 一个用于整理你色情内容的组织器，用Go编写。
+  title:
+    en_us: Stash
+  port_map: "9999"
+  scheme: http
+  index: /
