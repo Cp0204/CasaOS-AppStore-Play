@@ -1,0 +1,45 @@
+name: auto-symlink
+services:
+  auto-symlink:
+    image: shenxianmq/auto_symlink:latest
+    container_name: auto-symlink
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - type: bind
+        source: /DATA/Media/Movies
+        target: /Media
+      - type: bind
+        source: /DATA/AppData/auto-symlink/config
+        target: /app/config
+    ports:
+      - target: 8095
+        published: "8095"
+        protocol: tcp
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: auto-symlink
+  store_app_id: auto-symlink
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Auto_Symlink is an automation tool designed to manage cloud drives mounted locally through CloudDrive2/Alist. It creates symbolic links, making it easier for media servers like Emby/Jellyfin/Plex to scrape and read content, while reducing frequent access to the cloud drive.
+    zh_cn: Auto_Symlink 是一款自动化工具，专门用于管理通过 CloudDrive2/Alist 挂载到本地的网盘。它能够创建软链接，使得像 Emby/Jellyfin/Plex 这样的媒体服务器能够更容易地刮削和读取内容，同时减少对网盘的频繁访问。
+  developer: shenxianmq
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/auto-symlink/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/auto-symlink/screenshot-1.png
+  tagline:
+    en_us: An automation tool for cloud drive management
+    zh_cn: 用于网盘管理的自动化工具
+  title:
+    en_us: Auto Symlink
+  port_map: "8095"
