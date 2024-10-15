@@ -13,14 +13,14 @@ services:
       - /DATA/Gallery/immich:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
     environment:
-      - DB_DATABASE_NAME=immich
-      - DB_PASSWORD=postgres
-      - DB_USERNAME=postgres
+      DB_DATABASE_NAME: immich
+      DB_PASSWORD: postgres
+      DB_USERNAME: postgres
+    ports:
+      - '2283:2283'
     depends_on:
       - redis
       - database
-    ports:
-      - 2283:3001
     restart: unless-stopped
     healthcheck:
       disable: false
@@ -32,11 +32,11 @@ services:
     hostname: immich-machine-learning
     image: altran1502/immich-machine-learning:release
     environment:
-      - DB_DATABASE_NAME=immich
-      - DB_PASSWORD=postgres
-      - DB_USERNAME=postgres
-      # - HTTP_PROXY=http://172.17.0.1:10809
-      # - HTTPS_PROXY=http://172.17.0.1:10809
+      DB_DATABASE_NAME: immich
+      DB_PASSWORD: postgres
+      DB_USERNAME: postgres
+      # HTTP_PROXY: http://172.17.0.1:10809
+      # HTTPS_PROXY: http://172.17.0.1:10809
     restart: unless-stopped
     volumes:
       - /DATA/AppData/immich/model-cache:/cache
@@ -73,7 +73,22 @@ services:
       interval: 5m
       start_interval: 30s
       start_period: 5m
-    command: ["postgres", "-c", "shared_preload_libraries=vectors.so", "-c", 'search_path="$$user", public, vectors', "-c", "logging_collector=on", "-c", "max_wal_size=2GB", "-c", "shared_buffers=512MB", "-c", "wal_compression=on"]
+    command:
+      [
+        'postgres',
+        '-c',
+        'shared_preload_libraries=vectors.so',
+        '-c',
+        'search_path="$$user", public, vectors',
+        '-c',
+        'logging_collector=on',
+        '-c',
+        'max_wal_size=2GB',
+        '-c',
+        'shared_buffers=512MB',
+        '-c',
+        'wal_compression=on',
+      ]
     restart: unless-stopped
     networks:
       - immich
