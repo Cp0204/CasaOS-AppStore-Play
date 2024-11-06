@@ -1,0 +1,111 @@
+name: emby-happy
+services:
+  emby-happy:
+    image: amilys/embyserver:latest
+    container_name: emby-happy
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+      - GID=0
+      - UID=0
+    ports:
+      - target: 8096
+        published: "8096"
+        protocol: tcp
+      - target: 8920
+        published: "8920"
+        protocol: tcp
+    # privileged: true
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/emby-happy/config
+        target: /config
+      - type: bind
+        source: /DATA/Media/TV Shows
+        target: /data/tvshows
+      - type: bind
+        source: /DATA/Media/Movies
+        target: /data/movies
+    extra_hosts:
+      - api.themoviedb.org:13.224.163.120
+      - image.tmdb.org:143.244.50.83
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+x-casaos:
+  architectures:
+    - amd64
+  main: emby-happy
+  store_app_id: emby-happy
+  author: CasaOS User
+  category: Media
+  description:
+    en_us: Emby Server brings all of your home videos, music, and photos together into one place. This enhanced version includes emby-erx for UI enhancements, dd-danmaku for adding danmaku support, and embyExternalUrl for using external players.
+    zh_cn: Emby 服务器将您所有的家庭视频、音乐和照片集中到一处。此增强版本包括用于 UI 增强的 emby-erx、用于添加弹幕支持的 dd-danmaku 以及用于使用外部播放器的 embyExternalUrl。
+  developer: amilys
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/emby-happy/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/emby-happy/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/emby-happy/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/emby-happy/screenshot-3.png
+  port_map: "8096"
+  scheme: http
+  tagline:
+    en_us: Enhanced Emby Server with plugins support
+    zh_cn: 具有插件的增强型 Emby 服务器
+  tips:
+    en_us: |
+      ## Added features:
+
+      - [emby-crx Emby Enhancement/Landscaping Plugin](https://github.com/Nolovenodie/emby-crx)
+        To enable, add the library ID to `/config/config/ext.sh`, then restart the container and Ctrl+F5 to refresh the page.
+
+      - [dd-danmaku Emby popup library plugin](https://github.com/RyoLee/dd-danmaku)
+        Enable/disable it in `/config/config/ext.sh`.
+
+      - [Emby call external player](https://github.com/bpking1/embyExternalUrl)
+        Enable/disable in `/config/config/ext.sh`.
+
+
+      ## Edible Methods:
+
+      1. Emby Settings->Emby Premiere: Enter `Crazy Thursday V Me 50` and tap Save.
+
+      2. Refresh the browser page to start eating.
+
+      3. Live TV: After adding the live source, refresh the guide data manually.
+
+      4. Android and TV client: http://res.ssr0.cn:8000/?/Emby/
+
+      [MORE](https://hub.docker.com/r/amilys/embyserver)
+    zh_cn: |
+      ## 已添加功能：
+
+      - [emby-crx Emby 增强/美化 插件](https://github.com/Nolovenodie/emby-crx)
+        开启请在 `/config/config/ext.sh` 添加媒体库ID，再重启容器和 Ctrl+F5 刷新网页。
+
+      - [dd-danmaku Emby 弹幕库插件](https://github.com/RyoLee/dd-danmaku)
+        开启/关闭请在 `/config/config/ext.sh` 中设置。
+
+      - [emby调用外部播放器](https://github.com/bpking1/embyExternalUrl)
+        开启/关闭请在 `/config/config/ext.sh` 中设置。
+
+      ## 食用方法：
+
+      1. Emby设置->Emby Premiere：输入 `疯狂星期四V我50` 点下保存
+
+      2. 刷新浏览器网页开始食用
+
+      3. 电视直播：添加直播源后,再手动刷新一下指南数据
+
+      4. 安卓与电视客户端：http://res.ssr0.cn:8000/?/Emby/
+
+      [更多说明](https://hub.docker.com/r/amilys/embyserver)
+  title:
+    en_us: Emby Happy
+    zh_cn: Emby 开心版
