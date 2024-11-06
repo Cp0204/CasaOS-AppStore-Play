@@ -29,6 +29,7 @@ services:
       - type: bind
         source: /DATA/Media/Movies
         target: /data/movies
+    hostname: emby-happy
     extra_hosts:
       - api.themoviedb.org:13.224.163.120
       - image.tmdb.org:143.244.50.83
