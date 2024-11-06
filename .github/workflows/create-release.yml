@@ -11,6 +11,10 @@ on:
       - '**.yml'
       - '**.json'
       - '!Apps_pre/**'
+  pull_request:
+    types: [closed]
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       tags:
