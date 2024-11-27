@@ -3,8 +3,8 @@ services:
   moviepilot:
     stdin_open: true
     tty: true
-    container_name: moviepilot
-    hostname: moviepilot
+    container_name: moviepilot-v2
+    hostname: moviepilot-v2
     # networks:
     #   - moviepilot
     ports:
@@ -13,8 +13,8 @@ services:
         protocol: tcp
     volumes:
       - "/DATA/Media:/media"
-      - "/DATA/AppData/moviepilot/config:/config"
-      - "/DATA/AppData/moviepilot/core:/moviepilot/.cache/ms-playwright"
+      - "/DATA/AppData/moviepilot-v2/config:/config"
+      - "/DATA/AppData/moviepilot-v2/core:/moviepilot/.cache/ms-playwright"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     environment:
       - "NGINX_PORT=3000"
@@ -26,9 +26,9 @@ services:
       - "AUTH_SITE=iyuu"
       - "IYUU_SIGN=xxxx"
       - "SUPERUSER=admin"
-      - "API_TOKEN=moviepilot"
+      # - 'API_TOKEN=无需手动配置，系统会自动生成。如果需要自定义配置，必须为16位以上的复杂字符串'
     restart: unless-stopped
-    image: jxxghp/moviepilot:latest
+    image: jxxghp/moviepilot-v2:latest
     deploy:
       resources:
         reservations:
@@ -52,10 +52,10 @@ x-casaos:
     en_us: NAS Media Library Automation Management Tool
     zh_cn: NAS媒体库自动化管理工具
   description:
-    en_us: MoviePilot is a video management tool that can automatically download and manage movies. **The MoviePilot V1 version stops feature updates, only fixes major bugs and simultaneously updates site resource packs. The V2 version has added a number of new features. Some functions have been redesigned and developed using independent scenarios. They cannot be automatically upgraded through the V1 version. They are also incompatible with the configuration and database files of the old version.**
-    zh_cn: MoviePilot 是一个视频管理工具，可以自动下载和管理电影。**MoviePilot V1版本停止功能更新，仅修复重大Bug以及同步更新站点资源包。V2版本新增多项新特性，部分功能重新设计开发，使用独立境像，无法通过V1版本自动升级，同时也不兼容旧版本配置和数据库文件。**
+    en_us: MoviePilot is a video management tool that can automatically download and manage movies.
+    zh_cn: MoviePilot 是一个视频管理工具，可以自动下载和管理电影。
   title:
-    en_us: MoviePilot
+    en_us: MoviePilot-v2
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/moviepilot/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/moviepilot/screenshot-1.png
@@ -65,8 +65,6 @@ x-casaos:
   tips:
     before_install:
       en_us: |
-        **The MoviePilot V1 version stops feature updates, only fixes major bugs and simultaneously updates site resource packs. The V2 version has added a number of new features. Some functions have been redesigned and developed using independent scenarios. They cannot be automatically upgraded through the V1 version. They are also incompatible with the configuration and database files of the old version.**
-
         ## Default Account
 
         | Username | Password |
@@ -75,8 +73,6 @@ x-casaos:
 
         Please note that this software is a bit complicated, you need to read the [documentation](https://wiki.movie-pilot.org/configuration)
       zh_cn: |
-        **MoviePilot V1版本停止功能更新，仅修复重大Bug以及同步更新站点资源包。V2版本新增多项新特性，部分功能重新设计开发，使用独立境像，无法通过V1版本自动升级，同时也不兼容旧版本配置和数据库文件。**
-
         ## 默认账号
 
         | 用户名 | 密码 |
