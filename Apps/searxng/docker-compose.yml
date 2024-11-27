@@ -1,0 +1,60 @@
+name: searxng
+services:
+  searxng:
+    container_name: searxng
+    image: searxng/searxng:latest
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - "8888:8080"
+    volumes:
+      - /DATA/AppData/searxng/config:/etc/searxng
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8888
+      - UWSGI_WORKERS=4
+      - UWSGI_THREADS=4
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: searxng
+  store_app_id: searxng
+  author: Cp0204
+  category: WEB
+  description:
+    en_us: SearXNG is a free internet metasearch engine which aggregates results from various search services and databases. Users are neither tracked nor profiled.
+    zh_cn: SearXNG 是一款自由的互联网元搜索引擎，它汇聚来自多个搜索服务和数据库的结果。用户不会被追踪或分析。
+  developer: searxng
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/searxng/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/searxng/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/searxng/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/searxng/screenshot-3.png
+  tagline:
+    en_us: A privacy-respecting, open metasearch engine
+    zh_cn: 尊重隐私的开源元搜索引擎
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/searxng/thumbnail.png
+  tips:
+    before_install:
+      en_us: "The default installation is minimal, without Redis and Caddy, and is accessed via HTTP. You need to set the `SEARXNG_BASE_URL` environment variable to your access URL."
+      zh_cn: "默认为最小化安装，未安装 redis 和 Caddy ，以 http 访问。你需要在环境变量中设置 `SEARXNG_BASE_URL` 为你的访问地址。"
+  title:
+    en_us: "SearXNG"
+  port_map: "8888"
+  index: /
