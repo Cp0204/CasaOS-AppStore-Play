@@ -2,7 +2,7 @@ name: webdav
 services:
   webdav:
     environment:
-      AUTH_TYPE: Digest
+      AUTH_TYPE: Basic
       USERNAME: admin
       PASSWORD: admin1234
       TZ: $TZ
