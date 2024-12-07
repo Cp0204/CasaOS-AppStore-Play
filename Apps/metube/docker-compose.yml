@@ -1,0 +1,41 @@
+name: metube
+services:
+  metube:
+    image: ghcr.io/alexta69/metube:latest
+    container_name: metube
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    volumes:
+      - /DATA/Downloads:/downloads
+    network_mode: bridge
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: metube
+  store_app_id: metube
+  author: Cp0204
+  category: Downloader
+  description:
+    en_us: MeTube is a self-hosted YouTube downloader with a web UI for youtube-dl / yt-dlp, enabling easy downloading of your favorite videos.
+    zh_cn: MeTube 是一个自托管的 YouTube 下载器，具有 youtube-dl / yt-dlp 的 Web UI，能够轻松下载您喜爱的视频。
+  developer: alex
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/metube/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/metube/screenshot.gif
+  tagline:
+    en_us: Download your favorite videos easily with MeTube!
+    zh_cn: 使用 MeTube 轻松下载您喜爱的视频！
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/metube/thumbnail.png
+  title:
+    en_us: MeTube
+  scheme: http
+  hostname:
+  index: /
+  port_map: "8081"
