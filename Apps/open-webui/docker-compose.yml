@@ -8,10 +8,13 @@ services:
           memory: 1024M
     hostname: open-webui
     image: ghcr.io/open-webui/open-webui:main
+    # image: backplane/open-webui:latest # Docker Hub mirror
     ports:
-      - 8080:8080
-    environment:
-      - OLLAMA_BASE_URL=http://172.17.0.1:11434
+      - 3000:8080
+    # environment:
+    #   - OPENAI_API_KEY=sk-xxxx
+    #   - OPENAI_API_BASE_URLS=https://api.openai.com
+    #   - OLLAMA_BASE_URL=http://172.17.0.1:11434
     restart: unless-stopped
     volumes:
       - /DATA/AppData/ollama:/root/.ollama
@@ -42,6 +45,6 @@ x-casaos:
     zh_cn: 用户友好的大语言模型WebUI （前身为 Ollama WebUI）
   title:
     en_us: Open WebUI
-  port_map: "8080"
+  port_map: "3000"
   scheme: http
   index: /
