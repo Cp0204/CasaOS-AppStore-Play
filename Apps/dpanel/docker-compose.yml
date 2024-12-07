@@ -1,0 +1,62 @@
+name: dpanel
+services:
+  dpanel:
+    image: dpanel/dpanel:latest
+    container_name: dpanel
+    restart: unless-stopped
+    ports:
+      - "8807:8080"
+      - "4443:443"
+      - "8081:80"
+    environment:
+      APP_NAME: dpanel
+      INSTALL_USERNAME: admin
+      INSTALL_PASSWORD: admin
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /DATA/AppData/dpanel:/dpanel
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    network_mode: bridge
+
+  dpanel-plugin-explorer:
+    image: alpine:latest
+    container_name: dpanel-plugin-explorer
+    restart: unless-stopped
+    privileged: true
+    pid: host
+    command: ["tail", "-f", "/dev/null"]
+    network_mode: bridge
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: dpanel
+  store_app_id: dpanel
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: A Docker visualization management panel that provides complete container management functions. Easy-to-use full Chinese interface, container-based easy installation, and low resource consumption.
+    zh_cn: Docker 可视化管理面板，提供完善的容器管理功能。全中文界面易于使用，基于容器易于安装，资源占用低。
+  developer: dpanel
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dpanel/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dpanel/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dpanel/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dpanel/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dpanel/screenshot-4.png
+  tagline:
+    en_us: Easy-to-use Docker visual management panel.
+    zh_cn: 易于使用的 Docker 可视化管理面板。
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dpanel/thumbnail.png
+  tips:
+    before_install:
+      en_us: The default username and password are both admin.
+      zh_cn: 默认用户名和密码均为 admin。
+  title:
+    en_us: DPanel
+    zh_cn: DPanel
+  port_map: "8807"
