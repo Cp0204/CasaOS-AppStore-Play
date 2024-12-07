@@ -1,0 +1,101 @@
+name: chatnio
+services:
+  mysql:
+    image: mysql:latest
+    container_name: chatnio-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: chatnio
+      MYSQL_USER: chatnio
+      MYSQL_PASSWORD: chatnio123456!
+      TZ: Asia/Shanghai
+    expose:
+      - "3306"
+    volumes:
+      - /DATA/AppData/chatnio/db:/var/lib/mysql
+    networks:
+      - chatnio-network
+
+  redis:
+    image: redis:latest
+    container_name: chatnio-redis
+    restart: unless-stopped
+    expose:
+      - "6379"
+    volumes:
+      - /DATA/AppData/chatnio/redis:/data
+    networks:
+      - chatnio-network
+
+  chatnio:
+    image: programzmh/chatnio:latest
+    container_name: chatnio
+    restart: unless-stopped
+    ports:
+      - "8000:8094"
+    depends_on:
+      - mysql
+      - redis
+    links:
+      - mysql
+      - redis
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: chatnio
+      MYSQL_PASSWORD: chatnio123456!
+      MYSQL_DB: chatnio
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ""
+      REDIS_DB: 0
+      SERVE_STATIC: "true"
+    volumes:
+      - /DATA/AppData/chatnio/config:/config
+      - /DATA/AppData/chatnio/logs:/logs
+      - /DATA/AppData/chatnio/storage:/storage
+    networks:
+      - chatnio-network
+
+networks:
+  chatnio-network:
+    name: chatnio
+    driver: bridge
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: chatnio
+  store_app_id: chatnio
+  author: Cp0204
+  category: Chat
+  description:
+    en_us: "Chat Nio is an all-in-one AI service management platform that offers comprehensive solutions for individual users, developers, and enterprises. We are committed to providing users with efficient, flexible, and powerful AI services."
+    zh_cn: "Chat Nio 是一款 AI 一站式服务管理平台，提供面向个人用户、开发者和企业的全面解决方案。我们致力于为用户提供高效、灵活和强大的 AI 服务。"
+  developer: programzmh
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/chatnio/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/chatnio/screenshot-1.png
+  tagline:
+    en_us: "One-stop AI solution"
+    zh_cn: "一站式 AI 解决方案"
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/chatnio/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        After successful deployment, the administrator account is `root`, and the default password is `chatnio123456`.
+
+        Please be sure to change the default password promptly after deployment to ensure system security.
+      zh_cn: |
+        部署成功后，管理员账号为 `root`，密码默认为 `chatnio123456`
+
+        请务必在部署完成后及时更改默认密码，以确保系统安全。
+  title:
+    en_us: Chat Nio
+  index: /
+  port_map: "8000"
