@@ -41,6 +41,7 @@ x-casaos:
     zh_cn: 一个API分发所有大模型
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/one-api/thumbnail.png
   title:
+    en_us: One API
     zh_cn: One API
   index: /
   port_map: "3000"
