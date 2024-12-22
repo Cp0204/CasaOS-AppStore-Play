@@ -1,13 +1,20 @@
+#
+# WARNING: Make sure to use the docker-compose.yml of the current release:
+#
+# https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
+#
+# The compose file on main may not be compatible with the latest release.
+#
+
 name: immich
 
 services:
-  immich-server:
+  immich:
     deploy:
       resources:
         reservations:
           memory: 1024M
-    container_name: immich-server
-    hostname: immich-server
+    container_name: immich
     image: altran1502/immich-server:release
     volumes:
       - /DATA/Gallery/immich:/usr/src/app/upload
@@ -29,12 +36,12 @@ services:
 
   immich-machine-learning:
     container_name: immich-machine-learning
-    hostname: immich-machine-learning
     image: altran1502/immich-machine-learning:release
     environment:
       DB_DATABASE_NAME: immich
       DB_PASSWORD: postgres
       DB_USERNAME: postgres
+      # 使用代理下载图像识别模型
       # HTTP_PROXY: http://172.17.0.1:10809
       # HTTPS_PROXY: http://172.17.0.1:10809
     restart: unless-stopped
@@ -47,8 +54,7 @@ services:
 
   redis:
     container_name: immich-redis
-    hostname: immich-redis
-    image: redis:6.2-alpine
+    image: redis:6.2-alpine@sha256:eaba718fecd1196d88533de7ba49bf903ad33664a92debb24660a922ecd9cac8
     healthcheck:
       test: redis-cli ping || exit 1
     volumes:
@@ -59,8 +65,7 @@ services:
 
   database:
     container_name: immich-postgres
-    hostname: immich-postgres
-    image: tensorchord/pgvecto-rs:pg14-v0.2.0
+    image: tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
@@ -101,7 +106,7 @@ x-casaos:
   architectures:
     - amd64
     - arm64
-  main: immich-server
+  main: immich
   store_app_id: immich
   category: Gallery
   author: Cp0204
