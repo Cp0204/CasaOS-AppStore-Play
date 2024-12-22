@@ -18,12 +18,8 @@ services:
     network_mode: host
     restart: unless-stopped
     volumes:
-      - type: bind
-        source: /dev/net/tun
-        target: /dev/net/tun
-      - type: bind
-        source: /DATA/AppData/tailscaled/config
-        target: /var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+      - /DATA/AppData/tailscaled/config:/var/lib/tailscale
 x-casaos:
   architectures:
     - amd64
@@ -32,18 +28,24 @@ x-casaos:
   author: Cp0204
   category: VPN
   description:
-    en_us: Tailscale is a zero config VPN for building secure networks. Install on any device in minutes. Remote access from any network or physical location.
-    zh_cn: Tailscale 是一款用于构建安全网络的零配置 VPN。只需几分钟即可在任何设备上安装，即可从任何网络或物理位置远程访问。
+    en_us: Tailscale lets you connect your devices and users together in your own secure virtual private network. Tailscale enables encrypted point-to-point connections using the open source WireGuard protocol.
+    zh_cn: Tailscale⁠ 允许您将您的设备和用户连接到您自己的安全虚拟专用网络中。Tailscale 通过开源的 WireGuard 协议实现加密的点对点连接。
   developer: tailscale
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Tailscale/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/tailscale/screenshot-1.svg
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/tailscale/screenshot-2.svg
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/tailscale/screenshot-3.svg
   main: tailscaled
   tagline:
-    en_us: A VPN Service for Secure Networks.
-    zh_cn: 一个 VPN 服务，为安全网络提供保护。
-  thumbnail:
+    en_us: Secure, private, and easy networking
+    zh_cn: 实现安全、私密且简单的网络
   tips:
     before_install:
       en_us: After installation, view the authentication url in the `App Settings-Logs`.
       zh_cn: 安装完成后，请在`应用设置-日志`中查看认证链接。
   title:
     en_us: Tailscaled
+  scheme: https
+  hostname: login.tailscale.com
+  index: /admin/machines
