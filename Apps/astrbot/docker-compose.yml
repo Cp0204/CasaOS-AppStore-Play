@@ -1,0 +1,42 @@
+name: astrbot
+services:
+  astrbot:
+    image: soulter/astrbot:latest
+    container_name: astrbot
+    network_mode: bridge
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/astrbot/data:/AstrBot/data
+    ports:
+      - "6185:6185"
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: astrbot
+  store_app_id: astrbot
+  author: Cp0204
+  category: Chat
+  description:
+    en_us: AstrBot is an easy-to-use multi-platform chatbot and development framework. It features loose coupling, asynchronous processing, multi-platform deployment, an easy-to-use plugin system, and comprehensive integration with large language models (LLM).
+    zh_cn: AstrBot 是一个易于上手的多平台聊天机器人及开发框架。它具有松耦合、异步处理、多消息平台部署、易用的插件系统以及完善的大语言模型（LLM）接入。
+  developer: soulter
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/astrbot/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/astrbot/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/astrbot/screenshot-2.png
+  tagline:
+    en_us: Multi-platform Chatbot Framework with LLM Integration
+    zh_cn: 多平台聊天机器人框架，集成大语言模型
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/astrbot/thumbnail.png
+  title:
+    en_us: AstrBot
+  scheme: http
+  hostname: ""
+  index: /
+  port_map: "6185"
