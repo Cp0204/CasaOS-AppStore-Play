@@ -1,0 +1,41 @@
+name: pdfmathtranslate
+services:
+  pdfmathtranslate:
+    image: byaidu/pdf2zh:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    network_mode: bridge
+    ports:
+      - "7860:7860"
+    restart: unless-stopped
+    container_name: pdfmathtranslate
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: pdfmathtranslate
+  store_app_id: pdfmathtranslate
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: PDF scientific paper translation and bilingual comparison. Preserve formulas, charts, table of contents, and annotations (preview). Support multiple languages, and diverse translation services. Provides commandline tool, interactive user interface, and Docker.
+    zh_cn: 科学 PDF 文档翻译及双语对照工具。保留公式、图表、目录和注释 (预览效果)。支持多种语言和诸多翻译服务。提供命令行工具，图形交互界面，以及容器化部署。
+  developer: byaidu
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pdfmathtranslate/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pdfmathtranslate/screenshot-1.gif
+  tagline:
+    en_us: Translate scientific PDFs with ease and precision.
+    zh_cn: 轻松精确地翻译科学PDF文档。
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pdfmathtranslate/thumbnail.png
+  tips:
+    before_install:
+      en_us: Ensure you have the necessary translation API keys configured.
+      zh_cn: 确保您已配置必要的翻译API密钥。
+  title:
+    en_us: PDFMathTranslate
+  index: /
+  port_map: "7860"
