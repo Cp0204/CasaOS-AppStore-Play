@@ -31,7 +31,8 @@ services:
 
   grampsweb-celery:
     <<: *grampsweb # YAML merge key copying the entire grampsweb service config
-    ports: []
+    ports:
+      - "65000:65000" # Useless port, placeholder, because CasaOS AppStore does not support the [] notation.
     container_name: grampsweb-celery
     depends_on:
       - grampsweb-redis
