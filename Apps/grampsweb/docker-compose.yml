@@ -1,0 +1,78 @@
+name: grampsweb
+services:
+  grampsweb: &grampsweb
+    image: ghcr.io/gramps-project/grampsweb:latest
+    container_name: grampsweb
+    restart: unless-stopped
+    ports:
+      - "8081:5000"
+    environment:
+      GRAMPSWEB_TREE: "Gramps Web" # will create a new tree if not exists
+      GRAMPSWEB_CELERY_CONFIG__broker_url: "redis://grampsweb-redis:6379/0"
+      GRAMPSWEB_CELERY_CONFIG__result_backend: "redis://grampsweb-redis:6379/0"
+      GRAMPSWEB_RATELIMIT_STORAGE_URI: redis://grampsweb-redis:6379/1
+    depends_on:
+      - grampsweb_redis
+    volumes:
+      - /DATA/AppData/grampsweb/users:/app/users # persist user database
+      - /DATA/AppData/grampsweb/index:/app/indexdir # persist search index
+      - /DATA/AppData/grampsweb/thumb_cache:/app/thumbnail_cache # persist thumbnails
+      - /DATA/AppData/grampsweb/cache:/app/cache # persist export and report caches
+      - /DATA/AppData/grampsweb/secret:/app/secret # persist flask secret
+      - /DATA/AppData/grampsweb/db:/root/.gramps/grampsdb # persist Gramps database
+      - /DATA/AppData/grampsweb/media:/app/media # persist media files
+      - /DATA/AppData/grampsweb/tmp:/tmp
+    networks:
+      - grampsweb
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+  grampsweb-celery:
+    <<: *grampsweb # YAML merge key copying the entire grampsweb service config
+    container_name: grampsweb-celery
+    depends_on:
+      - grampsweb-redis
+    command: celery -A gramps_webapi.celery worker --loglevel=INFO --concurrency=2
+
+  grampsweb-redis:
+    image: docker.io/library/redis:7.2.4-alpine
+    container_name: grampsweb-redis
+    restart: unless-stopped
+    networks:
+      - grampsweb
+
+networks:
+  grampsweb:
+    name: grampsweb
+    driver: bridge
+
+x-casaos:
+  architectures:
+    - arm
+    - arm64
+    - amd64
+  main: grampsweb
+  store_app_id: grampsweb
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: Gramps Web is a web-based application designed for collaborative family tree building. It can be accessed from any web-enabled device and is ideal for working with others to build your family tree together. Gramps Web is free and open-source software, prioritizing the privacy and control of your data.
+    zh_cn: Gramps Web 是一个基于 Web 的应用程序，专为协作构建家谱而设计。它可以从任何支持 Web 的设备访问，非常适合与他人一起构建家谱。Gramps Web 是免费的开源软件，优先考虑您的数据的隐私和控制。
+  developer: Gramps Project
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/grampsweb/icon.svg
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/grampsweb/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/grampsweb/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/grampsweb/screenshot-3.png
+  tagline:
+    en_us: Collaborate on your family tree with Gramps Web
+    zh_cn: 使用 Gramps Web 协作构建您的家谱
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/grampsweb/thumbnail.png
+  title:
+    en_us: Gramps Web
+  scheme: http
+  hostname: ""
+  index: /
+  port_map: "8081"
