@@ -1,0 +1,64 @@
+name: fritzbox-wlan-password-rotator
+services:
+  fb-pw-rotator:
+    cpu_shares: 90
+    deploy:
+      resources:
+        limits:
+          memory: 8M
+    environment:
+      - CRONTAB_EXPRESSION=0 3 * * *
+      - FB_ADDRESS=192.168.178.1
+      - FB_PASSWORD=
+      - FB_USER=
+      - TZ=Africa/Tunis
+      - WEB_PASSWORD=password
+      - WLAN_CONFIGURATION=WLANConfiguration3
+    image: philippehmeier/fritzbox-wlan-password-rotator:latest
+    labels:
+      icon: https://icon.casaos.io/main/all/fb-pw-rotator.png
+    ports:
+      - target: 5000
+        published: "5001"
+        protocol: tcp
+    restart: always
+    volumes:
+      - /DATA/AppData/fritzboxwlanqrcod:/app/data
+    x-casaos:
+      architectures:
+        - amd64
+        - arm
+        - arm64
+      author: Cp0204
+      developer: philippehmeier
+      category: Network Tools
+      description: >
+        A simple tool that automatically updates the guest WLAN password of a FRITZ!Box 
+        after a defined interval and displays the updated credentials and QR code on 
+        a central webpage in your home network.
+      tagline: >
+        A tool for automatically updating the guest WLAN password on FRITZ!Box.
+      tips:
+        - Ensure your FRITZ!Box is running a firmware version that supports remote administration and password changes.
+        - Modify the CRON expression in the environment variables to adjust the password rotation schedule to your needs.
+        - Ensure the device has proper network access and communication with the router for the password rotation process to work smoothly.
+      icon_url: https://icon.casaos.io/main/all/fb-pw-rotator.png
+      screenshot_urls:
+        - "URL_TO_SCREENSHOT_1"
+        - "URL_TO_SCREENSHOT_2"
+    network_mode: bridge
+    privileged: false
+x-casaos:
+  author: Cp0204
+  developer: philippehmeier
+  hostname: 192.168.178.8
+  icon: https://icon.casaos.io/main/all/fb-pw-rotator.png
+  port_map: "5001"
+  scheme: http
+  store_app_id: fritzbox-wlan-password-rotator
+  title:
+    en_us: fb-pw-rotator
+
+volumes:
+  fritzboxwlanqrcod:
+    driver: local
