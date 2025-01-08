@@ -1,0 +1,99 @@
+name: pve
+services:
+  pve:
+    image: makedie/proxmox_ve:8.3.2
+    container_name: pve
+    tty: true
+    environment:
+      root_password: "root"
+      port: 8006
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/fuse:/dev/fuse
+      - /dev/kvm:/dev/kvm
+      - /dev/vfio:/dev/vfio
+      - /dev/nvidia0:/dev/nvidia0
+      - /dev/nvidiactl:/dev/nvidiactl
+      - /dev/nvidia-uvm:/dev/nvidia-uvm
+      - /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools
+      - /dev/nvidia-vgpu1:/dev/nvidia-vgpu1
+    cap_add:
+      #- SYS_ADMIN
+      - NET_ADMIN
+    # ports:
+    #   - "8006:8006"
+    network_mode: host
+    volumes:
+      # - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      # - /sys/fs/cgroup/systemd:/sys/fs/cgroup/systemd
+      - /sys/fs/fuse:/sys/fs/fuse
+      - /var/run/openvswitch:/host/var/run/openvswitch
+      # 持久化数据
+      - /DATA/AppData/pve/pve-cluster:/var/lib/pve-cluster # 虚拟机配置
+      - /DATA/AppData/pve/vz:/var/lib/vz #虚拟机磁盘
+    tmpfs:
+      - /tmp
+      - /var/run
+      - /var/cache
+      - /run/lock
+    extra_hosts:
+      - "shop.maurer-it.com:127.0.0.1"
+      - "pve:127.0.0.1"
+      - "pve:192.168.1.8"
+    hostname: pve
+    stop_grace_period: 2m
+    privileged: true
+    deploy:
+      resources:
+        reservations:
+          memory: 2048M
+    restart: unless-stopped
+
+x-casaos:
+  architectures:
+    - amd64
+  main: pve
+  store_app_id: pve
+  author: Cp0204
+  category: "Utilities"
+  description:
+    en_us: Proxmox VE is a complete open-source platform for enterprise virtualization. It integrates the KVM hypervisor and LXC containers, software-defined storage, and networking functionality on a single platform.
+    zh_cn: Proxmox VE 是一个完整的企业虚拟化开源平台。它在单个平台上集成了 KVM 虚拟机管理程序和 LXC 容器、软件定义存储和网络功能。
+  developer: Proxmox.com/GreenDamTan
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pve/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pve/screenshot-1.jpg
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pve/screenshot-2.jpg
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pve/screenshot-3.jpg
+  tagline:
+    en_us: Enterprise virtualization platform
+    zh_cn: 企业虚拟化平台
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pve/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        The default root password is `root`, **Please change it after installation.** It is recommended to access the web interface through the port 8006.
+
+        **Non-consistent changes notice:**
+        Due to the differences between running in a Docker container and on bare metal, some optimizations have been made. These changes may cause inconsistencies with the original Proxmox VE behavior.
+        Generally, features such as creating virtual machines, vGPU, and hardware passthrough should work normally.
+        Cluster functionality has not been verified, and the changes may have broken cluster features.
+        The following features are explicitly unsupported:
+        - LXC functionality is not supported
+        - Firewall functionality is not supported
+        Other features need to be evaluated on a case-by-case basis.
+      zh_cn: |
+        默认 root 密码为 `root`，**请在安装后更改。** 建议通过端口 8006 访问 Web 界面。
+
+        **非一致性改动说明：**
+        由于 Docker 容器与裸金属运行环境存在差异，因此做出了一些优化修改。这些修改可能造成与原版 Proxmox VE 行为不一致。
+        一般情况下，开通虚拟机、vGPU、直通硬件等功能是可以正常工作的。
+        集群功能未经过验证，改动有可能破坏了集群功能。
+        以下是明确未支持的功能：
+        - LXC 功能未被支持
+        - 防火墙功能未被支持
+        其余功能需要自行判断。
+  title:
+    en_us: Proxmox VE
+  index: /
+  port_map: "8006"
