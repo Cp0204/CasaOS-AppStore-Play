@@ -1,7 +1,7 @@
 name: fnos
 services:
   fnos:
-    image: makedie/fnos:latest
+    image: makedie/fnos:0.8.29-568_test
     container_name: fnos
     tty: true
     devices:
