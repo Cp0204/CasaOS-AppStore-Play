@@ -1,6 +1,6 @@
-name: moviepilot
+name: moviepilot-v2
 services:
-  moviepilot:
+  moviepilot-v2:
     stdin_open: true
     tty: true
     container_name: moviepilot-v2
@@ -43,8 +43,8 @@ x-casaos:
   architectures:
     - arm64
     - amd64
-  main: moviepilot
-  store_app_id: moviepilot
+  main: moviepilot-v2
+  store_app_id: moviepilot-v2
   author: CasaOS Team & Cp0204
   category: Media
   developer: jxxghp
