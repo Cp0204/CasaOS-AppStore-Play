@@ -1,11 +1,9 @@
 name: hivisionidphoto
 services:
   hivisionidphoto:
-    image: linzeyi/hivision_idphotos:v1
+    image: linzeyi/hivision_idphotos:latest
     ports:
-      - target: 7860
-        published: "7860"
-        protocol: tcp
+      - 7860:7860
     deploy:
       resources:
         reservations:
@@ -17,6 +15,7 @@ services:
 x-casaos:
   architectures:
     - arm64
+    - amd64
   main: hivisionidphoto
   store_app_id: hivisionidphoto
   author: Cp0204
@@ -32,7 +31,7 @@ x-casaos:
   tagline:
     en_us: Create ID photos effortlessly with HivisionIDPhoto
     zh_cn: 使用 HivisionIDPhoto 轻松制作证件照
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hivisionidphoto/thumbnail.png
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hivisionidphoto/thumbnail.png
   title:
     en_us: HivisionIDPhoto
   index: /
