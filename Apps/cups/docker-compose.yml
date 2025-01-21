@@ -1,0 +1,59 @@
+name: cups
+services:
+  cups:
+    image: anujdatar/cups:latest
+    container_name: cups
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+    environment:
+      CUPSADMIN: admin
+      CUPSPASSWORD: password
+      TZ: Asia/Shanghai
+    network_mode: bridge
+    ports:
+      - "631:631"
+    volumes:
+      - /DATA/AppData/cups/config:/etc/cups
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: cups
+  store_app_id: cups
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: CUPS (Common UNIX Printing System) is a modular printing system for Unix-like operating systems that allows a computer to act as a print server. It can accept print jobs from client computers, process them, and send them to the appropriate printer.
+    zh_cn: CUPS（通用UNIX打印系统）是一个模块化的打印系统，适用于类Unix操作系统，允许计算机充当打印服务器。它可以接受来自客户端计算机的打印作业，处理它们并将其发送到适当的打印机。
+  developer: anujdatar
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/cups/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/cups/screenshot-1.png
+  tagline:
+    en_us: Turn your printer into a network printer
+    zh_cn: 将您的打印机变成网络打印机
+  tips:
+    before_install:
+      en_us: |
+        | Variables    | Default         | Description                       |
+        | ------------ | --------------- | --------------------------------- |
+        | TZ           | `Asia/Shanghai` | Time zone of your server          |
+        | CUPSADMIN    | `admin          | Name of the admin user for server |
+        | CUPSPASSWORD | `password`      | Password for server admin         |
+      zh_cn: |
+        | 环境变量     | 默认值           | 说明       |
+        | ------------ | --------------- | ---------- |
+        | TZ           | `Asia/Shanghai` | 时区       |
+        | CUPSADMIN    | `admin`         | 管理用户名 |
+        | CUPSPASSWORD | `password`      | 管理密码   |
+  title:
+    en_us: CUPS
+  index: /
+  port_map: "631"
