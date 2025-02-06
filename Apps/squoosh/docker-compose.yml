@@ -1,0 +1,37 @@
+name: squoosh
+services:
+  squoosh:
+    image: dko0/squoosh:1.12.0
+    container_name: squoosh
+    network_mode: bridge
+    ports:
+      - "7701:8080"
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+x-casaos:
+  architectures:
+    - arm
+    - arm64
+    - amd64
+  main: squoosh
+  store_app_id: squoosh
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Squoosh is an open-source image compression tool developed by Google. It provides an intuitive user interface that allows users to preview and compare different compression algorithms in real-time to find the best balance between compression and quality.
+    zh_cn: Squoosh 是一款由谷歌开发的开源图片压缩工具，它提供了直观的用户界面，让用户可以在不同压缩算法之间进行实时预览和比较，以便找到最佳的压缩与质量平衡点。
+  developer: Google
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/squoosh/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/squoosh/screenshot-1.png
+  tagline:
+    en_us: Image compression app
+    zh_cn: 图像压缩应用程序
+  title:
+    en_us: Squoosh
+  index: /
+  port_map: "7701"
