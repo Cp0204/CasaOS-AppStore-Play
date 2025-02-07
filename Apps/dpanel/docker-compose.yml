@@ -15,23 +15,16 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /DATA/AppData/dpanel:/dpanel
+      - /var/lib/casaos/apps:/var/lib/casaos/apps
     deploy:
       resources:
         reservations:
           memory: 128M
     network_mode: bridge
 
-  dpanel-plugin-explorer:
-    image: alpine:latest
-    container_name: dpanel-plugin-explorer
-    restart: unless-stopped
-    privileged: true
-    pid: host
-    command: ["tail", "-f", "/dev/null"]
-    network_mode: bridge
-
 x-casaos:
   architectures:
+    - arm
     - arm64
     - amd64
   main: dpanel
