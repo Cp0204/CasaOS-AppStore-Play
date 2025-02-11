@@ -1,55 +1,68 @@
 name: rustdesk-server
 services:
+  hbbs:
+    command:
+      - hbbs
+    container_name: rustdesk-server-hbbs
+    depends_on:
+      - hbbr
+    image: rustdesk/rustdesk-server:latest
+    environment:
+      - KEY=_
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/rustdesk-server/data:/root
+    networks:
+      - rustdesk-server
+    ports:
+      - 21115:21115
+      - 21116:21116
+      - 21116:21116/udp
+      - 21118:21118
+
   hbbr:
     command:
       - hbbr
     container_name: rustdesk-server-hbbr
     image: rustdesk/rustdesk-server:latest
     environment:
-      - KEY=_
+      - KEY=_ # 如果设置了此参数，将强制使用指定密钥对，如果设为 "_"，则强制使用任意密钥；下同
     restart: unless-stopped
     volumes:
-      - /DATA/AppData/rustdesk-server/hbbr:/root
-    network_mode: bridge
+      - /DATA/AppData/rustdesk-server/data:/root
+    networks:
+      - rustdesk-server
     ports:
-      - "21117:21117/tcp"
-      - "21119:21119/tcp"
-    privileged: false
+      - 21117:21117
+      - 21119:21119
 
-  hbbs:
-    command:
-      - hbbs
-    container_name: rustdesk-server-hbbs
-    depends_on:
-      hbbr:
-        condition: service_started
-        required: true
-    image: rustdesk/rustdesk-server:latest
-    environment:
-      - KEY=_
-    restart: unless-stopped
-    volumes:
-      - /DATA/AppData/rustdesk-server/hbbs:/root
-    network_mode: bridge
-    ports:
-      - "21115:21115/tcp"
-      - "21118:21118/tcp"
-      - "21116:21116/tcp"
-      - "21116:21116/udp"
-    privileged: false
 
   api:
+    image: lejianwen/rustdesk-api:latest
     container_name: rustdesk-server-api
-    image: kingmo888/rustdesk-api-server:latest
+    environment:
+      - TZ=Asia/Shanghai
+      - RUSTDESK_API_APP_REGISTER=true
+      - RUSTDESK_API_LANG=zh-CN
+      - RUSTDESK_API_RUSTDESK_ID_SERVER=192.168.1.66:21116
+      - RUSTDESK_API_RUSTDESK_RELAY_SERVER=192.168.1.66:21117
+      - RUSTDESK_API_RUSTDESK_API_SERVER=http://192.168.1.66:21114
+      - RUSTDESK_API_RUSTDESK_KEY=_
     ports:
-      - "21114:21114/tcp"
-    restart: unless-stopped
+      - 21114:21114
     volumes:
-      - /DATA/AppData/rustdesk-server/api/db:/rustdesk-api-server/db
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-    network_mode: bridge
-    privileged: false
+      - /DATA/AppData/rustdesk-server/api:/app/data
+    networks:
+      - rustdesk-server
+    restart: unless-stopped
+    depends_on:
+      - hbbs
+      - hbbr
+
+networks:
+  rustdesk-server:
+    external: false
+    name: rustdesk-server
 
 x-casaos:
   architectures:
@@ -60,7 +73,7 @@ x-casaos:
   store_app_id: rustdesk-server
   category: Utilities
   author: Cp0204
-  developer: rustdesk | kingmo888
+  developer: rustdesk | lejianwen
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/screenshot-1.png
@@ -68,8 +81,8 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/screenshot-3.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/thumbnail.png
   description:
-    en_us: RustDesk builds its own transit server, combining the official [rustdesk-server](https://github.com/rustdesk/rustdesk-server) and kingmo888's [rustdesk-api-server](https://github.com/kingmo888/rustdesk-api-server).
-    zh_cn: RustDesk 自建中转服务器，集合官方 [rustdesk-server](https://github.com/rustdesk/rustdesk-server) 与 kingmo888 的 [rustdesk-api-server](https://github.com/kingmo888/rustdesk-api-server) 服务。
+    en_us: RustDesk builds its own transit server, combining the official [rustdesk-server](https://github.com/rustdesk/rustdesk-server) and lejianwen's [rustdesk-api](https://github.com/lejianwen/rustdesk-api).
+    zh_cn: RustDesk 自建中转服务器，集合官方 [rustdesk-server](https://github.com/rustdesk/rustdesk-server) 与 lejianwen 的 [rustdesk-api](https://github.com/lejianwen/rustdesk-api) 服务。
   tagline:
     en_us: RustDesk Self-Hosted
     zh_cn: RustDesk 自托管
@@ -77,8 +90,8 @@ x-casaos:
     en_us: RustDesk Server
   tips:
     before_install:
-      en_us: In rustdesk-api-server, the first registered account is a super administrator, and the subsequent registered accounts are normal accounts.
-      zh_cn: rustdesk-api-server 中，第一个注册的账户为超级管理员，之后注册账户为普通账户。
+      en_us: The initial installation administrator is the username admin, the password will be printed on the console, you can change the password via [CLI](https://github.com/lejianwen/rustdesk-api#CLI)
+      zh_cn: 初次安装管理员为用户名为admin，密码将在控制台打印，可以通过[命令行](https://github.com/lejianwen/rustdesk-api#CLI)更改密码
   port_map: "21114"
   scheme: http
   index: /
