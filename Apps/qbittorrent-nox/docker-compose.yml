@@ -1,0 +1,106 @@
+name: qbittorrent-nox
+services:
+  qbittorrent-nox:
+    image: qbittorrentofficial/qbittorrent-nox:latest
+    container_name: qbittorrent-nox
+    restart: unless-stopped
+    # ports:
+    #   - "8080:8080" # WebUI 端口
+    #   - "6881:6881" # TCP 端口
+    #   - "6881:6881/udp" # UDP 端口
+    volumes:
+      - /DATA/AppData/qbittorrent-nox/config:/config
+      - /DATA/Downloads:/downloads
+      - /mnt:/mnt
+    environment:
+      QBT_LEGAL_NOTICE: "yes" # 需要同意法律声明，这里假设用户同意
+      QBT_WEBUI_PORT: "8181"
+      PGID: $PGID
+      PUID: $PUID
+      TZ: $TZ
+      UMASK: "002"
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    network_mode: host
+
+x-casaos:
+  architectures:
+    - arm
+    - arm64
+    - amd64
+  main: qbittorrent-nox
+  author: Cp0204
+  category: Downloader
+  description:
+    en_us: The qBittorrent project aims to provide an open-source software alternative to µTorrent.
+    zh_cn: qBittorrent 项目旨在提供一个开源的 µTorrent 替代品。
+    ar_sa: يهدف مشروع qBittorrent إلى توفير بديل مفتوح المصدر لـ µTorrent.
+    de_de: Das qBittorrent-Projekt zielt darauf ab, eine Open-Source-Software-Alternative zu µTorrent zu bieten.
+    es_es: El objetivo del proyecto qBittorrent es proporcionar una alternativa de software de código abierto a µTorrent.
+    fr_fr: Le projet qBittorrent vise à fournir une alternative open source à µTorrent.
+    hu_hu: A qBittorrent projekt célja, hogy nyílt forráskódú szoftver alternatívát nyújtson a µTorrent számára.
+    it_it: Il progetto qBittorrent mira a fornire un'alternativa open source a µTorrent.
+    ru_ru: Проект qBittorrent стремится предоставить альтернативу c открытым исходным кодом для µTorrent.
+    pl_pl: Projekt qBittorrent ma na celu zapewnienie otwartoźródłowej alternatywy dla µTorrent.
+    pt_br: O objetivo do projeto qBittorrent é fornecer uma alternativa de software de código aberto ao µTorrent.
+    sv_se: qBittorrent-projektets mål är att erbjuda en öppen källkodsalternativ till µTorrent.
+    uk_ua: Проект qBittorrent має на меті надати альтернативу з відкритим вихідним кодом для µTorrent.
+  developer: qBittorrent
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qbittorrent-nox/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qbittorrent-nox/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qbittorrent-nox/screenshot-2.png
+  tagline:
+    en_us: Free BitTorrent downloader
+    zh_cn: 免费的 BitTorrent 下载器
+    ar_sa: مُنزِّل BitTorrent مجاني
+    de_de: Kostenloser BitTorrent-Downloader
+    es_es: Descargador de BitTorrent gratuito
+    fr_fr: Téléchargeur BitTorrent gratuit
+    hu_hu: Ingyenes BitTorrent letöltő
+    it_it: Downloader BitTorrent gratuito
+    ru_ru: Бесплатный загрузчик BitTorrent
+    pl_pl: Darmowy downloader BitTorrent
+    pt_br: Downloader BitTorrent gratuito
+    sv_se: Gratis BitTorrent-downladdare
+    uk_ua: Безкоштовний завантажувач BitTorrent
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qbittorrent-nox/thumbnail.jpg
+  tips:
+    before_install:
+      en_us: |
+        Default Account
+
+        | Username | Password |
+        |----------|----------|
+        | `admin`  | Print to console |
+
+        Default Accessible Path
+
+        | Host | Container |
+        | ---- | ----- |
+        | `/DATA/Downloads` | `/downloads` |
+        | `/mnt` | `/mnt` |
+
+        You can add mapped paths yourself, make sure you use the correct paths when using qBittorrent.
+      zh_cn: |
+        默认账号
+
+        | 用户名 | 密码 |
+        |----------|----------|
+        | `admin`  | 打印到控制台 |
+
+        默认可访问路径
+
+        | 主机 | 容器 |
+        | ---- | ----- |
+        | `/DATA/Downloads` | `/downloads` |
+        | `/mnt` | `/mnt` |
+
+        你可以自行增加映射路径，请确保在使用 qBittorrent 时使用正确的路径。
+
+  title:
+    en_us: qBittorrent
+  index: /
+  port_map: "8181"
