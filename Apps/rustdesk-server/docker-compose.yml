@@ -8,12 +8,13 @@ services:
       - hbbr
     image: rustdesk/rustdesk-server:latest
     environment:
-      - KEY=_
+      - KEY=YOURKEY # 如果设置了此参数，将强制使用指定密钥对，如果设为 "_"，则强制使用任意密钥；下同
     restart: unless-stopped
     volumes:
       - /DATA/AppData/rustdesk-server/data:/root
     networks:
       - rustdesk-server
+    network_mode: bridge
     ports:
       - 21115:21115
       - 21116:21116
@@ -26,16 +27,16 @@ services:
     container_name: rustdesk-server-hbbr
     image: rustdesk/rustdesk-server:latest
     environment:
-      - KEY=_ # 如果设置了此参数，将强制使用指定密钥对，如果设为 "_"，则强制使用任意密钥；下同
+      - KEY=YOURKEY
     restart: unless-stopped
     volumes:
       - /DATA/AppData/rustdesk-server/data:/root
     networks:
       - rustdesk-server
+    network_mode: bridge
     ports:
       - 21117:21117
       - 21119:21119
-
 
   api:
     image: lejianwen/rustdesk-api:latest
@@ -47,7 +48,8 @@ services:
       - RUSTDESK_API_RUSTDESK_ID_SERVER=192.168.1.66:21116
       - RUSTDESK_API_RUSTDESK_RELAY_SERVER=192.168.1.66:21117
       - RUSTDESK_API_RUSTDESK_API_SERVER=http://192.168.1.66:21114
-      - RUSTDESK_API_RUSTDESK_KEY=_
+      - RUSTDESK_API_RUSTDESK_KEY=YOURKEY
+    network_mode: bridge
     ports:
       - 21114:21114
     volumes:
