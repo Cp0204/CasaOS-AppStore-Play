@@ -2,7 +2,7 @@ name: tailscale-derper
 services:
   tailscale-derper:
     environment:
-      DERP_ADDR: :3443
+      DERP_ADDR: :443
       DERP_CERT_MODE: manual
       DERP_DOMAIN: xxx.com
     image: fredliang/derper:latest
@@ -13,7 +13,7 @@ services:
           memory: "32M"
     network_mode: bridge
     ports:
-      - target: 3443
+      - target: 443
         published: "3443"
         protocol: tcp
       - target: 3478
@@ -24,6 +24,7 @@ services:
       - type: bind
         source: /DATA/AppData/derper/certs
         target: /app/certs
+
 x-casaos:
   architectures:
     - amd64
@@ -41,7 +42,7 @@ x-casaos:
   scheme: http
   tagline:
     en_us: Tailscale Relay Server
-    zh_cn: Tailscale中继服务器
+    zh_cn: Tailscale 中继服务器
   tips:
     before_install:
       en_us: If your domain name is `xxx.com`, the certificate and private key files are named `xxx.com.crt`, `xxx.com.key` and are placed in the /certs directory. [Documentation](https://tailscale.com/kb/1118/custom-derp-servers/)
