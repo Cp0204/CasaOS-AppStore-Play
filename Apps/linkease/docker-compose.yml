@@ -1,0 +1,43 @@
+name: linkease
+services:
+  linkease:
+    container_name: linkease
+    image: linkease/linkease:latest
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/linkease/data:/linkease-data
+      - /DATA/AppData/linkease/config:/linkease-config
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      PUID: "0"
+      PGID: "0"
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+x-casaos:
+  architectures:
+    - arm
+    - arm64
+    - amd64
+  main: linkease
+  store_app_id: linkease
+  author: Cp0204
+  category: Cloud
+  description:
+    en_us: LinkEase is a cross-platform family photo album, audio and video media, file transfer, and remote control solution. It provides seamless data exchange across all platforms and allows you to enjoy P2P high-speed file transfer. You can also back up your photos and files anytime, anywhere, easily creating your own private cloud service.  LinkEase also supports adding various applications such as web pages, SSH, remote routing, remote downloading, and remote viewing. It supports multiple network protocols such as WebDAV, SFTP, SAMBA, and S3, enabling easy remote application management through the mobile app.
+    zh_cn: 易有云是一款全平台家庭相册、影音媒体、文件互传和远程控制解决方案。它提供跨平台无缝数据交换，让您享受P2P高速文件传输体验。您还可以随时随地备份照片和文件，轻松创建自己的私有云服务。易有云还支持添加各种应用程序，如网页、SSH、远程路由、远程下载和远程观看。它支持WebDAV、SFTP、SAMBA和S3等多种网络协议，可通过移动应用程序轻松进行远程应用管理。
+  developer: linkease
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkease/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkease/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkease/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/linkease/screenshot-3.png
+  tagline:
+    en_us: Private cloud drive that everyone can use
+    zh_cn: 人人会用的私有网盘
+  title:
+    en_us: LinkEase
+    zh_cn: 易有云
+  port_map: "8897"
