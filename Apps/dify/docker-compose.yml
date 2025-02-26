@@ -187,7 +187,7 @@ x-shared-env: &shared-api-worker-env
   SSRF_DEFAULT_READ_TIME_OUT: ${SSRF_DEFAULT_READ_TIME_OUT:-5}
   SSRF_DEFAULT_WRITE_TIME_OUT: ${SSRF_DEFAULT_WRITE_TIME_OUT:-5}
   EXPOSE_NGINX_PORT: ${EXPOSE_NGINX_PORT:-6080}
-  EXPOSE_NGINX_SSL_PORT: ${EXPOSE_NGINX_SSL_PORT:-6443}
+  EXPOSE_NGINX_SSL_PORT: ${EXPOSE_NGINX_SSL_PORT:-443}
   POSITION_TOOL_PINS: ${POSITION_TOOL_PINS:-}
   POSITION_TOOL_INCLUDES: ${POSITION_TOOL_INCLUDES:-}
   POSITION_TOOL_EXCLUDES: ${POSITION_TOOL_EXCLUDES:-}
@@ -386,8 +386,8 @@ services:
       PLUGIN_REMOTE_INSTALLING_PORT: ${PLUGIN_REMOTE_INSTALL_PORT:-5003}
       PLUGIN_WORKING_PATH: ${PLUGIN_WORKING_PATH:-/app/storage/cwd}
       FORCE_VERIFYING_SIGNATURE: ${FORCE_VERIFYING_SIGNATURE:-true}
-    ports:
-      - "${EXPOSE_PLUGIN_DEBUGGING_PORT:-5003}:${PLUGIN_DEBUGGING_PORT:-5003}"
+    # ports:
+    #   - "${EXPOSE_PLUGIN_DEBUGGING_PORT:-5003}:${PLUGIN_DEBUGGING_PORT:-5003}"
     volumes:
       - /DATA/AppData/dify/volumes/plugin_daemon:/app/storage
     networks:
@@ -402,9 +402,10 @@ services:
     image: ubuntu/squid:latest
     restart: unless-stopped
     volumes:
-      - /DATA/AppData/dify/ssrf_proxy/squid.conf.template:/etc/squid/squid.conf.template
-      - /DATA/AppData/dify/ssrf_proxy/docker-entrypoint.sh:/docker-entrypoint-mount.sh
-    entrypoint: [ 'sh', '-c', "cp /docker-entrypoint-mount.sh /docker-entrypoint.sh && sed -i 's/\r$$//' /docker-entrypoint.sh && chmod +x /docker-entrypoint.sh && /docker-entrypoint.sh" ]
+      - /DATA/AppData/dify/ssrf_proxy:/init # Avoid creating files as dirs
+      # - /DATA/AppData/dify/ssrf_proxy/squid.conf.template:/etc/squid/squid.conf.template
+      # - /DATA/AppData/dify/ssrf_proxy/docker-entrypoint.sh:/docker-entrypoint-mount.sh
+    entrypoint: [ 'sh', '-c', "cp /init/squid.conf.template /etc/squid/squid.conf.template && cp /init/docker-entrypoint.sh /docker-entrypoint.sh && sed -i 's/\r$$//' /docker-entrypoint.sh && chmod +x /docker-entrypoint.sh && /docker-entrypoint.sh" ]
     environment:
       # pls clearly modify the squid env vars to fit your network environment.
       HTTP_PORT: ${SSRF_HTTP_PORT:-3128}
@@ -457,7 +458,7 @@ services:
       - init
     ports:
       - '${EXPOSE_NGINX_PORT:-6080}:${NGINX_PORT:-80}'
-      # - '${EXPOSE_NGINX_SSL_PORT:-6443}:${NGINX_SSL_PORT:-443}'
+      # - '${EXPOSE_NGINX_SSL_PORT:-443}:${NGINX_SSL_PORT:-443}'
     networks:
       - dify
 
