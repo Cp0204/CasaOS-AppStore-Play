@@ -29,7 +29,7 @@ x-casaos:
   category: VPN
   description:
     en_us: Tailscale lets you connect your devices and users together in your own secure virtual private network. Tailscale enables encrypted point-to-point connections using the open source WireGuard protocol.
-    zh_cn: Tailscale⁠ 允许您将您的设备和用户连接到您自己的安全虚拟专用网络中。Tailscale 通过开源的 WireGuard 协议实现加密的点对点连接。
+    zh_cn: Tailscale 允许您将您的设备和用户连接到您自己的安全虚拟专用网络中。Tailscale 通过开源的 WireGuard 协议实现加密的点对点连接。
   developer: tailscale
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Tailscale/icon.png
   screenshot_link:
