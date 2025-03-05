@@ -1,0 +1,51 @@
+name: electerm
+services:
+  electerm-web:
+    image: zxdong262/electerm-web:latest
+    container_name: electerm
+    environment:
+      DB_PATH: /home/electerm/data
+      HOST: 0.0.0.0
+      SERVER_SECRET: some_server_secret
+      SERVER_PASS: password_to_login
+      ENABLE_AUTH: "1"
+    init: true
+    ports:
+      - "8082:5577"
+    volumes:
+      - /DATA/AppData/electerm:/home/electerm/data
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: electerm-web
+  store_app_id: electerm
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Electerm is an open-sourced terminal/ssh/telnet/serialport/RDP/VNC/sftp client(linux, mac, win). It supports features like global hotkeys, multi-platform support, multiple language support, direct editing of remote files, password or key login, Zmodem(rz, sz), ssh tunneling, Trzsz(trz/tsz), transparent window, custom background image, proxy server, preset commands, themes, data synchronization to Github/Gitee, quick command input, AI assistant integration, and command-line usage.
+    zh_cn: Electerm是一款开源的终端/ssh/telnet/serialport/RDP/VNC/sftp客户端(linux, mac, win)。它支持全局快捷键、多平台支持、多语言支持、直接编辑远程文件、密码或密钥登录、Zmodem(rz, sz)、ssh隧道、Trzsz(trz/tsz)、透明窗口、自定义背景图片、代理服务器、预设命令、主题、数据同步到Github/Gitee、快速命令输入、AI助手集成以及命令行使用等功能。
+  developer: zxdong262
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/electerm/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/electerm/screenshot-1.png
+    # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/electerm/screenshot-2.png
+    # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/electerm/screenshot-3.png
+  tagline:
+    en_us: A Secure and Feature-Rich Terminal Client
+    zh_cn: 安全且功能丰富的终端客户端
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/electerm/thumbnail.png
+  tips:
+    before_install:
+      en_us: Should only be used in local machine, should not be given access from internet for safety reason.
+      zh_cn: 应仅在本地机器中使用，出于安全原因，不应允许从互联网访问。
+  title:
+    en_us: Electerm
+    zh_cn: Electerm
+  port_map: "8082"
