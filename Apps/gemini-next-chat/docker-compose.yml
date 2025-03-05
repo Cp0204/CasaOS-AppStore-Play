@@ -1,0 +1,47 @@
+name: gemini-next-chat
+services:
+  gemini-next-chat:
+    image: xiangfa/talk-with-gemini:latest
+    container_name: gemini-next-chat
+    environment:
+      - ACCESS_PASSWORD=
+      - GEMINI_API_KEY=
+      - GEMINI_API_BASE_URL=https://generativelanguage.googleapis.com
+    ports:
+      - "5481:3000"
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/gemini-next-chat/config:/data
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: gemini-next-chat
+  store_app_id: gemini-next-chat
+  author: Cp0204
+  category: Chat
+  description:
+    en_us: Deploy your private Gemini Next Chat application easily. Supports Gemini 1.5 Pro, Gemini 1.5 Flash, Gemini Pro, and Gemini Pro Vision models. Includes multimodal support (images, videos, audio, text documents), voice mode, visual recognition, assistant marketplace, plugins (web search, web page interpretation, paper search, real-time weather), conversation history, Artifact support, full Markdown support, context compression, local data storage, PWA support, responsive design with dark mode, fast loading, and static deployment options.
+    zh_cn: 一键免费部署您的私人 Gemini Next Chat 应用。支持 Gemini 1.5 Pro、Gemini 1.5 Flash、Gemini Pro 和 Gemini Pro Vision 模型。包含多模态支持（图片、视频、音频、文本文档）、语音模式、视觉识别、助理市场、插件（网络搜索、网页解读、论文搜索、实时天气）、会话历史记录、Artifact 支持、完整的 Markdown 支持、上下文压缩、本地数据存储、PWA 支持、响应式设计与深色模式、快速加载以及静态部署选项。
+  developer: xiangfa
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gemini-next-chat/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gemini-next-chat/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gemini-next-chat/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gemini-next-chat/screenshot-3.png
+  tagline:
+    en_us: Your Private Gemini Next Chat AI Assistant
+    zh_cn: 您的私人 Gemini Next Chat AI 助理
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gemini-next-chat/thumbnail.png
+  tips:
+    before_install:
+      en_us: Set your Gemini API Key and Access Password in the environment variables.
+      zh_cn: 在环境变量中设置您的 Gemini API 密钥和访问密码。
+  title:
+    en_us: Gemini Next Chat
+  port_map: "5481"
