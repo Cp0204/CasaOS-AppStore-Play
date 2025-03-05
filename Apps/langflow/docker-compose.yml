@@ -1,0 +1,47 @@
+name: langflow
+services:
+  langflow:
+    image: langflowai/langflow:latest
+    container_name: langflow
+    environment:
+      - DO_NOT_TRACK=true
+      - LANGFLOW_CONFIG_DIR=/app/langflow
+      - LANGFLOW_AUTO_LOGIN=false
+      - LANGFLOW_SUPERUSER=langflow
+      - LANGFLOW_SUPERUSER_PASSWORD=langflow
+    ports:
+      - "7860:7860"
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/langflow/data:/app/langflow
+    network_mode: bridge
+    deploy:
+      resources:
+        reservations:
+          memory: 2G
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: langflow
+  store_app_id: langflow
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: Langflow is a visual framework for building multi-agent and RAG applications. It's open-source, Python-powered, customizable, and LLM and vector store agnostic. Its intuitive interface allows easy manipulation of AI building blocks, enabling rapid prototyping and turning ideas into real-world solutions.
+    zh_cn: Langflow 是一个用于构建多智能体和 RAG 应用的可视化框架。它是开源的，基于 Python，可定制，并且与 LLM 和向量存储无关。其直观的界面允许轻松操作 AI 构建块，从而实现快速原型设计并将想法转化为实际解决方案。
+  developer: langflowai
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/langflow/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/langflow/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/langflow/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/langflow/screenshot-3.png
+  tagline:
+    en_us: A visual framework for building LLM applications.
+    zh_cn: 用于构建 LLM 应用的可视化框架。
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/langflow/thumbnail.png
+  title:
+    en_us: Langflow
+    zh_cn: Langflow
+  port_map: "7860"
