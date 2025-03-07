@@ -1,0 +1,32 @@
+name: fake-ollama
+services:
+  fake-ollama:
+    image: ghcr.io/spoonnotfound/fake-ollama:latest
+    ports:
+      - 11434:11434
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    container_name: fake-ollama
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: fake-ollama
+  store_app_id: fake-ollama
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: A fake Ollama API server implementation, fully compatible with the Ollama API, supporting OpenAI compatible interfaces and streaming output. Simulates multiple DeepSeek-R1 models. Lightweight and easy to deploy.
+    zh_cn: 一个模拟 Ollama API 的服务器实现，完全兼容 Ollama API，支持 OpenAI 兼容接口和流式输出。模拟多个 DeepSeek-R1 模型。轻量级，易于部署。
+  developer: spoonnotfound
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fake-ollama/icon.png
+  tagline:
+    en_us: A fake Ollama API server for testing and development
+    zh_cn: 用于测试和开发的假 Ollama API 服务器
+  title:
+    en_us: Fake Ollama
+  port_map: "11434"
