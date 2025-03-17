@@ -15,6 +15,10 @@ services:
     volumes:
       - /DATA/AppData/cups/config:/etc/cups
     restart: unless-stopped
+    ulimits:
+      nofile:
+        soft: 1024
+        hard: 1024
     deploy:
       resources:
         reservations:
