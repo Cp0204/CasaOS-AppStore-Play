@@ -1,34 +1,25 @@
 name: stirling-pdf
 services:
   stirling-pdf:
-    image: frooodle/s-pdf:latest
+    image: stirlingtools/stirling-pdf:latest
     deploy:
       resources:
         reservations:
           memory: 768M
     network_mode: bridge
     ports:
-      - target: 8080
-        published: "8081"
-        protocol: tcp
+      - '8081:8080'
     volumes:
-      - type: bind
-        source: /DATA/AppData/stirling-pdf/trainingData
-        target: /usr/share/tessdata
-      - type: bind
-        source: /DATA/AppData/stirling-pdf/extraConfigs
-        target: /configs
-      - type: bind
-        source: ./customFiles
-        target: /customFiles/
-      - type: bind
-        source: ./logs
-        target: /logs/
+      - /DATA/AppData/stirling-pdf/trainingData:/usr/share/tessdata
+      - /DATA/AppData/stirling-pdf/extraConfigs:/configs
+      - /DATA/AppData/stirling-pdf/customFiles:/customFiles/
+      - /DATA/AppData/stirling-pdf/logs:/logs/
+      - /DATA/AppData/stirling-pdf/pipeline:/pipeline/
     environment:
       - DOCKER_ENABLE_SECURITY=false
       - SECURITY_ENABLE_LOGIN=true
       - SECURITY_INITIALLOGIN_USERNAME=admin
-      - SECURITY_INITIALLOGIN_PASSWORD=stirling
+      - SECURITY_INITIALLOGIN_PASSWORD=admin
       - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
       - LANGS=zh_CN
     restart: unless-stopped
@@ -60,10 +51,10 @@ x-casaos:
   tips:
     before_install:
       en_us: |
-        Login authentication is not enabled by default, you can set it in [environment variables](https://github.com/Stirling-Tools/Stirling-PDF?tab=readme-ov-file#environment-only-parameters).
+        Login authentication is not enabled by default, you can set it in [environment variables](https://docs.stirlingpdf.com/Advanced%20Configuration/System%20and%20Security).
 
         > If you enable login, need to download about 120M .jar package from Github at startup.
       zh_cn: |
-        默认不开启登录验证，你可以在[环境变量](https://github.com/Stirling-Tools/Stirling-PDF?tab=readme-ov-file#environment-only-parameters)中设置。
+        默认不开启登录验证，你可以在[环境变量](https://docs.stirlingpdf.com/Advanced%20Configuration/System%20and%20Security)中设置。
 
         > 开启登录的话，启动时需要从 Github 上下载约 120M 的 .jar 包。**国内网络有点障碍，会卡住。**
