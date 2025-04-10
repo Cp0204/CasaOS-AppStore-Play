@@ -1,0 +1,52 @@
+name: cloud-saver
+services:
+  cloud-saver:
+    image: jiangrui1994/cloudsaver:latest
+    container_name: cloud-saver
+    ports:
+      - "8008:8008"
+    volumes:
+      - /DATA/AppData/cloud-saver/data:/app/data
+      - /DATA/AppData/cloud-saver/config:/app/config
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: cloud-saver
+  store_app_id: cloud-saver
+  author: Cp0204
+  category: Downloader
+  description:
+    en_us: CloudSaver is a web disk resource search and transfer tool. It supports responsive layout and is perfectly adapted to mobile and PC. It can be deployed with one click through Docker.
+    zh_cn: 一款网盘资源搜索与转存工具，支持响应式布局，移动端与PC完美适配，可通过 Docker 一键部署。
+  developer: jiangrui1994
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/cloud-saver/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/cloud-saver/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/cloud-saver/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/cloud-saver/screenshot-3.png
+  tagline:
+    en_us: A web disk resource search and transfer tool
+    zh_cn: 一款网盘资源搜索与转存工具
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/cloud-saver/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        Default registration code
+        - Administrator: 230713
+        - Regular user: 9527
+      zh_cn: |
+        1. 资源搜索需要配置代理环境
+        2.默认注册码
+          - 管理员：230713
+          - 普通用户：9527
+  title:
+    en_us: CloudSaver
+  index: /
+  port_map: "8008"
