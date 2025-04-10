@@ -1,0 +1,163 @@
+name: ai-starter-kit-gpu
+
+x-n8n: &service-n8n
+  image: n8nio/n8n:latest
+  networks:
+    - ai-starter-kit
+  environment:
+    - DB_TYPE=postgresdb
+    - DB_POSTGRESDB_HOST=postgres
+    - DB_POSTGRESDB_USER=root
+    - DB_POSTGRESDB_PASSWORD=password
+    - N8N_DIAGNOSTICS_ENABLED=false
+    - N8N_PERSONALIZATION_ENABLED=false
+    - N8N_ENCRYPTION_KEY=super-secret-key
+    - N8N_USER_MANAGEMENT_JWT_SECRET=even-more-secret
+    - OLLAMA_HOST=ollama:11434
+    - N8N_SECURE_COOKIE=false
+    - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+    - N8N_RUNNERS_ENABLED=true
+
+services:
+
+  # n8n 服务
+  n8n:
+    <<: *service-n8n
+    hostname: n8n
+    container_name: ai-starter-kit-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    volumes:
+      - /DATA/AppData/ai-starter-kit/n8n_storage:/home/node/.n8n
+      - /DATA/AppData/ai-starter-kit/n8n/backup:/backup
+      - /DATA/AppData/ai-starter-kit/shared:/data/shared
+    depends_on:
+      postgres:
+        condition: service_healthy
+      n8n-import:
+        condition: service_completed_successfully
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+  # n8n 导入服务，用以导入凭据和工作流
+  n8n-import:
+    <<: *service-n8n
+    hostname: n8n-import
+    container_name: ai-starter-kit-n8n-import
+    entrypoint: /bin/sh
+    command:
+      - "-c"
+      - "rm -rf self-hosted-ai-starter-kit && git clone https://github.com/n8n-io/self-hosted-ai-starter-kit.git && cp -r self-hosted-ai-starter-kit/n8n/backup/* backup && n8n import:credentials --separate --input=/home/node/backup/credentials && n8n import:workflow --separate --input=/home/node/backup/workflows"
+    volumes:
+      - /DATA/AppData/ai-starter-kit/n8n/backup:/home/node/backup
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # n8n 数据库
+  postgres:
+    image: postgres:16-alpine
+    hostname: ai-starter-kit-postgres
+    networks:
+      - ai-starter-kit
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=n8n
+    volumes:
+      - /DATA/AppData/ai-starter-kit/postgres_storage:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -h localhost -U root -d n8n
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    container_name: ai-starter-kit-postgres
+
+  # 向量数据库
+  qdrant:
+    image: qdrant/qdrant:latest
+    hostname: qdrant
+    container_name: ai-starter-kit-qdrant
+    networks:
+      - ai-starter-kit
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+    volumes:
+      - /DATA/AppData/ai-starter-kit/qdrant_storage:/qdrant/storage
+
+  # ollama 服务，区分 CPU/GPU 版本
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ai-starter-kit-ollama
+    networks:
+      - ai-starter-kit
+    restart: unless-stopped
+    ports:
+      - 11434:11434
+    volumes:
+      - /DATA/AppData/ai-starter-kit/ollama_storage:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+
+  # ollama pull 服务，用以初始化时拉取模型
+  ollama-pull-llama:
+    image: ollama/ollama:latest
+    container_name: ai-starter-kit-ollama-pull-llama
+    networks:
+      - ai-starter-kit
+    volumes:
+      - /DATA/AppData/ai-starter-kit/ollama_storage:/root/.ollama
+    entrypoint: /bin/sh
+    environment:
+      - OLLAMA_HOST=ollama:11434
+    command:
+      - "-c"
+      - "sleep 3; ollama pull llama3.2"
+    depends_on:
+      - ollama
+
+networks:
+  ai-starter-kit:
+    name: ai-starter-kit
+    driver: bridge
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: n8n
+  store_app_id: ai-starter-kit-gpu
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: "Self-hosted AI Starter Kit is an open-source Docker Compose template designed to swiftly initialize a comprehensive local AI and low-code development environment. It combines the self-hosted n8n platform with a curated list of compatible AI products and components to quickly get started with building self-hosted AI workflows."
+    zh_cn: "Self-hosted AI Starter Kit 是一个开源的 Docker Compose 模板，旨在快速初始化一个全面的本地 AI 和低代码开发环境。它将自托管的 n8n 平台与精选的兼容 AI 产品和组件列表相结合，以快速开始构建自托管的 AI 工作流程。"
+  developer: n8n-io
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ai-starter-kit/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ai-starter-kit/screenshot-1.png
+  tagline:
+    en_us: Self-hosted AI starter kit
+    zh_cn: 自托管 AI 启动套件
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ai-starter-kit/thumbnail.png
+  tips:
+    before_install:
+      en_us: "If this is the first time you’re running the workflow, you may need to wait until Ollama finishes downloading Llama3.2. You can inspect the docker console logs to check on the progress."
+      zh_cn: "如果这是您第一次启动此套件，您可能需要等待 Ollama 完成 Llama3.2 的下载。您可以检查 Docker 控制台日志以查看进度。"
+  title:
+    en_us: AI Starter Kit [NVIDIA]
+  index: /
+  port_map: "5678"
