@@ -150,6 +150,6 @@ x-casaos:
       en_us: "If this is the first time you’re running the workflow, you may need to wait until Ollama finishes downloading Llama3.2. You can inspect the docker console logs to check on the progress."
       zh_cn: "如果这是您第一次启动此套件，您可能需要等待 Ollama 完成 Llama3.2 的下载。您可以检查 Docker 控制台日志以查看进度。"
   title:
-    en_us: AI Starter Kit [CPU]
+    en_us: n8n Al Kit [CPU]
   index: /
   port_map: "5678"
