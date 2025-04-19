@@ -1,0 +1,43 @@
+name: xiaomusic
+services:
+  xiaomusic:
+    image: docker.hanxi.cc/hanxi/xiaomusic:latest
+    container_name: xiaomusic
+    restart: unless-stopped
+    ports:
+      - "58090:8090"
+    environment:
+      XIAOMUSIC_PUBLIC_PORT: 58090
+    volumes:
+      - /DATA/AppData/xiaomusic/music:/app/music
+      - /DATA/AppData/xiaomusic/conf:/app/conf
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  main: xiaomusic
+  store_app_id: xiaomusic
+  author: Cp0204
+  category: Media
+  description:
+    en_us: Unlimited listening to songs, liberate Xiaoai speakers. Play music with Xiaoai speakers, and download music using yt-dlp.
+    zh_cn: 无限听歌，解放小爱音箱。使用小爱音箱播放音乐，音乐使用 yt-dlp 下载。
+  developer: hanxi
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xiaomusic/icon.png
+  tagline:
+    en_us: Unlimited listening to songs, liberate Xiaoai speakers.
+    zh_cn: 无限听歌，解放小爱音箱
+  tips:
+    before_install:
+      en_us: "If you encounter problems during the first installation, please refer to [💬 FAQ problem collection](https://github.com/hanxi/xiaomusic/issues/99). There are solutions to the problems encountered generally."
+      zh_cn: "初次安装遇到问题请查阅 [💬 FAQ问题集合](https://github.com/hanxi/xiaomusic/issues/99) ，一般遇到的问题都已经有解决办法。"
+  title:
+    en_us: XiaoMusic
+  index: /
+  port_map: "58090"
