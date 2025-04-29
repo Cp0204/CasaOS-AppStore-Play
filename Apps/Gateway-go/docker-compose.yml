@@ -1,0 +1,68 @@
+name: gateway-go
+services:
+  gateway-go:
+    image: openiothub/gateway-go:latest
+    network_mode: host
+    deploy:
+      resources:
+        reservations:
+          memory: "32M"
+    labels:
+      icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gateway-go/icon.png
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/config
+        target: /root
+    ports:
+      - target: 34323
+        published: "34323"
+        protocol: tcp
+    x-casaos:
+      ports:
+        - container: "34323"
+          description:
+            en_us: WebUI HTTP Port
+            zh_cn: WebUI HTTP 端口
+      volumes:
+        - container: /root
+          description:
+            en_us: gateway-go config directory.
+            zh_cn: gateway-go 配置目录
+    container_name: gateway-go
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: iotserv
+  category: Network
+  description:
+    en_us: |
+      A fast reverse proxy to help you expose a local server behind a NAT or firewall to your client.
+      
+      Use OpenIoTHub to scan the following QR code and add a gateway,then add host,add host's port,finally, enjoy remote control
+
+      At present, the APP supports native interface access to CasaOS/Zima's main functions, including installing applications,
+      
+      managing installed applications (including: starting, stopping, remote intranet penetration access to all installed applications,
+       
+      etc.), and viewing system status. In the future, it will support native interface APP access such as DPanel and remote access for installing applications
+    zh_cn: | 
+      云亿连内网穿透工具的内网网关，帮助用户随时随地访问本设备所在网络，支持http和ssh等众多协议，在有条件的情况下优先使用p2p直连网络，支持安卓、iOS、Windows、macOS、Linux客户端访问。
+      
+      使用云亿连客户端扫描本应用提供的二维码添加本网关，在客户端上添加主机，然后添加端口。 这样你在外面就可以通过云亿连App访问你的 CasaOS/Zima 设备了。使用文档：https://docs.iothub.cloud/typical/index.html#casaoszimaos
+
+      目前APP支持原生界面访问CasaOS/Zima主要功能，包括安装应用、管理已安装应用（包括：启动、停止、远程内网穿透访问所有已安装应用等）、查看系统状态，未来将支持DPanel等的原生界面APP访问和安装应用的远程访问
+  developer: iotserv
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gateway-go/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gateway-go/screenshot-1.png
+  main: gateway-go
+  port_map: "34323"
+  scheme: http
+  tagline:
+    en_us: A fast reverse proxy to help you expose a local server behind a NAT or firewall to your client.
+    zh_cn: 简单好用的内网穿透工具
+  title:
+    en_us: gateway-go
