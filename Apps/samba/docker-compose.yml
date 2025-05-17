@@ -41,8 +41,8 @@ x-casaos:
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/samba/thumbnail.png
   tips:
     before_install:
-      en_us: Default username is "admin" and password is "password". Please change these credentials after installation for security.
-      zh_cn: 默认用户名为"admin"，密码为"password"。出于安全考虑，安装后请更改这些凭据。
+      en_us: You need to disable the SMB service that comes with the system first to free up port 445, refer to the command `systemctl stop smb && systemctl disable smb`. Default username is `admin` and password is `password`. Please change these credentials after installation for security.
+      zh_cn: 需要先把系统自带的SMB服务禁用，以释放445端口，参考命令`systemctl stop smb && systemctl disable smb`，默认用户名为`admin`，密码为`password`。出于安全考虑，安装后请更改这些凭据。
   title:
     en_us: Samba
     zh_cn: SMB共享
