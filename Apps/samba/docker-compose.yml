@@ -1,0 +1,50 @@
+name: samba
+services:
+  samba:
+    image: dockurr/samba:latest
+    container_name: samba
+    environment:
+      NAME: "Data"
+      USER: "admin"
+      PASS: "password"
+      RW: "true"
+    ports:
+      - "445:445"
+    volumes:
+      - /DATA:/storage
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    network_mode: bridge
+
+x-casaos:
+  architectures:
+    - arm
+    - arm64
+    - amd64
+  main: samba
+  store_app_id: samba
+  author: Cp0204
+  category: File Sync
+  description:
+    en_us: Samba SMB server in a Docker container. An implementation of the Windows SMB networking protocol, allowing file sharing between Windows, Linux and macOS systems. [DOC](https://hub.docker.com/r/dockurr/samba)
+    zh_cn: Docker 容器中的 Samba SMB 服务器。可以加密码🙃，实现了Windows SMB网络协议，允许在Windows、Linux和macOS系统之间共享文件。[文档](https://hub.docker.com/r/dockurr/samba)
+  developer: dockurr
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/samba/icon.png
+  # screenshot_link:
+  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/samba/screenshot-1.png
+  tagline:
+    en_us: Share files across all your devices with SMB protocol
+    zh_cn: 使用SMB协议在所有设备间共享文件
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/samba/thumbnail.png
+  tips:
+    before_install:
+      en_us: Default username is "admin" and password is "password". Please change these credentials after installation for security.
+      zh_cn: 默认用户名为"admin"，密码为"password"。出于安全考虑，安装后请更改这些凭据。
+  title:
+    en_us: Samba
+    zh_cn: SMB共享
+  index: /
+  port_map: "445"
