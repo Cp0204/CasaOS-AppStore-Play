@@ -49,7 +49,7 @@ x-casaos:
         | Variables    | Default         | Description                       |
         | ------------ | --------------- | --------------------------------- |
         | TZ           | `Asia/Shanghai` | Time zone of your server          |
-        | CUPSADMIN    | `admin          | Name of the admin user for server |
+        | CUPSADMIN    | `admin`         | Name of the admin user for server |
         | CUPSPASSWORD | `password`      | Password for server admin         |
       zh_cn: |
         | 环境变量     | 默认值           | 说明       |
