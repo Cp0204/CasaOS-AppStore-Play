@@ -1,0 +1,49 @@
+name: surveyking
+services:
+  surveyking:
+    image: surveyking/surveyking:latest
+    # image: registry.cn-hangzhou.aliyuncs.com/surveyking/surveyking:latest
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+    network_mode: bridge
+    ports:
+      - "1991:1991"
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/surveyking/db:/app/db
+      - /DATA/AppData/surveyking/files:/app/files
+      - /DATA/AppData/surveyking/logs:/app/logs
+    container_name: surveyking
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: surveyking
+  store_app_id: surveyking
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: SurveyKing is an open-source survey, exam, and voting system with features comparable to commercial systems.
+    zh_cn: SurveyKing 是一款开源的调查问卷、考试和投票系统，其功能可与商业系统相媲美。
+  developer: surveyking
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/surveyking/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/surveyking/screenshot-1.jpg
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/surveyking/screenshot-2.jpg
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/surveyking/screenshot-3.jpg
+  tagline:
+    en_us: Open-source survey, exam, and voting system
+    zh_cn: 开源的调查问卷、考试和投票系统
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/surveyking/thumbnail.png
+  tips:
+    before_install:
+      en_us: "Default Account Password: `admin` / `123456`"
+      zh_cn: "默认账号密码： `admin` / `123456`"
+  title:
+    en_us: SurveyKing
+    zh_cn: 卷王
+  index: /
+  port_map: "1991"
