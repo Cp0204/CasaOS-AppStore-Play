@@ -1,0 +1,46 @@
+name: torrserver
+services:
+  torrserver:
+    image: ghcr.io/yourok/torrserver:latest
+    container_name: torrserver
+    network_mode: host # to allow DLNA feature
+    environment:
+      TS_PORT: "5665"
+      TS_DONTKILL: "1"
+      TS_HTTPAUTH: "0"
+      TS_CONF_PATH: /opt/ts/config
+      TS_TORR_DIR: /opt/ts/torrents
+    volumes:
+      - /DATA/AppData/torrserver:/opt/ts
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  main: torrserver
+  store_app_id: torrserver
+  author: Cp0204
+  category: Media
+  description:
+    en_us: Simple and powerful tool for streaming torrents. TorrServer is a program that allows users to view torrents online without the need for preliminary file downloading. The core functionality of TorrServer includes caching torrents and subsequent data transfer via the HTTP protocol, allowing the cache size to be adjusted according to the system parameters and the user's internet connection speed.
+    zh_cn: 简单而强大的种子流媒体工具。 TorrServer是一个允许用户在线观看种子，而无需预先下载文件的程序。 TorrServer的核心功能包括缓存种子，并通过HTTP协议进行后续数据传输，允许根据系统参数和用户的互联网连接速度调整缓存大小。
+  developer: yourok
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/torrserver/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/torrserver/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/torrserver/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/torrserver/screenshot-3.png
+  tagline:
+    en_us: Simple and powerful tool for streaming torrents.
+    zh_cn: 简单而强大的种子流媒体工具。
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/torrserver/thumbnail.png
+  title:
+    en_us: TorrServer
+  index: /
+  port_map: "5665"
