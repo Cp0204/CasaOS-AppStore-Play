@@ -15,7 +15,7 @@ services:
     volumes:
       - type: bind
         source: /DATA/AppData/certimate/data
-        target: /data
+        target: /app/pb_data
     container_name: certimate
 
 x-casaos:
