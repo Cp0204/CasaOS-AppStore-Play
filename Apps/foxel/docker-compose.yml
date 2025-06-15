@@ -1,0 +1,74 @@
+name: foxel
+services:
+  foxel:
+    image: ghcr.io/drizzletime/foxel:dev
+    container_name: foxel
+    restart: unless-stopped
+    ports:
+      - "8088:80"
+    environment:
+      DEFAULT_CONNECTION: Host=postgres;Username=foxel;Password=foxel123;Database=foxel_db
+      TZ: Asia/Shanghai
+    volumes:
+      - /DATA/AppData/foxel/uploads:/app/Uploads
+    pull_policy: always
+    depends_on:
+      - postgres
+    networks:
+      - foxel
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+  postgres:
+    image: postgres:17.5
+    container_name: foxel-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: foxel
+      POSTGRES_PASSWORD: foxel123
+      POSTGRES_DB: foxel_db
+      TZ: Asia/Shanghai
+    volumes:
+      - /DATA/AppData/foxel/db:/var/lib/postgresql/data
+    networks:
+      - foxel
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+
+networks:
+  foxel:
+    name: foxel
+    driver: bridge
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: foxel
+  store_app_id: foxel
+  author: Cp0204
+  category: Media
+  description:
+    en_us: Foxel is a modern intelligent image retrieval and management system based on .NET 9, integrating advanced AI visual models and vector embedding technology to provide efficient image search and management functions.
+    zh_cn: Foxel 是一个基于 .NET 9 开发的现代化智能图像检索与管理系统，集成先进的 AI 视觉模型 和 向量嵌入技术，提供高效的图像搜索与管理功能。
+  developer: DrizzleTime
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/foxel/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/foxel/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/foxel/screenshot-2.png
+  tagline:
+    en_us: Intelligent Image Retrieval and Management System
+    zh_cn: 智能图像检索与管理系统
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/foxel/thumbnail.png
+  tips:
+    before_install:
+      en_us: "The first registered user will automatically receive administrator privileges"
+      zh_cn: "第一个注册的用户将自动获得管理员权限"
+  title:
+    en_us: Foxel
+  index: /
+  port_map: "8088"
