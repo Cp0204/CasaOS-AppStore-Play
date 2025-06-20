@@ -14,7 +14,6 @@ services:
       - /DATA/AppData/rustdesk-server/data:/root
     networks:
       - rustdesk-server
-    network_mode: bridge
     ports:
       - 21115:21115
       - 21116:21116
@@ -33,7 +32,6 @@ services:
       - /DATA/AppData/rustdesk-server/data:/root
     networks:
       - rustdesk-server
-    network_mode: bridge
     ports:
       - 21117:21117
       - 21119:21119
@@ -43,13 +41,12 @@ services:
     container_name: rustdesk-server-api
     environment:
       - TZ=Asia/Shanghai
-      - RUSTDESK_API_APP_REGISTER=true
+      - RUSTDESK_API_APP_REGISTER=false
       - RUSTDESK_API_LANG=zh-CN
       - RUSTDESK_API_RUSTDESK_ID_SERVER=192.168.1.66:21116
       - RUSTDESK_API_RUSTDESK_RELAY_SERVER=192.168.1.66:21117
       - RUSTDESK_API_RUSTDESK_API_SERVER=http://192.168.1.66:21114
       - RUSTDESK_API_RUSTDESK_KEY=YOURKEY
-    network_mode: bridge
     ports:
       - 21114:21114
     volumes:
@@ -63,7 +60,6 @@ services:
 
 networks:
   rustdesk-server:
-    external: false
     name: rustdesk-server
 
 x-casaos:
