@@ -1,0 +1,54 @@
+name: openlist
+services:
+  openlist:
+    image: openlistteam/openlist:latest
+    container_name: openlist
+    deploy:
+      resources:
+        reservations:
+          memory: 64M
+    volumes:
+      - /DATA/AppData/openlist/data:/opt/openlist/data
+    ports:
+      - 5244:5244
+    environment:
+      - PUID=0
+      - PGID=0
+      - UMASK=022
+    restart: unless-stopped
+    network_mode: bridge
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  main: openlist
+  store_app_id: openlist
+  author: Cp0204
+  category: File Sync
+  description:
+    en_us: A file list program that supports multiple storages, powered by Gin and SolidJS, fork of AList.
+    zh_cn: 一个支持多存储的文件列表程序，使用 Gin 和 SolidJS，基于 AList 项目 fork 开发
+  developer: openlistteam
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/openlist/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/openlist/screenshot-1.png
+  tagline:
+    en_us: A new AList Fork to Anti Trust Crisis.
+    zh_cn: 一个更可信、可持续的 AList 开源替代方案
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/openlist/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        After installation, view the initial password in the log.
+
+        This fork is not yet stable, specific migration progress can be viewed in [OpenList Migration Work Summary](https://github.com/OpenListTeam/OpenList/issues/6)
+      zh_cn: |
+        安装完成后，请在日志中查看初始密码。
+
+        本 Fork 尚未稳定, 具体迁移进度可在 [OpenList 迁移工作总结](https://github.com/OpenListTeam/OpenList/issues/6) 中查看。
+  title:
+    en_us: OpenList
+  port_map: "5244"
+  scheme: http
