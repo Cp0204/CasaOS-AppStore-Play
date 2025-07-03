@@ -1,0 +1,44 @@
+name: libretv
+services:
+  libretv:
+    image: bestzwei/libretv:latest
+    container_name: libretv
+    ports:
+      - "8899:8080"
+    environment:
+      PASSWORD: your_password
+      ADMINPASSWORD: your_adminpassword
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    network_mode: bridge
+
+x-casaos:
+  architectures:
+    - arm64
+    - amd64
+  main: libretv
+  store_app_id: libretv
+  author: Cp0204
+  category: Media
+  description:
+    en_us: LibreTV is a lightweight, free online video search and viewing platform that provides content search and playback services from multiple video sources. No registration required, ready to use, supports access from multiple devices.
+    zh_cn: LibreTV 是一个轻量级、免费的在线视频搜索与观看平台，提供来自多个视频源的内容搜索与播放服务。无需注册，即开即用，支持多种设备访问。
+  developer: bestzwei
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/libretv/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/libretv/screenshot-1.png
+  tagline:
+    en_us: Free viewing, enjoy the excitement
+    zh_cn: 自由观影，畅享精彩
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/libretv/thumbnail.png
+  tips:
+    before_install:
+      en_us: Default password is 'your_password', default admin password is 'your_adminpassword'. Please change them after installation.
+      zh_cn: 默认密码是'your_password'，默认管理员密码是'your_adminpassword'。安装后请修改。
+  title:
+    en_us: LibreTV
+  index: /
+  port_map: "8899"
