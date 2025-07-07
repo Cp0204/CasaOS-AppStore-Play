@@ -83,6 +83,12 @@ Enjoyed the project? Consider buying me a coffee - it helps me keep going!
 
 ![WeChatPay](https://cdn.jsdelivr.net/gh/Cp0204/Cp0204@main/img/wechat_pay_qrcode.png)
 
+## Sponsor
+
+CDN acceleration and security protection for this project are sponsored by Tencent EdgeOne.
+
+<a href="https://edgeone.ai/?from=github" target="_blank"><img title="Best Asian CDN, Edge, and Secure Solutions - Tencent EdgeOne" src="https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png" width="300"></a>
+
 ## App List / 应用列表
 
 | Icon | AppName | Description |
