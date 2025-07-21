@@ -1,0 +1,57 @@
+name: minecraft-server
+services:
+  minecraft-server:
+    image: itzg/minecraft-server:latest
+    container_name: minecraft-server
+    restart: unless-stopped
+    tty: true # 容器可交互
+    stdin_open: true # 容器可输入
+    ports:
+      - "25565:25565"
+    environment:
+      EULA: "TRUE"
+      ONLINE_MODE: "FALSE"
+      # 内存限制：同时设置 INIT_MEMORY MAX_MEMORY
+      MEMORY: 1g
+      # 内存限制：分开设置
+      # INIT_MEMORY: 1g
+      # MAX_MEMORY: 4g
+      # VERSION: 1.21.8
+      # Mod加载器[FORGE NEOFORGE FABRIC]
+      # TYPE: FABRIC
+      # 对应Mod加载器版本
+      # FABRIC_LAUNCHER_VERSION: 1.0.3
+      # FABRIC_LOADER_VERSION: 0.16.3
+      # 整合包文件地址
+      # GENERIC_PACK: /modpacks/xxxxxxxx.zip
+    volumes:
+    - /DATA/AppData/minecraft-server/data:/data
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: minecraft-server
+  store_app_id: minecraft-server
+  author: Cp0204
+  category: Games
+  description:
+    en_us: A Minecraft Server that will automatically download the latest stable version at startup. You can customize the server using environment variables.
+    zh_cn: 一个 Minecraft 服务器，它将在启动时自动下载最新的稳定版本。您可以使用环境变量自定义服务器。
+  developer: itzg
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/minecraft-server/icon.png
+  tagline:
+    en_us: Minecraft Server
+    zh_cn: Minecraft 服务器
+  tips:
+    before_install:
+      en_us: |
+        - The default Minecraft server port is 25565.
+        - Remember to accept the EULA by setting the environment variable `EULA` to `TRUE`.
+        - You can find more configuration options and examples in the [official documentation](https://docker-minecraft-server.readthedocs.io/en/latest/).
+      zh_cn: |
+        - 默认的 Minecraft 服务器端口是 25565。
+        - 记得设置环境变量 `EULA` 为 `TRUE` 来接受 EULA。
+        - 你可以在[官方文档](https://docker-minecraft-server.readthedocs.io/en/latest/)中找到更多的配置选项和示例。
+  title:
+    en_us: Minecraft Server
