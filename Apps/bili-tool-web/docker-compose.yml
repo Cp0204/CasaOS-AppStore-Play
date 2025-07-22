@@ -1,0 +1,54 @@
+name: bili-tool-web
+services:
+  bili-tool-web:
+    image: ghcr.io/raywangqvq/bili_tool_web:latest
+    container_name: bili-tool-web
+    ports:
+      - "22330:8080"
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - /DATA/AppData/bili-tool-web/Logs:/app/Logs
+      - /DATA/AppData/bili-tool-web/config:/app/config
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  main: bili-tool-web
+  store_app_id: bili-tool-web
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: BiliTool is an automated task execution tool that acts as a helpful assistant, following pre-configured commands to complete planned tasks within specified frequencies and timeframes when we forget to do them.
+    zh_cn: BiliTool 是一个自动执行任务的工具，当我们忘记做某项任务时，它会像一个贴心小助手，按照我们预先吩咐它的命令，在指定频率、时间范围内帮助我们完成计划的任务。
+  developer: raywangqvq
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/bili-tool-web/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/bili-tool-web/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/bili-tool-web/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/bili-tool-web/screenshot-3.png
+  tagline:
+    en_us: An automated task execution tool for Bilibili.
+    zh_cn: 一个自动执行Bilibili任务的工具。
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/bili-tool-web/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        Default user: `admin`
+        Default password: `BiliTool@2233`
+        Please change the password on the Admin page after the first login.
+      zh_cn: |
+        默认用户：`admin`
+        默认密码：`BiliTool@2233`
+        首次登陆后，请到Admin页面修改密码。
+  title:
+    en_us: BiliTool Web
+  index: /
+  port_map: "22330"
