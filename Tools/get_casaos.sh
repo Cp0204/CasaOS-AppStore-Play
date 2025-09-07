@@ -735,17 +735,21 @@ usage() {
 		Valid options are:
 		    -p <build_dir>          Specify build directory (Local install)
 		    -h                      Show this help message and exit
+		    -c                      Specify mirror source (China)
 	EOF
     exit "$1"
 }
 
-while getopts ":p:h" arg; do
+while getopts ":p:hc" arg; do
     case "$arg" in
     p)
         BUILD_DIR=$OPTARG
         ;;
     h)
         usage 0
+        ;;
+    c)
+        REGION="China"
         ;;
     *)
         usage 1
@@ -754,7 +758,12 @@ while getopts ":p:h" arg; do
 done
 
 # Step 0 : Get Download Url Domain
-Get_Download_Url_Domain
+if [[ -z "${REGION}" ]]; then
+    Get_Download_Url_Domain
+else
+    Show 2 "Mirror source: ${REGION}"
+    CASA_DOWNLOAD_DOMAIN="https://casaos.oss-cn-shanghai.aliyuncs.com/"
+fi
 # Step 1: Check ARCH
 Check_Arch
 
