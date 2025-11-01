@@ -1,7 +1,7 @@
 name: certimate
 services:
   certimate:
-    image: usual2970/certimate:latest
+    image: certimate/certimate:latest
     deploy:
       resources:
         reservations:
