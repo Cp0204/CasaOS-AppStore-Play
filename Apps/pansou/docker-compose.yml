@@ -1,0 +1,86 @@
+name: pansou
+services:
+  pansou:
+    image: ghcr.io/fish2018/pansou-web:latest
+    container_name: pansou
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+    ports:
+      - "6080:80"
+      - "6443:443"
+    environment:
+      # 基础配置
+      - DOMAIN=localhost
+      - PANSOU_PORT=8888
+      - PANSOU_HOST=127.0.0.1
+
+      # 数据目录配置（统一在/app/data下）
+      - CACHE_PATH=/app/data/cache
+      - LOG_PATH=/app/data/logs
+
+      # 插件配置（镜像已包含推荐插件，如需自定义可取消注释并修改）
+      - ENABLED_PLUGINS=labi,zhizhen,shandian,duoduo,muou,wanou,hunhepan,jikepan,panwiki,pansearch,panta,qupansou,hdr4k,pan666,susu,thepiratebay,xuexizhinan,panyq,ouge,huban,cyg,erxiao,miaoso,fox4k,pianku,clmao,wuji,cldi,xiaozhang,libvio,leijing,xb6v,xys,ddys,hdmoli,clxiong,jutoushe,sdso,xiaoji,xdyh,haisou,bixin,djgou,nyaa,xinjuc,aikanzy,qupanshe,xdpan,discourse,yunsou,ahhhhfs,nsgame,quark4k,quarksoo,sousou,ash,feikuai,kkmao,alupan,ypfxw,mikuclub,daishudj,dyyj,meitizy,jsnoteclub,mizixing,lou1,yiove
+
+      # Telegram频道配置（镜像已包含这些默认频道，如需自定义可取消注释）
+      - CHANNELS=tgsearchers4,Aliyun_4K_Movies,bdbdndn11,yunpanx,bsbdbfjfjff,yp123pan,sbsbsnsqq,yunpanxunlei,tianyifc,BaiduCloudDisk,txtyzy,peccxinpd,gotopan,PanjClub,kkxlzy,baicaoZY,MCPH01,MCPH02,MCPH03,bdwpzhpd,ysxb48,jdjdn1111,yggpan,MCPH086,zaihuayun,Q66Share,ucwpzy,shareAliyun,alyp_1,dianyingshare,Quark_Movies,XiangxiuNBB,ydypzyfx,ucquark,xx123pan,yingshifenxiang123,zyfb123,tyypzhpd,tianyirigeng,cloudtianyi,hdhhd21,Lsp115,oneonefivewpfx,qixingzhenren,taoxgzy,Channel_Shares_115,tyysypzypd,vip115hot,wp123zy,yunpan139,yunpan189,yunpanuc,yydf_hzl,leoziyuan,Q_dongman,yoyokuakeduanju,TG654TG,WFYSFX02,QukanMovie,yeqingjie_GJG666,movielover8888_film3,Baidu_netdisk,D_wusun,FLMdongtianfudi,KaiPanshare,QQZYDAPP,rjyxfx,PikPak_Share_Channel,btzhi,newproductsourcing,cctv1211,duan_ju,QuarkFree,yunpanNB,kkdj001,xxzlzn,pxyunpanxunlei,jxwpzy,kuakedongman,liangxingzhinan,xiangnikanj,solidsexydoll,guoman4K,zdqxm,kduanju,cilidianying,CBduanju,SharePanFilms,dzsgx,BooksRealm,Oscar_4Kmovies,douerpan,baidu_yppan,Q_jilupian,Netdisk_Movies,yunpanquark,ammmziyuan,ciliziyuanku,cili8888,jzmm_123pan,Q_dianying,domgmingapk,dianying4k,q_dianshiju,tgbokee,ucshare,godupan,gokuapan
+
+      # 代理配置（可选）
+      # - PROXY=socks5://xxx.xxx.xxx.xxx:7897
+
+      # 性能配置（镜像已包含默认值，如需调整可取消注释）
+      # - CACHE_ENABLED=true
+      # - CACHE_TTL=60
+      # - MAX_CONCURRENCY=200
+      # - MAX_PAGES=30
+
+      # 健康检查配置（容器内部监控）
+      - HEALTH_CHECK_INTERVAL=30 # 后端服务健康检查间隔（秒）
+      - HEALTH_CHECK_TIMEOUT=10 # 健康检查超时时间（秒）
+      - HEALTH_CHECK_RETRIES=3 # 失败重试次数
+
+      # 认证配置（可选，默认不启用）
+      # - AUTH_ENABLED=true
+      # - AUTH_USERS=admin:admin123,user:pass456
+      # - AUTH_TOKEN_EXPIRY=24
+      # - AUTH_JWT_SECRET=your-secret-key-here
+    volumes:
+      # 数据持久化（统一挂载/app/data，包含缓存、日志、SSL证书等所有数据）
+      - /DATA/AppData/pansou:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/app/healthcheck.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: pansou
+  store_app_id: pansou
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: PanSou is a high-performance network disk resource search API service that supports TG search and custom plugin search.
+    zh_cn: PanSou 是一个高性能的网盘资源搜索 API 服务，支持 TG 搜索和自定义插件搜索。
+  developer: fish2018
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/screenshot-2.png
+  tagline:
+    en_us: High-performance network disk resource search API service.
+    zh_cn: 高性能的网盘资源搜索API服务。
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/thumbnail.png
+  tips:
+    before_install:
+      en_us: ""
+      zh_cn: ""
+  title:
+    en_us: PanSou
+  index: /
+  port_map: "6080"
