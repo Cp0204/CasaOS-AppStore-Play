@@ -1,0 +1,48 @@
+name: casaos-docker
+services:
+  casaos-docker:
+    image: dockurr/casa:latest
+    container_name: casaos-docker
+    ports:
+      - "8080:8080"
+    volumes:
+      - /DATA:/DATA
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/casaos:/var/lib/casaos
+    restart: unless-stopped
+    stop_grace_period: 1m
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: casaos-docker
+  store_app_id: casaos-docker
+  author: Cp0204
+  category: "Utilities"
+  description:
+    en_us: CasaOS inside a Docker container.
+    zh_cn: 在 Docker 容器中运行 CasaOS。
+  developer: worph, dockurr
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casaos-docker/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casaos-docker/screenshot-1.jpg
+  tagline:
+    en_us: CasaOS in Docker
+    zh_cn: Docker 里的 CasaOS
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casaos-docker/thumbnail.png
+  tips:
+    before_install:
+      en_us: ""
+      zh_cn: |
+        此镜像将 CasaOS 运行在容器中，某些功能受限（如 存储空间管理、SMB共享），建议仅作为 Docker 管理面板使用。
+
+        CasaOS 自身的配置存放在 `/DATA/AppData/casaos`
+  title:
+    en_us: CasaOS
+  index: /
+  port_map: "8080"
