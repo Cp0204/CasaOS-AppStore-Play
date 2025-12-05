@@ -1,0 +1,107 @@
+name: windows
+services:
+  windows:
+    image: dockurr/windows:latest
+    container_name: windows
+    environment:
+      VERSION: "11"
+      USERNAME: "Docker" # Default username
+      PASSWORD: "admin" # Default password
+      LANGUAGE: "English" # Default language
+      DISK_SIZE: "64G" # Default disk size
+      RAM_SIZE: "4G" # Default RAM size
+      CPU_CORES: "2" # Default CPU cores
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    volumes:
+      - /DATA/AppData/windows:/storage
+      # - /path/to/your/custom.iso:/boot.iso # Uncomment and modify to use a local ISO file
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 4G
+    stop_grace_period: 2m
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: windows
+  store_app_id: windows
+  author: Cp0204
+  category: Utilities
+  description:
+    en_us: Run Windows inside a Docker container with KVM acceleration and a web-based viewer.
+    zh_cn: 在 Docker 容器中运行 Windows，支持 KVM 加速和基于 Web 的查看器。
+  developer: dockurr
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/screenshot-2.png
+  tagline:
+    en_us: Windows inside a Docker container.
+    zh_cn: Docker 容器中的 Windows。
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        **Default Configuration:**
+        - **Username:** Docker
+        - **Password:** admin
+        - **Windows Version:** 11 Pro
+        - **Language:** English
+        - **Disk Size:** 64 GB
+        - **RAM Size:** 4 GB
+        - **CPU Cores:** 2
+
+        **Customization Options:**
+        - **Windows Version:** Modify the `VERSION` environment variable. Available options include:
+          - `11`: Windows 11 Pro (7.2 GB)
+          - `11l`: Windows 11 LTSC (4.7 GB)
+          - `10`: Windows 10 Pro (5.7 GB)
+          - `xp`: Windows XP Professional (0.6 GB)
+          - `2022`: Windows Server 2022 (6.0 GB)
+          - And more (see official documentation for full list).
+        - **Custom ISO Image:** To use an unsupported ISO, set `VERSION` to its URL (e.g., `VERSION: "https://example.com/win.iso"`). Alternatively, bind a local ISO file to `/boot.iso` in the `volumes` section (e.g., `- /path/to/your/custom.iso:/boot.iso`). The `VERSION` environment variable will be ignored if a local ISO is mounted.
+        - **Username & Password:** Change `USERNAME` and `PASSWORD` environment variables.
+        - **Language:** Set the `LANGUAGE` environment variable to your preferred language (e.g., "French", "Chinese").
+        - **Disk Size:** Adjust `DISK_SIZE` environment variable (e.g., `"256G"`).
+        - **RAM Size:** Adjust `RAM_SIZE` environment variable (e.g., `"8G"`).
+        - **CPU Cores:** Adjust `CPU_CORES` environment variable (e.g., `"4"`).
+      zh_cn: |
+        **默认配置：**
+        - **用户名：** Docker
+        - **密码：** admin
+        - **Windows 版本：** 11 Pro
+        - **语言：** 英语
+        - **磁盘大小：** 64 GB
+        - **内存大小：** 4 GB
+        - **CPU 核心数：** 2
+
+        **自定义选项：**
+        - **Windows 版本：** 修改 `VERSION` 环境变量。可用选项包括：
+          - `11`: Windows 11 专业版 (7.2 GB)
+          - `11l`: Windows 11 LTSC 版 (4.7 GB)
+          - `10`: Windows 10 专业版 (5.7 GB)
+          - `xp`: Windows XP 专业版 (0.6 GB)
+          - `2022`: Windows Server 2022 (6.0 GB)
+          - 更多选项（请参阅官方文档获取完整列表）。
+        - **自定义 ISO 镜像：** 要使用不支持的 ISO，请将 `VERSION` 设置为其 URL（例如：`VERSION: "https://example.com/win.iso"`）。或者，在 `volumes` 部分将本地 ISO 文件绑定到 `/boot.iso`（例如：`- /path/to/your/custom.iso:/boot.iso`）。如果挂载了本地 ISO，`VERSION` 环境变量将被忽略。
+        - **用户名和密码：** 修改 `USERNAME` 和 `PASSWORD` 环境变量。
+        - **语言：** 将 `LANGUAGE` 环境变量设置为您偏好的语言（例如："French", "Chinese"）。
+        - **磁盘大小：** 调整 `DISK_SIZE` 环境变量（例如：`"256G"`）。
+        - **内存大小：** 调整 `RAM_SIZE` 环境变量（例如：`"8G"`）。
+        - **CPU 核心数：** 调整 `CPU_CORES` 环境变量（例如：`"4"`）。
+  title:
+    en_us: Windows
+    zh_cn: Windows
+  index: /
+  port_map: "8006"
