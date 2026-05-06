@@ -1,0 +1,40 @@
+name: hermes-agent
+services:
+  hermes-agent:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-agent
+    restart: unless-stopped
+    command: gateway run
+    ports:
+      - "8642:8642"
+      - "9119:9119"
+    volumes:
+      - /DATA/AppData/hermes-agent:/opt/data
+    environment:
+      - HERMES_DASHBOARD=1
+      - HERMES_DASHBOARD_HOST=0.0.0.0
+      - TZ=Asia/Shanghai
+    x-casaos:
+      architectures:
+        - amd64
+        - arm64
+      author: Nous Research
+      category: Developer
+      description:
+        en_us: Hermes Agent is a self-improving AI agent with built-in learning loop, persistent memory, and multi-platform messaging support (Telegram, Discord, Slack, etc.). It provides terminal access, file operations, web search, and extensible skills.
+        zh_cn: Hermes Agent 是 Nous Research 开发的自进化 AI 代理，具有内置学习循环、持久记忆和多平台消息支持（Telegram、Discord、Slack 等）。提供终端访问、文件操作、网络搜索和可扩展技能。
+      developer: Nous Research
+      icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/HermesAgent/icon.png
+      screenshot_link: []
+      tagline:
+        en_us: The Agent That Grows With You
+        zh_cn: 伴随你成长的 AI 代理
+      thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/HermesAgent/thumbnail.png
+      tips:
+        main: hermes-agent
+      title:
+        en_us: Hermes Agent
+        zh_cn: Hermes Agent
+      index: /
+      port_map: "8642"
+      scheme: http
