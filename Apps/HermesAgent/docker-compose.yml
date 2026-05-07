@@ -18,42 +18,42 @@ services:
       resources:
         reservations:
           memory: 512M
-    x-casaos:
-      architectures:
-        - amd64
-        - arm64
-      main: hermes-agent
-      store_app_id: hermes-agent
-      author: Nous Research
-      category: Developer
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: hermes-agent
+  store_app_id: hermes-agent
+  author: Nous Research
+  category: Developer
+  description:
+    en_us: Hermes Agent is a self-improving AI agent with built-in learning loop, persistent memory, and multi-platform messaging support (Telegram, Discord, Slack, etc.). It provides terminal access, file operations, web search, and extensible skills.
+    zh_cn: Hermes Agent 是 Nous Research 开发的自进化 AI 代理，具有内置学习循环、持久记忆和多平台消息支持（Telegram、Discord、Slack 等）。提供终端访问、文件操作、网络搜索和可扩展技能。
+  developer: Nous Research
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/HermesAgent/icon.png
+  tagline:
+    en_us: The Agent That Grows With You
+    zh_cn: 伴随你成长的 AI 代理
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/HermesAgent/thumbnail.png
+  title:
+    en_us: Hermes Agent
+    zh_cn: Hermes Agent
+  tips:
+    main: hermes-agent
+  index: /
+  port_map: "8642"
+  scheme: http
+  ports:
+    - container: "8642"
       description:
-        en_us: Hermes Agent is a self-improving AI agent with built-in learning loop, persistent memory, and multi-platform messaging support (Telegram, Discord, Slack, etc.). It provides terminal access, file operations, web search, and extensible skills.
-        zh_cn: Hermes Agent 是 Nous Research 开发的自进化 AI 代理，具有内置学习循环、持久记忆和多平台消息支持（Telegram、Discord、Slack 等）。提供终端访问、文件操作、网络搜索和可扩展技能。
-      developer: Nous Research
-      icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/HermesAgent/icon.png
-      tagline:
-        en_us: The Agent That Grows With You
-        zh_cn: 伴随你成长的 AI 代理
-      thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/HermesAgent/thumbnail.png
-      title:
-        en_us: Hermes Agent
-        zh_cn: Hermes Agent
-      tips:
-        main: hermes-agent
-      index: /
-      port_map: "8642"
-      scheme: http
-      ports:
-        - container: "8642"
-          description:
-            en_us: Hermes Gateway API Port
-            zh_cn: Hermes Gateway API 端口
-        - container: "9119"
-          description:
-            en_us: Hermes Dashboard Web UI
-            zh_cn: Hermes Dashboard 网页界面
-      volumes:
-        - container: /opt/data
-          description:
-            en_us: Hermes data directory (config, sessions, skills, memories)
-            zh_cn: Hermes 数据目录（配置、会话、技能、记忆）
+        en_us: Hermes Gateway API Port
+        zh_cn: Hermes Gateway API 端口
+    - container: "9119"
+      description:
+        en_us: Hermes Dashboard Web UI
+        zh_cn: Hermes Dashboard 网页界面
+  volumes:
+    - container: /opt/data
+      description:
+        en_us: Hermes data directory (config, sessions, skills, memories)
+        zh_cn: Hermes 数据目录（配置、会话、技能、记忆）
