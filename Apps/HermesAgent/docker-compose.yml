@@ -12,12 +12,11 @@ services:
       - /DATA/AppData/hermes-agent:/opt/data
     environment:
       - HERMES_DASHBOARD=1
-      - HERMES_DASHBOARD_HOST=0.0.0.0
       - TZ=Asia/Shanghai
     deploy:
       resources:
-        reservations:
-          memory: 512M
+        limits:
+          memory: 4G
 x-casaos:
   architectures:
     - amd64
