@@ -4,7 +4,9 @@ services:
     image: nousresearch/hermes-agent:latest
     container_name: hermes-agent
     restart: unless-stopped
-    command: gateway run
+    command:
+      - gateway
+      - run
     ports:
       - "8642:8642"
       - "9119:9119"
@@ -15,30 +17,43 @@ services:
       - TZ=Asia/Shanghai
     deploy:
       resources:
-        limits:
-          memory: 4G
+        reservations:
+          memory: 512M
 x-casaos:
   architectures:
     - amd64
     - arm64
   main: hermes-agent
   store_app_id: hermes-agent
-  author: Nous Research
+  author: Cp0204
   category: Developer
   description:
     en_us: Hermes Agent is a self-improving AI agent with built-in learning loop, persistent memory, and multi-platform messaging support (Telegram, Discord, Slack, etc.). It provides terminal access, file operations, web search, and extensible skills.
     zh_cn: Hermes Agent 是 Nous Research 开发的自进化 AI 代理，具有内置学习循环、持久记忆和多平台消息支持（Telegram、Discord、Slack 等）。提供终端访问、文件操作、网络搜索和可扩展技能。
   developer: Nous Research
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/HermesAgent/icon.png
+  screenshot_link: []
   tagline:
     en_us: The Agent That Grows With You
     zh_cn: 伴随你成长的 AI 代理
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/HermesAgent/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        After installation, run the setup wizard inside the container to configure API keys:
+        `docker exec -it hermes-agent hermes setup`
+        
+        Gateway API: http://<your-ip>:8642
+        Dashboard: http://<your-ip>:9119
+      zh_cn: |
+        安装后，在容器内运行设置向导来配置 API 密钥：
+        `docker exec -it hermes-agent hermes setup`
+        
+        Gateway API: http://<你的IP>:8642
+        Dashboard: http://<你的IP>:9119
   title:
     en_us: Hermes Agent
     zh_cn: Hermes Agent
-  tips:
-    main: hermes-agent
   index: /
   port_map: "8642"
   scheme: http
