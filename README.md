@@ -77,6 +77,8 @@ This is just a generic version, please add the following sources corresponding t
 
 Enjoyed the project? Consider buying me a coffee - it helps me keep going!
 
+[![PalPay](https://cdn.jsdelivr.net/gh/Cp0204/Cp0204@main/img/donate_paypal.png)](https://paypal.me/iscp0204)
+
 <a href="https://buymeacoffee.com/cp0204"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" target="_blank"/></a>
 
 如果你觉得这个项目对你有帮助，可以给我一点点支持，非常感谢～
