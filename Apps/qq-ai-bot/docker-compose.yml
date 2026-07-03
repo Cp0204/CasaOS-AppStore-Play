@@ -1,0 +1,101 @@
+name: qq-ai-bot
+services:
+  qq-ai-bot:
+    image: ghcr.io/happysnaker/qq-ai-bot:latest
+    container_name: qq-ai-bot
+    restart: unless-stopped
+    environment:
+      - BOT_PORT=8080
+      - DATA_DIR=/app/data
+      - SESSION_FILE_PATH=/app/data/sessions.json
+      - ONEBOT_MODE=reverse
+      - ONEBOT_REVERSE_WS_HOST=0.0.0.0
+      - ONEBOT_REVERSE_WS_PORT=16700
+      - ONEBOT_REVERSE_WS_PATH=/onebot/v11/ws
+      - ONEBOT_ALLOW_GROUP=true
+      - ONEBOT_REQUIRE_MENTION_IN_GROUP=true
+      - ONEBOT_ALLOW_PRIVATE=true
+      - ONEBOT_PROGRESS_MODE=message
+      - ACP_AGENT_COMMAND=node
+      - 'ACP_AGENT_ARGS_JSON=["dist/examples/mock-acp-agent.js"]'
+      - ACP_AGENT_WORKDIR=/app
+      - ACP_REUSE_SESSION=true
+      - ACP_VERBOSE_MODE=verbose
+    ports:
+      - "18080:8080"
+    volumes:
+      - /DATA/AppData/qq-ai-bot/data:/app/data
+    networks:
+      - qq_ai_bot_network
+
+  napcat:
+    image: mlikiowa/napcat-docker:latest
+    container_name: qq-ai-bot-napcat
+    restart: unless-stopped
+    depends_on:
+      - qq-ai-bot
+    environment:
+      - NAPCAT_UID=1000
+      - NAPCAT_GID=1000
+      - WEBUI_TOKEN=napcat
+      - MODE=qq-ai-bot
+    ports:
+      - "3000:3000"
+      - "6099:6099"
+    volumes:
+      - /DATA/AppData/qq-ai-bot/napcat/config:/app/napcat/config
+      - /DATA/AppData/qq-ai-bot/napcat/QQ:/app/.config/QQ
+    networks:
+      - qq_ai_bot_network
+
+networks:
+  qq_ai_bot_network:
+    driver: bridge
+
+x-casaos:
+  architectures:
+    - amd64
+  main: napcat
+  store_app_id: qq-ai-bot
+  author: happysnaker
+  developer: happysnaker
+  category: Chat
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qq-ai-bot/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qq-ai-bot/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qq-ai-bot/screenshot-2.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qq-ai-bot/thumbnail.png
+  description:
+    en_us: Self-hosted QQ ↔ AI bot scaffold for OneBot 11 / NapCat / LLOneBot. Bundles an ACP-compatible agent bridge, persistent sessions, progress streaming, and a ready-to-run Docker demo.
+    zh_cn: 一个面向自托管场景的 QQ ↔ AI Bot 脚手架，适配 OneBot 11 / NapCat / LLOneBot，内置 ACP 兼容 agent 桥接、持久会话、进度流式消息与开箱即用 Docker demo。
+  tagline:
+    en_us: Self-hosted QQ ↔ AI bot scaffold with ACP agent bridging
+    zh_cn: 支持 ACP agent 桥接的自托管 QQ ↔ AI Bot 脚手架
+  title:
+    en_us: qq-ai-bot
+    zh_cn: qq-ai-bot
+  tips:
+    before_install:
+      en_us: |
+        1. Open NapCat WebUI at `/webui` after install. The default token is `napcat` — change it after first login.
+
+        2. Sign in QQ from NapCat first. This stack uses NapCat's built-in `MODE=qq-ai-bot` template, so OneBot11 reverse WS is prewired to the bundled `qq-ai-bot` service.
+
+        3. The bundled bot starts with the mock ACP agent so you can verify QQ → OneBot11 → ACP end-to-end first.
+
+        4. To connect your own agent, edit `ACP_AGENT_COMMAND`, `ACP_AGENT_ARGS_JSON`, and `ACP_AGENT_WORKDIR` in the `qq-ai-bot` service.
+
+        5. Optional admin / health endpoints are exposed on port `18080`, e.g. `/status`, `/readyz`.
+      zh_cn: |
+        1. 安装后先打开 NapCat 的 `/webui`。默认登录 token 是 `napcat`，首次登录后建议立即修改。
+
+        2. 先在 NapCat 中登录 QQ。本编排直接复用了 NapCat 官方 `MODE=qq-ai-bot` 模板，OneBot11 reverse WS 已经预先连到内置的 `qq-ai-bot` 服务。
+
+        3. 默认先启动一个 mock ACP agent，方便你先验证 QQ → OneBot11 → ACP 整条链路是否打通。
+
+        4. 如果要接入你自己的 agent，只需要修改 `qq-ai-bot` 服务里的 `ACP_AGENT_COMMAND`、`ACP_AGENT_ARGS_JSON` 和 `ACP_AGENT_WORKDIR`。
+
+        5. 可选的管理 / 健康检查接口暴露在 `18080` 端口，例如 `/status`、`/readyz`。
+  port_map: "6099"
+  scheme: http
+  index: /webui
