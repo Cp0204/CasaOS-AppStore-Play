@@ -55,6 +55,7 @@ networks:
 x-casaos:
   architectures:
     - amd64
+    - arm64
   main: napcat
   store_app_id: qq-ai-bot
   author: happysnaker
