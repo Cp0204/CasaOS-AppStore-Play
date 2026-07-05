@@ -40,14 +40,8 @@ x-casaos:
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/openlist/thumbnail.png
   tips:
     before_install:
-      en_us: |
-        After installation, view the initial password in the log.
-
-        This fork is not yet stable, specific migration progress can be viewed in [OpenList Migration Work Summary](https://github.com/OpenListTeam/OpenList/issues/6)
-      zh_cn: |
-        安装完成后，请在日志中查看初始密码。
-
-        本 Fork 尚未稳定, 具体迁移进度可在 [OpenList 迁移工作总结](https://github.com/OpenListTeam/OpenList/issues/6) 中查看。
+      en_us: After installation, view the initial password in the log.
+      zh_cn: 安装完成后，请在日志中查看初始密码。
   title:
     en_us: OpenList
   port_map: "5244"
