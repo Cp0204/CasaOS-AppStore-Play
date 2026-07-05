@@ -1,0 +1,54 @@
+name: hermes-agent
+services:
+  hermes-agent:
+    image: nousresearch/hermes-agent:v2026.6.19
+    container_name: hermes-agent
+    restart: unless-stopped
+    command: gateway run
+    network_mode: bridge
+    ports:
+      - "8642:8642"
+      - "9119:9119"
+    volumes:
+      - /DATA/AppData/hermes-agent:/opt/data
+    environment:
+      - HERMES_DASHBOARD=1
+      - HERMES_DASHBOARD_PORT=9119
+      - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=admin
+      - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=password
+    hostname: hermes-agent
+    deploy:
+      resources:
+        reservations:
+          memory: 2G
+        limits:
+          memory: 2G
+          cpus: "2.0"
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: hermes-agent
+  store_app_id: hermes-agent
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: The self-improving AI agent by Nous Research. Creates skills from experience, improves them during use, persists knowledge across sessions. Supports Telegram, Discord, Slack, WhatsApp, Signal, and CLI with a full TUI interface.
+    zh_cn: Nous Research 开发的自我进化 AI 智能体。从经验中创建技能，使用中持续改进，跨会话持久化知识。支持 Telegram、Discord、Slack、WhatsApp、Signal 及 CLI 全功能终端界面。
+  developer: Nous Research
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hermes-agent/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hermes-agent/screenshot-1.png
+  tagline:
+    en_us: The agent that grows with you.
+    zh_cn: 与你一起成长的智能体。
+  tips:
+    before_install:
+      en_us: "Requires an LLM API key. Run `hermes setup` inside the container or configure via environment variables.\n\n**Dashboard default credentials:** `admin` / `password`\n\n⚠️ Change `HERMES_DASHBOARD_BASIC_AUTH_PASSWORD` before exposing to network.\n\n[Docs](https://hermes-agent.nousresearch.com/docs/)"
+      zh_cn: "需要 LLM API 密钥。在容器内运行 `hermes setup` 或通过环境变量配置。\n\n**仪表盘默认账号密码：** `admin` / `password`\n\n⚠️ 暴露到网络前请修改 `HERMES_DASHBOARD_BASIC_AUTH_PASSWORD`。\n\n[文档](https://hermes-agent.nousresearch.com/docs/)"
+  title:
+    en_us: Hermes Agent
+  index: /
+  port_map: "9119"
+  scheme: http
