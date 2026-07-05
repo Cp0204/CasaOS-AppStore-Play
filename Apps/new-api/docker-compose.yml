@@ -1,0 +1,45 @@
+name: new-api
+services:
+  new-api:
+    image: calciumion/new-api:latest
+    container_name: new-api
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - "3000:3000"
+    volumes:
+      - /DATA/AppData/new-api/data:/data
+    environment:
+      - TZ=Asia/Shanghai
+    deploy:
+      resources:
+        reservations:
+          memory: 256M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: new-api
+  store_app_id: new-api
+  author: Cp0204
+  category: Developer
+  description:
+    en_us: "A unified AI model hub for aggregation & distribution. Supports cross-converting various LLMs into OpenAI-compatible, Claude-compatible, or Gemini-compatible formats. Centralized gateway for personal and enterprise model management."
+    zh_cn: "AI 模型聚合分发统一网关。支持将多种 LLM 转换为 OpenAI、Claude、Gemini 兼容格式，提供个人和企业级模型管理的集中化网关。"
+  developer: QuantumNous
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/new-api/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/new-api/screenshot-1.webp
+  tagline:
+    en_us: Unified AI model hub for aggregation & distribution
+    zh_cn: AI 模型聚合分发统一网关
+  tips:
+    before_install:
+      en_us: "On first visit to `http://<host>:3000`, you will be guided to set up admin account and password.\n\n[GitHub](https://github.com/QuantumNous/new-api) | [Docs](https://docs.newapi.pro)"
+      zh_cn: "首次访问 `http://<主机IP>:3000` 时，系统将引导你设置管理员账号和密码。\n\n[GitHub](https://github.com/QuantumNous/new-api) | [文档](https://docs.newapi.pro)"
+  title:
+    en_us: New API
+  index: /
+  port_map: "3000"
+  scheme: http
