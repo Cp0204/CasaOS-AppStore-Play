@@ -1,0 +1,50 @@
+name: songloft
+services:
+  songloft:
+    image: songloft/songloft:latest
+    container_name: songloft
+    restart: unless-stopped
+    ports:
+      - "58091:58091"
+    volumes:
+      - /DATA/AppData/songloft/music:/app/music
+      - /DATA/AppData/songloft/data:/app/data
+    environment:
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=your_strong_password
+      - LISTEN_PORT=58091
+    deploy:
+      resources:
+        reservations:
+          memory: 128M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  main: songloft
+  store_app_id: songloft
+  author: Cp0204
+  category: Media
+  description:
+    en_us: Self-hosted music server for personal users. Scan local directories, auto-extract metadata and covers for MP3/FLAC/WAV/APE/OGG/M4A. Features JS plugin system, cross-platform Flutter clients, Kodi plugin, and built-in Web UI.
+    zh_cn: 面向个人用户的自托管音乐服务器。扫描本地目录，自动提取 MP3/FLAC/WAV/APE/OGG/M4A 等格式的封面和元数据。支持 JS 插件体系、跨平台 Flutter 客户端、Kodi 插件及内置 Web 界面。
+  developer: hanxi
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/songloft/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/songloft/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/songloft/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/songloft/screenshot-3.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/songloft/thumbnail.png
+  tagline:
+    en_us: Self-hosted music server for personal users.
+    zh_cn: 面向个人用户的自托管音乐服务器
+  tips:
+    before_install:
+      en_us: "Default credentials are `admin` / `your_strong_password`. Please replace the ADMIN_PASSWORD environment variable with your own strong password before deploying."
+      zh_cn: "默认账号密码为 `admin` / `your_strong_password` 。请将环境变量 ADMIN_PASSWORD 的值替换为你自己的强密码。"
+  title:
+    en_us: Songloft
+  index: /
+  port_map: "58091"
