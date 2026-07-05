@@ -1,7 +1,7 @@
 name: hermes-agent
 services:
   hermes-agent:
-    image: nousresearch/hermes-agent:v2026.6.19
+    image: nousresearch/hermes-agent:v2026.7.1
     container_name: hermes-agent
     restart: unless-stopped
     command: gateway run
