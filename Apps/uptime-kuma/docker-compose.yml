@@ -1,7 +1,7 @@
 name: uptime-kuma
 services:
   uptime-kuma:
-    image: louislam/uptime-kuma:2
+    image: louislam/uptime-kuma:2-slim
     container_name: uptime-kuma
     restart: unless-stopped
     ports:
