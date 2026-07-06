@@ -49,6 +49,6 @@ x-casaos:
       zh_cn: "需要 LLM API 密钥。在容器内运行 `hermes setup` 或通过环境变量配置。\n\n**仪表盘默认账号密码：** `admin` / `password`\n\n⚠️ 暴露到网络前请修改 `HERMES_DASHBOARD_BASIC_AUTH_PASSWORD`。\n\n[文档](https://hermes-agent.nousresearch.com/docs/)"
   title:
     en_us: Hermes Agent
-  index: /
+  index: /auth/password-login
   port_map: "9119"
   scheme: http
