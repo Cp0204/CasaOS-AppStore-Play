@@ -28,7 +28,6 @@ x-casaos:
   id: com.cp0204.homepage
   architectures:
     - amd64
-    - arm
     - arm64
   main: homepage
   category: Productivity

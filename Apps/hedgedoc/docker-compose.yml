@@ -51,7 +51,6 @@ x-casaos:
   architectures:
     - amd64
     - arm64
-    - arm
   main: hedgedoc
   store_app_id: hedgedoc
   category: Productivity

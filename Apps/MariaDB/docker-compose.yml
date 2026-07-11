@@ -47,7 +47,6 @@ x-casaos:
   id: com.cp0204.mariadb
   architectures:
     - amd64
-    - arm
     - arm64
   main: mariadb
   author: Cp0204

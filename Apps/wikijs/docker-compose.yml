@@ -42,7 +42,6 @@ services:
 x-casaos:
   id: com.cp0204.wikijs
   architectures:
-    - arm
     - arm64
     - amd64
   main: wikijs

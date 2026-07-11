@@ -50,7 +50,6 @@ x-casaos:
   id: com.cp0204.linkace
   architectures:
     - amd64
-    - arm
     - arm64
   author: Cp0204
   developer: linkace

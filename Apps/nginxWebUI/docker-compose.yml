@@ -20,7 +20,6 @@ x-casaos:
   id: com.cp0204.nginxwebui
   architectures:
     - amd64
-    - arm
     - arm64
   main: nginxwebui
   author: Cp0204

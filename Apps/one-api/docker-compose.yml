@@ -24,7 +24,6 @@ x-casaos:
   id: com.cp0204.one-api
   architectures:
     - amd64
-    - arm64
   main: one-api
   store_app_id: one-api
   author: Cp0204

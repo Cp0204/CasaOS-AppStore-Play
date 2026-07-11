@@ -53,7 +53,6 @@ networks:
 x-casaos:
   id: com.cp0204.grampsweb
   architectures:
-    - arm
     - arm64
     - amd64
   main: grampsweb
