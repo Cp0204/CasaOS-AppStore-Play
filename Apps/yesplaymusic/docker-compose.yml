@@ -17,9 +17,10 @@ services:
       ports:
         - container: '80'
           description:
-            en_us: Port
-            zh_cn: 端口
+            en_US: Port
+            zh_CN: 端口
 x-casaos:
+  id: com.cp0204.yesplaymusic
   architectures:
     - amd64
     - arm64
@@ -34,14 +35,14 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/yesplaymusic/screenshot-3.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/yesplaymusic/thumbnail.png
   description:
-    en_us: ✅ Developed using Vue.js stack, supports Netease Cloud login, MV playback, lyrics display, private FM, and daily recommendations. No social features, direct playback for overseas users, UnblockNeteaseMusic support, automatic check-ins, Light/Dark Mode switching, Touch Bar, PWA installation, Last.fm Scrobble, music cloud storage, custom shortcuts, Mpris, and more features in development. 🛠
-    zh_cn: ✅ Vue.js全家桶开发，支持网易云登录、MV播放、歌词显示、私人FM、每日推荐。无社交功能，海外用户直接播放，支持UnblockNeteaseMusic，自动签到，Light/Dark Mode切换，Touch Bar，PWA安装，Last.fm Scrobble，音乐云盘，自定义快捷键，Mpris等。🛠 更多功能开发中。
+    en_US: ✅ Developed using Vue.js stack, supports Netease Cloud login, MV playback, lyrics display, private FM, and daily recommendations. No social features, direct playback for overseas users, UnblockNeteaseMusic support, automatic check-ins, Light/Dark Mode switching, Touch Bar, PWA installation, Last.fm Scrobble, music cloud storage, custom shortcuts, Mpris, and more features in development. 🛠
+    zh_CN: ✅ Vue.js全家桶开发，支持网易云登录、MV播放、歌词显示、私人FM、每日推荐。无社交功能，海外用户直接播放，支持UnblockNeteaseMusic，自动签到，Light/Dark Mode切换，Touch Bar，PWA安装，Last.fm Scrobble，音乐云盘，自定义快捷键，Mpris等。🛠 更多功能开发中。
   tagline:
-    en_us: High aesthetic third-party NetEase cloud player
-    zh_cn: 高颜值的第三方网易云播放器
+    en_US: High aesthetic third-party NetEase cloud player
+    zh_CN: 高颜值的第三方网易云播放器
   title:
-    en_us: YesPlayMusic
-    zh_cn: YesPlayMusic
+    en_US: YesPlayMusic
+    zh_CN: YesPlayMusic
   port_map: '3000'
   scheme: http
   index: /

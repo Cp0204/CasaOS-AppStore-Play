@@ -26,6 +26,7 @@ services:
           cpus: "2.0"
 
 x-casaos:
+  id: com.cp0204.hermes-agent
   architectures:
     - amd64
     - arm64
@@ -34,21 +35,21 @@ x-casaos:
   author: Cp0204
   category: Developer
   description:
-    en_us: The self-improving AI agent by Nous Research. Creates skills from experience, improves them during use, persists knowledge across sessions. Supports Telegram, Discord, Slack, WhatsApp, Signal, and CLI with a full TUI interface.
-    zh_cn: Nous Research 开发的自我进化 AI 智能体。从经验中创建技能，使用中持续改进，跨会话持久化知识。支持 Telegram、Discord、Slack、WhatsApp、Signal 及 CLI 全功能终端界面。
+    en_US: The self-improving AI agent by Nous Research. Creates skills from experience, improves them during use, persists knowledge across sessions. Supports Telegram, Discord, Slack, WhatsApp, Signal, and CLI with a full TUI interface.
+    zh_CN: Nous Research 开发的自我进化 AI 智能体。从经验中创建技能，使用中持续改进，跨会话持久化知识。支持 Telegram、Discord、Slack、WhatsApp、Signal 及 CLI 全功能终端界面。
   developer: Nous Research
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hermes-agent/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hermes-agent/screenshot-1.png
   tagline:
-    en_us: The agent that grows with you.
-    zh_cn: 与你一起成长的智能体。
+    en_US: The agent that grows with you.
+    zh_CN: 与你一起成长的智能体。
   tips:
     before_install:
-      en_us: "Requires an LLM API key. Run `hermes setup` inside the container or configure via environment variables.\n\n**Dashboard default credentials:** `admin` / `password`\n\n⚠️ Change `HERMES_DASHBOARD_BASIC_AUTH_PASSWORD` before exposing to network.\n\n[Docs](https://hermes-agent.nousresearch.com/docs/)"
-      zh_cn: "需要 LLM API 密钥。在容器内运行 `hermes setup` 或通过环境变量配置。\n\n**仪表盘默认账号密码：** `admin` / `password`\n\n⚠️ 暴露到网络前请修改 `HERMES_DASHBOARD_BASIC_AUTH_PASSWORD`。\n\n[文档](https://hermes-agent.nousresearch.com/docs/)"
+      en_US: "Requires an LLM API key. Run `hermes setup` inside the container or configure via environment variables.\n\n**Dashboard default credentials:** `admin` / `password`\n\n⚠️ Change `HERMES_DASHBOARD_BASIC_AUTH_PASSWORD` before exposing to network.\n\n[Docs](https://hermes-agent.nousresearch.com/docs/)"
+      zh_CN: "需要 LLM API 密钥。在容器内运行 `hermes setup` 或通过环境变量配置。\n\n**仪表盘默认账号密码：** `admin` / `password`\n\n⚠️ 暴露到网络前请修改 `HERMES_DASHBOARD_BASIC_AUTH_PASSWORD`。\n\n[文档](https://hermes-agent.nousresearch.com/docs/)"
   title:
-    en_us: Hermes Agent
+    en_US: Hermes Agent
   index: /auth/password-login
   port_map: "9119"
   scheme: http

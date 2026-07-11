@@ -47,6 +47,7 @@ networks:
     driver: bridge
 
 x-casaos:
+  id: com.cp0204.linkace
   architectures:
     - amd64
     - arm
@@ -57,14 +58,14 @@ x-casaos:
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/LinkAce/icon.png
   store_app_id: linkace
   description:
-    en_us: Manage your bookmarks, links, and reading list with ease using LinkAce. Access your links from anywhere with a web browser.
-    zh_cn: 使用LinkAce轻松管理书签、链接和阅读列表。通过Web浏览器随时随地访问您的链接。
+    en_US: Manage your bookmarks, links, and reading list with ease using LinkAce. Access your links from anywhere with a web browser.
+    zh_CN: 使用LinkAce轻松管理书签、链接和阅读列表。通过Web浏览器随时随地访问您的链接。
   tagline:
-    en_us: Manage Your Bookmarks and Links
-    zh_cn: 管理您的书签和链接
+    en_US: Manage Your Bookmarks and Links
+    zh_CN: 管理您的书签和链接
   tips:
     before_install:
-      en_us: |
+      en_US: |
         Steps
 
         1. Create the **.env** file before installation and run it on the host machine
@@ -79,7 +80,7 @@ x-casaos:
 
 
         [Official documentation](https://www.linkace.org/docs/v1/setup/setup-with-docker/simple/)
-      zh_cn: |
+      zh_CN: |
         使用步骤
 
         1. 安装前建立 **.env** 文件，在宿主机运行
@@ -95,7 +96,7 @@ x-casaos:
 
         [官方文档](https://www.linkace.org/docs/v1/setup/setup-with-docker/simple/)
   title:
-    en_us: LinkAce
+    en_US: LinkAce
   index: /
   port_map: "8086"
   scheme: http

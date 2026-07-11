@@ -22,36 +22,37 @@ services:
       ports:
         - container: "5700"
           description:
-            en_us: WebUI Port
-            zh_cn: WebUI端口
+            en_US: WebUI Port
+            zh_CN: WebUI端口
       volumes:
         - container: /ql/config
           description:
-            en_us: qinglong config directory.
-            zh_cn: 青龙配置目录
+            en_US: qinglong config directory.
+            zh_CN: 青龙配置目录
 x-casaos:
+  id: com.cp0204.qinglong
   architectures:
     - amd64
     - arm
     - arm64
   main: qinglong
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: QingLong is a platform for managing and executing scheduled tasks for Python3, JavaScript, Shell, and Typescript scripts.
-    zh_cn: 青龙是一个用于管理和执行Python3、JavaScript、Shell和Typescript脚本的定时任务平台。
+    en_US: QingLong is a platform for managing and executing scheduled tasks for Python3, JavaScript, Shell, and Typescript scripts.
+    zh_CN: 青龙是一个用于管理和执行Python3、JavaScript、Shell和Typescript脚本的定时任务平台。
   developer: whyour
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qinglong/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qinglong/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qinglong/screenshot-2.png
   tagline:
-    en_us: Task management platform for Python, JavaScript, Shell, and Typescript scripts.
-    zh_cn: 用于Python、JavaScript、Shell和Typescript脚本的任务管理平台。
+    en_US: Task management platform for Python, JavaScript, Shell, and Typescript scripts.
+    zh_CN: 用于Python、JavaScript、Shell和Typescript脚本的任务管理平台。
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qinglong/thumbnail.png
   tips: {}
   title:
-    en_us: QingLong
-    zh_cn: 青龙
+    en_US: QingLong
+    zh_CN: 青龙
   index:
   port_map: "5700"

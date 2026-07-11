@@ -39,25 +39,26 @@ networks:
     name: codimd
 
 x-casaos:
+  id: com.cp0204.codimd
   architectures:
     - amd64
     - arm64
   main: codimd
   store_app_id: codimd
-  category: Documents
+  category: Productivity
   author: Cp0204
   developer: hackmd.io
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/codimd/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/codimd/screenshot-1.png
   description:
-    en_us: CodiMD lets you collaborate in real-time with markdown. Built on HackMD source code, CodiMD lets you host and control your team's content with speed and ease.
-    zh_cn: CodiMD 可让您使用 Markdown 进行实时协作。CodiMD 基于 HackMD 源代码构建，可让您快速、轻松地托管和控制团队内容。
+    en_US: CodiMD lets you collaborate in real-time with markdown. Built on HackMD source code, CodiMD lets you host and control your team's content with speed and ease.
+    zh_CN: CodiMD 可让您使用 Markdown 进行实时协作。CodiMD 基于 HackMD 源代码构建，可让您快速、轻松地托管和控制团队内容。
   tagline:
-    en_us: Realtime collaborative markdown notes on all platforms.
-    zh_cn: 全平台 Markdown 实时协作
+    en_US: Realtime collaborative markdown notes on all platforms.
+    zh_CN: 全平台 Markdown 实时协作
   title:
-    en_us: CodiMD
+    en_US: CodiMD
   port_map: "3000"
   scheme: http
   index: /

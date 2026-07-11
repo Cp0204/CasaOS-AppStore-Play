@@ -21,15 +21,16 @@ services:
       - /dev/net/tun:/dev/net/tun
       - /DATA/AppData/tailscaled/config:/var/lib/tailscale
 x-casaos:
+  id: com.cp0204.tailscale
   architectures:
     - amd64
     - arm
     - arm64
   author: Cp0204
-  category: VPN
+  category: Networking
   description:
-    en_us: Tailscale lets you connect your devices and users together in your own secure virtual private network. Tailscale enables encrypted point-to-point connections using the open source WireGuard protocol.
-    zh_cn: Tailscale 允许您将您的设备和用户连接到您自己的安全虚拟专用网络中。Tailscale 通过开源的 WireGuard 协议实现加密的点对点连接。
+    en_US: Tailscale lets you connect your devices and users together in your own secure virtual private network. Tailscale enables encrypted point-to-point connections using the open source WireGuard protocol.
+    zh_CN: Tailscale 允许您将您的设备和用户连接到您自己的安全虚拟专用网络中。Tailscale 通过开源的 WireGuard 协议实现加密的点对点连接。
   developer: tailscale
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Tailscale/icon.png
   screenshot_link:
@@ -38,14 +39,14 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/tailscale/screenshot-3.svg
   main: tailscaled
   tagline:
-    en_us: Secure, private, and easy networking
-    zh_cn: 实现安全、私密且简单的网络
+    en_US: Secure, private, and easy networking
+    zh_CN: 实现安全、私密且简单的网络
   tips:
     before_install:
-      en_us: After installation, view the authentication url in the `App Settings-Logs`.
-      zh_cn: 安装完成后，请在`应用设置-日志`中查看认证链接。
+      en_US: After installation, view the authentication url in the `App Settings-Logs`.
+      zh_CN: 安装完成后，请在`应用设置-日志`中查看认证链接。
   title:
-    en_us: Tailscaled
+    en_US: Tailscaled
   scheme: https
   hostname: login.tailscale.com
   index: /admin/machines

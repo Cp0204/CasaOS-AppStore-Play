@@ -20,29 +20,30 @@ services:
     container_name: webdav
 
 x-casaos:
+  id: com.cp0204.webdav
   architectures:
     - amd64
     - arm64
   main: webdav
   store_app_id: webdav
   author: bytemark
-  category: File Sync
+  category: Productivity
   description:
-    en_us: A simple WebDAV server.
-    zh_cn: 一个简单的WebDAV服务器。
+    en_US: A simple WebDAV server.
+    zh_CN: 一个简单的WebDAV服务器。
   developer: bytemark
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/webdav/icon.png
   # screenshot_link:
   #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/webdav/screenshot-1.png
   tagline:
-    en_us: Simple WebDAV Server
-    zh_cn: 简单的WebDAV服务器
+    en_US: Simple WebDAV Server
+    zh_CN: 简单的WebDAV服务器
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/webdav/thumbnail.png
   tips:
     before_install:
-      en_us: 'Default username: `admin`, default password: `admin1234`'
-      zh_cn: '默认用户名：`admin` ，默认密码：`admin1234`'
+      en_US: 'Default username: `admin`, default password: `admin1234`'
+      zh_CN: '默认用户名：`admin` ，默认密码：`admin1234`'
   title:
-    en_us: WebDAV
+    en_US: WebDAV
   index: /
   port_map: "8081"

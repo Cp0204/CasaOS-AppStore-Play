@@ -22,6 +22,7 @@ services:
     privileged: false
     container_name: lanraragi
 x-casaos:
+  id: com.cp0204.lanraragi
   architectures:
     - amd64
     - arm
@@ -36,14 +37,14 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lanraragi/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lanraragi/screenshot-3.png
   description:
-    en_us: 'LANraragi is a versatile comic archive management tool that supports various formats such as zip, rar, targz, lzma, 7z, xz, cbz, cbr, and pdf, with basic support for epub. Users can seamlessly read their comic archives directly from a web browser, as the server efficiently accesses compressed files using temporary folders.'
-    zh_cn: LANraragi是一款多功能的漫画存档管理工具，支持多种格式，包括zip、rar、targz、lzma、7z、xz、cbz、cbr和pdf，同时对epub提供基本支持。用户可以直接从Web浏览器中无缝阅读其漫画存档，因为服务器通过临时文件夹有效地访问压缩文件。
+    en_US: 'LANraragi is a versatile comic archive management tool that supports various formats such as zip, rar, targz, lzma, 7z, xz, cbz, cbr, and pdf, with basic support for epub. Users can seamlessly read their comic archives directly from a web browser, as the server efficiently accesses compressed files using temporary folders.'
+    zh_CN: LANraragi是一款多功能的漫画存档管理工具，支持多种格式，包括zip、rar、targz、lzma、7z、xz、cbz、cbr和pdf，同时对epub提供基本支持。用户可以直接从Web浏览器中无缝阅读其漫画存档，因为服务器通过临时文件夹有效地访问压缩文件。
   tagline:
-    en_us: Archival and reading of manga/doujinshi
-    zh_cn: 漫画/同人志的档案与阅读
+    en_US: Archival and reading of manga/doujinshi
+    zh_CN: 漫画/同人志的档案与阅读
   title:
-    en_us: LANraragi
-    zh_cn: LANraragi
+    en_US: LANraragi
+    zh_CN: LANraragi
   port_map: '3000'
   scheme: http
   index: /

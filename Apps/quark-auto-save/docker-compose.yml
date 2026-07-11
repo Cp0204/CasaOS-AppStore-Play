@@ -28,21 +28,22 @@ services:
       ports:
         - container: "5005"
           description:
-            en_us: Port
-            zh_cn: 端口
+            en_US: Port
+            zh_CN: 端口
       volumes:
         - container: /app/config
           description:
-            en_us: Config directory.
-            zh_cn: 配置目录
+            en_US: Config directory.
+            zh_CN: 配置目录
 x-casaos:
+  id: com.cp0204.quark-auto-save
   architectures:
     - amd64
     - arm
     - arm64
   main: quark-auto-save
   store_app_id: quark-auto-save
-  category: Cloud
+  category: Productivity
   author: Cp0204
   developer: Cp0204
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/quark-auto-save/icon.png
@@ -50,24 +51,24 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/quark-auto-save/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/quark-auto-save/screenshot-2.png
   description:
-    en_us: For some continuously updated resources, it is very troublesome to dump them every now and then.  Execute this script regularly to automatically dump and organize file names, together with Alist, rclone, Emby, you can achieve the effect of automatic updating. 🥳
-    zh_cn: 对于一些持续更新的资源，隔段时间去转存十分麻烦。  定期执行本脚本自动转存、文件名整理，配合 Alist, rclone, Emby 可达到自动追更的效果。🥳
+    en_US: For some continuously updated resources, it is very troublesome to dump them every now and then.  Execute this script regularly to automatically dump and organize file names, together with Alist, rclone, Emby, you can achieve the effect of automatic updating. 🥳
+    zh_CN: 对于一些持续更新的资源，隔段时间去转存十分麻烦。  定期执行本脚本自动转存、文件名整理，配合 Alist, rclone, Emby 可达到自动追更的效果。🥳
   tagline:
-    en_us: Pan.quark.cn's sign, automatic dumping, naming and organizing, sending push alerts and refreshing media libraries all in one
-    zh_cn: 夸克网盘签到、自动转存、命名整理、发推送提醒和刷新媒体库一条龙
+    en_US: Pan.quark.cn's sign, automatic dumping, naming and organizing, sending push alerts and refreshing media libraries all in one
+    zh_CN: 夸克网盘签到、自动转存、命名整理、发推送提醒和刷新媒体库一条龙
   title:
-    en_us: QuarkAutoSave
-    zh_cn: 夸克网盘自动转存
+    en_US: QuarkAutoSave
+    zh_CN: 夸克网盘自动转存
   tips:
     before_install:
-      en_us: |
+      en_US: |
         | Environment      | Default    | Remarks  |
         | ---------------- | ---------- | -------- |
         | `WEBUI_USERNAME` | `admin`    | Admin username |
         | `WEBUI_PASSWORD` | `admin123` | admin password |
 
         Currently WebUI is not perfect, only for auxiliary use, you should also understand how to [configure manually](https://github.com/Cp0204/quark-auto-save/blob/main/README.md#%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE).
-      zh_cn: |
+      zh_CN: |
         | 环境变量         | 默认       | 备注     |
         | ---------------- | ---------- | -------- |
         | `WEBUI_USERNAME` | `admin`    | 管理账号 |

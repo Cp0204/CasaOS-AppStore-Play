@@ -47,25 +47,26 @@ services:
     network_mode: bridge
 
 x-casaos:
+  id: com.cp0204.lancache
   architectures:
     - amd64
   author: Cp0204
   developer: LanCache.net
-  category: Network
+  category: Networking
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lancache/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lancache/screenshot-1.png
   store_app_id: lancache
   main: monolithic
   description:
-    en_us: Make the most of your network. Get more play for your gamers. Download your games once and serve them out to many people at your LAN. The principle is to set up the NAS as a DNS server, hijack HTTP traffic to the NAS, cache the downloaded game files, and distribute them at high speed by the NAS when downloading again.
-    zh_cn: 充分利用您的网络，为玩家带来更多乐趣。只需下载一次游戏，就可以向局域网中其他设备提供缓存高速下载。其原理是把NAS设为DNS服务器，劫持HTTP流量到NAS，缓存下载过的游戏文件，再次下载时由NAS高速分发。
+    en_US: Make the most of your network. Get more play for your gamers. Download your games once and serve them out to many people at your LAN. The principle is to set up the NAS as a DNS server, hijack HTTP traffic to the NAS, cache the downloaded game files, and distribute them at high speed by the NAS when downloading again.
+    zh_CN: 充分利用您的网络，为玩家带来更多乐趣。只需下载一次游戏，就可以向局域网中其他设备提供缓存高速下载。其原理是把NAS设为DNS服务器，劫持HTTP流量到NAS，缓存下载过的游戏文件，再次下载时由NAS高速分发。
   tagline:
-    en_us: LAN Party game caching made easy
-    zh_cn: 局域网轻松使用游戏下载缓存
+    en_US: LAN Party game caching made easy
+    zh_CN: 局域网轻松使用游戏下载缓存
   tips:
     before_install:
-      en_us: |
+      en_US: |
         After installation:
 
         1. Change the `LANCACHE_IP` of lancache-dns to the NAS cache server IP.
@@ -79,7 +80,7 @@ x-casaos:
         - Clients only use IPv4, disable IPv6 in the system network, otherwise the system may prioritize DNS resolution with IPv6
 
         - You must use ports 80 and 443 of the NAS, when the NAS acts as a pseudo HTTP(S) server.
-      zh_cn: |
+      zh_CN: |
         安装后：
 
         1. 更改lancache-dns的`LANCACHE_IP`为NAS缓存服务器IP
@@ -94,7 +95,7 @@ x-casaos:
 
         - 必须使用NAS的80、443端口，此时NAS作为伪HTTP(S)服务器
   title:
-    en_us: LanCache
+    en_US: LanCache
   index: /
   port_map: "80"
   scheme: http

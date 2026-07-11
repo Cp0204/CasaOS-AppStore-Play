@@ -35,31 +35,32 @@ services:
     privileged: false
 
 x-casaos:
+  id: com.cp0204.firefox
   architectures:
     - amd64
     - arm64
   main: firefox
   store_app_id: firefox
-  category: WEB
+  category: Productivity
   author: Cp0204
   developer: LinuxServer.io
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/firefox/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/firefox/screenshot-1.png
   description:
-    en_us: Firefox Browser, is a free and open-source web browser developed by the Mozilla Foundation and its subsidiary, the Mozilla Corporation. Firefox uses the Gecko layout engine to render web pages, which implements current and anticipated web standards.
-    zh_cn: Firefox 浏览器，是由 Mozilla 基金会及其子公司 Mozilla Corporation 开发的免费开源 Web 浏览器。Firefox 使用 Gecko 布局引擎来渲染网页，该引擎实现了当前和预期的 Web 标准。
+    en_US: Firefox Browser, is a free and open-source web browser developed by the Mozilla Foundation and its subsidiary, the Mozilla Corporation. Firefox uses the Gecko layout engine to render web pages, which implements current and anticipated web standards.
+    zh_CN: Firefox 浏览器，是由 Mozilla 基金会及其子公司 Mozilla Corporation 开发的免费开源 Web 浏览器。Firefox 使用 Gecko 布局引擎来渲染网页，该引擎实现了当前和预期的 Web 标准。
   tagline:
-    en_us: This is a Docker container for Firefox, it can access the intranet
-    zh_cn: 容器中的火狐浏览器，可访问内网
+    en_US: This is a Docker container for Firefox, it can access the intranet
+    zh_CN: 容器中的火狐浏览器，可访问内网
   title:
-    en_us: Firefox
+    en_US: Firefox
   tips:
     before_install:
-      en_us: |
+      en_US: |
         Default login `admin` Password `admin`, you can change it in environment variables. More [description](https://hub.docker.com/r/linuxserver/firefox).
         > When you start the program for the first time, it will take about 1~5min to download and install the language support package depending on the network condition, if you can't open it immediately, please wait.
-      zh_cn: |
+      zh_CN: |
         默认登录账号 `admin` 密码 `admin`，你可以在环境变量中更改。更多[说明](https://hub.docker.com/r/linuxserver/firefox)。
         > 首次启动时，根据网络情况，下载和安装语言支持包需要1~5分钟，如果无法立即打开，请稍候。
   port_map: "3000"

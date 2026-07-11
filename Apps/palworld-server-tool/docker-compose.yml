@@ -23,12 +23,13 @@ services:
           memory: 256M
 
 x-casaos:
+  id: com.cp0204.palworld-server-tool
   architectures:
     - amd64
     - arm64
   main: palworld-server-tool
   store_app_id: palworld-server-tool
-  category: Games
+  category: Others
   author: Cp0204
   developer: zaigie
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server-tool/icon.png
@@ -38,17 +39,17 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server-tool/screenshot-3.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/palworld-server/thumbnail.png
   description:
-    en_us: Through parse Level.sav and RCON, visual interface management PalWorld dedicated server. [documentation](https://github.com/zaigie/palworld-server-tool)
-    zh_cn: 基于Level.sav存档解析和RCON优雅地用可视化界面管理幻兽帕鲁专用服务器。[文档](https://github.com/zaigie/palworld-server-tool)
+    en_US: Through parse Level.sav and RCON, visual interface management PalWorld dedicated server. [documentation](https://github.com/zaigie/palworld-server-tool)
+    zh_CN: 基于Level.sav存档解析和RCON优雅地用可视化界面管理幻兽帕鲁专用服务器。[文档](https://github.com/zaigie/palworld-server-tool)
   tagline:
-    en_us: Visual Management of PalWorld dedicated server.
-    zh_cn: 可视化管理幻兽帕鲁专用服务器
+    en_US: Visual Management of PalWorld dedicated server.
+    zh_CN: 可视化管理幻兽帕鲁专用服务器
   title:
-    en_us: PalWorld Server Tool
-    zh_cn: 《幻兽帕鲁》服务器管理工具
+    en_US: PalWorld Server Tool
+    zh_CN: 《幻兽帕鲁》服务器管理工具
   tips:
     before_install:
-      en_us: |
+      en_US: |
         Environment variables that should be modified after installation:
 
         | Variables | Information | Defaults |
@@ -56,7 +57,7 @@ x-casaos:
         | WEB__PASSWORD | WebUI password | `password` |
         | RCON__ADDRESS | RCON service address | `172.17.0.1:25575` |
         | RCON__PASSWORD | Server administrator password | `adminPasswordHere` |
-      zh_cn: |
+      zh_CN: |
         安装后应修改的环境变量：
 
         | 变量 | 信息 | 默认值 |

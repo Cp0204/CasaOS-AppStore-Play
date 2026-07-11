@@ -29,22 +29,23 @@ services:
       ports:
         - container: '5001'
           description:
-            en_us: WebUI Port
-            zh_cn: WebUI 端口
+            en_US: WebUI Port
+            zh_CN: WebUI 端口
       volumes:
         - container: /var/run/docker.sock
           description:
-            en_us: Docker Management Connector
-            zh_cn: Docker 管理连接器
+            en_US: Docker Management Connector
+            zh_CN: Docker 管理连接器
         - container: /app/data
           description:
-            en_us: DATA directory.
-            zh_cn: 数据目录
+            en_US: DATA directory.
+            zh_CN: 数据目录
         - container: /opt/stacks
           description:
-            en_us: Stacks directory.
-            zh_cn: 堆栈目录
+            en_US: Stacks directory.
+            zh_CN: 堆栈目录
 x-casaos:
+  id: com.cp0204.dockge
   architectures:
     - amd64
     - arm
@@ -60,23 +61,23 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dockge/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dockge/screenshot-3.png
   description:
-    en_us: A fancy, easy-to-use and reactive self-hosted docker compose.yaml stack-oriented manager.
-    zh_cn: 一个美观、易用、反应灵敏的自托管 docker compose.yaml 堆栈管理器。
+    en_US: A fancy, easy-to-use and reactive self-hosted docker compose.yaml stack-oriented manager.
+    zh_CN: 一个美观、易用、反应灵敏的自托管 docker compose.yaml 堆栈管理器。
   tagline:
-    en_us: Stack-oriented manager
-    zh_cn: 堆栈管理器
+    en_US: Stack-oriented manager
+    zh_CN: 堆栈管理器
   title:
-    en_us: Dockge
+    en_US: Dockge
   tips:
     before_install:
-      en_us: |
+      en_US: |
         If you wish to manage CasaOS installed App in Dockge, run this command:
         ```shell
         mkdir -p /DATA/AppData/dockge/stacks
         cp -r /var/lib/casaos/apps/* /DATA/AppData/dockge/stacks
         ```
         This copies the stacks from CasaOS to Dockge
-      zh_cn: |
+      zh_CN: |
         如果你希望在 Dockge 中管理 CasaOS 安裝的应用，请执行这个命令：
         ```shell
         mkdir -p /DATA/AppData/dockge/stacks

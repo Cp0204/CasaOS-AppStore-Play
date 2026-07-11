@@ -22,6 +22,7 @@ services:
           memory: 8M
 
 x-casaos:
+  id: com.cp0204.0-dkturbo
   architectures:
     - arm
     - arm64
@@ -29,26 +30,26 @@ x-casaos:
   main: 0-dkturbo
   store_app_id: 0-dkturbo
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: Docker image accelerator, automatically test the speed and apply the fastest image source. **Non-Chinese users don’t need to use**
-    zh_cn: Docker 镜像加速器，自动测速和应用最快镜像源。
+    en_US: Docker image accelerator, automatically test the speed and apply the fastest image source. **Non-Chinese users don’t need to use**
+    zh_CN: Docker 镜像加速器，自动测速和应用最快镜像源。
   developer: Cp0204
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/0-dkturbo/icon.png
   tagline:
-    en_us: Non-Chinese users don’t need to use
-    zh_cn: Docker 镜像加速器，喂饭到你嘴里
+    en_US: Non-Chinese users don’t need to use
+    zh_CN: Docker 镜像加速器，喂饭到你嘴里
   title:
-    en_us: "dkTurbo"
+    en_US: "dkTurbo"
   scheme: https
   hostname: github.com
   port_map: ''
   index: /Cp0204/CasaOS-AppStore-Play
   tips:
     before_install:
-      en_us: |
+      en_US: |
         **Non-Chinese users don’t need to use**
-      zh_cn: |
+      zh_CN: |
         ### 启动 = 自动换源
 
         自动测速和修改镜像源，你可以在容器日志里看工作进度。

@@ -41,15 +41,16 @@ services:
           memory: 2048M
 
 x-casaos:
+  id: com.cp0204.fnos
   architectures:
     - amd64
   main: fnos
   store_app_id: fnos
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: fnOS is a lightweight and efficient operating system designed for containerized environments. It is based on the latest Linux kernel, compatible with x86 hardware, and supports flexible storage expansion. The system is free and supports lossless updates. It includes features like remote download, automatic scraping for movie posters, 99% accuracy in movie matching, automatic subtitle downloads, and hardware transcoding. It also supports TV-side viewing, making it easy for the whole family to use.
-    zh_cn: 飞牛私有云 fnOS 基于最新 Linux 内核深度开发，兼容 x86 硬件，存储自由，灵活扩容；系统正版免费、无损更新；飞牛影视支持 App 远程下载解析种子；自动刮削成海报墙、电影准确率 99%、自动下载字幕；支持主流硬件智能转码；支持 TV 端观影；一个飞牛 App 解决所有事情，简单易用，一家老小一起用飞牛。
+    en_US: fnOS is a lightweight and efficient operating system designed for containerized environments. It is based on the latest Linux kernel, compatible with x86 hardware, and supports flexible storage expansion. The system is free and supports lossless updates. It includes features like remote download, automatic scraping for movie posters, 99% accuracy in movie matching, automatic subtitle downloads, and hardware transcoding. It also supports TV-side viewing, making it easy for the whole family to use.
+    zh_CN: 飞牛私有云 fnOS 基于最新 Linux 内核深度开发，兼容 x86 硬件，存储自由，灵活扩容；系统正版免费、无损更新；飞牛影视支持 App 远程下载解析种子；自动刮削成海报墙、电影准确率 99%、自动下载字幕；支持主流硬件智能转码；支持 TV 端观影；一个飞牛 App 解决所有事情，简单易用，一家老小一起用飞牛。
   developer: Teiron Inc/GreenDamTan
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fnos/icon.png
   screenshot_link:
@@ -57,15 +58,15 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fnos/screenshot-2.png
     # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fnos/screenshot-3.png
   tagline:
-    en_us: Private Cloud Systems
-    zh_cn: 私有云系统
+    en_US: Private Cloud Systems
+    zh_CN: 私有云系统
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fnos/thumbnail.png
   tips:
     before_install:
-      en_us: Only for experience, no data persistence. Compatibility is not guaranteed. During initialization, if you encounter errors like 'Resource temporarily unavailable', simply refresh the page to access the web UI.
-      zh_cn: 仅供体验，无数据持久化。不保证兼容性。在初始化过程中，如果遇到类似“Resource temporarily unavailable”的错误，只需刷新页面即可访问 Web UI。
+      en_US: Only for experience, no data persistence. Compatibility is not guaranteed. During initialization, if you encounter errors like 'Resource temporarily unavailable', simply refresh the page to access the web UI.
+      zh_CN: 仅供体验，无数据持久化。不保证兼容性。在初始化过程中，如果遇到类似“Resource temporarily unavailable”的错误，只需刷新页面即可访问 Web UI。
   title:
-    en_us: fnOS
-    zh_cn: 飞牛私有云
+    en_US: fnOS
+    zh_CN: 飞牛私有云
   index: /
   port_map: "5666"

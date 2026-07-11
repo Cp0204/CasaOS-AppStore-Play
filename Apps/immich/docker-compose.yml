@@ -89,12 +89,13 @@ networks:
     name: immich
 
 x-casaos:
+  id: com.cp0204.immich
   architectures:
     - amd64
     - arm64
   main: immich
   store_app_id: immich
-  category: Gallery
+  category: Media
   author: Cp0204
   developer: alextran1502
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/immich/icon.png
@@ -102,21 +103,21 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/immich/screenshot-1.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/immich/thumbnail.png
   description:
-    en_us: immich is a self-hosted photo and video backup solution for iOS and Android. It offers AI-powered features like object detection, people recognition, and location-based search, giving you complete control over your privacy and data.
-    zh_cn: immich 是一款适用于 iOS 和 Android 的自托管照片和视频备份解决方案。它提供了由 AI 支持的功能，例如对象检测、人物识别和基于位置的搜索，使您可以完全控制自己的隐私和数据。
+    en_US: immich is a self-hosted photo and video backup solution for iOS and Android. It offers AI-powered features like object detection, people recognition, and location-based search, giving you complete control over your privacy and data.
+    zh_CN: immich 是一款适用于 iOS 和 Android 的自托管照片和视频备份解决方案。它提供了由 AI 支持的功能，例如对象检测、人物识别和基于位置的搜索，使您可以完全控制自己的隐私和数据。
   tagline:
-    en_us: High performance self-hosted photo and video backup solution
-    zh_cn: 高性能的自托管照片和视频备份方案
+    en_US: High performance self-hosted photo and video backup solution
+    zh_CN: 高性能的自托管照片和视频备份方案
   title:
-    en_us: immich
+    en_US: immich
   tips:
     before_install:
-      en_us: |
+      en_US: |
         ⚠️ The project is under very active development.
         ⚠️ Expect bugs and breaking changes.
         ⚠️ Do not use the app as the only way to store your photos and videos.
         ⚠️ Always follow 3-2-1 backup plan for your precious photos and videos!
-      zh_cn: |
+      zh_CN: |
         ⚠️ 本项目正在 非常活跃 地开发中。
         ⚠️ 可能存在 bug 或者随时有重大变更。
         ⚠️ 不要把本软件作为您存储照片或视频的唯一方式。

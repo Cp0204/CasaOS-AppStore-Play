@@ -67,11 +67,12 @@ networks:
     name: fastgpt
 
 x-casaos:
+  id: com.cp0204.fastgpt
   architectures:
     - amd64
     - arm64
   main: fastgpt
-  category: Chat
+  category: Social
   author: Cp0204
   developer: sealos.io
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fastgpt/icon.png
@@ -81,17 +82,17 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fastgpt/screenshot-3.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fastgpt/screenshot-4.png
   description:
-    en_us: FastGPT is a knowledge-based QA system built on the LLM, offers out-of-the-box data processing and model invocation capabilities, allows for workflow orchestration through Flow visualization!
-    zh_cn: FastGPT 是一个基于 LLM 大语言模型的知识库问答系统，提供开箱即用的数据处理、模型调用等能力。同时可以通过 Flow 可视化进行工作流编排，从而实现复杂的问答场景！
+    en_US: FastGPT is a knowledge-based QA system built on the LLM, offers out-of-the-box data processing and model invocation capabilities, allows for workflow orchestration through Flow visualization!
+    zh_CN: FastGPT 是一个基于 LLM 大语言模型的知识库问答系统，提供开箱即用的数据处理、模型调用等能力。同时可以通过 Flow 可视化进行工作流编排，从而实现复杂的问答场景！
   tagline:
-    en_us: Knowledge-based QA system built on the LLM
-    zh_cn: 大语言模型的知识库问答系统
+    en_US: Knowledge-based QA system built on the LLM
+    zh_CN: 大语言模型的知识库问答系统
   title:
-    en_us: FastGPT
-    zh_cn: FastGPT
+    en_US: FastGPT
+    zh_CN: FastGPT
   tips:
     before_install:
-      en_us: |
+      en_US: |
         Installation steps
 
         1. Create the **config.json** file before installation and run it on the host
@@ -106,7 +107,7 @@ x-casaos:
 
 
         [Documentation](https://doc.fastgpt.in/docs/development/docker/)
-      zh_cn: |
+      zh_CN: |
         安装步骤
 
         1. 安装前先建立**config.json**文件，在宿主机运行

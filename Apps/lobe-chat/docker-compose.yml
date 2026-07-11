@@ -17,12 +17,13 @@ services:
     network_mode: bridge
 
 x-casaos:
+  id: com.cp0204.lobe-chat
   architectures:
     - amd64
     - arm64
   main: lobe-chat
   store_app_id: lobe-chat
-  category: Chat
+  category: Social
   author: Cp0204
   developer: LobeHub
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lobe-chat/icon.png
@@ -34,17 +35,17 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lobe-chat/screenshot-5.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lobe-chat/thumbnail.png
   description:
-    en_us: An open-source, modern-design LLMs/AI chat framework. Supports Multi AI Providers( OpenAI / Claude 3 / Gemini / Perplexity / Bedrock / Azure / Mistral / Ollama ), Multi-Modals (Vision/TTS) and plugin system. One-click FREE deployment of your private ChatGPT chat application.
-    zh_cn: 一个开源、现代设计的LLMs/AI聊天框架。支持多个AI供应商（OpenAI / Claude 3 / Gemini / Perplexity / Bedrock / Azure / Mistral / Ollama）、多模态（视觉/TTS）和插件系统。一键免费部署您的私人ChatGPT聊天应用程序。
+    en_US: An open-source, modern-design LLMs/AI chat framework. Supports Multi AI Providers( OpenAI / Claude 3 / Gemini / Perplexity / Bedrock / Azure / Mistral / Ollama ), Multi-Modals (Vision/TTS) and plugin system. One-click FREE deployment of your private ChatGPT chat application.
+    zh_CN: 一个开源、现代设计的LLMs/AI聊天框架。支持多个AI供应商（OpenAI / Claude 3 / Gemini / Perplexity / Bedrock / Azure / Mistral / Ollama）、多模态（视觉/TTS）和插件系统。一键免费部署您的私人ChatGPT聊天应用程序。
   tagline:
-    en_us: Built for you the Super Individual
-    zh_cn: 在 LobeChat 中将你的 AI 团队汇聚一处
+    en_US: Built for you the Super Individual
+    zh_CN: 在 LobeChat 中将你的 AI 团队汇聚一处
   title:
-    en_us: LobeChat
+    en_US: LobeChat
   tips:
     before_install:
-      en_us: LobeChat provides some additional configuration items during deployment, which can be customized using [environment-variables](https://lobehub.com/docs/self-hosting/environment-variables/basic).
-      zh_cn: LobeChat 在部署时提供了一些额外的配置项，你可以使用[环境变量](https://lobehub.com/zh/docs/self-hosting/environment-variables/basic)进行自定义设置。
+      en_US: LobeChat provides some additional configuration items during deployment, which can be customized using [environment-variables](https://lobehub.com/docs/self-hosting/environment-variables/basic).
+      zh_CN: LobeChat 在部署时提供了一些额外的配置项，你可以使用[环境变量](https://lobehub.com/zh/docs/self-hosting/environment-variables/basic)进行自定义设置。
   port_map: "3210"
   scheme: http
   index: /

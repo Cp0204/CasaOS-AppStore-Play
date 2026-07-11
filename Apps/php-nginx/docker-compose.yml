@@ -20,24 +20,25 @@ services:
       - /DATA/AppData/php-nginx/certs:/etc/ssl/web
 
 x-casaos:
+  id: com.cp0204.php-nginx
   architectures:
     - amd64
     - arm
     - arm64
   main: php-nginx
   author: Cp0204
-  category: WEB
+  category: Productivity
   description:
-    en_us: A Docker application that combines PHP-FPM and Nginx to serve PHP websites. It provides a convenient setup for running PHP applications with an Nginx web server.
-    zh_cn: 一个将PHP-FPM和Nginx结合起来为PHP网站提供服务的Docker应用。它为使用Nginx作为Web服务器运行PHP应用程序提供了便捷的设置。
+    en_US: A Docker application that combines PHP-FPM and Nginx to serve PHP websites. It provides a convenient setup for running PHP applications with an Nginx web server.
+    zh_CN: 一个将PHP-FPM和Nginx结合起来为PHP网站提供服务的Docker应用。它为使用Nginx作为Web服务器运行PHP应用程序提供了便捷的设置。
   developer: shinsenter
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/php-nginx/icon.png
   tagline:
-    en_us: PHP-FPM and Nginx for PHP websites
-    zh_cn: 用于PHP网站的PHP-FPM和Nginx
+    en_US: PHP-FPM and Nginx for PHP websites
+    zh_CN: 用于PHP网站的PHP-FPM和Nginx
   tips: {}
   title:
-    en_us: php-nginx
+    en_US: php-nginx
   index:
   port_map: "8080"
   scheme: http

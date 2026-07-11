@@ -21,12 +21,13 @@ services:
     restart: unless-stopped
 
 x-casaos:
+  id: com.cp0204.cosmos-server
   architectures:
     - arm64
     - amd64
   main: cosmos-server
   store_app_id: cosmos-server
-  category: Cloud
+  category: Productivity
   author: Cp0204
   developer: azukaar
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/cosmos-server/icon.png
@@ -38,18 +39,18 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/cosmos-server/screenshot-5.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/cosmos-server/thumbnail.png
   description:
-    en_us: Cosmos is the most secure and easy way to self-host a Home Server. It acts as a secure gateway to your application, as well as a server manager. It aims to solve the increasingly worrying problem of vulnerable self-hosted applications and personal servers.
-    zh_cn: Cosmos 是自我托管家庭服务器最安全、最简单的方法。它既是应用程序的安全网关，也是服务器管理器。它旨在解决日益令人担忧的自托管应用程序和个人服务器易受攻击的问题。
+    en_US: Cosmos is the most secure and easy way to self-host a Home Server. It acts as a secure gateway to your application, as well as a server manager. It aims to solve the increasingly worrying problem of vulnerable self-hosted applications and personal servers.
+    zh_CN: Cosmos 是自我托管家庭服务器最安全、最简单的方法。它既是应用程序的安全网关，也是服务器管理器。它旨在解决日益令人担忧的自托管应用程序和个人服务器易受攻击的问题。
   tagline:
-    en_us: Another docker-based HomeServer panel
-    zh_cn: 另一个基于 docker 的家庭服务器面板
+    en_US: Another docker-based HomeServer panel
+    zh_CN: 另一个基于 docker 的家庭服务器面板
   title:
-    en_us: Cosmos
-    zh_cn: Cosmos
+    en_US: Cosmos
+    zh_CN: Cosmos
   tips:
     before_install:
-      en_us: Cosmos is still in the early stages of development, go to [official](https://github.com/azukaar/Cosmos-Server) for more details.
-      zh_cn: Cosmos 仍在早期开发阶段，请到[官方](https://github.com/azukaar/Cosmos-Server)了解更多详情。
+      en_US: Cosmos is still in the early stages of development, go to [official](https://github.com/azukaar/Cosmos-Server) for more details.
+      zh_CN: Cosmos 仍在早期开发阶段，请到[官方](https://github.com/azukaar/Cosmos-Server)了解更多详情。
   port_map: '2080'
   scheme: http
   index: /

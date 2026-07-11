@@ -50,15 +50,16 @@ services:
     restart: unless-stopped
 
 x-casaos:
+  id: com.cp0204.pve
   architectures:
     - amd64
   main: pve
   store_app_id: pve
   author: Cp0204
-  category: "Utilities"
+  category: Productivity
   description:
-    en_us: Proxmox VE is a complete open-source platform for enterprise virtualization. It integrates the KVM hypervisor and LXC containers, software-defined storage, and networking functionality on a single platform.
-    zh_cn: Proxmox VE 是一个完整的企业虚拟化开源平台。它在单个平台上集成了 KVM 虚拟机管理程序和 LXC 容器、软件定义存储和网络功能。
+    en_US: Proxmox VE is a complete open-source platform for enterprise virtualization. It integrates the KVM hypervisor and LXC containers, software-defined storage, and networking functionality on a single platform.
+    zh_CN: Proxmox VE 是一个完整的企业虚拟化开源平台。它在单个平台上集成了 KVM 虚拟机管理程序和 LXC 容器、软件定义存储和网络功能。
   developer: Proxmox.com/GreenDamTan
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pve/icon.png
   screenshot_link:
@@ -66,12 +67,12 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pve/screenshot-2.jpg
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pve/screenshot-3.jpg
   tagline:
-    en_us: Enterprise virtualization platform
-    zh_cn: 企业虚拟化平台
+    en_US: Enterprise virtualization platform
+    zh_CN: 企业虚拟化平台
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pve/thumbnail.png
   tips:
     before_install:
-      en_us: |
+      en_US: |
         The default root password is `root`, **Please change it after installation.** It is recommended to access the web interface through the port 8006.
 
         **Non-consistent changes notice:**
@@ -82,7 +83,7 @@ x-casaos:
         - LXC functionality is not supported
         - Firewall functionality is not supported
         Other features need to be evaluated on a case-by-case basis.
-      zh_cn: |
+      zh_CN: |
         默认 root 密码为 `root`，**请在安装后更改。** 建议通过端口 8006 访问 Web 界面。
 
         **非一致性改动说明：**
@@ -94,6 +95,6 @@ x-casaos:
         - 防火墙功能未被支持
         其余功能需要自行判断。
   title:
-    en_us: Proxmox VE
+    en_US: Proxmox VE
   index: /
   port_map: "8006"

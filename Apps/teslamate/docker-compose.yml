@@ -87,6 +87,7 @@ networks:
     name: teslamate
 
 x-casaos:
+  id: com.cp0204.teslamate
   architectures:
     - arm
     - arm64
@@ -94,10 +95,10 @@ x-casaos:
   main: teslamate
   store_app_id: teslamate
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: A self-hosted data logger for your Tesla 🚘. A powerful, self-hosted data logger for your Tesla. Written in Elixir. Data is stored in a Postgres database. Visualization and data analysis with Grafana. Vehicle data is published to a local MQTT Broker.
-    zh_cn: 特斯拉汽车的自托管数据记录器 🚘。一个功能强大的特斯拉自托管数据记录器。使用 Elixir 编写。数据存储在 Postgres 数据库中。使用 Grafana 进行可视化和数据分析。车辆数据发布到本地 MQTT 代理。
+    en_US: A self-hosted data logger for your Tesla 🚘. A powerful, self-hosted data logger for your Tesla. Written in Elixir. Data is stored in a Postgres database. Visualization and data analysis with Grafana. Vehicle data is published to a local MQTT Broker.
+    zh_CN: 特斯拉汽车的自托管数据记录器 🚘。一个功能强大的特斯拉自托管数据记录器。使用 Elixir 编写。数据存储在 Postgres 数据库中。使用 Grafana 进行可视化和数据分析。车辆数据发布到本地 MQTT 代理。
   developer: teslamate
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/teslamate/icon.svg
   screenshot_link:
@@ -105,12 +106,12 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/teslamate/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/teslamate/screenshot-3.png
   tagline:
-    en_us: A self-hosted data logger for your Tesla
-    zh_cn: 特斯拉汽车的自托管数据记录器
+    en_US: A self-hosted data logger for your Tesla
+    zh_CN: 特斯拉汽车的自托管数据记录器
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/teslamate/thumbnail.png
   tips:
     before_install:
-      en_us: |
+      en_US: |
         ## Instructions
 
         1. **Choose a secure encryption key** that will be used to encrypt your Tesla API tokens (insert as `ENCRYPTION_KEY`).
@@ -121,7 +122,7 @@ x-casaos:
         1. Open the web interface [http://your-ip-address:4000](http://localhost:4000)
         2. Sign in with your Tesla Account
         3. The Grafana dashboards are available at [http://your-ip-address:3000](http://localhost:3000). Log in with the default user `admin` (initial password `admin`) and enter a secure password.
-      zh_cn: |
+      zh_CN: |
         ## 说明
 
         1.  **选择一个安全的加密密钥** 来加密您的 Tesla API 令牌（将其设为 `ENCRYPTION_KEY`）。
@@ -133,6 +134,6 @@ x-casaos:
         2.  使用您的 Tesla 账户登录
         3.  Grafana 仪表板位于 [http://your-ip-address:3000](http://your-ip-address:3000)。使用默认用户 `admin`（初始密码 `admin`）登录并输入安全密码。
   title:
-    en_us: TeslaMate
+    en_US: TeslaMate
   index: /
   port_map: "4000"

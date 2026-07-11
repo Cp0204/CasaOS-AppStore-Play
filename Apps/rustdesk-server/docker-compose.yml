@@ -63,13 +63,14 @@ networks:
     name: rustdesk-server
 
 x-casaos:
+  id: com.cp0204.rustdesk-server
   architectures:
     - arm
     - arm64
     - amd64
   main: api
   store_app_id: rustdesk-server
-  category: Utilities
+  category: Productivity
   author: Cp0204
   developer: rustdesk | lejianwen
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/icon.png
@@ -79,17 +80,17 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/screenshot-3.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/thumbnail.png
   description:
-    en_us: RustDesk builds its own transit server, combining the official [rustdesk-server](https://github.com/rustdesk/rustdesk-server) and lejianwen's [rustdesk-api](https://github.com/lejianwen/rustdesk-api).
-    zh_cn: RustDesk 自建中转服务器，集合官方 [rustdesk-server](https://github.com/rustdesk/rustdesk-server) 与 lejianwen 的 [rustdesk-api](https://github.com/lejianwen/rustdesk-api) 服务。
+    en_US: RustDesk builds its own transit server, combining the official [rustdesk-server](https://github.com/rustdesk/rustdesk-server) and lejianwen's [rustdesk-api](https://github.com/lejianwen/rustdesk-api).
+    zh_CN: RustDesk 自建中转服务器，集合官方 [rustdesk-server](https://github.com/rustdesk/rustdesk-server) 与 lejianwen 的 [rustdesk-api](https://github.com/lejianwen/rustdesk-api) 服务。
   tagline:
-    en_us: RustDesk Self-Hosted
-    zh_cn: RustDesk 自托管
+    en_US: RustDesk Self-Hosted
+    zh_CN: RustDesk 自托管
   title:
-    en_us: RustDesk Server
+    en_US: RustDesk Server
   tips:
     before_install:
-      en_us: The initial installation administrator is the username admin, the password will be printed on the console, you can change the password via [CLI](https://github.com/lejianwen/rustdesk-api#CLI)
-      zh_cn: 初次安装管理员为用户名为admin，密码将在控制台打印，可以通过[命令行](https://github.com/lejianwen/rustdesk-api#CLI)更改密码
+      en_US: The initial installation administrator is the username admin, the password will be printed on the console, you can change the password via [CLI](https://github.com/lejianwen/rustdesk-api#CLI)
+      zh_CN: 初次安装管理员为用户名为admin，密码将在控制台打印，可以通过[命令行](https://github.com/lejianwen/rustdesk-api#CLI)更改密码
   port_map: "21114"
   scheme: http
   index: /

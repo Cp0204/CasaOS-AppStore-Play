@@ -16,29 +16,30 @@ services:
     restart: unless-stopped
 
 x-casaos:
+  id: com.cp0204.portainer-agent
   architectures:
     - arm64
     - arm
     - amd64
   main: portainer-agent
   store_app_id: portainer-agent
-  category: Utilities
+  category: Productivity
   author: Cp0204
   developer: Portainer
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/portainer-agent/icon.png
   description:
-    en_us: Portainer Agent is a lightweight agent used to manage Docker environments remotely. It allows Portainer to manage the resources of a Docker environment even if Portainer is not installed directly on the Docker host.
-    zh_cn: Portainer Agent 是用于远程管理Docker环境的轻量级代理。它允许Portainer管理Docker环境的资源，即使Portainer没有直接安装在Docker主机上。
+    en_US: Portainer Agent is a lightweight agent used to manage Docker environments remotely. It allows Portainer to manage the resources of a Docker environment even if Portainer is not installed directly on the Docker host.
+    zh_CN: Portainer Agent 是用于远程管理Docker环境的轻量级代理。它允许Portainer管理Docker环境的资源，即使Portainer没有直接安装在Docker主机上。
   tagline:
-    en_us: Used for Remote Portainer Management
-    zh_cn: 用于远程 Portainer 管理
+    en_US: Used for Remote Portainer Management
+    zh_CN: 用于远程 Portainer 管理
   title:
-    en_us: Portainer Agent
-    zh_cn: Portainer Agent
+    en_US: Portainer Agent
+    zh_CN: Portainer Agent
   tips:
     before_install:
-      en_us: '[Documentation](https://docs.portainer.io/admin/environments/add/docker/agent)'
-      zh_cn: '[文档](https://docs.portainer.io/admin/environments/add/docker/agent)'
+      en_US: '[Documentation](https://docs.portainer.io/admin/environments/add/docker/agent)'
+      zh_CN: '[文档](https://docs.portainer.io/admin/environments/add/docker/agent)'
   port_map: ''
   scheme: http
   index: /

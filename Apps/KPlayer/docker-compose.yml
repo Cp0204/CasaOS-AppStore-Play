@@ -27,27 +27,28 @@ services:
         source: /mnt
         target: /mnt
 x-casaos:
+  id: com.cp0204.kplayer
   architectures:
     - amd64
     - arm64
   author: Cp0204
-  category: Network
+  category: Networking
   description:
-    en_us: KPlayer can help you quickly perform looped live streaming of video resources on the server, simply customize the configuration file to enable live streaming.
-    zh_cn: KPlayer 可以帮助你快速在服务器上进行视频资源的循环直播推流，只需要简单修改配置文件即可开启直播推流。
+    en_US: KPlayer can help you quickly perform looped live streaming of video resources on the server, simply customize the configuration file to enable live streaming.
+    zh_CN: KPlayer 可以帮助你快速在服务器上进行视频资源的循环直播推流，只需要简单修改配置文件即可开启直播推流。
   developer: bytelang
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/KPlayer/icon.png
   main: kplayer
   tagline:
-    en_us: Live streaming of video resources
-    zh_cn: 视频资源的直播推流
+    en_US: Live streaming of video resources
+    zh_CN: 视频资源的直播推流
   thumbnail:
   tips:
     before_install:
-      en_us: Before installation, please create a `config.json` file in the directory `/DATA/AppData/kplayer/`. Documentation https://docs.kplayer.net/v0.5.8/helper/config.html
-      zh_cn: 在安装之前，请先在目录 `/DATA/AppData/kplayer/` 中创建 `config.json` 文件。文档 https://docs.kplayer.net/v0.5.8/helper/config.html
+      en_US: Before installation, please create a `config.json` file in the directory `/DATA/AppData/kplayer/`. Documentation https://docs.kplayer.net/v0.5.8/helper/config.html
+      zh_CN: 在安装之前，请先在目录 `/DATA/AppData/kplayer/` 中创建 `config.json` 文件。文档 https://docs.kplayer.net/v0.5.8/helper/config.html
   title:
-    en_us: KPlayer
+    en_US: KPlayer
   index:
   port_map: "4156"
   scheme: http

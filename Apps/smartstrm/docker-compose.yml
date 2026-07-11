@@ -20,6 +20,7 @@ services:
           memory: 128M
 
 x-casaos:
+  id: com.cp0204.smartstrm
   architectures:
     - amd64
     - arm64
@@ -28,8 +29,8 @@ x-casaos:
   author: Cp0204
   category: Media
   description:
-    en_us: "Media library STRM file generation tool. Works elegantly with Emby — aggregate media resources from cloud drives (OpenList, Quark, 115, Tianyi, Xunlei), manage tasks with scheduling and cleanup, integrate via Webhook, and support 302 direct link playback for Emby/Jellyfin/Plex."
-    zh_cn: "媒体库 STRM 文件生成工具。和 Emby 优雅配合，网盘媒体资源丝滑入库，打造您的专属影音体验。支持 OpenList、夸克、115、天翼、迅雷等多种网盘驱动；灵活的任务管理（定时、自定义后缀/大小、同步清理缺失文件）；强大的 Webhook 联动（网页/QAS/CloudSaver 转存触发、Emby 同步删除）；实用的插件系统，支持飞牛影视刷新，一站式 Emby/Jellyfin/Plex/飞牛影视 302 直链播放 (Pro)。"
+    en_US: "Media library STRM file generation tool. Works elegantly with Emby — aggregate media resources from cloud drives (OpenList, Quark, 115, Tianyi, Xunlei), manage tasks with scheduling and cleanup, integrate via Webhook, and support 302 direct link playback for Emby/Jellyfin/Plex."
+    zh_CN: "媒体库 STRM 文件生成工具。和 Emby 优雅配合，网盘媒体资源丝滑入库，打造您的专属影音体验。支持 OpenList、夸克、115、天翼、迅雷等多种网盘驱动；灵活的任务管理（定时、自定义后缀/大小、同步清理缺失文件）；强大的 Webhook 联动（网页/QAS/CloudSaver 转存触发、Emby 同步删除）；实用的插件系统，支持飞牛影视刷新，一站式 Emby/Jellyfin/Plex/飞牛影视 302 直链播放 (Pro)。"
   developer: Cp0204
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/smartstrm/icon.png
   screenshot_link:
@@ -38,14 +39,14 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/smartstrm/screenshot-3.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/smartstrm/screenshot-4.png
   tagline:
-    en_us: Media library STRM file generation tool
-    zh_cn: 媒体库 STRM 文件生成工具
+    en_US: Media library STRM file generation tool
+    zh_CN: 媒体库 STRM 文件生成工具
   tips:
     before_install:
-      en_us: "Default credentials: `admin` / `admin123`\n\n⚠️ Change `ADMIN_PASSWORD` before exposing to network.\n\n[Documentation](https://smartstrm.github.io)"
-      zh_cn: "默认账号密码：`admin` / `admin123`\n\n⚠️ 暴露到网络前请修改 `ADMIN_PASSWORD`。\n\n[文档](https://smartstrm.github.io)"
+      en_US: "Default credentials: `admin` / `admin123`\n\n⚠️ Change `ADMIN_PASSWORD` before exposing to network.\n\n[Documentation](https://smartstrm.github.io)"
+      zh_CN: "默认账号密码：`admin` / `admin123`\n\n⚠️ 暴露到网络前请修改 `ADMIN_PASSWORD`。\n\n[文档](https://smartstrm.github.io)"
   title:
-    en_us: SmartStrm
+    en_US: SmartStrm
   index: /
   port_map: "8024"
   scheme: http

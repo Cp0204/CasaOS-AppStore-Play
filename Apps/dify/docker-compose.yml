@@ -504,6 +504,7 @@ networks:
     name: dify
 
 x-casaos:
+  id: com.cp0204.dify
   architectures:
     - arm64
     - amd64
@@ -512,8 +513,8 @@ x-casaos:
   author: Cp0204
   category: Developer
   description:
-    en_us: Dify is an open-source LLM app development platform. Orchestrate LLM apps from agents to complex AI workflows, with a built-in RAG engine. More production-ready than LangChain.  Build AI applications faster with support for mainstream LLMs, an intuitive prompt orchestration interface, high-quality RAG engines, and a flexible AI agent framework.
-    zh_cn: Dify 是一个开源的 LLM 应用开发平台。通过内置的 RAG 引擎，可以编排从代理到复杂 AI 工作流的 LLM 应用。比 LangChain 更易于生产环境部署。支持主流 LLM，提供直观的 prompt 编排界面、高质量的 RAG 引擎和灵活的 AI 代理框架，助您更快地构建 AI 应用。
+    en_US: Dify is an open-source LLM app development platform. Orchestrate LLM apps from agents to complex AI workflows, with a built-in RAG engine. More production-ready than LangChain.  Build AI applications faster with support for mainstream LLMs, an intuitive prompt orchestration interface, high-quality RAG engines, and a flexible AI agent framework.
+    zh_CN: Dify 是一个开源的 LLM 应用开发平台。通过内置的 RAG 引擎，可以编排从代理到复杂 AI 工作流的 LLM 应用。比 LangChain 更易于生产环境部署。支持主流 LLM，提供直观的 prompt 编排界面、高质量的 RAG 引擎和灵活的 AI 代理框架，助您更快地构建 AI 应用。
   developer: LangGenius
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/icon.png
   screenshot_link:
@@ -522,9 +523,9 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/screenshot-3.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dify/thumbnail.png
   tagline:
-    en_us: The Innovation Engine for GenAI Applications
-    zh_cn: 生成式 AI 应用创新引擎
+    en_US: The Innovation Engine for GenAI Applications
+    zh_CN: 生成式 AI 应用创新引擎
   title:
-    en_us: Dify
+    en_US: Dify
   index: /
   port_map: "6080"

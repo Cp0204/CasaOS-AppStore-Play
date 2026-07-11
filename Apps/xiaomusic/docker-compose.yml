@@ -17,6 +17,7 @@ services:
           memory: 64M
 
 x-casaos:
+  id: com.cp0204.xiaomusic
   architectures:
     - amd64
     - arm64
@@ -26,18 +27,18 @@ x-casaos:
   author: Cp0204
   category: Media
   description:
-    en_us: Unlimited listening to songs, liberate Xiaoai speakers. Play music with Xiaoai speakers, and download music using yt-dlp.
-    zh_cn: 无限听歌，解放小爱音箱。使用小爱音箱播放音乐，音乐使用 yt-dlp 下载。
+    en_US: Unlimited listening to songs, liberate Xiaoai speakers. Play music with Xiaoai speakers, and download music using yt-dlp.
+    zh_CN: 无限听歌，解放小爱音箱。使用小爱音箱播放音乐，音乐使用 yt-dlp 下载。
   developer: hanxi
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xiaomusic/icon.png
   tagline:
-    en_us: Unlimited listening to songs, liberate Xiaoai speakers.
-    zh_cn: 无限听歌，解放小爱音箱
+    en_US: Unlimited listening to songs, liberate Xiaoai speakers.
+    zh_CN: 无限听歌，解放小爱音箱
   tips:
     before_install:
-      en_us: "If you encounter problems during the first installation, please refer to [💬 FAQ problem collection](https://github.com/hanxi/xiaomusic/issues/99). There are solutions to the problems encountered generally."
-      zh_cn: "初次安装遇到问题请查阅 [💬 FAQ问题集合](https://github.com/hanxi/xiaomusic/issues/99) ，一般遇到的问题都已经有解决办法。"
+      en_US: "If you encounter problems during the first installation, please refer to [💬 FAQ problem collection](https://github.com/hanxi/xiaomusic/issues/99). There are solutions to the problems encountered generally."
+      zh_CN: "初次安装遇到问题请查阅 [💬 FAQ问题集合](https://github.com/hanxi/xiaomusic/issues/99) ，一般遇到的问题都已经有解决办法。"
   title:
-    en_us: XiaoMusic
+    en_US: XiaoMusic
   index: /
   port_map: "58090"

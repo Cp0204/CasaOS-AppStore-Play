@@ -14,6 +14,7 @@ services:
           memory: 256M
 
 x-casaos:
+  id: com.cp0204.uptime-kuma
   architectures:
     - amd64
     - arm64
@@ -21,20 +22,20 @@ x-casaos:
   main: uptime-kuma
   store_app_id: uptime-kuma
   author: Cp0204
-  category: Network
+  category: Networking
   description:
-    en_us: "A self-hosted monitoring tool. Supports HTTP(S), TCP, DNS, ICMP, Steam Game Server, Docker, and other protocols for uptime monitoring with status pages, notifications, and 2-minute interval checks."
-    zh_cn: "自托管监控工具。支持 HTTP(S)、TCP、DNS、ICMP、Steam Game Server、Docker 等协议的在线状态监控，提供状态页面、通知推送和 2 分钟间隔检测。"
+    en_US: "A self-hosted monitoring tool. Supports HTTP(S), TCP, DNS, ICMP, Steam Game Server, Docker, and other protocols for uptime monitoring with status pages, notifications, and 2-minute interval checks."
+    zh_CN: "自托管监控工具。支持 HTTP(S)、TCP、DNS、ICMP、Steam Game Server、Docker 等协议的在线状态监控，提供状态页面、通知推送和 2 分钟间隔检测。"
   developer: Louis Lam
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/uptime-kuma/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/uptime-kuma/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/uptime-kuma/screenshot-2.png
   tagline:
-    en_us: A self-hosted monitoring tool
-    zh_cn: 自托管监控工具
+    en_US: A self-hosted monitoring tool
+    zh_CN: 自托管监控工具
   title:
-    en_us: Uptime Kuma
+    en_US: Uptime Kuma
   index: /
   port_map: "3001"
   scheme: http

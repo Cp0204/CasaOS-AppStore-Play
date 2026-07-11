@@ -40,6 +40,7 @@ services:
 #     name: moviepilot
 
 x-casaos:
+  id: com.cp0204.moviepilot-v2
   architectures:
     - arm64
     - amd64
@@ -49,13 +50,13 @@ x-casaos:
   category: Media
   developer: jxxghp
   tagline:
-    en_us: NAS Media Library Automation Management Tool
-    zh_cn: NAS媒体库自动化管理工具
+    en_US: NAS Media Library Automation Management Tool
+    zh_CN: NAS媒体库自动化管理工具
   description:
-    en_us: MoviePilot is a video management tool that can automatically download and manage movies.
-    zh_cn: MoviePilot 是一个视频管理工具，可以自动下载和管理电影。
+    en_US: MoviePilot is a video management tool that can automatically download and manage movies.
+    zh_CN: MoviePilot 是一个视频管理工具，可以自动下载和管理电影。
   title:
-    en_us: MoviePilot-v2
+    en_US: MoviePilot-v2
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/moviepilot-v2/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/moviepilot-v2/screenshot-1.png
@@ -64,7 +65,7 @@ x-casaos:
   port_map: "3000"
   tips:
     before_install:
-      en_us: |
+      en_US: |
         ## Default Account
 
         | Username | Password |
@@ -72,7 +73,7 @@ x-casaos:
         | `admin` | Get from log |
 
         Please note that this software is a bit complicated, you need to read the [documentation](https://wiki.movie-pilot.org/configuration)
-      zh_cn: |
+      zh_CN: |
         ## 默认账号
 
         | 用户名 | 密码 |

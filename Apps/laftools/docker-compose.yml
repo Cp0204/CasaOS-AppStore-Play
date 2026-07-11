@@ -21,26 +21,27 @@ services:
     network_mode: bridge
 
 x-casaos:
+  id: com.cp0204.laftools
   architectures:
     # - arm64
     - amd64
   main: laftools
   store_app_id: laftools
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: Miaoda Toolbox is a privacy-first, self-deployable and completely open-source Chinese toolbox!
-    zh_cn: 秒达工具箱是一款隐私优先，可自部署且完全开源的中文工具箱！
+    en_US: Miaoda Toolbox is a privacy-first, self-deployable and completely open-source Chinese toolbox!
+    zh_CN: 秒达工具箱是一款隐私优先，可自部署且完全开源的中文工具箱！
   developer: work7z
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/laftools/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/laftools/screenshot-1.png
   tagline:
-    en_us: Free and secure one-click outbound toolbox
-    zh_cn: 免费安全的一键式呼出工具箱
+    en_US: Free and secure one-click outbound toolbox
+    zh_CN: 免费安全的一键式呼出工具箱
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/laftools/thumbnail.png
   title:
-    en_us: LafTools
-    zh_cn: 秒达工具箱
+    en_US: LafTools
+    zh_CN: 秒达工具箱
   index: /
   port_map: "39899"

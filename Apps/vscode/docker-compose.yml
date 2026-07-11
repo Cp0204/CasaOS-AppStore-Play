@@ -28,6 +28,7 @@ services:
         target: /config/workspace/DATA
     network_mode: bridge
 x-casaos:
+  id: com.cp0204.vscode
   architectures:
     - amd64
     - arm64
@@ -39,13 +40,13 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vscode/screenshot-1.png
   store_app_id: vscode
   description:
-    en_us: Code with ease using Visual Studio Code on your server. Access it through your browser anywhere, anytime.
-    zh_cn: 在您的服务器上轻松编写代码，使用Visual Studio Code。通过浏览器随时随地访问。
+    en_US: Code with ease using Visual Studio Code on your server. Access it through your browser anywhere, anytime.
+    zh_CN: 在您的服务器上轻松编写代码，使用Visual Studio Code。通过浏览器随时随地访问。
   tagline:
-    en_us: Code Anywhere with VS Code
-    zh_cn: 使用VS Code随时随地编码
+    en_US: Code Anywhere with VS Code
+    zh_CN: 使用VS Code随时随地编码
   title:
-    en_us: VS Code
+    en_US: VS Code
   index: /
   port_map: "8443"
   scheme: http

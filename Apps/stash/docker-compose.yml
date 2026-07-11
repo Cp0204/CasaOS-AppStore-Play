@@ -40,6 +40,7 @@ services:
       - /DATA/AppData/stash/generated:/generated
 
 x-casaos:
+  id: com.cp0204.stash
   architectures:
     - arm
     - arm64
@@ -53,13 +54,13 @@ x-casaos:
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/stash/screenshot-1.png
   description:
-    en_us: Stash is a self-hosted webapp written in Go which organizes and serves your porn.
-    zh_cn: Stash 是一个用 Go 编写的自托管网络应用程序，用于组织和提供成人内容。
+    en_US: Stash is a self-hosted webapp written in Go which organizes and serves your porn.
+    zh_CN: Stash 是一个用 Go 编写的自托管网络应用程序，用于组织和提供成人内容。
   tagline:
-    en_us: Your self-hosted adult video library
-    zh_cn: 您的自托管成人视频库
+    en_US: Your self-hosted adult video library
+    zh_CN: 您的自托管成人视频库
   title:
-    en_us: Stash
+    en_US: Stash
   port_map: "9999"
   scheme: http
   index: /

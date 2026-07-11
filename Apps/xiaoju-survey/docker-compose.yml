@@ -43,15 +43,16 @@ networks:
     driver: bridge
 
 x-casaos:
+  id: com.cp0204.xiaoju-survey
   architectures:
     - arm64
     - amd64
   main: xiaoju-survey
   author: Cp0204
-  category: Analytics
+  category: Productivity
   description:
-    en_us: XIAOJUSURVEY is a lightweight and secure questionnaire system base, providing individuals and enterprises with a one-stop product-level solution to quickly meet various online survey scenarios.
-    zh_cn: 「快速」打造「专属」问卷系统, 让调研「更轻松」。XIAOJUSURVEY是一套轻量、安全的问卷系统基座，提供面向个人和企业的一站式产品级解决方案，快速满足各类线上调研场景。
+    en_US: XIAOJUSURVEY is a lightweight and secure questionnaire system base, providing individuals and enterprises with a one-stop product-level solution to quickly meet various online survey scenarios.
+    zh_CN: 「快速」打造「专属」问卷系统, 让调研「更轻松」。XIAOJUSURVEY是一套轻量、安全的问卷系统基座，提供面向个人和企业的一站式产品级解决方案，快速满足各类线上调研场景。
   developer: didi.cn
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xiaoju-survey/icon.png
   screenshot_link:
@@ -59,15 +60,15 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xiaoju-survey/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xiaoju-survey/screenshot-3.png
   tagline:
-    en_us: Lightweight and safe questionnaire system base
-    zh_cn: 轻量安全的问卷系统基座
+    en_US: Lightweight and safe questionnaire system base
+    zh_CN: 轻量安全的问卷系统基座
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xiaoju-survey/thumbnail.png
   title:
-    en_us: XIAOJUSURVEY
-    zh_cn: 小橘调研
+    en_US: XIAOJUSURVEY
+    zh_CN: 小橘调研
   tips:
     before_install:
-      en_us: 'No default account, register first before using.'
-      zh_cn: '没有默认账号，先注册后使用。'
+      en_US: 'No default account, register first before using.'
+      zh_CN: '没有默认账号，先注册后使用。'
   index: /
   port_map: "8081"

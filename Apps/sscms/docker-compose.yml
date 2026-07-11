@@ -18,16 +18,17 @@ services:
     network_mode: bridge
 
 x-casaos:
+  id: com.cp0204.sscms
   architectures:
     - amd64
     - arm64
   main: sscms
   store_app_id: sscms
   author: Cp0204
-  category: WEB
+  category: Productivity
   description:
-    en_us: SiteServer CMS is an open-source, free, enterprise-grade, and commercially available CMS content management system. It allows you to build a full-featured, high-performance, large-scale, and easy-to-maintain website platform with minimal cost, manpower, and time.
-    zh_cn: SiteServer CMS是一款开源免费、企业级、可商用的CMS内容管理系统，能够以最低的成本、最少的人力投入在最短的时间内架设一个功能齐全、性能优异、规模庞大并易于维护的网站平台。
+    en_US: SiteServer CMS is an open-source, free, enterprise-grade, and commercially available CMS content management system. It allows you to build a full-featured, high-performance, large-scale, and easy-to-maintain website platform with minimal cost, manpower, and time.
+    zh_CN: SiteServer CMS是一款开源免费、企业级、可商用的CMS内容管理系统，能够以最低的成本、最少的人力投入在最短的时间内架设一个功能齐全、性能优异、规模庞大并易于维护的网站平台。
   developer: sscms.com
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sscms/icon.png
   screenshot_link:
@@ -35,11 +36,11 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sscms/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sscms/screenshot-3.png
   tagline:
-    en_us: Open-source, free, and enterprise-grade CMS
-    zh_cn: 开源免费企业级CMS
+    en_US: Open-source, free, and enterprise-grade CMS
+    zh_CN: 开源免费企业级CMS
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sscms/thumbnail.png
   title:
-    en_us: SiteServer CMS
-    zh_cn: SiteServer CMS
+    en_US: SiteServer CMS
+    zh_CN: SiteServer CMS
   index: /ss-admin/install
   port_map: "8081"

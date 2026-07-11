@@ -22,6 +22,7 @@ services:
           memory: 8M
 
 x-casaos:
+  id: com.cp0204.ttydbridge
   architectures:
     - amd64
     - arm
@@ -36,22 +37,22 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ttydbridge/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ttydbridge/screenshot-2.png
   description:
-    en_us: ttydBridge acts as a "bridge" to the host environment, allowing you to easily access and use the host terminal in a web. It is built on ttyd and runs in a containerized manner, providing a secure and convenient remote endpoint experience.
-    zh_cn: ttydBridge 如一座“桥”，连通了宿主机环境，让你在浏览器中轻松访问和使用宿主机终端。它基于 ttyd 构建，并以容器化的方式运行，提供了安全、便捷的远程终端体验。
+    en_US: ttydBridge acts as a "bridge" to the host environment, allowing you to easily access and use the host terminal in a web. It is built on ttyd and runs in a containerized manner, providing a secure and convenient remote endpoint experience.
+    zh_CN: ttydBridge 如一座“桥”，连通了宿主机环境，让你在浏览器中轻松访问和使用宿主机终端。它基于 ttyd 构建，并以容器化的方式运行，提供了安全、便捷的远程终端体验。
   tagline:
-    en_us: Easy access to the host terminal in web
-    zh_cn: 在浏览器中轻松访问宿主机终端
+    en_US: Easy access to the host terminal in web
+    zh_CN: 在浏览器中轻松访问宿主机终端
   title:
-    en_us: ttydBridge
+    en_US: ttydBridge
   tips:
     before_install:
-      en_us: |
+      en_US: |
         If you are using ZimaOS, the login command is missing:
         1. Change the environment variable `START_COMMAND` to `bash` ;
         2. And set the `HTTP_USERNAME` `HTTP_PASSWORD` variables to add HTTP authentication.
 
         [Official DOC](https://hub.docker.com/r/cp0204/ttydbridge)
-      zh_cn: |
+      zh_CN: |
         如果你正在使用 ZimaOS ，由其缺少 login 命令：
         1. 请把环境变量 `START_COMMAND` 改为 `bash` ；
         2. 并设置 `HTTP_USERNAME` `HTTP_PASSWORD` 变量，以增加 HTTP 鉴权。

@@ -26,6 +26,7 @@ services:
     container_name: redroid
 
 x-casaos:
+  id: com.cp0204.redroid
   architectures:
     - arm64
     - amd64
@@ -34,18 +35,18 @@ x-casaos:
   author: Cp0204
   category: Developer
   description:
-    en_us: redroid (Remote-Android) is a multi-arch, GPU enabled, Android in Cloud solution. You can boot many instances in Linux host (Docker, podman, k8s etc.). redroid supports both arm64 and amd64 architectures. redroid is suitable for Cloud Gaming, Virtualise Phones, Automation Test and more.
-    zh_cn: redroid (Remote-Android) 是一款支持多架构、GPU加速的安卓云解决方案。您可以在 Linux 主机 (Docker、podman、k8s 等) 上运行多个实例。 redroid 支持 arm64 和 amd64 架构。 redroid 适用于云游戏、手机虚拟化、自动化测试等。
+    en_US: redroid (Remote-Android) is a multi-arch, GPU enabled, Android in Cloud solution. You can boot many instances in Linux host (Docker, podman, k8s etc.). redroid supports both arm64 and amd64 architectures. redroid is suitable for Cloud Gaming, Virtualise Phones, Automation Test and more.
+    zh_CN: redroid (Remote-Android) 是一款支持多架构、GPU加速的安卓云解决方案。您可以在 Linux 主机 (Docker、podman、k8s 等) 上运行多个实例。 redroid 支持 arm64 和 amd64 架构。 redroid 适用于云游戏、手机虚拟化、自动化测试等。
   developer: zhouziyang
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/redroid/icon.png
   tagline:
-    en_us: Android in Cloud solution
-    zh_cn: 云安卓解决方案
+    en_US: Android in Cloud solution
+    zh_CN: 云安卓解决方案
   title:
-    en_us: redroid
+    en_US: redroid
   tips:
     before_install:
-      en_us: |
+      en_US: |
         This app has no WebUI and is connected and controlled via network adb, you can use it with **ws-scrcpy**.
 
         **Note: Do not open `5555` ports on the Internet. **
@@ -62,7 +63,7 @@ x-casaos:
         - Android 10 (`redroid/redroid:10.0.0-latest`)
         - Android 9 (`redroid/redroid:9.0.0-latest`)
         - Android 8.1 (`redroid/redroid:8.1.0-latest`)
-      zh_cn: |
+      zh_CN: |
         本应用没有 WebUI ，通过网络adb连接和控制，你可以配合 **ws-scrcpy** 使用。
 
         **注意：不要开放 `5555` 端口在互联网上。**

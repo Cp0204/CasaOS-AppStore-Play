@@ -30,40 +30,41 @@ services:
       ports:
         - container: "9000"
           description:
-            en_us: Portainer Web UI Port
-            zh_cn: Portainer Web UI 端口
+            en_US: Portainer Web UI Port
+            zh_CN: Portainer Web UI 端口
         - container: "9443"
           description:
-            en_us: Portainer Web UI Port(https)
-            zh_cn: Portainer Web UI 端口(https)
+            en_US: Portainer Web UI Port(https)
+            zh_CN: Portainer Web UI 端口(https)
       volumes:
         - container: /data
           description:
-            en_us: Portainer data directory
-            zh_cn: Portainer 数据目录
+            en_US: Portainer data directory
+            zh_CN: Portainer 数据目录
 x-casaos:
+  id: com.cp0204.portainer
   architectures:
     - amd64
     - arm
     - arm64
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: Portainer is a lightweight management UI which allows you to easily manage your Docker environments. It is designed to be easy to use and offers full control over your Docker hosts and containers.
-    zh_cn: Portainer 是一个轻量级的管理界面，可让您轻松管理Docker环境。它被设计为易于使用，并提供对Docker主机和容器的完全控制。
+    en_US: Portainer is a lightweight management UI which allows you to easily manage your Docker environments. It is designed to be easy to use and offers full control over your Docker hosts and containers.
+    zh_CN: Portainer 是一个轻量级的管理界面，可让您轻松管理Docker环境。它被设计为易于使用，并提供对Docker主机和容器的完全控制。
   developer: Portainer
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Portainer/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Portainer/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Portainer/screenshot-2.png
   tagline:
-    en_us: Lightweight Docker management UI
-    zh_cn: 轻量级 Docker 管理界面
+    en_US: Lightweight Docker management UI
+    zh_CN: 轻量级 Docker 管理界面
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Portainer/thumbnail.png
   tips:
   main: portainer
   title:
-    en_us: Portainer
+    en_US: Portainer
   index: /
   port_map: "9000"
   scheme: http

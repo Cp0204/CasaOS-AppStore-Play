@@ -57,12 +57,13 @@ networks:
     name: halo
 
 x-casaos:
+  id: com.cp0204.halo
   architectures:
     - amd64
     - arm64
   main: halo
   store_app_id: halo
-  category: Blog
+  category: Social
   author: Cp0204
   developer: www.halo.run
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/icon.png
@@ -73,13 +74,13 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/screenshot-4.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/thumbnail.png
   description:
-    en_us: Halo is an open source blog system , written in Java , with a simple and easy to use interface and rich functionality features .
-    zh_cn: Halo 是一个开源的博客系统，采用 Java 编写，具有简洁易用的界面和丰富的功能特性。
+    en_US: Halo is an open source blog system , written in Java , with a simple and easy to use interface and rich functionality features .
+    zh_CN: Halo 是一个开源的博客系统，采用 Java 编写，具有简洁易用的界面和丰富的功能特性。
   tagline:
-    en_us: Open source powerful and easy to use website builder
-    zh_cn: 强大易用的开源建站工具
+    en_US: Open source powerful and easy to use website builder
+    zh_CN: 强大易用的开源建站工具
   title:
-    en_us: Halo
+    en_US: Halo
   port_map: "8090"
   scheme: http
   index: /

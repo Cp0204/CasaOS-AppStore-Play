@@ -120,11 +120,12 @@ services:
         ipv4_address: 172.22.222.8
 
 x-casaos:
+  id: com.cp0204.safeline-ce
   architectures:
     - amd64
   main: mgt
   store_app_id: safeline-ce
-  category: WEB
+  category: Productivity
   author: Cp0204
   developer: chaitin
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/icon.png
@@ -134,18 +135,18 @@ x-casaos:
   #  - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/screenshot-3.png
   #thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/thumbnail.png
   description:
-    en_us: SafeLine is a WAF built by Changting Technology over a period of nearly 10 years, and its core detection capability is driven by intelligent semantic analysis algorithms. It is a free WAF that is simple enough, good enough, and strong enough to protect your website from hackers based on the industry-leading semantic engine detection technology and access as a reverse proxy.
-    zh_cn: 雷池（SafeLine）是长亭科技耗时近 10 年倾情打造的 WAF，核心检测能力由智能语义分析算法驱动。一款足够简单、足够好用、足够强的免费 WAF。基于业界领先的语义引擎检测技术，作为反向代理接入，保护你的网站不受黑客攻击。
+    en_US: SafeLine is a WAF built by Changting Technology over a period of nearly 10 years, and its core detection capability is driven by intelligent semantic analysis algorithms. It is a free WAF that is simple enough, good enough, and strong enough to protect your website from hackers based on the industry-leading semantic engine detection technology and access as a reverse proxy.
+    zh_CN: 雷池（SafeLine）是长亭科技耗时近 10 年倾情打造的 WAF，核心检测能力由智能语义分析算法驱动。一款足够简单、足够好用、足够强的免费 WAF。基于业界领先的语义引擎检测技术，作为反向代理接入，保护你的网站不受黑客攻击。
   tagline:
-    en_us: Popular community WAF
-    zh_cn: 广受好评的社区 WAF
+    en_US: Popular community WAF
+    zh_CN: 广受好评的社区 WAF
   title:
-    en_us: SafeLine
-    zh_cn: 雷池
+    en_US: SafeLine
+    zh_CN: 雷池
   tips:
     before_install:
-      en_us: SafeLine needs to run on a CPU that supports the ssse3 instruction set, please configure the virtual machine to enable CPU ssse3 instruction set support.
-      zh_cn: 雷池需要运行在支持 ssse3 指令集的 CPU 上，虚拟机请自行配置开启 CPU ssse3 指令集支持。
+      en_US: SafeLine needs to run on a CPU that supports the ssse3 instruction set, please configure the virtual machine to enable CPU ssse3 instruction set support.
+      zh_CN: 雷池需要运行在支持 ssse3 指令集的 CPU 上，虚拟机请自行配置开启 CPU ssse3 指令集支持。
   port_map: "9443"
   scheme: https
   index: /

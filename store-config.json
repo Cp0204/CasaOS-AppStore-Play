@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "store_id": "play-appstore",
+  "name": {
+    "en_US": "Play AppStore",
+    "zh_CN": "Play 应用商店"
+  },
+  "description": {
+    "en_US": "Play AppStore, play with Docker. Get things done.",
+    "zh_CN": "Play 应用商店，用 Docker 玩出生产力。"
+  },
+  "maintainer": "Cp0204",
+  "url": "https://github.com/Cp0204/CasaOS-AppStore-Play"
+}

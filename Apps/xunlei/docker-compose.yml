@@ -36,40 +36,41 @@ services:
       envs:
         - container: XL_DASHBOARD_PORT
           description:
-            en_us: Web UI Port
-            zh_cn: Web UI端口
+            en_US: Web UI Port
+            zh_CN: Web UI端口
       volumes:
         - container: /xunlei/data
           description:
-            en_us: Xunlei data directory.
-            zh_cn: 迅雷数据目录
+            en_US: Xunlei data directory.
+            zh_CN: 迅雷数据目录
         - container: /xunlei/downloads
           description:
-            en_us: Xunlei downloads directory.
-            zh_cn: 迅雷下载目录
+            en_US: Xunlei downloads directory.
+            zh_CN: 迅雷下载目录
 x-casaos:
+  id: com.cp0204.xunlei
   architectures:
     - amd64
     - arm64
   main: xunlei
   author: Cp0204
-  category: Downloader
+  category: Productivity
   description:
-    en_us: Thunder, a veteran download software in China, supports HTTP/FTP/BT and other protocols.
-    zh_cn: 迅雷下载，国内老牌下载软件，支持HTTP/FTP/BT等协议。
+    en_US: Thunder, a veteran download software in China, supports HTTP/FTP/BT and other protocols.
+    zh_CN: 迅雷下载，国内老牌下载软件，支持HTTP/FTP/BT等协议。
   developer: Xunlei Limited
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xunlei/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xunlei/screenshot-1.png
   tagline:
-    en_us: Popular download manager in China
-    zh_cn: 迅雷远程下载
+    en_US: Popular download manager in China
+    zh_CN: 迅雷远程下载
   tips:
     before_install:
-      en_us: The environment variables `XL_DASHBOARD_USERNAME` and `XL_DASHBOARD_PASSWORD` add basic authentication to the Thunderbolt panel, the default user password is `admin`, removing the environment variables removes the authentication. [Documentation](https://hub.docker.com/r/cnk3x/xunlei)
-      zh_cn: 环境变量 `XL_DASHBOARD_USERNAME` 和 `XL_DASHBOARD_PASSWORD` 给迅雷面板添加基本验证，默认用户密码为 `admin` ，删除环境变量可去除验证。[文档](https://hub.docker.com/r/cnk3x/xunlei)
+      en_US: The environment variables `XL_DASHBOARD_USERNAME` and `XL_DASHBOARD_PASSWORD` add basic authentication to the Thunderbolt panel, the default user password is `admin`, removing the environment variables removes the authentication. [Documentation](https://hub.docker.com/r/cnk3x/xunlei)
+      zh_CN: 环境变量 `XL_DASHBOARD_USERNAME` 和 `XL_DASHBOARD_PASSWORD` 给迅雷面板添加基本验证，默认用户密码为 `admin` ，删除环境变量可去除验证。[文档](https://hub.docker.com/r/cnk3x/xunlei)
   title:
-    en_us: Thunder
-    zh_cn: 迅雷
+    en_US: Thunder
+    zh_CN: 迅雷
   index: /
   port_map: "2345"

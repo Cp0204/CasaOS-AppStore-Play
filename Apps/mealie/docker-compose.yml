@@ -28,25 +28,26 @@ services:
     network_mode: bridge
 
 x-casaos:
+  id: com.cp0204.mealie
   architectures:
     - arm64
     - amd64
   main: mealie
   author: Cp0204
-  category: Home Automation
+  category: Home
   description:
-    en_us: Mealie is a self hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family.
-    zh_cn: Mealie 是一款自托管的菜谱管理器和膳食计划工具，它拥有 RestAPI 后端和使用 Vue 构建的响应式前端应用程序，为整个家庭提供愉快的用户体验。
+    en_US: Mealie is a self hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family.
+    zh_CN: Mealie 是一款自托管的菜谱管理器和膳食计划工具，它拥有 RestAPI 后端和使用 Vue 构建的响应式前端应用程序，为整个家庭提供愉快的用户体验。
   developer: mealie
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/mealie/icon.svg
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/mealie/screenshot-1.png
   tagline:
-    en_us: An open source recipe manager
-    zh_cn: 开源菜谱管理器
+    en_US: An open source recipe manager
+    zh_CN: 开源菜谱管理器
   tips:
     before_install:
-      en_us: |
+      en_US: |
         You need to change the environment variable `BASE_URL` before using it.
 
         **Default Credentials**
@@ -54,7 +55,7 @@ x-casaos:
         Password: `MyPassword`
 
         For more information on settings such as email and OpenAI integration, please [read the documentation](https://docs.mealie.io/documentation/getting-started/installation/backend-config/)
-      zh_cn: |
+      zh_CN: |
         使用前你需要修改环境变量 `BASE_URL`
 
         **默认凭据**
@@ -63,6 +64,6 @@ x-casaos:
 
         有关邮件和 OpenAI 集成等更多设置，请[阅读文档](https://docs.mealie.io/documentation/getting-started/installation/backend-config/)
   title:
-    en_us: Mealie
+    en_US: Mealie
   index: /
   port_map: "9925"

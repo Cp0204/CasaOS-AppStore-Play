@@ -23,6 +23,7 @@ services:
     network_mode: bridge
 
 x-casaos:
+  id: com.cp0204.dpanel
   architectures:
     - arm
     - arm64
@@ -30,10 +31,10 @@ x-casaos:
   main: dpanel
   store_app_id: dpanel
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: A Docker visualization management panel that provides complete container management functions. Easy-to-use full Chinese interface, container-based easy installation, and low resource consumption.
-    zh_cn: Docker 可视化管理面板，提供完善的容器管理功能。全中文界面易于使用，基于容器易于安装，资源占用低。
+    en_US: A Docker visualization management panel that provides complete container management functions. Easy-to-use full Chinese interface, container-based easy installation, and low resource consumption.
+    zh_CN: Docker 可视化管理面板，提供完善的容器管理功能。全中文界面易于使用，基于容器易于安装，资源占用低。
   developer: dpanel
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dpanel/icon.png
   screenshot_link:
@@ -42,14 +43,14 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dpanel/screenshot-3.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dpanel/screenshot-4.png
   tagline:
-    en_us: Easy-to-use Docker visual management panel.
-    zh_cn: 易于使用的 Docker 可视化管理面板。
+    en_US: Easy-to-use Docker visual management panel.
+    zh_CN: 易于使用的 Docker 可视化管理面板。
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dpanel/thumbnail.png
   tips:
     before_install:
-      en_us: The default username and password are both admin.
-      zh_cn: 默认用户名和密码均为 admin。
+      en_US: The default username and password are both admin.
+      zh_CN: 默认用户名和密码均为 admin。
   title:
-    en_us: DPanel
-    zh_cn: DPanel
+    en_US: DPanel
+    zh_CN: DPanel
   port_map: "8807"

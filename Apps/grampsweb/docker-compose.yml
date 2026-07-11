@@ -51,6 +51,7 @@ networks:
     driver: bridge
 
 x-casaos:
+  id: com.cp0204.grampsweb
   architectures:
     - arm
     - arm64
@@ -60,8 +61,8 @@ x-casaos:
   author: Cp0204
   category: Developer
   description:
-    en_us: Gramps Web is a web-based application designed for collaborative family tree building. It can be accessed from any web-enabled device and is ideal for working with others to build your family tree together. Gramps Web is free and open-source software, prioritizing the privacy and control of your data.
-    zh_cn: Gramps Web 是一个基于 Web 的应用程序，专为协作构建家谱而设计。它可以从任何支持 Web 的设备访问，非常适合与他人一起构建家谱。Gramps Web 是免费的开源软件，优先考虑您的数据的隐私和控制。
+    en_US: Gramps Web is a web-based application designed for collaborative family tree building. It can be accessed from any web-enabled device and is ideal for working with others to build your family tree together. Gramps Web is free and open-source software, prioritizing the privacy and control of your data.
+    zh_CN: Gramps Web 是一个基于 Web 的应用程序，专为协作构建家谱而设计。它可以从任何支持 Web 的设备访问，非常适合与他人一起构建家谱。Gramps Web 是免费的开源软件，优先考虑您的数据的隐私和控制。
   developer: Gramps Project
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/grampsweb/icon.svg
   screenshot_link:
@@ -69,11 +70,11 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/grampsweb/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/grampsweb/screenshot-3.png
   tagline:
-    en_us: Collaborate on your family tree with Gramps Web
-    zh_cn: 使用 Gramps Web 协作构建您的家谱
+    en_US: Collaborate on your family tree with Gramps Web
+    zh_CN: 使用 Gramps Web 协作构建您的家谱
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/grampsweb/thumbnail.png
   title:
-    en_us: Gramps Web
+    en_US: Gramps Web
   scheme: http
   hostname: ""
   index: /

@@ -28,30 +28,31 @@ services:
     - /DATA/AppData/minecraft-server/data:/data
 
 x-casaos:
+  id: com.cp0204.minecraft-server
   architectures:
     - amd64
     - arm64
   main: minecraft-server
   store_app_id: minecraft-server
   author: Cp0204
-  category: Games
+  category: Others
   description:
-    en_us: A Minecraft Server that will automatically download the latest stable version at startup. You can customize the server using environment variables.
-    zh_cn: 一个 Minecraft 服务器，它将在启动时自动下载最新的稳定版本。您可以使用环境变量自定义服务器。
+    en_US: A Minecraft Server that will automatically download the latest stable version at startup. You can customize the server using environment variables.
+    zh_CN: 一个 Minecraft 服务器，它将在启动时自动下载最新的稳定版本。您可以使用环境变量自定义服务器。
   developer: itzg
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/minecraft-server/icon.png
   tagline:
-    en_us: Minecraft Server
-    zh_cn: Minecraft 服务器
+    en_US: Minecraft Server
+    zh_CN: Minecraft 服务器
   tips:
     before_install:
-      en_us: |
+      en_US: |
         - The default Minecraft server port is 25565.
         - Remember to accept the EULA by setting the environment variable `EULA` to `TRUE`.
         - You can find more configuration options and examples in the [official documentation](https://docker-minecraft-server.readthedocs.io/en/latest/).
-      zh_cn: |
+      zh_CN: |
         - 默认的 Minecraft 服务器端口是 25565。
         - 记得设置环境变量 `EULA` 为 `TRUE` 来接受 EULA。
         - 你可以在[官方文档](https://docker-minecraft-server.readthedocs.io/en/latest/)中找到更多的配置选项和示例。
   title:
-    en_us: Minecraft Server
+    en_US: Minecraft Server

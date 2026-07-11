@@ -14,30 +14,31 @@ services:
           memory: 64M
 
 x-casaos:
+  id: com.cp0204.lucky
   architectures:
     - amd64
     - arm
     - arm64
   main: lucky
   author: Cp0204
-  category: Network
+  category: Networking
   description:
-    en_us: Lucky is a networking tool for port forwarding, reverse proxy, DDNS, WoL, IPv4 STUN NAT traversal, cron jobs, ACME certificates, and network storage (WebDAV/FTP/FileBrowser).
-    zh_cn: Lucky（万吉）是一款网络工具，支持端口转发、反向代理、DDNS、网络唤醒、IPv4 STUN 内网穿透、计划任务、ACME 自动证书及网络存储（WebDAV/FTP/FileBrowser）。
+    en_US: Lucky is a networking tool for port forwarding, reverse proxy, DDNS, WoL, IPv4 STUN NAT traversal, cron jobs, ACME certificates, and network storage (WebDAV/FTP/FileBrowser).
+    zh_CN: Lucky（万吉）是一款网络工具，支持端口转发、反向代理、DDNS、网络唤醒、IPv4 STUN 内网穿透、计划任务、ACME 自动证书及网络存储（WebDAV/FTP/FileBrowser）。
   developer: gdy666
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lucky/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/lucky/screenshot-1.png
   tagline:
-    en_us: Network tool with solutions
-    zh_cn: 网络工具与解决方案
+    en_US: Network tool with solutions
+    zh_CN: 网络工具与解决方案
   tips:
     before_install:
-      en_us: Default login account `666`, Default login password `666`
-      zh_cn: 默认登录账号 `666`，默认登录密码 `666`
+      en_US: Default login account `666`, Default login password `666`
+      zh_CN: 默认登录账号 `666`，默认登录密码 `666`
   title:
-    en_us: Lucky
-    zh_cn: 万吉
+    en_US: Lucky
+    zh_CN: 万吉
   index: /
   port_map: "16601"
   scheme: http

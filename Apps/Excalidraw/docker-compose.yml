@@ -16,23 +16,24 @@ services:
         protocol: tcp
     restart: unless-stopped
 x-casaos:
+  id: com.cp0204.excalidraw
   architectures:
     - amd64
   main: excalidraw
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: Excalidraw is a virtual collaborative whiteboard tool that lets you easily sketch diagrams, illustrate ideas, and create beautiful illustrations remotely.
-    zh_cn: Excalidraw是一款虚拟协作白板工具，可以让您轻松绘制图表、阐明思想和远程创建精美的插图。
+    en_US: Excalidraw is a virtual collaborative whiteboard tool that lets you easily sketch diagrams, illustrate ideas, and create beautiful illustrations remotely.
+    zh_CN: Excalidraw是一款虚拟协作白板工具，可以让您轻松绘制图表、阐明思想和远程创建精美的插图。
   developer: Excalidraw
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Excalidraw/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Excalidraw/screenshot-1.png
   tagline:
-    en_us: Collaborative Whiteboard Tool
-    zh_cn: 协作白板工具
+    en_US: Collaborative Whiteboard Tool
+    zh_CN: 协作白板工具
   tips: {}
   title:
-    en_us: Excalidraw
+    en_US: Excalidraw
   index: /
   port_map: "5000"

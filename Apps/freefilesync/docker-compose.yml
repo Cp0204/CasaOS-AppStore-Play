@@ -21,6 +21,7 @@ services:
     network_mode: bridge
 
 x-casaos:
+  id: com.cp0204.freefilesync
   architectures:
     - amd64
     - arm64
@@ -28,10 +29,10 @@ x-casaos:
   main: freefilesync
   store_app_id: freefilesync
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: FreeFileSync is a folder comparison and synchronization software that creates and manages backup copies of all your important files. Instead of copying every file every time, FreeFileSync determines the differences between a source and a target folder and transfers only the minimum amount of data needed.
-    zh_cn: FreeFileSync 是一款文件夹比较和同步软件，可以创建和管理所有重要文件的备份副本。FreeFileSync 不是每次都复制每个文件，而是确定源文件夹和目标文件夹之间的差异，并仅传输所需的最少数据量。
+    en_US: FreeFileSync is a folder comparison and synchronization software that creates and manages backup copies of all your important files. Instead of copying every file every time, FreeFileSync determines the differences between a source and a target folder and transfers only the minimum amount of data needed.
+    zh_CN: FreeFileSync 是一款文件夹比较和同步软件，可以创建和管理所有重要文件的备份副本。FreeFileSync 不是每次都复制每个文件，而是确定源文件夹和目标文件夹之间的差异，并仅传输所需的最少数据量。
   developer: jlesage
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/freefilesync/icon.png
   screenshot_link:
@@ -39,10 +40,10 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/freefilesync/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/freefilesync/screenshot-3.png
   tagline:
-    en_us: File synchronization
-    zh_cn: 文件同步软件
+    en_US: File synchronization
+    zh_CN: 文件同步软件
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/freefilesync/thumbnail.png
   title:
-    en_us: FreeFileSync
+    en_US: FreeFileSync
   index: /
   port_map: "5800"

@@ -20,28 +20,29 @@ services:
         source: /etc/timezone
         target: /etc/timezone
 x-casaos:
+  id: com.cp0204.frps
   architectures:
     - amd64
     - arm
     - arm64
   author: Cp0204
-  category: Network
+  category: Networking
   description:
-    en_us: A fast reverse proxy server that helps you expose a local server to the internet. It provides client authentication and supports multiple protocols.
-    zh_cn: 一个快速的反向代理服务器，可以帮助您将本地服务器暴露到互联网。它提供客户端认证并支持多种协议。
+    en_US: A fast reverse proxy server that helps you expose a local server to the internet. It provides client authentication and supports multiple protocols.
+    zh_CN: 一个快速的反向代理服务器，可以帮助您将本地服务器暴露到互联网。它提供客户端认证并支持多种协议。
   developer: snowdreamtech
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/frps/icon.png
   main: frps
   tagline:
-    en_us: Fast reverse proxy server
-    zh_cn: 快速的反向代理服务器
+    en_US: Fast reverse proxy server
+    zh_CN: 快速的反向代理服务器
   thumbnail:
   tips:
     before_install:
-      en_us: Before installation, please create a file named `frps.toml` in the `/DATA/AppData/frp/` directory.
-      zh_cn: 安装前，请先在 `/DATA/AppData/frp/` 目录下建立 `frps.toml` 文件。
+      en_US: Before installation, please create a file named `frps.toml` in the `/DATA/AppData/frp/` directory.
+      zh_CN: 安装前，请先在 `/DATA/AppData/frp/` 目录下建立 `frps.toml` 文件。
   title:
-    en_us: frps
+    en_US: frps
   index:
   port_map: "7500"
   scheme: http

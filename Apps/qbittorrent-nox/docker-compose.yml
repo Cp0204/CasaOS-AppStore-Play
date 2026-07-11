@@ -26,50 +26,51 @@ services:
     network_mode: host
 
 x-casaos:
+  id: com.cp0204.qbittorrent-nox
   architectures:
     - arm
     - arm64
     - amd64
   main: qbittorrent-nox
   author: Cp0204
-  category: Downloader
+  category: Productivity
   description:
-    en_us: The qBittorrent project aims to provide an open-source software alternative to µTorrent.
-    zh_cn: qBittorrent 项目旨在提供一个开源的 µTorrent 替代品。
-    ar_sa: يهدف مشروع qBittorrent إلى توفير بديل مفتوح المصدر لـ µTorrent.
-    de_de: Das qBittorrent-Projekt zielt darauf ab, eine Open-Source-Software-Alternative zu µTorrent zu bieten.
-    es_es: El objetivo del proyecto qBittorrent es proporcionar una alternativa de software de código abierto a µTorrent.
-    fr_fr: Le projet qBittorrent vise à fournir une alternative open source à µTorrent.
-    hu_hu: A qBittorrent projekt célja, hogy nyílt forráskódú szoftver alternatívát nyújtson a µTorrent számára.
-    it_it: Il progetto qBittorrent mira a fornire un'alternativa open source a µTorrent.
-    ru_ru: Проект qBittorrent стремится предоставить альтернативу c открытым исходным кодом для µTorrent.
-    pl_pl: Projekt qBittorrent ma na celu zapewnienie otwartoźródłowej alternatywy dla µTorrent.
-    pt_br: O objetivo do projeto qBittorrent é fornecer uma alternativa de software de código aberto ao µTorrent.
-    sv_se: qBittorrent-projektets mål är att erbjuda en öppen källkodsalternativ till µTorrent.
-    uk_ua: Проект qBittorrent має на меті надати альтернативу з відкритим вихідним кодом для µTorrent.
+    en_US: The qBittorrent project aims to provide an open-source software alternative to µTorrent.
+    zh_CN: qBittorrent 项目旨在提供一个开源的 µTorrent 替代品。
+    ar_SA: يهدف مشروع qBittorrent إلى توفير بديل مفتوح المصدر لـ µTorrent.
+    de_DE: Das qBittorrent-Projekt zielt darauf ab, eine Open-Source-Software-Alternative zu µTorrent zu bieten.
+    es_ES: El objetivo del proyecto qBittorrent es proporcionar una alternativa de software de código abierto a µTorrent.
+    fr_FR: Le projet qBittorrent vise à fournir une alternative open source à µTorrent.
+    hu_HU: A qBittorrent projekt célja, hogy nyílt forráskódú szoftver alternatívát nyújtson a µTorrent számára.
+    it_IT: Il progetto qBittorrent mira a fornire un'alternativa open source a µTorrent.
+    ru_RU: Проект qBittorrent стремится предоставить альтернативу c открытым исходным кодом для µTorrent.
+    pl_PL: Projekt qBittorrent ma na celu zapewnienie otwartoźródłowej alternatywy dla µTorrent.
+    pt_BR: O objetivo do projeto qBittorrent é fornecer uma alternativa de software de código aberto ao µTorrent.
+    sv_SE: qBittorrent-projektets mål är att erbjuda en öppen källkodsalternativ till µTorrent.
+    uk_UA: Проект qBittorrent має на меті надати альтернативу з відкритим вихідним кодом для µTorrent.
   developer: qBittorrent
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qbittorrent-nox/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qbittorrent-nox/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qbittorrent-nox/screenshot-2.png
   tagline:
-    en_us: Free BitTorrent downloader
-    zh_cn: 免费的 BitTorrent 下载器
-    ar_sa: مُنزِّل BitTorrent مجاني
-    de_de: Kostenloser BitTorrent-Downloader
-    es_es: Descargador de BitTorrent gratuito
-    fr_fr: Téléchargeur BitTorrent gratuit
-    hu_hu: Ingyenes BitTorrent letöltő
-    it_it: Downloader BitTorrent gratuito
-    ru_ru: Бесплатный загрузчик BitTorrent
-    pl_pl: Darmowy downloader BitTorrent
-    pt_br: Downloader BitTorrent gratuito
-    sv_se: Gratis BitTorrent-downladdare
-    uk_ua: Безкоштовний завантажувач BitTorrent
+    en_US: Free BitTorrent downloader
+    zh_CN: 免费的 BitTorrent 下载器
+    ar_SA: مُنزِّل BitTorrent مجاني
+    de_DE: Kostenloser BitTorrent-Downloader
+    es_ES: Descargador de BitTorrent gratuito
+    fr_FR: Téléchargeur BitTorrent gratuit
+    hu_HU: Ingyenes BitTorrent letöltő
+    it_IT: Downloader BitTorrent gratuito
+    ru_RU: Бесплатный загрузчик BitTorrent
+    pl_PL: Darmowy downloader BitTorrent
+    pt_BR: Downloader BitTorrent gratuito
+    sv_SE: Gratis BitTorrent-downladdare
+    uk_UA: Безкоштовний завантажувач BitTorrent
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qbittorrent-nox/thumbnail.jpg
   tips:
     before_install:
-      en_us: |
+      en_US: |
         Default Account
 
         | Username | Password |
@@ -84,7 +85,7 @@ x-casaos:
         | `/mnt` | `/mnt` |
 
         You can add mapped paths yourself, make sure you use the correct paths when using qBittorrent.
-      zh_cn: |
+      zh_CN: |
         默认账号
 
         | 用户名 | 密码 |
@@ -101,6 +102,6 @@ x-casaos:
         你可以自行增加映射路径，请确保在使用 qBittorrent 时使用正确的路径。
 
   title:
-    en_us: qBittorrent
+    en_US: qBittorrent
   index: /
   port_map: "8181"

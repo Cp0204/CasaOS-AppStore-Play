@@ -19,15 +19,16 @@ services:
         target: /opt/alist/data
 
 x-casaos:
+  id: com.cp0204.alist
   architectures:
     - amd64
     - arm
     - arm64
   author: Cp0204
-  category: Cloud
+  category: Productivity
   description:
-    en_us: A file list program that supports multiple storage, powered by Gin and Solidjs.
-    zh_cn: 一个支持多种存储的文件列表程序，使用 Gin 和 Solidjs。
+    en_US: A file list program that supports multiple storage, powered by Gin and Solidjs.
+    zh_CN: 一个支持多种存储的文件列表程序，使用 Gin 和 Solidjs。
   developer: Xhofe
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Alist/icon.png
   screenshot_link:
@@ -36,18 +37,18 @@ x-casaos:
   port_map: "5244"
   scheme: http
   tagline:
-    en_us: A file list program that supports multiple storage
-    zh_cn: 一个支持多种存储的文件列表程序
+    en_US: A file list program that supports multiple storage
+    zh_CN: 一个支持多种存储的文件列表程序
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Alist/thumbnail.png
   tips:
     before_install:
-      en_us: |
+      en_US: |
         **Note: The open source project Alist has been found to have been sold out to a commercial company in June 2025 and has been suspected of collecting private information, so please use with caution.**
 
         After installation, view the initial password in the log.
-      zh_cn: |
+      zh_CN: |
         **注意：开源项目Alist已于2025年6月被发现出卖给某商业公司，并有涉嫌收集隐私信息的行为，请谨慎使用。**
 
         安装完成后，请在日志中查看初始密码。
   title:
-    en_us: Alist
+    en_US: Alist

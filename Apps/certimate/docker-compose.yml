@@ -19,16 +19,17 @@ services:
     container_name: certimate
 
 x-casaos:
+  id: com.cp0204.certimate
   architectures:
     - arm64
     - amd64
   main: certimate
   store_app_id: certimate
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: Certimate is a self-hosted SSL certificate management tool that makes it easy to obtain, renew and deploy SSL certificates from Let's Encrypt, ZeroSSL and more, for free.
-    zh_cn: Certimate 是一款自托管的 SSL 证书管理工具，可以轻松地从 Let's Encrypt、ZeroSSL 等机构免费获取、续订和部署 SSL 证书。
+    en_US: Certimate is a self-hosted SSL certificate management tool that makes it easy to obtain, renew and deploy SSL certificates from Let's Encrypt, ZeroSSL and more, for free.
+    zh_CN: Certimate 是一款自托管的 SSL 证书管理工具，可以轻松地从 Let's Encrypt、ZeroSSL 等机构免费获取、续订和部署 SSL 证书。
   developer: usual2970
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/certimate/icon.svg
   screenshot_link:
@@ -38,18 +39,18 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/certimate/screenshot-4.jpg
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/certimate/screenshot-5.jpg
   tagline:
-    en_us: A self-hosted SSL certificate management tool.
-    zh_cn: 一款自托管的 SSL 证书管理工具。
+    en_US: A self-hosted SSL certificate management tool.
+    zh_CN: 一款自托管的 SSL 证书管理工具。
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/certimate/thumbnail.png
   tips:
     before_install:
-      en_us: |
+      en_US: |
         Username: `admin@certimate.fun`
         Password: `1234567890`
-      zh_cn: |
+      zh_CN: |
         用户名：`admin@certimate.fun`
         密码：`1234567890`
   title:
-      en_us: Certimate
+      en_US: Certimate
   index: /
   port_map: "8090"

@@ -21,20 +21,21 @@ services:
       ports:
         - container: '8080'
           description:
-            en_us: Port
-            zh_cn: 端口
+            en_US: Port
+            zh_CN: 端口
       volumes:
         - container: /usr/app/data
           description:
-            en_us: Data directory.
-            zh_cn: 数据目录
+            en_US: Data directory.
+            zh_CN: 数据目录
 x-casaos:
+  id: com.cp0204.nocodb
   architectures:
     - amd64
     - arm
     - arm64
   main: nocodb
-  category: WEB
+  category: Productivity
   author: Cp0204
   developer: nocodb.com
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nocodb/icon.png
@@ -43,14 +44,14 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nocodb/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/nocodb/screenshot-3.png
   description:
-    en_us: NocoDB is a no-code database platform that allows teams to collaborate and build applications with ease of a familiar and intuitive spreadsheet interface. This allows even non-developers or business users to become software creators.
-    zh_cn: NocoDB 是一个无代码数据库平台，允许团队通过熟悉和直观的电子表格界面轻松协作和构建应用程序。这甚至允许非开发人员或业务用户成为软件创建者。
+    en_US: NocoDB is a no-code database platform that allows teams to collaborate and build applications with ease of a familiar and intuitive spreadsheet interface. This allows even non-developers or business users to become software creators.
+    zh_CN: NocoDB 是一个无代码数据库平台，允许团队通过熟悉和直观的电子表格界面轻松协作和构建应用程序。这甚至允许非开发人员或业务用户成为软件创建者。
   tagline:
-    en_us: Open Source data platform
-    zh_cn: 开源数据平台
+    en_US: Open Source data platform
+    zh_CN: 开源数据平台
   title:
-    en_us: NocoDB
-    zh_cn: NocoDB
+    en_US: NocoDB
+    zh_CN: NocoDB
   port_map: '8080'
   scheme: http
   index: /

@@ -127,6 +127,7 @@ networks:
     driver: bridge
 
 x-casaos:
+  id: com.cp0204.ai-starter-kit
   architectures:
     - amd64
     - arm64
@@ -135,21 +136,21 @@ x-casaos:
   author: Cp0204
   category: Developer
   description:
-    en_us: "Self-hosted AI Starter Kit is an open-source Docker Compose template designed to swiftly initialize a comprehensive local AI and low-code development environment. It combines the self-hosted n8n platform with a curated list of compatible AI products and components to quickly get started with building self-hosted AI workflows."
-    zh_cn: "Self-hosted AI Starter Kit 是一个开源的 Docker Compose 模板，旨在快速初始化一个全面的本地 AI 和低代码开发环境。它将自托管的 n8n 平台与精选的兼容 AI 产品和组件列表相结合，以快速开始构建自托管的 AI 工作流程。"
+    en_US: "Self-hosted AI Starter Kit is an open-source Docker Compose template designed to swiftly initialize a comprehensive local AI and low-code development environment. It combines the self-hosted n8n platform with a curated list of compatible AI products and components to quickly get started with building self-hosted AI workflows."
+    zh_CN: "Self-hosted AI Starter Kit 是一个开源的 Docker Compose 模板，旨在快速初始化一个全面的本地 AI 和低代码开发环境。它将自托管的 n8n 平台与精选的兼容 AI 产品和组件列表相结合，以快速开始构建自托管的 AI 工作流程。"
   developer: n8n-io
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ai-starter-kit/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ai-starter-kit/screenshot-1.png
   tagline:
-    en_us: Self-hosted AI starter kit
-    zh_cn: 自托管 AI 启动套件
+    en_US: Self-hosted AI starter kit
+    zh_CN: 自托管 AI 启动套件
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ai-starter-kit/thumbnail.png
   tips:
     before_install:
-      en_us: "If this is the first time you’re running the workflow, you may need to wait until Ollama finishes downloading Llama3.2. You can inspect the docker console logs to check on the progress."
-      zh_cn: "如果这是您第一次启动此套件，您可能需要等待 Ollama 完成 Llama3.2 的下载。您可以检查 Docker 控制台日志以查看进度。"
+      en_US: "If this is the first time you’re running the workflow, you may need to wait until Ollama finishes downloading Llama3.2. You can inspect the docker console logs to check on the progress."
+      zh_CN: "如果这是您第一次启动此套件，您可能需要等待 Ollama 完成 Llama3.2 的下载。您可以检查 Docker 控制台日志以查看进度。"
   title:
-    en_us: n8n Al Kit [CPU]
+    en_US: n8n Al Kit [CPU]
   index: /
   port_map: "5678"

@@ -55,16 +55,17 @@ networks:
     name: dataease
 
 x-casaos:
+  id: com.cp0204.dataease
   architectures:
     - amd64
     - arm64
   main: dataease
   store_app_id: dataease
   author: Cp0204
-  category: Analytics
+  category: Productivity
   description:
-    en_us: DataEase is an open-source free data visualization analysis tool, Aiming to help users with various levels of technical skills to carry out data analysis quickly, and explore the value of data easily.
-    zh_cn: DataEase 是开源的数据可视化分析工具，帮助用户快速分析数据并洞察业务趋势，从而实现业务的改进与优化。DataEase 支持丰富的数据源连接，能够通过拖拉拽方式快速制作图表，并可以方便的与他人分享。
+    en_US: DataEase is an open-source free data visualization analysis tool, Aiming to help users with various levels of technical skills to carry out data analysis quickly, and explore the value of data easily.
+    zh_CN: DataEase 是开源的数据可视化分析工具，帮助用户快速分析数据并洞察业务趋势，从而实现业务的改进与优化。DataEase 支持丰富的数据源连接，能够通过拖拉拽方式快速制作图表，并可以方便的与他人分享。
   developer: dataease
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dataease/icon.png
   screenshot_link:
@@ -73,17 +74,17 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dataease/screenshot-3.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dataease/screenshot-4.png
   tagline:
-    en_us: An open-source free data visualization analysis tool.
-    zh_cn: 人人可用的开源 BI 工具
+    en_US: An open-source free data visualization analysis tool.
+    zh_CN: 人人可用的开源 BI 工具
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dataease/thumbnail.png
   tips:
     before_install:
-      en_us: |
+      en_US: |
         username: admin
         password: DataEase@123456
-      zh_cn: |
+      zh_CN: |
         用户名: admin
         密码: DataEase@123456
   title:
-    en_us: DataEase
+    en_US: DataEase
   port_map: "8101"

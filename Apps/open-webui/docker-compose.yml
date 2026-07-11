@@ -23,12 +23,13 @@ services:
     privileged: false
 
 x-casaos:
+  id: com.cp0204.open-webui
   architectures:
     - amd64
     - arm64
   main: open-webui
   store_app_id: open-webui
-  category: Chat
+  category: Social
   author: Cp0204
   developer: tjbck
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/open-webui/icon.png
@@ -38,13 +39,13 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/open-webui/screenshot-3.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/open-webui/thumbnail.png
   description:
-    en_us: Open WebUI is an extensible, feature-rich, and user-friendly self-hosted WebUI designed to operate entirely offline. It supports various LLM runners, including Ollama and OpenAI-compatible APIs. For more information, be sure to check out our [Open WebUI Documentation](https://docs.openwebui.com/).
-    zh_cn: Open WebUI 是一种可扩展、功能丰富且用户友好的自托管 WebUI，旨在完全离线运行。它支持各种LLM运行器，包括 Ollama 和 OpenAI 兼容的 API。有关更多信息，请务必查看我们的 [Open WebUI 文档](https://docs.openwebui.com/).。
+    en_US: Open WebUI is an extensible, feature-rich, and user-friendly self-hosted WebUI designed to operate entirely offline. It supports various LLM runners, including Ollama and OpenAI-compatible APIs. For more information, be sure to check out our [Open WebUI Documentation](https://docs.openwebui.com/).
+    zh_CN: Open WebUI 是一种可扩展、功能丰富且用户友好的自托管 WebUI，旨在完全离线运行。它支持各种LLM运行器，包括 Ollama 和 OpenAI 兼容的 API。有关更多信息，请务必查看我们的 [Open WebUI 文档](https://docs.openwebui.com/).。
   tagline:
-    en_us: User-friendly WebUI for LLMs (Formerly Ollama WebUI)
-    zh_cn: 用户友好的大语言模型WebUI （前身为 Ollama WebUI）
+    en_US: User-friendly WebUI for LLMs (Formerly Ollama WebUI)
+    zh_CN: 用户友好的大语言模型WebUI （前身为 Ollama WebUI）
   title:
-    en_us: Open WebUI
+    en_US: Open WebUI
   port_map: "3000"
   scheme: http
   index: /

@@ -26,15 +26,16 @@ services:
       - /DATA/Downloads:/Downloads
 
 x-casaos:
+  id: com.cp0204.aria2
   architectures:
     - amd64
     - arm
     - arm64
   author: Cp0204
-  category: Downloader
+  category: Productivity
   description:
-    en_us: Aria2 is a lightweight multi-protocol & multi-source command-line download utility. It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink.
-    zh_cn: Aria2 是一款轻量级的多协议和多源命令行下载工具。它支持 HTTP/HTTPS、FTP、SFTP、BitTorrent 和 Metalink 。
+    en_US: Aria2 is a lightweight multi-protocol & multi-source command-line download utility. It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink.
+    zh_CN: Aria2 是一款轻量级的多协议和多源命令行下载工具。它支持 HTTP/HTTPS、FTP、SFTP、BitTorrent 和 Metalink 。
   developer: johngong
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2/icon.png
   screenshot_link:
@@ -43,11 +44,11 @@ x-casaos:
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/aria2/thumbnail.png
   main: aria2
   tagline:
-    en_us: The lightweight multi-protocol & multi-source command-line download utility
-    zh_cn: 轻量级的多协议和多源命令行下载工具
+    en_US: The lightweight multi-protocol & multi-source command-line download utility
+    zh_CN: 轻量级的多协议和多源命令行下载工具
   tips:
     before_install:
-      en_us: |
+      en_US: |
         Aria2 itself is a download kernel with no admin panel. This application integrates with WebUI [AriaNg](http://ariang.mayswind.net) for graphical management, but you still **need to set up the AriaNg connection information manually** after installation:
 
         | Environment | Default | Description |
@@ -58,7 +59,7 @@ x-casaos:
         Alternatively, you can use a mobile app to connect to the management, e.g. [Aria2App](https://github.com/devgianlu/Aria2App).
 
         **NOTE**: Changes to Aria2 settings using the third-party panel will only be saved for that sub-process, and will not modify the configuration file; if permanently modified, you should manually modify the Aria2 configuration file.
-      zh_cn: |
+      zh_CN: |
         Aria2 本身是一个下载核心，没有管理面板。本应用集成 WebUI [AriaNg](http://ariang.mayswind.net) 供图形化管理，但安装后你仍然**需要手动设置 AriaNg 连接信息**：
 
         | 环境变量 | 默认值 | 说明 |
@@ -70,7 +71,7 @@ x-casaos:
 
         **注意**：使用第三方面板对 Aria2 设置的修改只会保存在该次进程中，不会修改配置文件，如果永久修改，你应该手动修改Aria2配置文件。
   title:
-    en_us: Aria2
+    en_US: Aria2
   scheme: http
   hostname: ""
   port_map: "6880"

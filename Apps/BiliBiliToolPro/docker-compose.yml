@@ -19,25 +19,26 @@ services:
         source: /DATA/AppData/bilibilitoolpro/Logs
         target: /app/Logs
 x-casaos:
+  id: com.cp0204.bilibilitoolpro
   architectures:
     - amd64
     - arm64
   author: Cp0204
-  category: WEB
+  category: Productivity
   description:
-    en_us: BiliBiliTool is a tool that automatically performs tasks. When we forget to do a certain task, it is like a caring assistant that follows the commands we have given it in advance, helping us complete the planned tasks within the specified frequency and time range.
-    zh_cn: BiliBiliTool 是一个自动执行任务的工具，当我们忘记做某项任务时，它会像一个贴心小助手，按照我们预先吩咐它的命令，在指定频率、时间范围内帮助我们完成计划的任务。
+    en_US: BiliBiliTool is a tool that automatically performs tasks. When we forget to do a certain task, it is like a caring assistant that follows the commands we have given it in advance, helping us complete the planned tasks within the specified frequency and time range.
+    zh_CN: BiliBiliTool 是一个自动执行任务的工具，当我们忘记做某项任务时，它会像一个贴心小助手，按照我们预先吩咐它的命令，在指定频率、时间范围内帮助我们完成计划的任务。
   developer: raywangqvq
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/screenshot-1.png
   tagline:
-    en_us: Automated tool for performing BiliBili tasks.
-    zh_cn: 自动执行 BiliBi 任务的工具
+    en_US: Automated tool for performing BiliBili tasks.
+    zh_CN: 自动执行 BiliBi 任务的工具
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/thumbnail.png
   tips:
     before_install:
-      en_us: |
+      en_US: |
         Steps
 
         1. Create a `cookies.json` file before installing, and run it on the host machine
@@ -55,7 +56,7 @@ x-casaos:
 
 
         [Documentation](https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md)
-      zh_cn: |
+      zh_CN: |
         使用步骤
 
         1. 安装前建立**cookies.json**文件，在宿主机运行
@@ -75,4 +76,4 @@ x-casaos:
         [项目文档](https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md)
   main: bilibilitoolpro
   title:
-    en_us: BiliBiliToolPro
+    en_US: BiliBiliToolPro

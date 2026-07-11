@@ -57,30 +57,31 @@ services:
       start_period: 40s
 
 x-casaos:
+  id: com.cp0204.pansou
   architectures:
     - amd64
     - arm64
   main: pansou
   store_app_id: pansou
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: PanSou is a high-performance network disk resource search API service that supports TG search and custom plugin search.
-    zh_cn: PanSou 是一个高性能的网盘资源搜索 API 服务，支持 TG 搜索和自定义插件搜索。
+    en_US: PanSou is a high-performance network disk resource search API service that supports TG search and custom plugin search.
+    zh_CN: PanSou 是一个高性能的网盘资源搜索 API 服务，支持 TG 搜索和自定义插件搜索。
   developer: fish2018
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/screenshot-2.png
   tagline:
-    en_us: High-performance network disk resource search API service.
-    zh_cn: 高性能的网盘资源搜索API服务。
+    en_US: High-performance network disk resource search API service.
+    zh_CN: 高性能的网盘资源搜索API服务。
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/thumbnail.png
   tips:
     before_install:
-      en_us: ""
-      zh_cn: ""
+      en_US: ""
+      zh_CN: ""
   title:
-    en_us: PanSou
+    en_US: PanSou
   index: /
   port_map: "6080"

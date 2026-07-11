@@ -30,16 +30,17 @@ services:
     network_mode: bridge
 
 x-casaos:
+  id: com.cp0204.fast-os-docker
   architectures:
     - amd64
     - arm
     - arm64
   main: fastosdocker
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: FAST OS DOCKER is a graphical management tool for Docker, providing users with Docker overview, local container management, remote image pulling, server disk mapping, server network management, and more. It can meet the container management needs of small to medium-sized organizations.
-    zh_cn: FAST OS DOCKER是Docker的图形化管理工具，为用户提供了Docker总览、本地容器管理、远程镜像拉取、服务器磁盘映射、服务器网络管理等功能，基本能满足中小型单位对容器管理的全部需求。
+    en_US: FAST OS DOCKER is a graphical management tool for Docker, providing users with Docker overview, local container management, remote image pulling, server disk mapping, server network management, and more. It can meet the container management needs of small to medium-sized organizations.
+    zh_CN: FAST OS DOCKER是Docker的图形化管理工具，为用户提供了Docker总览、本地容器管理、远程镜像拉取、服务器磁盘映射、服务器网络管理等功能，基本能满足中小型单位对容器管理的全部需求。
   developer: wangbinxingkong
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fast-os-docker/icon.png
   screenshot_link:
@@ -47,11 +48,11 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fast-os-docker/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fast-os-docker/screenshot-3.png
   tagline:
-    en_us: Docker Management Tool
-    zh_cn: Docker管理工具
+    en_US: Docker Management Tool
+    zh_CN: Docker管理工具
   thumbnail:
   tips: {}
   title:
-    en_us: FAST OS DOCKER
+    en_US: FAST OS DOCKER
   index: /
   port_map: "8081"

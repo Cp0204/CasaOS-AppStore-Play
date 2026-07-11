@@ -31,28 +31,29 @@ services:
     stop_grace_period: 2m
 
 x-casaos:
+  id: com.cp0204.windows
   architectures:
     - amd64
     - arm64
   main: windows
   store_app_id: windows
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: Run Windows inside a Docker container with KVM acceleration and a web-based viewer.
-    zh_cn: 在 Docker 容器中运行 Windows，支持 KVM 加速和基于 Web 的查看器。
+    en_US: Run Windows inside a Docker container with KVM acceleration and a web-based viewer.
+    zh_CN: 在 Docker 容器中运行 Windows，支持 KVM 加速和基于 Web 的查看器。
   developer: dockurr
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/screenshot-2.png
   tagline:
-    en_us: Windows inside a Docker container.
-    zh_cn: Docker 容器中的 Windows。
+    en_US: Windows inside a Docker container.
+    zh_CN: Docker 容器中的 Windows。
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/thumbnail.png
   tips:
     before_install:
-      en_us: |
+      en_US: |
         **Default Configuration:**
         - **Username:** Docker
         - **Password:** admin
@@ -76,7 +77,7 @@ x-casaos:
         - **Disk Size:** Adjust `DISK_SIZE` environment variable (e.g., `"256G"`).
         - **RAM Size:** Adjust `RAM_SIZE` environment variable (e.g., `"8G"`).
         - **CPU Cores:** Adjust `CPU_CORES` environment variable (e.g., `"4"`).
-      zh_cn: |
+      zh_CN: |
         **默认配置：**
         - **用户名：** Docker
         - **密码：** admin
@@ -101,7 +102,7 @@ x-casaos:
         - **内存大小：** 调整 `RAM_SIZE` 环境变量（例如：`"8G"`）。
         - **CPU 核心数：** 调整 `CPU_CORES` 环境变量（例如：`"4"`）。
   title:
-    en_us: Windows
-    zh_cn: Windows
+    en_US: Windows
+    zh_CN: Windows
   index: /
   port_map: "8006"

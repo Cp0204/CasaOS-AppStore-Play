@@ -15,15 +15,16 @@ services:
     network_mode: bridge
 
 x-casaos:
+  id: com.cp0204.myip
   architectures:
     - arm64
     - amd64
   main: myip
   author: Cp0204
-  category: Utilities
+  category: Productivity
   description:
-    en_us: The best IP Toolbox. Easy to check what's your IPs, IP geolocation, check for DNS leaks, examine WebRTC connections, speed test, ping test, MTR test, check website availability, whois search and more!
-    zh_cn: 可能是最好用的IP工具箱。轻松检查你的 IP，IP 地理位置，检查DNS泄漏，检查 WebRTC 连接，速度测试，ping 测试，MTR测试，检查网站可用性，查询 Whois 信息等等。
+    en_US: The best IP Toolbox. Easy to check what's your IPs, IP geolocation, check for DNS leaks, examine WebRTC connections, speed test, ping test, MTR test, check website availability, whois search and more!
+    zh_CN: 可能是最好用的IP工具箱。轻松检查你的 IP，IP 地理位置，检查DNS泄漏，检查 WebRTC 连接，速度测试，ping 测试，MTR测试，检查网站可用性，查询 Whois 信息等等。
   developer: jason5ng32
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/icon.webp
   # screenshot_link:
@@ -31,11 +32,11 @@ x-casaos:
   #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/screenshot-2.png
   #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/screenshot-3.png
   tagline:
-    en_us: A Better IP Toolbox
-    zh_cn: 更好的IP工具箱
+    en_US: A Better IP Toolbox
+    zh_CN: 更好的IP工具箱
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/thumbnail.png
   title:
-    en_us: MyIP
-    zh_cn: IP工具箱
+    en_US: MyIP
+    zh_CN: IP工具箱
   index: /
   port_map: "18966"

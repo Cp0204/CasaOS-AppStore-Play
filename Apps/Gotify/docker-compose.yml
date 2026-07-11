@@ -18,13 +18,14 @@ services:
         source: /DATA/AppData/gotify
         target: /app/data
 x-casaos:
+  id: com.cp0204.gotify
   architectures:
     - amd64
   author: Cp0204
-  category: Dapps
+  category: Others
   description:
-    en_us: A self-hosted push notification service written in Go. It simplifies the sending and receiving of push notifications over multiple platforms.
-    zh_cn: 一个使用Go编写的自托管推送通知服务。它简化了在多个平台上发送和接收推送通知的过程。
+    en_US: A self-hosted push notification service written in Go. It simplifies the sending and receiving of push notifications over multiple platforms.
+    zh_CN: 一个使用Go编写的自托管推送通知服务。它简化了在多个平台上发送和接收推送通知的过程。
   developer: jmattheis
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/icon.png
   screenshot_link:
@@ -32,12 +33,12 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Gotify/screenshot-2.png
   main: gotify
   tagline:
-    en_us: a simple server for sending and receiving messages
-    zh_cn: 一个简单的服务器用于发送和接收消息
+    en_US: a simple server for sending and receiving messages
+    zh_CN: 一个简单的服务器用于发送和接收消息
   thumbnail:
   tips:
   title:
-    en_us: Gotify
+    en_US: Gotify
   index:
   port_map: "86"
   scheme: http

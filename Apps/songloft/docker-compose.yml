@@ -19,6 +19,7 @@ services:
           memory: 128M
 
 x-casaos:
+  id: com.cp0204.songloft
   architectures:
     - amd64
     - arm64
@@ -28,8 +29,8 @@ x-casaos:
   author: Cp0204
   category: Media
   description:
-    en_us: Self-hosted music server for personal users. Scan local directories, auto-extract metadata and covers for MP3/FLAC/WAV/APE/OGG/M4A. Features JS plugin system, cross-platform Flutter clients, Kodi plugin, and built-in Web UI.
-    zh_cn: 面向个人用户的自托管音乐服务器。扫描本地目录，自动提取 MP3/FLAC/WAV/APE/OGG/M4A 等格式的封面和元数据。支持 JS 插件体系、跨平台 Flutter 客户端、Kodi 插件及内置 Web 界面。
+    en_US: Self-hosted music server for personal users. Scan local directories, auto-extract metadata and covers for MP3/FLAC/WAV/APE/OGG/M4A. Features JS plugin system, cross-platform Flutter clients, Kodi plugin, and built-in Web UI.
+    zh_CN: 面向个人用户的自托管音乐服务器。扫描本地目录，自动提取 MP3/FLAC/WAV/APE/OGG/M4A 等格式的封面和元数据。支持 JS 插件体系、跨平台 Flutter 客户端、Kodi 插件及内置 Web 界面。
   developer: hanxi
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/songloft/icon.png
   screenshot_link:
@@ -38,13 +39,13 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/songloft/screenshot-3.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/songloft/thumbnail.png
   tagline:
-    en_us: Self-hosted music server for personal users.
-    zh_cn: 面向个人用户的自托管音乐服务器
+    en_US: Self-hosted music server for personal users.
+    zh_CN: 面向个人用户的自托管音乐服务器
   tips:
     before_install:
-      en_us: "Default credentials are `admin` / `your_strong_password`. Please replace the ADMIN_PASSWORD environment variable with your own strong password before deploying."
-      zh_cn: "默认账号密码为 `admin` / `your_strong_password` 。请将环境变量 ADMIN_PASSWORD 的值替换为你自己的强密码。"
+      en_US: "Default credentials are `admin` / `your_strong_password`. Please replace the ADMIN_PASSWORD environment variable with your own strong password before deploying."
+      zh_CN: "默认账号密码为 `admin` / `your_strong_password` 。请将环境变量 ADMIN_PASSWORD 的值替换为你自己的强密码。"
   title:
-    en_us: Songloft
+    en_US: Songloft
   index: /
   port_map: "58091"

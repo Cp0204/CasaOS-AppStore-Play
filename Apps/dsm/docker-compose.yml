@@ -26,33 +26,34 @@ services:
     network_mode: bridge
     privileged: false
 x-casaos:
+  id: com.cp0204.dsm
   architectures:
     - amd64
   main: dsm
-  category: File Sync
+  category: Productivity
   author: Cp0204
   developer: vDSM
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dsm/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dsm/screenshot-1.png
   description:
-    en_us: Multiple disks, KVM acceleration, GPU passthrough, Upgrades supported
-    zh_cn: 多磁盘，KVM 加速，GPU直通，支持升级
+    en_US: Multiple disks, KVM acceleration, GPU passthrough, Upgrades supported
+    zh_CN: 多磁盘，KVM 加速，GPU直通，支持升级
   tagline:
-    en_us: Virtual DSM in a docker container
-    zh_cn: 在docker容器中虚拟DSM
+    en_US: Virtual DSM in a docker container
+    zh_CN: 在docker容器中虚拟DSM
   title:
-    en_us: Virtual DSM
-    zh_cn: Virtual DSM
+    en_US: Virtual DSM
+    zh_CN: Virtual DSM
   tips:
     before_install:
-      en_us: |
+      en_US: |
         1. Requires `DATA/AppData` free space 16G+
 
         2. For the safety of your data, please read [documentation](https://hub.docker.com/r/vdsm/virtual-dsm) first
 
         3. The first run will download the system package and initialization online, please be patient, you can check the progress in the container log.
-      zh_cn: |
+      zh_CN: |
         1. 需要 `/DATA/AppData` 空闲空间 16G+
 
         2. 为了你的数据安全，请先阅读 [文档](https://hub.docker.com/r/vdsm/virtual-dsm)

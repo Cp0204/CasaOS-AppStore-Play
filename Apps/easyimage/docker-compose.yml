@@ -29,27 +29,28 @@ services:
       ports:
         - container: '8080'
           description:
-            en_us: Port
-            zh_cn: 端口
+            en_US: Port
+            zh_CN: 端口
       volumes:
         - container: /app/web/config
           description:
-            en_us: Config directory.
-            zh_cn: 配置目录
+            en_US: Config directory.
+            zh_CN: 配置目录
         - container: /app/web/i
           description:
-            en_us: Img directory.
-            zh_cn: 图片目录
+            en_US: Img directory.
+            zh_CN: 图片目录
 x-casaos:
+  id: com.cp0204.easyimage
   architectures:
     - amd64
     - arm
     - arm64
   author: Cp0204
-  category: WEB
+  category: Productivity
   description:
-    en_us: 'Supporting multi -file upload, simple countless data library, returning picture URL, Markdown, bbscode, html picture warehouse program. Demo: https://png.cm/'
-    zh_cn: '支持多文件上传，简单无数据库，返回图片url、markdown、bbscode、html的一款图床程序，演示地址：https://png.cm/ '
+    en_US: 'Supporting multi -file upload, simple countless data library, returning picture URL, Markdown, bbscode, html picture warehouse program. Demo: https://png.cm/'
+    zh_CN: '支持多文件上传，简单无数据库，返回图片url、markdown、bbscode、html的一款图床程序，演示地址：https://png.cm/ '
   developer: icret
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/easyimage/icon.png
   screenshot_link:
@@ -58,12 +59,12 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/easyimage/screenshot-3.png
   main: easyimage
   tagline:
-    en_us: A powerful picture warehouse without database
-    zh_cn: 一款功能强大无数据库的图床
+    en_US: A powerful picture warehouse without database
+    zh_CN: 一款功能强大无数据库的图床
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/easyimage/thumbnail.png
   title:
-    en_us: EasyImage
-    zh_cn: 简单图床
+    en_US: EasyImage
+    zh_CN: 简单图床
   port_map: '8080'
   scheme: http
   index: /

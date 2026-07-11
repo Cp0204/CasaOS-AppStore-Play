@@ -91,6 +91,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build v2 Dist
+        id: build_v2_dist
+        uses: IceWhaleTech/build-appstore-action@v1
+        with:
+          source: .
+          output: dist
+          base-url: "https://play.cuse.eu.org"
+
+      - name: Zip v2 Dist
+        shell: bash
+        run: |
+          cd dist && zip -r ../dist.zip . && cd ..
+
       - name: Upload New Release
         uses: softprops/action-gh-release@v2
         with:
@@ -99,6 +112,7 @@ jobs:
             AppStore_arm.zip
             AppStore_arm64.zip
             AppStore_amd64.zip
+            dist.zip
           tag_name: new
           name: "v${{ steps.get_commit_messages.outputs.release_date }}"
           draft: false
@@ -124,6 +138,7 @@ jobs:
             Tools/get_casaos.sh:get_casaos.sh
             Tools/casaos_newbie.sh:casaos_newbie.sh
             Tools/YAML-Generator.html:generate/index.html
+            dist/**:/
 
       - name: Cloudflare Purge Cached
         run: |

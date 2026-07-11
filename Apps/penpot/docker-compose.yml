@@ -102,6 +102,7 @@ networks:
     name: penpot
 
 x-casaos:
+  id: com.cp0204.penpot
   architectures:
     - arm64
     - amd64
@@ -109,8 +110,8 @@ x-casaos:
   author: Cp0204
   category: Developer
   description:
-    en_us: Penpot is the first open-source design and prototyping platform meant for cross-domain teams. Designers craft beautiful interfaces with professional vector tools, while developers inspect the code in real-time.
-    zh_cn: Penpot是第一个开源的设计和原型平台，专为跨领域团队打造。设计人员可以使用专业的矢量工具制作精美的界面，而开发人员可以实时检查代码。
+    en_US: Penpot is the first open-source design and prototyping platform meant for cross-domain teams. Designers craft beautiful interfaces with professional vector tools, while developers inspect the code in real-time.
+    zh_CN: Penpot是第一个开源的设计和原型平台，专为跨领域团队打造。设计人员可以使用专业的矢量工具制作精美的界面，而开发人员可以实时检查代码。
   developer: Penpot
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/penpot/icon.png
   screenshot_link:
@@ -118,10 +119,10 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/penpot/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/penpot/screenshot-3.png
   tagline:
-    en_us: The Open Source design & prototyping platform
-    zh_cn: 开源的设计和原型平台
+    en_US: The Open Source design & prototyping platform
+    zh_CN: 开源的设计和原型平台
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/penpot/thumbnail.png
   title:
-    en_us: Penpot
+    en_US: Penpot
   index: /
   port_map: "9001"

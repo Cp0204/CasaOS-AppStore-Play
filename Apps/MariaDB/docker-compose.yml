@@ -25,43 +25,44 @@ services:
       envs:
         - container: MYSQL_ROOT_PASSWORD
           description:
-            en_us: Root password for MariaDB.
-            zh_cn: MariaDB 的 root 密码。
+            en_US: Root password for MariaDB.
+            zh_CN: MariaDB 的 root 密码。
       volumes:
         - container: /etc/mysql/conf.d
           description:
-            en_us: MariaDB config directory.
-            zh_cn: MariaDB 配置目录。
+            en_US: MariaDB config directory.
+            zh_CN: MariaDB 配置目录。
         - container: /var/lib/mysql
           description:
-            en_us: MariaDB data directory.
-            zh_cn: MariaDB 数据目录。
+            en_US: MariaDB data directory.
+            zh_CN: MariaDB 数据目录。
       ports:
         - container: "3306"
           description:
-            en_us: MariaDB Port
-            zh_cn: MariaDB 端口
+            en_US: MariaDB Port
+            zh_CN: MariaDB 端口
     network_mode: bridge
 
 x-casaos:
+  id: com.cp0204.mariadb
   architectures:
     - amd64
     - arm
     - arm64
   main: mariadb
   author: Cp0204
-  category: Database
+  category: Developer
   description:
-    en_us: MariaDB is a community-developed fork of MySQL and aims to be an enhanced, drop-in replacement for it.
-    zh_cn: MariaDB 是 MySQL 的社区开发分支，旨在成为其增强版的兼容替代品。
+    en_US: MariaDB is a community-developed fork of MySQL and aims to be an enhanced, drop-in replacement for it.
+    zh_CN: MariaDB 是 MySQL 的社区开发分支，旨在成为其增强版的兼容替代品。
   developer: MariaDB
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/MariaDB/icon.png
   tagline:
-    en_us: Open-source relational database
-    zh_cn: 开源关系型数据库
+    en_US: Open-source relational database
+    zh_CN: 开源关系型数据库
   tips:
     before_install:
-      en_us: |
+      en_US: |
         Default Credentials
 
         | Username | Password |
@@ -70,7 +71,7 @@ x-casaos:
 
         The installation allows you to modify the environment variable afterwards.
         For more parameters, please refer to https://hub.docker.com/_/mariadb
-      zh_cn: |
+      zh_CN: |
         默认凭据
 
         | 用户名 | 密码 |
@@ -80,4 +81,4 @@ x-casaos:
         安装后可在环境变量中修改
         更多参数请参考 https://hub.docker.com/_/mariadb
   title:
-    en_us: MariaDB
+    en_US: MariaDB

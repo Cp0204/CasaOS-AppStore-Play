@@ -39,6 +39,7 @@ services:
           memory: 128M
 
 x-casaos:
+  id: com.cp0204.emby-happy
   architectures:
     - amd64
   main: emby-happy
@@ -46,8 +47,8 @@ x-casaos:
   author: CasaOS User
   category: Media
   description:
-    en_us: Emby Server brings all of your home videos, music, and photos together into one place. This enhanced version includes emby-erx for UI enhancements, dd-danmaku for adding danmaku support, and embyExternalUrl for using external players.
-    zh_cn: Emby 服务器将您所有的家庭视频、音乐和照片集中到一处。此增强版本包括用于 UI 增强的 emby-erx、用于添加弹幕支持的 dd-danmaku 以及用于使用外部播放器的 embyExternalUrl。
+    en_US: Emby Server brings all of your home videos, music, and photos together into one place. This enhanced version includes emby-erx for UI enhancements, dd-danmaku for adding danmaku support, and embyExternalUrl for using external players.
+    zh_CN: Emby 服务器将您所有的家庭视频、音乐和照片集中到一处。此增强版本包括用于 UI 增强的 emby-erx、用于添加弹幕支持的 dd-danmaku 以及用于使用外部播放器的 embyExternalUrl。
   developer: amilys
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/emby-happy/icon.png
   screenshot_link:
@@ -57,11 +58,11 @@ x-casaos:
   port_map: "8096"
   scheme: http
   tagline:
-    en_us: Enhanced Emby Server with plugins support
-    zh_cn: 具有插件的增强型 Emby 服务器
+    en_US: Enhanced Emby Server with plugins support
+    zh_CN: 具有插件的增强型 Emby 服务器
   tips:
     before_install:
-      en_us: |
+      en_US: |
         ## Added features:
 
         - [emby-crx Emby Enhancement/Landscaping Plugin](https://github.com/Nolovenodie/emby-crx)
@@ -85,7 +86,7 @@ x-casaos:
         4. Android and TV client: http://res.ssr0.cn:8000/?/Emby/
 
         [MORE](https://hub.docker.com/r/amilys/embyserver)
-      zh_cn: |
+      zh_CN: |
         ## 已添加功能：
 
         - [emby-crx Emby 增强/美化 插件](https://github.com/Nolovenodie/emby-crx)
@@ -109,5 +110,5 @@ x-casaos:
 
         [更多说明](https://hub.docker.com/r/amilys/embyserver)
   title:
-    en_us: Emby Happy
-    zh_cn: Emby 开心版
+    en_US: Emby Happy
+    zh_CN: Emby 开心版

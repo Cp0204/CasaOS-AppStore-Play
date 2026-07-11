@@ -32,12 +32,13 @@ services:
     network_mode: bridge
 
 x-casaos:
+  id: com.cp0204.onlyoffice
   architectures:
     - amd64
     - arm64
   main: onlyoffice
   store_app_id: onlyoffice
-  category: Documents
+  category: Productivity
   author: Cp0204
   developer: AscensioSystem
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/onlyoffice/icon.png
@@ -47,13 +48,13 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/onlyoffice/screenshot-3.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/onlyoffice/thumbnail.png
   description:
-    en_us: 'ONLYOFFICE Document Server is an online office suite comprising viewers and editors for texts, spreadsheets and presentations, fully compatible with Office Open XML formats: .docx, .xlsx, .pptx and enabling collaborative editing in real time.'
-    zh_cn: ONLYOFFICE 文档服务器是一个在线办公套件，包括文本、电子表格和演示文稿的查看器和编辑器，与Office Open XML格式完全兼容：.docx、.xlsx、.pptx，并支持实时协作编辑。
+    en_US: 'ONLYOFFICE Document Server is an online office suite comprising viewers and editors for texts, spreadsheets and presentations, fully compatible with Office Open XML formats: .docx, .xlsx, .pptx and enabling collaborative editing in real time.'
+    zh_CN: ONLYOFFICE 文档服务器是一个在线办公套件，包括文本、电子表格和演示文稿的查看器和编辑器，与Office Open XML格式完全兼容：.docx、.xlsx、.pptx，并支持实时协作编辑。
   tagline:
-    en_us: Online office suite
-    zh_cn: 在线办公套件
+    en_US: Online office suite
+    zh_CN: 在线办公套件
   title:
-    en_us: ONLYOFFICE
+    en_US: ONLYOFFICE
   tips:
     before_install:
     custom:

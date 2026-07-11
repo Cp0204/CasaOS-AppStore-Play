@@ -1,2 +1,4 @@
 /tmp
 .vscode
+/dist
+/.cache

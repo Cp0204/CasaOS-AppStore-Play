@@ -24,24 +24,25 @@ services:
       volumes:
         - container: /Config
           description:
-            en_us: Config directory.
-            zh_cn: 配置目录
+            en_US: Config directory.
+            zh_CN: 配置目录
         - container: /mnt
           description:
-            en_us: Mount directory.
-            zh_cn: 挂载目录
+            en_US: Mount directory.
+            zh_CN: 挂载目录
         - container: /media
           description:
-            en_us: Mount directory.
-            zh_cn: 挂载目录
+            en_US: Mount directory.
+            zh_CN: 挂载目录
 x-casaos:
+  id: com.cp0204.clouddrive
   architectures:
     - amd64
     - arm
     - arm64
   main: clouddrive
   store_app_id: clouddrive
-  category: Cloud
+  category: Productivity
   author: Cp0204
   developer: waytechcloudfs
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/clouddrive/icon.png
@@ -49,16 +50,16 @@ x-casaos:
   #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/clouddrive/screenshot-1.png
   # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/clouddrive/thumbnail.png
   description:
-    en_us: A powerful multi -cloud disk management tool provides users with a one -stop multi -cloud disk solution containing a cloud -mounted local mount.
-    zh_cn: 一个强大的多云盘管理工具，为用户提供包含云盘本地挂载的一站式的多云盘解决方案。
+    en_US: A powerful multi -cloud disk management tool provides users with a one -stop multi -cloud disk solution containing a cloud -mounted local mount.
+    zh_CN: 一个强大的多云盘管理工具，为用户提供包含云盘本地挂载的一站式的多云盘解决方案。
   tagline:
-    en_us: The infinite possibility of unlocking cloud storage
-    zh_cn: 解锁云存储的无限可能
+    en_US: The infinite possibility of unlocking cloud storage
+    zh_CN: 解锁云存储的无限可能
   title:
-    en_us: CloudDrive2
+    en_US: CloudDrive2
   tips:
     before_install:
-      en_us: |
+      en_US: |
         **Must step before installing** Execute the following command on the host machine before proceeding to the next step:
         ```
         sudo mkdir -p /etc/systemd/system/docker.service.d/
@@ -72,7 +73,7 @@ x-casaos:
         ⚠️⚠️⚠️ **IMPORTANT**: Do not edit the application settings in CasaOS UI after installation! Otherwise it will result in unsuccessful mounting!
 
         📁 Mount to the host using the `/mnt` or `/media` directory.
-      zh_cn: |
+      zh_CN: |
         **安装前必须步骤**，先在宿主机执行以下命令，再进行下一步：
         ```
         sudo mkdir -p /etc/systemd/system/docker.service.d/

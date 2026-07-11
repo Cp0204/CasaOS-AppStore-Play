@@ -47,13 +47,14 @@ networks:
     name: hedgedoc
 
 x-casaos:
+  id: com.cp0204.hedgedoc
   architectures:
     - amd64
     - arm64
     - arm
   main: hedgedoc
   store_app_id: hedgedoc
-  category: Documents
+  category: Productivity
   author: Cp0204
   developer: HedgeDoc
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hedgedoc/icon.png
@@ -63,13 +64,13 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hedgedoc/screenshot-3.png
   thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hedgedoc/thumbnail.png
   description:
-    en_us: "HedgeDoc (formerly known as CodiMD) is an open-source, web-based, self-hosted, collaborative markdown editor.  You can use it to easily collaborate on notes, graphs and even presentations in real-time. All you need to do is to share your note-link to your co-workers and they’re ready to go."
-    zh_cn: "HedgeDoc（前身为 CodiMD）是一款开源、基于网络、自托管的协作式标记符编辑器。 你可以用它轻松地实时协作编写笔记、图表甚至演示文稿。您只需将笔记链接分享给您的同事，他们就可以开始工作了。  "
+    en_US: "HedgeDoc (formerly known as CodiMD) is an open-source, web-based, self-hosted, collaborative markdown editor.  You can use it to easily collaborate on notes, graphs and even presentations in real-time. All you need to do is to share your note-link to your co-workers and they’re ready to go."
+    zh_CN: "HedgeDoc（前身为 CodiMD）是一款开源、基于网络、自托管的协作式标记符编辑器。 你可以用它轻松地实时协作编写笔记、图表甚至演示文稿。您只需将笔记链接分享给您的同事，他们就可以开始工作了。  "
   tagline:
-    en_us: Real-time collaborative markdown notes.
-    zh_cn: 实时协作 markdown 笔记
+    en_US: Real-time collaborative markdown notes.
+    zh_CN: 实时协作 markdown 笔记
   title:
-    en_us: HedgeDoc
+    en_US: HedgeDoc
   port_map: "3000"
   scheme: http
   index: /
