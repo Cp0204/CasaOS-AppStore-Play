@@ -50,7 +50,6 @@ x-casaos:
   tagline:
     en_US: A privacy-respecting, open metasearch engine
     zh_CN: 尊重隐私的开源元搜索引擎
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/searxng/thumbnail.png
   tips:
     before_install:
       en_US: "The default installation is minimal, without Redis and Caddy, and is accessed via HTTP. You need to set the `SEARXNG_BASE_URL` environment variable to your access URL."

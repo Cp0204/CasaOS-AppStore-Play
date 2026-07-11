@@ -46,9 +46,6 @@ x-casaos:
   author: Cp0204
   developer: waytechcloudfs
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/clouddrive/icon.png
-  # screenshot_link:
-  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/clouddrive/screenshot-1.png
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/clouddrive/thumbnail.png
   description:
     en_US: A powerful multi -cloud disk management tool provides users with a one -stop multi -cloud disk solution containing a cloud -mounted local mount.
     zh_CN: 一个强大的多云盘管理工具，为用户提供包含云盘本地挂载的一站式的多云盘解决方案。

@@ -27,10 +27,6 @@ x-casaos:
     zh_CN: 可能是最好用的IP工具箱。轻松检查你的 IP，IP 地理位置，检查DNS泄漏，检查 WebRTC 连接，速度测试，ping 测试，MTR测试，检查网站可用性，查询 Whois 信息等等。
   developer: jason5ng32
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/icon.webp
-  # screenshot_link:
-  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/screenshot-1.png
-  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/screenshot-2.png
-  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/myip/screenshot-3.png
   tagline:
     en_US: A Better IP Toolbox
     zh_CN: 更好的IP工具箱

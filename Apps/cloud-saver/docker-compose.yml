@@ -35,7 +35,6 @@ x-casaos:
   tagline:
     en_US: A web disk resource search and transfer tool
     zh_CN: 一款网盘资源搜索与转存工具
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/cloud-saver/thumbnail.png
   tips:
     before_install:
       en_US: |

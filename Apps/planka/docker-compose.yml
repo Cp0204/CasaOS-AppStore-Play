@@ -65,7 +65,6 @@ x-casaos:
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/planka/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/planka/screenshot-1.png
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/planka/thumbnail.png
   description:
     en_US: Planka is an elegant open-source project tracking tool designed to help teams efficiently manage project progress and task allocation. It supports creating projects, boards, cards, labels, and tasks, as well as real-time updates, internal notifications, and multi-language interfaces.
     zh_CN: Planka 是一个优雅的开源项目跟踪工具，帮助团队高效管理项目进度和任务分配。它支持创建项目、看板、卡片、标签和任务，以及实时更新、内部通知和多语言界面。

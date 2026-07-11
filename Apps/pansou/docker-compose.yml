@@ -72,11 +72,9 @@ x-casaos:
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/screenshot-2.png
   tagline:
     en_US: High-performance network disk resource search API service.
     zh_CN: 高性能的网盘资源搜索API服务。
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pansou/thumbnail.png
   tips:
     before_install:
       en_US: ""

@@ -108,7 +108,6 @@ x-casaos:
   tagline:
     en_US: A self-hosted data logger for your Tesla
     zh_CN: 特斯拉汽车的自托管数据记录器
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/teslamate/thumbnail.png
   tips:
     before_install:
       en_US: |

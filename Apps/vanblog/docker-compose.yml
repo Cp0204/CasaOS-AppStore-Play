@@ -67,7 +67,6 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vanblog/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vanblog/screenshot-3.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vanblog/screenshot-4.png
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/vanblog/thumbnail.png
   description:
     en_US: VanBlog is a simple, practical and elegant high-performance personal blog system. It supports HTTPS certificate fully automated on-demand application, dark mode, support for mobile adaptive and commenting, built-in traffic statistics and image bed, embedded commenting system, complete with, support for dark mode, support for mobile, support for one-click upload of clipboard images to the image bed, backend administration panel with a powerful editor.  Translated with DeepL.com (free version)
     zh_CN: VanBlog 是一款简洁实用优雅的高性能个人博客系统。支持 HTTPS 证书全自动按需申请、黑暗模式、支持移动端自适应和评论，内置流量统计与图床，内嵌评论系统，配有完备的、支持黑暗模式、支持移动端、支持一键上传剪切板图片到图床、带有强大的编辑器的后台管理面板。

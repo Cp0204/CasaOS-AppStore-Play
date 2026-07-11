@@ -34,11 +34,9 @@ x-casaos:
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gemini-next-chat/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gemini-next-chat/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gemini-next-chat/screenshot-3.png
   tagline:
     en_US: Your Private Gemini Next Chat AI Assistant
     zh_CN: 您的私人 Gemini Next Chat AI 助理
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/gemini-next-chat/thumbnail.png
   tips:
     before_install:
       en_US: Set your Gemini API Key and Access Password in the environment variables.

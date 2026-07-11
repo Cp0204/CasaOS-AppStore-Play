@@ -40,13 +40,10 @@ x-casaos:
   main: autofilm
   port_map: ""
   scheme: http
-  # screenshot_link:
-  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/autofilm/screenshot-1.png
   store_app_id: autofilm
   tagline:
     en_US: A project that provides Strm direct chain playback for Emby and Jellyfin servers
     zh_CN: 一个为Emby、Jellyfin服务器提供Strm直链播放的小项目
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/autofilm/thumbnail.png
   tips:
     before_install:
       en_US: '[AutoFilm README](https://blog.akimio.top/posts/1031/)'

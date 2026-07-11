@@ -131,9 +131,6 @@ x-casaos:
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/screenshot-1.png
-  #  - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/screenshot-2.png
-  #  - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/screenshot-3.png
-  #thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/safeline-ce/thumbnail.png
   description:
     en_US: SafeLine is a WAF built by Changting Technology over a period of nearly 10 years, and its core detection capability is driven by intelligent semantic analysis algorithms. It is a free WAF that is simple enough, good enough, and strong enough to protect your website from hackers based on the industry-leading semantic engine detection technology and access as a reverse proxy.
     zh_CN: 雷池（SafeLine）是长亭科技耗时近 10 年倾情打造的 WAF，核心检测能力由智能语义分析算法驱动。一款足够简单、足够好用、足够强的免费 WAF。基于业界领先的语义引擎检测技术，作为反向代理接入，保护你的网站不受黑客攻击。

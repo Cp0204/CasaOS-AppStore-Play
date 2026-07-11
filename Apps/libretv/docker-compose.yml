@@ -34,7 +34,6 @@ x-casaos:
   tagline:
     en_US: Free viewing, enjoy the excitement
     zh_CN: 自由观影，畅享精彩
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/libretv/thumbnail.png
   tips:
     before_install:
       en_US: Default password is 'your_password', default admin password is 'your_adminpassword'. Please change them after installation.

@@ -45,7 +45,6 @@ x-casaos:
   tagline:
     en_US: Easy-to-use Docker visual management panel.
     zh_CN: 易于使用的 Docker 可视化管理面板。
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dpanel/thumbnail.png
   tips:
     before_install:
       en_US: The default username and password are both admin.

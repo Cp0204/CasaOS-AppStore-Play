@@ -38,7 +38,6 @@ x-casaos:
   tagline:
     en_US: High-performance screen sharing for developers
     zh_CN: 面向开发人员的高性能屏幕共享
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/screego/thumbnail.png
   title:
     en_US: Screego
   index: /

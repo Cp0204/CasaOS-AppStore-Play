@@ -69,7 +69,6 @@ x-casaos:
   tagline:
     en_US: Enterprise virtualization platform
     zh_CN: 企业虚拟化平台
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pve/thumbnail.png
   tips:
     before_install:
       en_US: |

@@ -72,7 +72,6 @@ x-casaos:
   tagline:
     en_US: Collaborate on your family tree with Gramps Web
     zh_CN: 使用 Gramps Web 协作构建您的家谱
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/grampsweb/thumbnail.png
   title:
     en_US: Gramps Web
   scheme: http

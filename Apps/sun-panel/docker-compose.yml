@@ -59,7 +59,6 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sun-panel/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sun-panel/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sun-panel/screenshot-3.png
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sun-panel/thumbnail.png
   description:
     en_US: 'A server , NAS navigation panel , Homepage , browser homepage . Features: simple , LAN internal and external network link switching , docker deployment , support for arm system , easy to get started , no modification of code , no need to connect to external databases , rich icon free with ( text icon + svg icon + built-in three-way icon library ) , support for web pages built-in small window to open ( part of the site to block this feature ) , small resource consumption .'
     zh_CN: 一个服务器、NAS导航面板、Homepage、浏览器首页。 特点：简洁、局域网内外网链接切换、docker部署、对arm系统支持、上手简单，免修改代码、无需连接外部数据库、丰富图标自由搭配（文字图标+svg图标+内置三方图标库）、支持网页内置小窗口打开（部分网站屏蔽此功能）、占用资源小。

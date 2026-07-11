@@ -34,12 +34,9 @@ x-casaos:
     zh_CN: Docker 容器中的 Samba SMB 服务器。可以加密码🙃，实现了Windows SMB网络协议，允许在Windows、Linux和macOS系统之间共享文件。[文档](https://hub.docker.com/r/dockurr/samba)
   developer: dockurr
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/samba/icon.png
-  # screenshot_link:
-  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/samba/screenshot-1.png
   tagline:
     en_US: Share files across all your devices with SMB protocol
     zh_CN: 使用SMB协议在所有设备间共享文件
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/samba/thumbnail.png
   tips:
     before_install:
       en_US: You need to disable the SMB service that comes with the system first to free up port 445, refer to the command `systemctl stop smb && systemctl disable smb`. Default username is `admin` and password is `password`. Please change these credentials after installation for security.

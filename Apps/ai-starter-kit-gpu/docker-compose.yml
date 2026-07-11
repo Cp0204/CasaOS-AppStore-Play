@@ -153,7 +153,6 @@ x-casaos:
   tagline:
     en_US: Self-hosted AI starter kit
     zh_CN: 自托管 AI 启动套件
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ai-starter-kit/thumbnail.png
   tips:
     before_install:
       en_US: "If this is the first time you’re running the workflow, you may need to wait until Ollama finishes downloading Llama3.2. You can inspect the docker console logs to check on the progress."

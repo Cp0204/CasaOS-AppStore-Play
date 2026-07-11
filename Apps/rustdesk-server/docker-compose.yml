@@ -78,7 +78,6 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/screenshot-3.png
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/rustdesk-server/thumbnail.png
   description:
     en_US: RustDesk builds its own transit server, combining the official [rustdesk-server](https://github.com/rustdesk/rustdesk-server) and lejianwen's [rustdesk-api](https://github.com/lejianwen/rustdesk-api).
     zh_CN: RustDesk 自建中转服务器，集合官方 [rustdesk-server](https://github.com/rustdesk/rustdesk-server) 与 lejianwen 的 [rustdesk-api](https://github.com/lejianwen/rustdesk-api) 服务。

@@ -41,7 +41,6 @@ x-casaos:
   tagline:
     en_US: A self-hosted SSL certificate management tool.
     zh_CN: 一款自托管的 SSL 证书管理工具。
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/certimate/thumbnail.png
   tips:
     before_install:
       en_US: |

@@ -72,7 +72,6 @@ x-casaos:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/screenshot-2.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/screenshot-3.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/screenshot-4.png
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/halo/thumbnail.png
   description:
     en_US: Halo is an open source blog system , written in Java , with a simple and easy to use interface and rich functionality features .
     zh_CN: Halo 是一个开源的博客系统，采用 Java 编写，具有简洁易用的界面和丰富的功能特性。

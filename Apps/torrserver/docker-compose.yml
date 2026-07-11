@@ -40,7 +40,6 @@ x-casaos:
   tagline:
     en_US: Simple and powerful tool for streaming torrents.
     zh_CN: 简单而强大的种子流媒体工具。
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/torrserver/thumbnail.png
   title:
     en_US: TorrServer
   index: /

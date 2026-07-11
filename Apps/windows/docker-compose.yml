@@ -44,13 +44,9 @@ x-casaos:
     zh_CN: 在 Docker 容器中运行 Windows，支持 KVM 加速和基于 Web 的查看器。
   developer: dockurr
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/icon.png
-  screenshot_link:
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/screenshot-2.png
   tagline:
     en_US: Windows inside a Docker container.
     zh_CN: Docker 容器中的 Windows。
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/windows/thumbnail.png
   tips:
     before_install:
       en_US: |

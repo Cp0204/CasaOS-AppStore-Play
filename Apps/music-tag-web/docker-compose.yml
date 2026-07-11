@@ -43,7 +43,6 @@ x-casaos:
   tagline:
     en_US: A music tag editor
     zh_CN: 音乐标签编辑器
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/music-tag-web/thumbnail.png
   tips:
     before_install:
       en_US: |

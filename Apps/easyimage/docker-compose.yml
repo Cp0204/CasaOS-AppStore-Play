@@ -61,7 +61,6 @@ x-casaos:
   tagline:
     en_US: A powerful picture warehouse without database
     zh_CN: 一款功能强大无数据库的图床
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/easyimage/thumbnail.png
   title:
     en_US: EasyImage
     zh_CN: 简单图床

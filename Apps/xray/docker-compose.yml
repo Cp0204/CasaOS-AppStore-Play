@@ -31,12 +31,9 @@ x-casaos:
     zh_CN: Xray，万物皆可穿透。它也是支持 XTLS 的最佳 v2ray-core，且完全兼容 v2ray-core 的配置。
   developer: RPRX
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xray/icon.png
-  # screenshot_link:
-  #   - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xray/screenshot-1.png
   tagline:
     en_US: High-performance and configurable proxy software
     zh_CN: 高性能、可配置的代理软件
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/xray/thumbnail.png
   tips:
     before_install:
       en_US: You must create a configuration file `/DATA/AppData/xray/config.json` in host at first.

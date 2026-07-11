@@ -39,7 +39,6 @@ x-casaos:
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ntfy/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ntfy/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/ntfy/screenshot-3.png
   tagline:
     en_US: A simple HTTP-based pub-sub notification service.
     zh_CN: 一个简单的基于 HTTP 的发布-订阅通知服务。

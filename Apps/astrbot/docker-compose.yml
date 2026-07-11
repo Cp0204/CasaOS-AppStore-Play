@@ -36,7 +36,6 @@ x-casaos:
   tagline:
     en_US: Multi-platform Chatbot Framework with LLM Integration
     zh_CN: 多平台聊天机器人框架，集成大语言模型
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/astrbot/thumbnail.png
   title:
     en_US: AstrBot
   scheme: http

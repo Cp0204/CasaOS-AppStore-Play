@@ -36,7 +36,6 @@ x-casaos:
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wallabag/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wallabag/screenshot-1.png
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wallabag/thumbnail.png
   description:
     en_US: wallabag is a web application allowing you to save web pages for later reading. Click, save and read it when you want. It extracts content so that you won't be distracted by pop-ups and cie.
     zh_CN: wallabag 是一款网络应用程序，允许您保存网页以供以后阅读。点击保存，随时阅读。它提取内容，以便您不会被弹出窗口等干扰。

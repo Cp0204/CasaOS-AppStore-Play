@@ -44,11 +44,9 @@ x-casaos:
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/jpom/icon.svg
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/jpom/screenshot-1.png
-    # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/jpom/screenshot-2.png
   tagline:
     en_US: Simple and lightweight low-invasive online build, automated deployment, daily operations, and project monitoring software.
     zh_CN: 简而轻的低侵入式在线构建、自动部署、日常运维、项目监控软件
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/jpom/thumbnail.png
   title:
     en_US: Jpom
   port_map: "2122"

@@ -76,7 +76,6 @@ x-casaos:
   tagline:
     en_US: An open-source free data visualization analysis tool.
     zh_CN: 人人可用的开源 BI 工具
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dataease/thumbnail.png
   tips:
     before_install:
       en_US: |

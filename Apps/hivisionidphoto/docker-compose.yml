@@ -32,7 +32,6 @@ x-casaos:
   tagline:
     en_US: Create ID photos effortlessly with HivisionIDPhoto
     zh_CN: 使用 HivisionIDPhoto 轻松制作证件照
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/hivisionidphoto/thumbnail.png
   title:
     en_US: HivisionIDPhoto
   index: /

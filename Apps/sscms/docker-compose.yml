@@ -34,11 +34,9 @@ x-casaos:
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sscms/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sscms/screenshot-2.png
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sscms/screenshot-3.png
   tagline:
     en_US: Open-source, free, and enterprise-grade CMS
     zh_CN: 开源免费企业级CMS
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/sscms/thumbnail.png
   title:
     en_US: SiteServer CMS
     zh_CN: SiteServer CMS

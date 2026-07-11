@@ -44,7 +44,6 @@ x-casaos:
   tagline:
     en_US: A robust, locally hosted PDF Toolbox
     zh_CN: 功能强大的自托管的 PDF 工具箱
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/stirling-pdf/thumbnail.png
   title:
     en_US: Stirling-PDF
   index: /

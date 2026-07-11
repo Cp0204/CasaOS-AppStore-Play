@@ -33,7 +33,6 @@ x-casaos:
   tagline:
     en_US: Download your favorite videos easily with MeTube!
     zh_CN: 使用 MeTube 轻松下载您喜爱的视频！
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/metube/thumbnail.png
   title:
     en_US: MeTube
   scheme: http

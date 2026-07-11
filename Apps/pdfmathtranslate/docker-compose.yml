@@ -31,7 +31,6 @@ x-casaos:
   tagline:
     en_US: Translate scientific PDFs with ease and precision.
     zh_CN: 轻松精确地翻译科学PDF文档。
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/pdfmathtranslate/thumbnail.png
   tips:
     before_install:
       en_US: Ensure you have the necessary translation API keys configured.

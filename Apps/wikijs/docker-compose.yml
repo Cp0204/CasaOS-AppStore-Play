@@ -58,7 +58,6 @@ x-casaos:
   tagline:
     en_US: A modern, lightweight and powerful wiki app
     zh_CN: 现代化、轻量级、功能强大的 wiki 应用程序
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/wikijs/thumbnail.png
   title:
     en_US: Wiki.js
   index: /

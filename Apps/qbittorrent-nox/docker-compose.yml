@@ -50,9 +50,6 @@ x-casaos:
     uk_UA: Проект qBittorrent має на меті надати альтернативу з відкритим вихідним кодом для µTorrent.
   developer: qBittorrent
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qbittorrent-nox/icon.png
-  screenshot_link:
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qbittorrent-nox/screenshot-1.png
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/qbittorrent-nox/screenshot-2.png
   tagline:
     en_US: Free BitTorrent downloader
     zh_CN: 免费的 BitTorrent 下载器

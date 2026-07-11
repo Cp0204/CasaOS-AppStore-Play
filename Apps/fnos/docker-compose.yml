@@ -56,11 +56,9 @@ x-casaos:
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fnos/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fnos/screenshot-2.png
-    # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fnos/screenshot-3.png
   tagline:
     en_US: Private Cloud Systems
     zh_CN: 私有云系统
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/fnos/thumbnail.png
   tips:
     before_install:
       en_US: Only for experience, no data persistence. Compatibility is not guaranteed. During initialization, if you encounter errors like 'Resource temporarily unavailable', simply refresh the page to access the web UI.

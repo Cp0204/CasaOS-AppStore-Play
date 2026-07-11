@@ -40,12 +40,9 @@ x-casaos:
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dweebui/icon.png
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dweebui/screenshot-1.png
-    # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dweebui/screenshot-2.png
-    # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dweebui/screenshot-3.png
   tagline:
     en_US: Free and Open-Source WebUI For Managing Your Containers
     zh_CN: 又一个开源免费Docker管理器
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/dweebui/thumbnail.png
   title:
     en_US: DweebUI
   port_map: "8000"

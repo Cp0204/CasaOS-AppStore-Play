@@ -42,7 +42,6 @@ x-casaos:
   tagline:
     en_US: File synchronization
     zh_CN: 文件同步软件
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/freefilesync/thumbnail.png
   title:
     en_US: FreeFileSync
   index: /

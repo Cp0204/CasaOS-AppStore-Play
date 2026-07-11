@@ -34,14 +34,9 @@ x-casaos:
     zh_CN: Electerm是一款开源的终端/ssh/telnet/serialport/RDP/VNC/sftp客户端(linux, mac, win)。它支持全局快捷键、多平台支持、多语言支持、直接编辑远程文件、密码或密钥登录、Zmodem(rz, sz)、ssh隧道、Trzsz(trz/tsz)、透明窗口、自定义背景图片、代理服务器、预设命令、主题、数据同步到Github/Gitee、快速命令输入、AI助手集成以及命令行使用等功能。
   developer: zxdong262
   icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/electerm/icon.png
-  screenshot_link:
-    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/electerm/screenshot-1.png
-    # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/electerm/screenshot-2.png
-    # - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/electerm/screenshot-3.png
   tagline:
     en_US: A Secure and Feature-Rich Terminal Client
     zh_CN: 安全且功能丰富的终端客户端
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/electerm/thumbnail.png
   tips:
     before_install:
       en_US: Should only be used in local machine, should not be given access from internet for safety reason.

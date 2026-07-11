@@ -38,7 +38,6 @@ x-casaos:
   tagline:
     en_US: Open-source survey, exam, and voting system
     zh_CN: 开源的调查问卷、考试和投票系统
-  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/surveyking/thumbnail.png
   tips:
     before_install:
       en_US: "Default Account Password: `admin` / `123456`"

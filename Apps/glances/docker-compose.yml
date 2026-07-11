@@ -45,7 +45,6 @@ x-casaos:
   tagline:
     en_US: A top system monitoring tool.
     zh_CN: 顶级的系统监控工具。
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/glances/thumbnail.png
   title:
     en_US: Glances
   port_map: "61208"

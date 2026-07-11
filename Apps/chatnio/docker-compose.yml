@@ -85,7 +85,6 @@ x-casaos:
   tagline:
     en_US: "One-stop AI solution"
     zh_CN: "一站式 AI 解决方案"
-  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/chatnio/thumbnail.png
   tips:
     before_install:
       en_US: |
