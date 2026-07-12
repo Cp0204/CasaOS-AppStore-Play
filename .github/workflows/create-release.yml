@@ -102,6 +102,7 @@ jobs:
       - name: Zip v2 Dist
         shell: bash
         run: |
+          cp Tools/index.html dist/
           cd dist && zip -r ../dist.zip . && cd ..
 
       - name: Upload New Release

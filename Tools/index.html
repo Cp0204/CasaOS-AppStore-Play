@@ -1,0 +1,954 @@
+<!---
+  AppStore Index Page
+  Design by Cp0204
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AppStore</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --surface-2: #f0f0f3;
+      --border: #d0d0d6;
+      --text: #000000;
+      --text-dim: #4a4a52;
+      --text-mute: #9898a0;
+      --accent: #000000;
+      --accent-contrast: #ffffff;
+      --radius: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      padding: 56px 0 40px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .store-name {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .store-desc {
+      color: var(--text-dim);
+      font-size: 15px;
+      margin-top: 8px;
+      max-width: 540px;
+    }
+
+    .store-meta {
+      display: flex;
+      gap: 16px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--text-mute);
+      flex-wrap: wrap;
+    }
+
+    .store-meta span::after {
+      content: "·";
+      margin-left: 16px;
+      color: var(--border);
+    }
+
+    .store-meta span:last-child::after {
+      content: none;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+      align-items: center;
+    }
+
+    .search {
+      flex: 1;
+      min-width: 220px;
+      max-width: 360px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      transition: border-color .15s;
+    }
+
+    .search::placeholder {
+      color: var(--text-mute);
+    }
+
+    .search:focus {
+      border-color: var(--text-mute);
+    }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cat-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .cat-btn:hover {
+      border-color: var(--text-mute);
+      color: var(--text);
+    }
+
+    .cat-btn.active {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      cursor: pointer;
+      transition: all .2s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      border-color: var(--text-mute);
+      background: var(--surface-2);
+    }
+
+    .card:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--surface-2);
+      margin-bottom: 16px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+
+    .card-tagline {
+      font-size: 12.5px;
+      color: var(--text-dim);
+      line-height: 1.45;
+      display: -webkit-box;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .card-category {
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--text-mute);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .empty {
+      grid-column: 1/-1;
+      text-align: center;
+      color: var(--text-mute);
+      padding: 80px 0;
+      font-size: 14px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .42);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 48px 24px;
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 720px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      animation: rise .2s ease;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 5;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .15s;
+    }
+
+    .modal-close:hover {
+      color: var(--text);
+      border-color: var(--text-mute);
+    }
+
+    .modal-hero {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface-2);
+      object-fit: cover;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-body {
+      padding: 28px;
+    }
+
+    .modal-head {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .modal-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+
+    .modal-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .modal-author {
+      font-size: 13px;
+      color: var(--text-mute);
+      margin-top: 2px;
+    }
+
+    .modal-tagline {
+      font-size: 14.5px;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    .modal-desc {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin: 20px 0;
+      white-space: pre-wrap;
+    }
+
+    .modal-screenshots {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin: 16px 0;
+    }
+
+    .modal-screenshots img {
+      height: 140px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      background: var(--surface-2);
+      cursor: zoom-in;
+      transition: opacity .15s;
+    }
+
+    .modal-screenshots img:hover {
+      opacity: .85;
+    }
+
+    .compose-wrap {
+      margin-top: 16px;
+      display: none;
+    }
+
+    .compose-wrap.open {
+      display: block;
+    }
+
+    .compose-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      padding: 8px 12px;
+    }
+
+    .compose-bar span {
+      font-size: 12px;
+      color: var(--text-mute);
+    }
+
+    .compose-copy {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .compose-copy:hover {
+      border-color: var(--text-mute);
+      color: var(--text);
+    }
+
+    .compose-copy.copied {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      border-color: var(--accent);
+    }
+
+    pre.code-block {
+      margin: 0;
+      background: #0c0c0e;
+      color: #e8e8ea;
+      border: 1px solid var(--border);
+      border-radius: 0 0 8px 8px;
+      padding: 16px;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      max-height: 360px;
+      overflow-y: auto;
+      white-space: pre;
+    }
+
+    .dark pre.code-block {
+      background: #000;
+      color: #fff;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 11px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+      text-align: center;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn:hover {
+      border-color: var(--text-mute);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: #727272;
+      color: #ffffff;
+      border-color: #727272;
+    }
+
+    .modal-section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-mute);
+      margin: 24px 0 10px;
+    }
+
+    .zoom-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .88);
+      z-index: 200;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+    }
+
+    .zoom-backdrop.open {
+      display: flex;
+    }
+
+    .zoom-backdrop img {
+      max-width: 92vw;
+      max-height: 92vh;
+      border-radius: 8px;
+    }
+
+    footer {
+      margin-top: 64px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      font-size: 12.5px;
+      color: var(--text-mute);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
+    /* ---- dark mode ---- */
+    .dark {
+      --bg: #000000;
+      --surface: #111113;
+      --surface-2: #1c1c20;
+      --border: #2a2a2e;
+      --text: #ffffff;
+      --text-dim: #a1a1aa;
+      --text-mute: #6b6b73;
+      --accent: #ffffff;
+      --accent-contrast: #000000;
+    }
+
+    .dark .card:hover {
+      border-color: var(--text-mute);
+    }
+
+    .dark .btn-primary:hover {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+    }
+
+    .dark .modal-close:hover {
+      border-color: var(--text-mute);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 50;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+    }
+
+    .dark .theme-toggle {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .4);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.08);
+      border-color: var(--text-mute);
+    }
+
+    .theme-toggle {
+      color: #000;
+    }
+
+    .dark .theme-toggle {
+      color: #fff;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .card-icon {
+        width: 44px;
+        height: 44px;
+      }
+
+      header {
+        padding: 40px 0 28px;
+      }
+
+      .store-name {
+        font-size: 26px;
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <header>
+      <div class="store-name" id="storeName"></div>
+      <div class="store-desc" id="storeDesc"></div>
+      <div class="store-meta">
+        <span id="metaCount">— apps</span>
+        <span id="metaMaintainer"></span>
+      </div>
+    </header>
+
+    <div class="controls">
+      <input class="search" id="search" type="text" placeholder="Search apps…" autocomplete="off">
+      <div class="categories" id="categories"></div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <footer>
+      <span id="footerText"></span>
+    </footer>
+  </div>
+
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <img class="modal-hero" id="mHero" alt="">
+      <div class="modal-body">
+        <div class="modal-head">
+          <img class="modal-icon" id="mIcon" alt="">
+          <div>
+            <div class="modal-title" id="mTitle"></div>
+            <div class="modal-author" id="mAuthor"></div>
+            <div class="modal-tagline" id="mTagline"></div>
+          </div>
+        </div>
+        <div class="modal-section-label">Description</div>
+        <div class="modal-desc" id="mDesc"></div>
+        <div class="modal-section-label" id="screenLabel" style="display:none">Screenshots</div>
+        <div class="modal-screenshots" id="mScreens"></div>
+        <div class="modal-actions">
+          <button class="btn btn-primary" id="mCompose">View Compose</button>
+        </div>
+        <div class="compose-wrap" id="composeWrap">
+          <div class="compose-bar">
+            <span id="composeFileName">docker-compose.yml</span>
+            <button class="compose-copy" id="composeCopy">Copy</button>
+          </div>
+          <pre class="code-block" id="composeCode"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="zoom-backdrop" id="zoom"><img alt=""></div>
+  <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme"></button>
+
+  <script>
+    (() => {
+      const FALLBACK_ICON = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='18' height='18' rx='4'/><path d='M3 15l5-5a2 2 0 012.8 0L15 15'/><path d='M14 13l1-1a2 2 0 012.8 0L21 15'/></svg>";
+      const ICON_SUN = "<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='4'/><path d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41'/></svg>";
+      const ICON_MOON = "<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z'/></svg>";
+
+      // ---------- locale detection ----------
+      const LOCALE_DASHED = (navigator.language || 'en-US');
+      const LOCALE_UNDER = LOCALE_DASHED.replace('-', '_');
+      const LOCALE_BASE = LOCALE_UNDER.split('_')[0];
+      const DEFAULT_LANG = 'en_US';
+
+      let activeLocale = null;
+      let indexOverlay = {};
+
+      // theme: default to device preference, allow override + persist
+      const stored = localStorage.getItem('theme');
+      const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      let isDark = stored ? stored === 'dark' : systemDark;
+      const applyTheme = () => {
+        document.documentElement.classList.toggle('dark', isDark);
+        const btn = document.getElementById('themeToggle');
+        if (btn) btn.innerHTML = isDark ? ICON_SUN : ICON_MOON;
+      };
+      applyTheme();
+      document.getElementById('themeToggle').addEventListener('click', () => {
+        isDark = !isDark;
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        applyTheme();
+      });
+
+      let APPS = [];
+      let activeCat = 'All';
+
+      const $ = sel => document.querySelector(sel);
+      const grid = $('#grid');
+
+      const rel = path => path ? String(path).replace(/^\//, '') : '';
+
+      async function loadJSON(url) {
+        const r = await fetch(url);
+        if (!r.ok) throw new Error(url + ' → ' + r.status);
+        return r.json();
+      }
+
+      async function detectLocale() {
+        const candidates = [LOCALE_UNDER, LOCALE_BASE, LOCALE_DASHED];
+        for (const cand of candidates) {
+          if (cand === DEFAULT_LANG || cand.toLowerCase() === 'en' || cand.toLowerCase() === 'en_us') return null;
+          try {
+            const r = await fetch('index.' + cand + '.json', { method: 'HEAD' });
+            if (r.ok) return cand;
+          } catch (e) { }
+        }
+        return null;
+      }
+
+      function applyOverlay(base, overlay) {
+        if (!overlay || typeof overlay !== 'object') return base;
+        const out = Object.assign({}, base);
+        Object.keys(overlay).forEach(k => {
+          if (k === 'id') return;
+          const v = overlay[k];
+          if (v === '' || v == null) return;
+          if (typeof v === 'object' && !Array.isArray(v)) {
+            out[k] = applyOverlay(out[k] || {}, v);
+          } else {
+            out[k] = v;
+          }
+        });
+        return out;
+      }
+
+      function card(app) {
+        const el = document.createElement('div');
+        el.className = 'card';
+        el.tabIndex = 0;
+        const icon = rel(app.icon) || FALLBACK_ICON;
+        const img = document.createElement('img');
+        img.className = 'card-icon';
+        img.alt = '';
+        img.loading = 'lazy';
+        img.src = icon;
+        img.onerror = () => { img.onerror = null; img.src = FALLBACK_ICON; };
+        el.appendChild(img);
+        const title = document.createElement('div');
+        title.className = 'card-title';
+        title.textContent = app.title || app.id;
+        el.appendChild(title);
+        const tagline = document.createElement('div');
+        tagline.className = 'card-tagline';
+        tagline.textContent = app.tagline || '';
+        el.appendChild(tagline);
+        const cat = document.createElement('div');
+        cat.className = 'card-category';
+        cat.textContent = app.category || '';
+        el.appendChild(cat);
+        const open = () => openModal(app);
+        el.addEventListener('click', open);
+        el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+        return el;
+      }
+
+      function render() {
+        const q = $('#search').value.trim().toLowerCase();
+        const list = APPS.filter(a => {
+          if (activeCat !== 'All' && a.category !== activeCat) return false;
+          if (!q) return true;
+          return (a.title || '').toLowerCase().includes(q)
+            || (a.tagline || '').toLowerCase().includes(q)
+            || (a.developer || '').toLowerCase().includes(q)
+            || (a.category || '').toLowerCase().includes(q);
+        });
+        grid.innerHTML = '';
+        if (!list.length) { grid.innerHTML = '<div class="empty">No apps found.</div>'; return; }
+        list.forEach(a => grid.appendChild(card(a)));
+      }
+
+      function buildCategories() {
+        const cats = ['All', ...[...new Set(APPS.map(a => a.category).filter(Boolean))].sort()];
+        const box = $('#categories');
+        box.innerHTML = '';
+        cats.forEach(c => {
+          const b = document.createElement('button');
+          b.className = 'cat-btn' + (c === activeCat ? ' active' : '');
+          b.textContent = c;
+          b.addEventListener('click', () => { activeCat = c; buildCategories(); render(); });
+          box.appendChild(b);
+        });
+      }
+
+      async function openModal(app) {
+        const modal = $('#modal');
+        $('#mIcon').src = rel(app.icon) || FALLBACK_ICON;
+        $('#mTitle').textContent = app.title || app.id;
+        $('#mAuthor').textContent = [app.author, app.developer].filter(Boolean).join(' · ') || '—';
+        $('#mTagline').textContent = app.tagline || '';
+        $('#mDesc').textContent = 'Loading…';
+        $('#mScreens').innerHTML = '';
+        $('#screenLabel').style.display = 'none';
+        $('#mHero').style.display = 'none';
+        $('#composeWrap').classList.remove('open');
+        $('#composeCode').textContent = '';
+        $('#composeCopy').textContent = 'Copy';
+        $('#composeCopy').classList.remove('copied');
+        // compose fetch + expand + copy
+        let composeTxt = '';
+        const syncBtn = () => { $('#mCompose').textContent = $('#composeWrap').classList.contains('open') ? 'Hide Compose' : 'View Compose'; };
+        $('#mCompose').onclick = () => {
+          if (composeTxt) {
+            $('#composeWrap').classList.toggle('open');
+            syncBtn();
+            return;
+          }
+          $('#mCompose').textContent = 'Loading…';
+          fetch(rel(app.compose_url)).then(r => r.text()).then(txt => {
+            composeTxt = txt;
+            $('#composeCode').textContent = txt;
+            $('#composeWrap').classList.add('open');
+            syncBtn();
+          }).catch(() => { $('#mCompose').textContent = 'Failed'; });
+        };
+        $('#composeCopy').onclick = () => {
+          if (!composeTxt) return;
+          const btn = $('#composeCopy');
+          const done = () => { btn.textContent = 'Copied!'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied') }, 1400); };
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(composeTxt).then(done).catch(() => fallbackCopy(composeTxt, done));
+          } else {
+            fallbackCopy(composeTxt, done);
+          }
+        };
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+
+        try {
+          const meta = await loadJSON(rel(app.meta_url));
+          let display = meta;
+          if (activeLocale) {
+            try {
+              const overlay = await loadJSON(rel(app.meta_url).replace(/meta\.json$/, 'meta.' + activeLocale + '.json'));
+              display = applyOverlay(meta, overlay);
+            } catch (e) { }
+          }
+          $('#mDesc').textContent = display.description || 'No description.';
+          if (display.icon) $('#mIcon').src = rel(display.icon);
+          if (display.thumbnail) {
+            $('#mHero').src = rel(display.thumbnail);
+            $('#mHero').style.display = '';
+            $('#mHero').onerror = () => { $('#mHero').style.display = 'none'; }
+          }
+          const screens = display.screenshot_link || [];
+          const box = $('#mScreens');
+          box.innerHTML = '';
+          screens.forEach(s => {
+            const img = document.createElement('img');
+            img.src = rel(s);
+            img.loading = 'lazy';
+            img.onerror = () => img.remove();
+            img.onclick = () => openZoom(rel(s));
+            box.appendChild(img);
+          });
+          if (screens.length) $('#screenLabel').style.display = '';
+        } catch (e) {
+          $('#mDesc').textContent = 'Failed to load meta: ' + e.message;
+        }
+      }
+
+      function fallbackCopy(text, done) {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) { }
+        document.body.removeChild(ta);
+      }
+
+      function openZoom(src) {
+        const z = $('#zoom');
+        z.querySelector('img').src = src;
+        z.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      $('#zoom').addEventListener('click', () => { $('#zoom').classList.remove('open'); document.body.style.overflow = ''; });
+
+      function closeModal() {
+        $('#modal').classList.remove('open');
+        document.body.style.overflow = '';
+        $('#composeWrap').classList.remove('open');
+        $('#mCompose').textContent = 'View Compose';
+      }
+      $('#modalClose').addEventListener('click', closeModal);
+      $('#modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); $('#zoom').classList.remove('open'); } });
+
+      async function init() {
+        try {
+          activeLocale = await detectLocale();
+          const idx = await loadJSON('index.json');
+          let apps = idx.apps || [];
+          if (activeLocale) {
+            try {
+              const overlay = await loadJSON('index.' + activeLocale + '.json');
+              if (overlay && Array.isArray(overlay.apps)) {
+                indexOverlay = {};
+                overlay.apps.forEach(a => { if (a && a.id) indexOverlay[a.id] = a; });
+              }
+            } catch (e) { }
+          }
+          APPS = apps.slice().map(a => (indexOverlay[a.id]
+            ? applyOverlay(a, indexOverlay[a.id]) : a))
+            .sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+          try {
+            const store = await loadJSON('store.json');
+            let storeDisplay = store;
+            if (activeLocale) {
+              try {
+                storeDisplay = applyOverlay(store, await loadJSON('store.' + activeLocale + '.json'));
+              } catch (e) { }
+            }
+            const theName = storeDisplay.name || store.name || '';
+            document.title = theName;
+            $('#storeName').textContent = theName;
+            $('#storeDesc').textContent = storeDisplay.description || store.description || '';
+            $('#metaMaintainer').textContent = (storeDisplay.maintainer || store.maintainer) ? 'by ' + (storeDisplay.maintainer || store.maintainer) : '';
+            const ft = $('#footerText');
+            ft.innerHTML = '';
+            if (storeDisplay.url || store.url) {
+              const a = document.createElement('a');
+              a.href = storeDisplay.url || store.url;
+              a.target = '_blank';
+              a.rel = 'noopener';
+              a.textContent = (storeDisplay.url || store.url).replace(/^https?:\/\//, '');
+              ft.appendChild(a);
+            }
+          } catch (e) { }
+          $('#metaCount').textContent = APPS.length + ' apps';
+          buildCategories();
+          render();
+        } catch (e) {
+          grid.innerHTML = '<div class="empty">Failed to load index.json:<br><code>' + (e.message || e) + '</code></div>';
+        }
+      }
+
+      $('#search').addEventListener('input', render);
+      init();
+    })();
+  </script>
+</body>
+
+</html>
