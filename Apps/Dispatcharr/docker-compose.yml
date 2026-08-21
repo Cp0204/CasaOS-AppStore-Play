@@ -1,0 +1,55 @@
+services:
+  dispatcharr:
+    cap_add:
+      - SYS_NICE
+    cpu_shares: 
+    command: []
+    container_name: dispatcharr
+    deploy:
+      resources:
+        limits:
+          memory: 
+        reservations: {}
+      placement: {}
+    devices:
+      
+    entrypoint: null
+    environment:
+      CELERY_BROKER_URL: redis://localhost:6379/0
+      CELERY_NICE_LEVEL: "5"
+      DISPATCHARR_ENV: aio
+      DISPATCHARR_LOG_LEVEL: info
+      LIBVA_DRIVER_NAME: radeonsi
+      REDIS_HOST: localhost
+      TZ: Africa/Tunis
+      UWSGI_NICE_LEVEL: "-5"
+    image: ghcr.io/dispatcharr/dispatcharr:0.29.0
+    labels:
+      icon: https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/frontend/public/logo.png
+    network_mode: bridge
+    ports:
+      - target: 9191
+        published: "9191"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/dispatcharr
+        target: /data    
+x-casaos:
+id: com.cp0204.immich
+  architectures:
+    - amd64
+    - arm64
+  author: yassinyl
+  category: Media
+  hostname: 
+  icon: https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/frontend/public/logo.png
+  index: /
+  is_uncontrolled: false
+  main: dispatcharr
+  port_map: "9191"
+  scheme: http
+  store_app_id: dispatcharr
+  title:
+    custom: Dispatcharr
