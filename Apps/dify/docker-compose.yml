@@ -471,7 +471,7 @@ services:
   # The Weaviate vector store.
   weaviate:
     container_name: dify-weaviate
-    image: semitechnologies/weaviate:1.19.0
+    image: semitechnologies/weaviate:1.39.13
     profiles:
       - ''
       - weaviate
@@ -529,3 +529,9 @@ x-casaos:
     en_US: Dify
   index: /
   port_map: "6080"
+  tips:
+    before_install:
+      en_US: |
+        **Upgrading from an install that used Weaviate 1.19:** existing Weaviate data cannot jump straight to 1.39: the schema survives, but all stored objects become invisible and knowledge-base retrieval returns nothing. Back up `/DATA/AppData/dify/volumes/weaviate`, then start the `dify-weaviate` container once on each of 1.22, 1.23, 1.24 and 1.25 (e.g. `semitechnologies/weaviate:1.25.34`) before switching to 1.39.13.
+      zh_CN: |
+        **从使用 Weaviate 1.19 的旧安装升级：** 已有的 Weaviate 数据不能直接升级到 1.39：schema 会保留，但所有已存数据将不可见，知识库检索结果为空。请先备份 `/DATA/AppData/dify/volumes/weaviate`，然后依次用 1.22、1.23、1.24、1.25（例如 `semitechnologies/weaviate:1.25.34`）各启动一次 `dify-weaviate` 容器，再切换到 1.39.13。
