@@ -1,0 +1,285 @@
+name: rechvix
+
+services:
+  # Secrets (POSTGRES_PASSWORD, BILLING_APP_PASSWORD, AEAD_ENCRYPTION_KEY)
+  # are generated here on first boot into /DATA/AppData/$AppID/secrets
+  # instead of asked for at install — CasaOS doesn't reliably deliver typed
+  # install-time env values. Back this up with the database volume; losing
+  # it orphans both.
+  #
+  # Every dynamic value below is read via `$(sed ... /secrets/env)`, never
+  # a bare `$VAR` — CasaOS's compose interpolation runs a different number
+  # of passes for `install` vs `apply`, and `$(...)` is the one form both
+  # leave alone.
+  postgres:
+    image: postgres:18
+    container_name: rechvix-postgres
+    hostname: rechvix-postgres
+    restart: unless-stopped
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        set -e
+        umask 022
+        mkdir -p /secrets
+        if [ ! -s /secrets/env ]; then
+          {
+            echo "POSTGRES_PASSWORD=$$(head -c48 /dev/urandom | base64 | tr -dc 'A-Za-z0-9' | head -c24)"
+            echo "BILLING_APP_PASSWORD=$$(head -c48 /dev/urandom | base64 | tr -dc 'A-Za-z0-9' | head -c24)"
+            echo "AEAD_ENCRYPTION_KEY=$$(head -c32 /dev/urandom | base64)"
+          } > /secrets/.env.new
+          chmod 644 /secrets/.env.new
+          mv /secrets/.env.new /secrets/env
+        fi
+        mkdir -p /docker-entrypoint-initdb.d
+        cat > /docker-entrypoint-initdb.d/01-create-runtime-role.sql <<SQL
+        SELECT 'CREATE ROLE billing_app LOGIN PASSWORD ''$$(sed -n 's/^BILLING_APP_PASSWORD=//p' /secrets/env)'''
+        WHERE NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'billing_app')
+        \gexec
+        SQL
+        export POSTGRES_PASSWORD="$$(sed -n 's/^POSTGRES_PASSWORD=//p' /secrets/env)"
+        exec docker-entrypoint.sh postgres
+    environment:
+      POSTGRES_DB: billing
+      POSTGRES_USER: billing_migrator
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/postgres
+        target: /var/lib/postgresql
+      - type: bind
+        source: /DATA/AppData/$AppID/secrets
+        target: /secrets
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U billing_migrator -d billing"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - rechvix
+    x-casaos:
+      envs: []
+      volumes:
+        - container: /var/lib/postgresql
+          description:
+            en_US: All business data — invoices, inventory, accounting, everything. Back this up.
+        - container: /secrets
+          description:
+            en_US: Auto-generated database and encryption secrets. Back this up along with the database — losing it orphans the database and makes stored integration credentials unrecoverable.
+
+  # restart: on-failure (not "no"): CasaOS starts every container at once
+  # on install, often before postgres/its secrets file are ready — this
+  # keeps retrying until they are, then exits 0 and stays stopped.
+  migrate:
+    image: ghcr.io/raktim94/rechvix-server:0.22.0
+    container_name: rechvix-migrate
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        set -e
+        test -s /secrets/env
+        export DATABASE_DSN="postgres://billing_migrator:$$(sed -n 's/^POSTGRES_PASSWORD=//p' /secrets/env)@rechvix-postgres:5432/billing?sslmode=disable"
+        exec /app/server -migrate
+    restart: on-failure
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/secrets
+        target: /secrets
+    networks:
+      - rechvix
+    x-casaos:
+      envs: []
+
+  app:
+    image: ghcr.io/raktim94/rechvix-server:0.22.0
+    container_name: rechvix-app
+    hostname: rechvix-app
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        set -e
+        test -s /secrets/env
+        export DATABASE_DSN="postgres://billing_app:$$(sed -n 's/^BILLING_APP_PASSWORD=//p' /secrets/env)@rechvix-postgres:5432/billing?sslmode=disable"
+        # billing_migrator (RLS-bypassing), NOT billing_app — see
+        # deploy/compose/docker-compose.yml's identical line for why
+        # backup/restore needs this and reuses the same role the migrate
+        # service above connects as.
+        export BACKUP_DATABASE_DSN="postgres://billing_migrator:$$(sed -n 's/^POSTGRES_PASSWORD=//p' /secrets/env)@rechvix-postgres:5432/billing?sslmode=disable"
+        export AEAD_ENCRYPTION_KEY="$$(sed -n 's/^AEAD_ENCRYPTION_KEY=//p' /secrets/env)"
+        exec /app/server
+    environment:
+      HTTP_PORT: "8080"
+      DATABASE_AUTO_MIGRATE: "false"
+      SESSION_COOKIE_SECURE: "false"
+      ENABLE_BOOTSTRAP: "true"
+      PUBLIC_BASE_URL: ""
+      SMTP_HOST: ""
+      SMTP_PORT: "587"
+      SMTP_USERNAME: ""
+      SMTP_PASSWORD: ""
+      SMTP_FROM: ""
+      SMTP_TLS: "starttls"
+      VERIFACTU_PRODUCER_ID: ""
+    ports:
+      - target: 8080
+        published: "8090"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/secrets
+        target: /secrets
+    networks:
+      - rechvix
+    x-casaos:
+      envs:
+        - container: PUBLIC_BASE_URL
+          description:
+            en_US: Public address people reach this app at (for example https://billing.example.com). Used in emailed links, reminders and payment return pages. Optional.
+        - container: SMTP_HOST
+          description:
+            en_US: Mail server for sending documents, reminders and sign-in links. Leave empty to send no email. Optional.
+        - container: SMTP_PORT
+          description:
+            en_US: Mail server port (587 for STARTTLS, 465 for TLS).
+        - container: SMTP_USERNAME
+          description:
+            en_US: Mail server user name. Optional.
+        - container: SMTP_PASSWORD
+          description:
+            en_US: Mail server password. Optional.
+        - container: SMTP_FROM
+          description:
+            en_US: Sender address, for example billing@example.com. Required when SMTP_HOST is set.
+        - container: SMTP_TLS
+          description:
+            en_US: starttls (default), tls, or none for a trusted local relay.
+        - container: VERIFACTU_PRODUCER_ID
+          description:
+            en_US: Software producer identifier written into Spanish VERI*FACTU records. Only needed for Spanish companies using VERI*FACTU.
+      ports:
+        - container: "8080"
+          description:
+            en_US: rechvix API
+          protocol: tcp
+
+  worker:
+    image: ghcr.io/raktim94/rechvix-worker:0.22.0
+    container_name: rechvix-worker
+    hostname: rechvix-worker
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        set -e
+        test -s /secrets/env
+        export DATABASE_DSN="postgres://billing_app:$$(sed -n 's/^BILLING_APP_PASSWORD=//p' /secrets/env)@rechvix-postgres:5432/billing?sslmode=disable"
+        export AEAD_ENCRYPTION_KEY="$$(sed -n 's/^AEAD_ENCRYPTION_KEY=//p' /secrets/env)"
+        exec /app/worker
+    environment:
+      EINVOICE_PROVIDER: "mock"
+      PUBLIC_BASE_URL: ""
+      SMTP_HOST: ""
+      SMTP_PORT: "587"
+      SMTP_USERNAME: ""
+      SMTP_PASSWORD: ""
+      SMTP_FROM: ""
+      SMTP_TLS: "starttls"
+      VERIFACTU_PRODUCER_ID: ""
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/secrets
+        target: /secrets
+    networks:
+      - rechvix
+    x-casaos:
+      envs:
+        - container: PUBLIC_BASE_URL
+          description:
+            en_US: Public address people reach this app at (for example https://billing.example.com). Used in emailed links, reminders and payment return pages. Optional.
+        - container: SMTP_HOST
+          description:
+            en_US: Mail server for sending documents, reminders and sign-in links. Leave empty to send no email. Optional.
+        - container: SMTP_PORT
+          description:
+            en_US: Mail server port (587 for STARTTLS, 465 for TLS).
+        - container: SMTP_USERNAME
+          description:
+            en_US: Mail server user name. Optional.
+        - container: SMTP_PASSWORD
+          description:
+            en_US: Mail server password. Optional.
+        - container: SMTP_FROM
+          description:
+            en_US: Sender address, for example billing@example.com. Required when SMTP_HOST is set.
+        - container: SMTP_TLS
+          description:
+            en_US: starttls (default), tls, or none for a trusted local relay.
+        - container: VERIFACTU_PRODUCER_ID
+          description:
+            en_US: Software producer identifier written into Spanish VERI*FACTU records. Only needed for Spanish companies using VERI*FACTU.
+
+networks:
+  rechvix:
+    driver: bridge
+
+x-casaos:
+  id: com.nodedr.rechvix
+  architectures:
+    - amd64
+    - arm64
+  main: app
+  author: NodeDR Infotech Private Limited
+  developer: Raktim94
+  category: Finance
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Rechvix/icon.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Rechvix/thumbnail.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Rechvix/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Rechvix/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Rechvix/screenshot-3.png
+  title:
+    en_US: rechvix
+  tagline:
+    en_US: Self-hosted invoicing, CRM, stock and accounts with tax workpapers for India, Spain, the UK and the US — no subscription
+  description:
+    en_US: |
+      Open-source business software that connects invoicing, CRM,
+      multi-warehouse stock, purchasing and double-entry accounting.
+      Multi-company and multi-branch, with tax calculations and accountant
+      workpapers for India (GST), Spain, the UK, the EU and US states.
+      Self-hosted on your own hardware — no subscription, no mandatory
+      cloud dependency, no data leaving your server for core operation.
+
+      Double-entry accounting, perpetual multi-warehouse inventory, GST
+      invoicing with CGST/SGST/IGST breakdown, and a free e-Way Bill
+      workflow that never requires a paid government API. AGPL-3.0
+      licensed, same as this project's sibling, nodedr-pos.
+
+      Ships with a full web UI (dashboard, sales, purchases, inventory,
+      contacts, accounting, GST/tax, reports, settings) — `apps/server`
+      serves it directly, no separate frontend container needed.
+  tips:
+    before_install:
+      en_US: |
+        No setup needed before installing — database passwords and the
+        encryption key are generated automatically on first start.
+
+        Your data persists at `/DATA/AppData/rechvix/postgres` and
+        `/DATA/AppData/rechvix/secrets`, following CasaOS/ZimaOS's
+        standard backup/restore convention. Back up both together.
+
+        First run: open the app and go to /setup to create your business
+        (organisation, first branch/warehouse, and owner login).
+  index: /
+  scheme: http
+  port_map: "8090"
+  version: "0.22.0"

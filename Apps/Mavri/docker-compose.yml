@@ -1,0 +1,104 @@
+name: nodedr-invoice
+
+services:
+  nodedr-invoice:
+    image: ghcr.io/raktim94/mavri:2.5.0
+    container_name: nodedr-invoice
+    hostname: nodedr-invoice
+    restart: unless-stopped
+    ports:
+      - target: 3001
+        published: "8473"
+        protocol: tcp
+    environment:
+      COOKIE_SECURE: "false"
+      TRUST_PROXY: "0"
+      # In-app "Update now" button (Settings > Updates) -> the updater below.
+      UPDATER_URL: "http://nodedr-invoice-updater:8080"
+      UPDATER_TOKEN: "nodedr-invoice-updater"
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /data
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - -qO-
+        - http://127.0.0.1:3001/api/health
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    x-casaos:
+      envs:
+        - container: TRUST_PROXY
+          description:
+            en_US: Set to 1 when a reverse proxy or Cloudflare Tunnel sits in front, so rate limits see the real client. Leave 0 for direct LAN use.
+        - container: COOKIE_SECURE
+          description:
+            en_US: Set to true only when served over real HTTPS (reverse proxy or Cloudflare Tunnel). Leave false for plain LAN use.
+      ports:
+        - container: "3001"
+          description:
+            en_US: Mavri web interface
+      volumes:
+        - container: /data
+          description:
+            en_US: SQLite database, session secret and encryption key, and scheduled backups (in backups/). Back this up.
+
+  # Powers the in-app "Update now" button. Does nothing on its own (no
+  # polling): when you press the button, Mavri tells it which published
+  # version to move to, and it pulls that version of the Mavri image and
+  # recreates the Mavri container (nothing else). Needs the Docker socket to do
+  # that; your data in /DATA/AppData is untouched.
+  updater:
+    image: ghcr.io/raktim94/mavri-updater:2.5.0
+    container_name: nodedr-invoice-updater
+    hostname: nodedr-invoice-updater
+    restart: unless-stopped
+    environment:
+      UPDATER_TOKEN: "nodedr-invoice-updater"
+      TARGET_CONTAINERS: "nodedr-invoice"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    x-casaos:
+      volumes:
+        - container: /var/run/docker.sock
+          description:
+            en_US: Docker socket, used only by the in-app "Update now" button to move the Mavri container to a newer version.
+
+x-casaos:
+  id: com.nodedr.invoice
+  architectures:
+    - amd64
+    - arm64
+  main: nodedr-invoice
+  author: NodeDR Infotech Private Limited
+  developer: Raktim94
+  category: Finance
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Mavri/icon.png
+  title:
+    en_US: Mavri
+  tagline:
+    en_US: Self-hosted invoicing, quotes and payments with an API and MCP server
+  description:
+    en_US: |
+      Mavri is a free, open-source invoicing app that runs on your own
+      hardware. Create invoices and quotes, track payments, customize PDFs, and
+      let other systems create invoices through an API key authenticated REST API
+      (`/api/v1`), e-commerce webhooks, or the bundled MCP server.
+
+      Open it at `http://<your-server>:8473`.
+  tips:
+    before_install:
+      en_US: |
+        Your data persists at `/DATA/AppData/nodedr-invoice/data`.
+        On first launch you create the owner account, then set the public
+        address under Automation so links in emails and client pages work.
+  index: /
+  scheme: http
+  port_map: "8473"
+  website: "https://www.nodedr.com"
+  repo: "https://github.com/Raktim94/mavri"
+  support: "https://github.com/Raktim94/mavri/issues"
