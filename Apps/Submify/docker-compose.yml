@@ -1,0 +1,269 @@
+name: submify
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: submify-db
+    hostname: submify-db
+    restart: unless-stopped
+    # Generates a random Postgres password into the persisted secrets volume
+    # on first boot instead of shipping a fixed default — this compose file
+    # is public (CasaOS/ZimaOS store listing), so a hardcoded password would
+    # be a known-public credential on every install that doesn't change it.
+    # POSTGRES_PASSWORD_FILE is the official postgres image's own supported
+    # mechanism for this (see docker-entrypoint.sh's file_env()); db stays a
+    # single long-running container (no separate one-shot init service —
+    # those don't surface cleanly in the CasaOS app-status UI).
+    entrypoint:
+      - sh
+      - -c
+      - |
+        set -e
+        mkdir -p /run/secrets
+        if [ ! -s /run/secrets/postgres_password ]; then
+          tr -dc 'A-Za-z0-9' </dev/urandom | head -c 32 > /run/secrets/postgres_password
+          chmod 644 /run/secrets/postgres_password
+        fi
+        exec docker-entrypoint.sh postgres
+    environment:
+      POSTGRES_USER: submify
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_DB: submify
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/postgres
+        target: /var/lib/postgresql/data
+      - type: bind
+        source: /DATA/AppData/$AppID/secrets
+        target: /run/secrets
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U submify -d submify"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - submify
+
+  api:
+    image: ghcr.io/raktim94/submify-api:0.4.1
+    container_name: submify-api
+    hostname: submify-api
+    restart: unless-stopped
+    # Reads the same generated Postgres password (waits briefly in case this
+    # container wins a cold-start race against db) and generates its own
+    # random JWT_SECRET into the same persisted secrets volume on first
+    # boot — same reasoning as db's POSTGRES_PASSWORD_FILE above: this
+    # compose file is public, so a fixed default JWT secret would let
+    # anyone forge auth tokens against any install that hasn't changed it.
+    # `command:` alone would NOT work here — the image already has a fixed
+    # ENTRYPOINT (["/app/submify-api"]), so a plain `command:` override just
+    # becomes extra argv to that binary instead of replacing what actually
+    # runs. `entrypoint:` is required to make this shell wrapper the real
+    # process that execs into submify-api at the end.
+    entrypoint:
+      - sh
+      - -c
+      - |
+        set -e
+        mkdir -p /run/secrets
+        for i in $(seq 1 30); do
+          [ -s /run/secrets/postgres_password ] && break
+          sleep 1
+        done
+        if [ ! -s /run/secrets/jwt_secret ]; then
+          tr -dc 'A-Za-z0-9' </dev/urandom | head -c 48 > /run/secrets/jwt_secret
+          chmod 644 /run/secrets/jwt_secret
+        fi
+        export DATABASE_URL="postgres://submify:$(cat /run/secrets/postgres_password)@submify-db:5432/submify?sslmode=disable"
+        export JWT_SECRET="$(cat /run/secrets/jwt_secret)"
+        exec /app/submify-api
+    environment:
+      PORT: "8080"
+      AUTH_COOKIE_SECURE: "false"
+      ALLOWED_ORIGINS: "http://localhost:2512,http://127.0.0.1:2512"
+      CORS_RELAX_PRIVATE_NETWORKS: "true"
+      CORS_ALLOW_SAME_HOST_ORIGIN: "true"
+      CORS_PUBLIC_SUBMIT_ANY_ORIGIN: "true"
+      CORS_ORIGIN_HOST_SUFFIXES: ""
+      TRUSTED_PROXIES: "127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+      REFRESH_TOKEN_TTL_HOURS: "24"
+      PORTAL_TOKEN_TTL_HOURS: "12"
+      RATE_LIMIT_SENSITIVE_PUBLIC_RPM: "25"
+      RATE_LIMIT_SUBMIT_IP_RPM: "90"
+      RATE_LIMIT_SUBMIT_KEY_RPM: "180"
+      RATE_LIMIT_AUTH_USER_RPM: "600"
+      UPLOAD_MAX_SIZE_BYTES: "26214400"
+      UPLOAD_ALLOWED_MIME: "image/png,image/jpeg,application/pdf,text/plain"
+      PRESIGN_EXPIRY_MINUTES: "10"
+      # Zero-config fallback used whenever a project has no S3-compatible
+      # credentials configured from the dashboard.
+      LOCAL_STORAGE_DIR: "/data/uploads"
+      # Optional global fallback S3 credentials — leave blank to rely on the
+      # local-disk fallback above and/or per-project credentials set from
+      # the dashboard instead.
+      S3_ACCESS_KEY_ID: ""
+      S3_SECRET_ACCESS_KEY: ""
+      GIN_MODE: "release"
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/uploads
+        target: /data/uploads
+      - type: bind
+        source: /DATA/AppData/$AppID/secrets
+        target: /run/secrets
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - submify
+    x-casaos:
+      envs:
+        - container: ALLOWED_ORIGINS
+          description:
+            en_US: >-
+              Comma-separated list of origins allowed to call the API directly. Leave as default for local/LAN
+              use — CORS_RELAX_PRIVATE_NETWORKS and CORS_ALLOW_SAME_HOST_ORIGIN below already cover most
+              LAN/reverse-proxy setups automatically. Only add your public URL here if you put this instance
+              behind a domain and hit CORS errors.
+        - container: AUTH_COOKIE_SECURE
+          description:
+            en_US: Leave false for plain-HTTP LAN access (the default and normal case for CasaOS). Only set true if you've put this instance behind your own HTTPS reverse proxy — otherwise login will silently fail.
+        - container: S3_ACCESS_KEY_ID
+          description:
+            en_US: Optional — a global fallback S3-compatible access key. Leave blank to use local-disk storage and/or set credentials per-project from the dashboard instead.
+        - container: S3_SECRET_ACCESS_KEY
+          description:
+            en_US: Optional — paired with S3_ACCESS_KEY_ID above.
+      volumes:
+        - container: /data/uploads
+          description:
+            en_US: Locally-stored file uploads (used whenever a project has no S3-compatible credentials configured) — back this up.
+
+  web:
+    image: ghcr.io/raktim94/submify-web:0.4.1
+    container_name: submify-web
+    hostname: submify-web
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_BASE: "/api/v1"
+      NODEDR_SUBMIT_PUBLIC_KEY: ""
+      NODEDR_SUBMIT_SECRET_KEY: ""
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      - api
+    networks:
+      - submify
+
+  nginx:
+    image: ghcr.io/raktim94/submify-nginx:0.4.1
+    container_name: submify-nginx
+    hostname: submify-nginx
+    restart: unless-stopped
+    ports:
+      - target: 2512
+        published: "2512"
+        protocol: tcp
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      - api
+      - web
+    networks:
+      - submify
+    x-casaos:
+      ports:
+        - container: "2512"
+          description:
+            en_US: Submify web interface and API
+          protocol: tcp
+
+networks:
+  submify:
+    driver: bridge
+
+x-casaos:
+  id: com.nodedr.submify
+  architectures:
+    - amd64
+    - arm64
+  main: nginx
+  author: NodeDR Infotech Private Limited
+  developer: Raktim94
+  category: Developer
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Submify/icon.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Submify/thumbnail.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Submify/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Submify/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Submify/screenshot-3.png
+  title:
+    en_US: Submify
+  tagline:
+    en_US: Self-hosted, API-first form-submission and file-upload backend
+  description:
+    en_US: |
+      Submify is a free, open-source, self-hostable backend for website
+      forms and file uploads: drop-in contact/lead forms with spam-resistant
+      public submit keys, a project dashboard to review and export
+      submissions, presigned S3-compatible file uploads with a zero-config
+      local-disk fallback, calendar/booking (event types, availability,
+      ICS + Telegram reminders), Telegram notifications, and optional
+      per-submission sync into Zulivio as CRM leads. Runs entirely on your
+      own hardware — no subscription, no data leaving your server.
+
+      Access it from any device on your home network at
+      `http://<your-server>:2512`.
+  tips:
+    before_install:
+      en_US: |
+        The Postgres password and JWT signing secret are generated
+        randomly on first launch and stored in
+        `/DATA/AppData/submify/secrets/` — nothing to configure.
+
+        Your data (Postgres database, locally-stored file uploads, and the
+        generated secrets above) persists at `/DATA/AppData/submify/`,
+        following CasaOS/ZimaOS's standard backup/restore convention. Back
+        up the whole folder together — losing `secrets/` without the
+        matching `postgres/` data (or vice versa) locks you out.
+
+        After install, open the app to create your first project and
+        submit key — no manual configuration or demo data needed. To
+        accept file uploads without configuring S3 yourself, the local-disk
+        fallback works out of the box.
+  index: /
+  scheme: http
+  port_map: "2512"
+  version: "0.4.1"
+  update_at: "2026-10-24"
+  release_notes:
+    en_US: |-
+      0.4.1: security update: zod 4.6.6 (fixes a memory-exhaustion advisory); the MCP server now uses the zod 4 record API. No behaviour changes.
+
+      0.1.0: initial CasaOS/ZimaOS store listing — project dashboard,
+      spam-resistant public submit keys, file uploads (S3-compatible with
+      local-disk fallback), calendar/booking, Telegram notifications,
+      per-project SMTP email, and optional Zulivio CRM lead sync.
+      0.2.0: full calendar/booking UI (month/week/day grid views, event
+      type management, public booking pages with reschedule/cancel, .ics
+      export, Telegram booking reminders), and read-only calendar
+      visibility in the client portal (view-only bookings, no manage
+      rights, for portal-shared clients).
+      0.3.0: every project now has its own separate calendar — event
+      types, bookings, and personal agenda items are scoped per project.
+      A new dropdown on the dashboard's Calendar tab picks which project's
+      calendar you're viewing or adding events to, and each project's
+      client portal now shows only that project's own bookings instead of
+      the whole account's.
+      0.4.0: email notification status — the project's Email tab now shows
+      whether the latest notification was accepted by your SMTP server or
+      failed after retries, with the failure reason. "Accepted" is not
+      inbox delivery; bounces are not detected.
+  website: "https://submify.nodedr.com/"
+  repo: "https://github.com/Raktim94/Submify"
+  support: "https://github.com/Raktim94/Submify/issues"
+  docs: "https://github.com/Raktim94/Submify#readme"

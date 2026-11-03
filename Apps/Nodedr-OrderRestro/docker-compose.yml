@@ -1,0 +1,308 @@
+name: nodedr-restaurant-pos
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: nodedr-restaurant-pos-postgres
+    hostname: nodedr-restaurant-pos-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nodedr
+      POSTGRES_PASSWORD: "please-change-this-password"
+      POSTGRES_DB: nodedr_restaurant
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/postgres
+        target: /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nodedr"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - nodedr-restaurant-pos
+
+  backend:
+    image: ghcr.io/raktim94/nodedr-restaurant-pos-backend:1.20.0
+    container_name: nodedr-restaurant-pos-backend
+    hostname: nodedr-restaurant-pos-backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: "postgresql://nodedr:please-change-this-password@nodedr-restaurant-pos-postgres:5432/nodedr_restaurant"
+      # No JWT_SECRET here on purpose — the app generates a real random one
+      # itself on first boot and persists it to the /data/state volume
+      # below (see apps/backend/src/main.ts's resolveJwtSecret()). A
+      # hardcoded placeholder here would either be a real security hole
+      # (most CasaOS installers never change it) or, since a later backend
+      # update made the app refuse to boot with a known placeholder value,
+      # a broken install out of the box — this way nobody ever has to
+      # touch it and it still works correctly.
+      JWT_EXPIRES_IN: "12h"
+      PORT: "4000"
+      CORS_ORIGIN: "http://localhost:1995"
+      COOKIE_SECURE: "false"
+      UPLOADS_DIR: "/data/uploads"
+      # Spain VERI*FACTU producer identifier (see docs/verifactu.md). Only needed for Spanish installs.
+      VERIFACTU_PRODUCER_ID: ""
+      # Set to a long random key to make this server the sync hub for Windows
+      # PCs (Settings > Server Sync). Empty = sync server off.
+      SYNC_API_KEY: ""
+      # In-app "Update now" button (Settings > Updates) -> the updater below.
+      UPDATER_URL: "http://nodedr-restaurant-pos-updater:8080"
+      UPDATER_TOKEN: "nodedr-restaurant-updater"
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/uploads
+        target: /data/uploads
+      - type: bind
+        source: /DATA/AppData/$AppID/state
+        target: /data/state
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - nodedr-restaurant-pos
+    x-casaos:
+      envs:
+        - container: DATABASE_URL
+          description:
+            en_US: Must match the Postgres password below if you change it. Leave as default unless you know why you're changing it.
+        - container: CORS_ORIGIN
+          description:
+            en_US: Origin allowed to call the API (CORS). Leave as the default for local/LAN use — only change for a VPS behind real HTTPS.
+        - container: VERIFACTU_PRODUCER_ID
+          description:
+            en_US: Spain only. The software producer's identifier for VERI*FACTU records (at most 20 characters). Leave empty outside Spain.
+        - container: COOKIE_SECURE
+          description:
+            en_US: Set to true only when served over real HTTPS. Leave false for plain local/LAN use — a true value on plain HTTP silently breaks login (the session cookie gets dropped by the browser).
+      volumes:
+        - container: /data/uploads
+          description:
+            en_US: Uploaded images (menu items, staff avatars, etc.) — back this up.
+        - container: /data/state
+          description:
+            en_US: Auto-generated login security key. Created automatically on first launch — leave it alone.
+
+  web:
+    image: ghcr.io/raktim94/nodedr-restaurant-pos-web:1.20.0
+    container_name: nodedr-restaurant-pos-web
+    hostname: nodedr-restaurant-pos-web
+    restart: unless-stopped
+    ports:
+      - target: 3000
+        published: "1995"
+        protocol: tcp
+    depends_on:
+      - backend
+    networks:
+      - nodedr-restaurant-pos
+    x-casaos:
+      ports:
+        - container: "3000"
+          description:
+            en_US: Nodedr OrderRestro web interface
+          protocol: tcp
+
+  # In-app "Update now" (Settings > Updates): pulls the newer OrderRestro
+  # images above and recreates those two containers (nothing else). Needs the
+  # Docker socket to do that; data in /DATA/AppData is untouched. The updater
+  # image is generic (it only manages the containers named below), so the
+  # one published for NodeDR POS is reused.
+  updater:
+    image: ghcr.io/raktim94/nodedr-pos-updater:1.5.1
+    container_name: nodedr-restaurant-pos-updater
+    hostname: nodedr-restaurant-pos-updater
+    restart: unless-stopped
+    environment:
+      UPDATER_TOKEN: "nodedr-restaurant-updater"
+      TARGET_CONTAINERS: "nodedr-restaurant-pos-backend,nodedr-restaurant-pos-web"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - nodedr-restaurant-pos
+    x-casaos:
+      volumes:
+        - container: /var/run/docker.sock
+          description:
+            en_US: Docker socket, used only by the in-app "Update now" button to move the two OrderRestro containers to a newer version.
+
+networks:
+  nodedr-restaurant-pos:
+    driver: bridge
+
+x-casaos:
+  id: com.nodedr.orderrestro
+  architectures:
+    - amd64
+    - arm64
+  main: web
+  author: Nodedr Infotech Private Limited
+  developer: Raktim94
+  category: Finance
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Nodedr-OrderRestro/icon.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Nodedr-OrderRestro/thumbnail.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Nodedr-OrderRestro/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Nodedr-OrderRestro/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Nodedr-OrderRestro/screenshot-3.png
+  title:
+    en_US: Nodedr OrderRestro
+  tagline:
+    en_US: Offline-first restaurant management — POS, kitchen display, tables, and reservations
+  description:
+    en_US: |
+      Nodedr OrderRestro is a free, open-source restaurant management system:
+      point-of-sale ordering, a live kitchen display (KDS) split by station,
+      table/floor management with QR-code table ordering, reservations and a
+      waitlist, inventory with automatic ingredient deduction, customer CRM
+      with loyalty points and gift cards, and full billing (splits, tips,
+      discounts, refunds). Runs entirely on your own hardware — no
+      subscription, no data leaving your server.
+
+      Access it from any device on your home network at
+      `http://<your-server>:1995` — a till, a waiter's tablet, or the
+      kitchen's own display.
+  tips:
+    before_install:
+      en_US: |
+        Login security is handled automatically — no setup needed there.
+
+        **Before anything beyond a quick local trial**, change the
+        placeholder Postgres password: it must be changed identically in
+        both the `postgres` service's `POSTGRES_PASSWORD` and the
+        `backend` service's `DATABASE_URL`. Leaving the default is not
+        safe for a real installation.
+
+        Your data (Postgres database + uploaded images) persists at
+        `/DATA/AppData/nodedr-restaurant-pos/`, following CasaOS/ZimaOS's
+        standard backup/restore convention.
+
+        After install, sign up for a new restaurant account from the app's
+        `/signup` page — no manual configuration or demo data needed.
+  index: /
+  scheme: http
+  port_map: "1995"
+  version: "1.20.0"
+  update_at: "2026-11-03"
+  release_notes:
+    en_US: |-
+      1.20.0: departments and per-person access. Group staff into departments, and allow or
+      block single permissions for one person (with an optional end date) without making a new
+      role. Paste a supplier invoice's text to fill in the invoice form. The dashboard is
+      tidier on phones. A database change is applied automatically on update; back up first.
+
+      1.19.0: start with no server. The phone app can keep an account, menu and sales on its
+      own and connect to a restaurant server later.
+
+      1.18.0: the app can now work on its own. A standalone point of sale on the phone takes
+      orders and payments (cash, card, UPI) when the restaurant server is not reachable, and
+      sends them to the server when it is back. Switching tabs no longer shows "Can't reach
+      the server".
+
+      1.17.0: print from the phone. In the OrderRestro app, bills and kitchen tickets can
+      go to a Bluetooth thermal printer, or to Android's print dialog to save a PDF or use
+      any printer on the phone. A bill that is not paid yet now prints a UPI "scan to pay"
+      QR with the amount due when a UPI id is set in Settings. The pay button stays in view
+      on phones and Kitchen Display buttons fit small screens.
+
+      1.15.1: the app is simply called OrderRestro everywhere (sign-in page, install name,
+      page titles).
+
+      1.15.0: Android and iPhone app. Staff and riders connect by typing the server
+      address or scanning the QR code in Settings > Mobile app, then sign in as usual.
+      Phones get a notification for each new order and delivery (turn it on by adding a
+      Firebase key, see mobile/README.md), riders share live location through the app,
+      and rider updates made with no signal are sent when the connection returns. You can
+      delete your own account from the user menu. A database change is applied
+      automatically on update.
+
+      1.14.1: a cleaner dashboard. A greeting with the date, today's revenue as the main
+      number, smaller supporting figures, two across on phones, and cards that no
+      longer stretch into empty space.
+
+      1.14.0: Menu > Change all prices raises or lowers every dish by a percentage
+      (preview first; positive = costlier, negative = cheaper). Staff now see the
+      customer's delivery address, landmark and an Open in Google Maps button when
+      they accept or manage an order. The website lets customers create their
+      account while ordering and shows a Return to Home button after an order.
+
+      1.13.0: delivery riders. Add a staff member with the Delivery staff role and a
+      phone number; they sign in to the normal app with their phone number and
+      password and land on My deliveries: go online, share live location, get new
+      deliveries with a sound, navigate and call the customer, and mark picked up /
+      delivered / could not deliver. The Delivery page shows riders and the
+      customer's shared location. New Settings: make website food prices cheaper or
+      costlier by percentage or amount. Website checkout can send the customer's
+      current location and a landmark. A database change is applied automatically
+      on update.
+
+      1.12.2: referral rewards. Customers share a dish or their personal link; when
+      a new customer's first order is paid, the person who shared earns points and
+      so does the new customer (Settings > General > Referral rewards: on/off, points
+      for each side, and what a point is worth). Customers see their points,
+      rewards and referral history, and can redeem points as a discount. Zomato,
+      Swiggy and aggregator orders (UrbanPiper, Petpooja and similar) now arrive
+      through a signed webhook in Settings > Integrations. A database change is
+      applied automatically on update. Referral rewards need the new customer's first
+      order to reach a minimum food value (default 200), and a new setting lets you
+      refuse website orders below a minimum amount.
+
+      1.11.0: discount limits with a required reason, cash (rupee) discounts and
+      presets at the POS, several saved addresses per customer, a richer
+      dashboard (pending payments, low stock, team, payroll) with click-throughs,
+      payroll adjustments and salary slips, bulk CSV import of menu items and
+      ingredients, an integrations hub, and error messages shown app-wide.
+      Database changes are applied automatically on update.
+
+      1.10.0: connect your own website to OrderRestro. The Integration API now
+      returns the customer's mobile number and delivery address to the website's
+      backend (new "View order customer & delivery details" key permission), places
+      delivery orders with address and email, retries safely (Idempotency-Key), and
+      limits each key's requests. API keys can expire and be rotated from Settings >
+      API Keys. A Cloudflare Tunnel guide is in docs/website-integration.md. A
+      database change is applied automatically on update.
+
+      1.9.0: adds two-way server sync for the Windows app (Settings > Server
+      Sync): a PC keeps working offline and syncs with a central server, newest
+      edit wins. Set SYNC_API_KEY on the server to make it the sync hub; it is
+      optional and off by default. Update the server and every PC together.
+
+      1.8.2: security update: zod 4.6.6 (fixes a memory-exhaustion advisory). No behaviour changes.
+
+      1.8.1: VERI*FACTU now works only for branches in Spain: it is hidden and never records for any other country.
+
+      1.8.0: adds Spain VERI*FACTU (Settings > VERI*FACTU): every paid sale
+      becomes a simplified invoice in a tamper-evident chain, the 80 mm
+      receipt prints the AEAT QR code, and records can be reported to the tax
+      agency with your own certificate. Implemented, not certified: it has
+      not been run against the live AEAT portal and no Declaracion
+      Responsable has been issued, so test with AEAT's pre-production portal
+      and ask your gestor before relying on it. Off by default; nothing
+      changes for other countries. Also includes everything since 1.1.0
+      (kiosk, half portions, printer settings and more).
+
+      1.1.0: fixes a real fresh-install boot failure — CasaOS's own
+      placeholder JWT_SECRET tripped a later safety check that made the
+      backend refuse to start, so every out-of-the-box install crash-looped
+      with an opaque "Internal Server Error" and no way to diagnose it. The
+      backend now generates a real random secret itself on first boot and
+      persists it, so a fresh install just works with nothing to configure.
+
+      Also adds: one-click self-update (check for updates and apply them
+      from Settings), table occupancy timers with dashboard quick actions
+      and click-to-order POS, an MCP server plus integration API keys and a
+      public integrations REST API, and realtime push kept live across the
+      whole dashboard.
+
+      1.0.2: fixes an install that would silently fail to start ("Internal
+      Server Error" on login) — login security is now generated
+      automatically instead of requiring a manual config change.
+
+      Initial CasaOS/ZimaOS release: POS ordering, kitchen display, table
+      management with QR ordering, reservations, inventory, customer
+      loyalty/CRM, and billing.
+  website: "https://orderrestro.nodedr.com/"
+  repo: "https://github.com/Raktim94/nodedr-restaurant-pos"
+  support: "https://orderrestro.nodedr.com/contact"
+  docs: "https://github.com/Raktim94/nodedr-restaurant-pos#readme"

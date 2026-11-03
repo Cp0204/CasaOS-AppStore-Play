@@ -1,0 +1,219 @@
+name: nodedr-pos
+
+services:
+  backend:
+    image: ghcr.io/raktim94/nodedr-pos-backend:1.6.2
+    container_name: nodedr-pos-backend
+    hostname: nodedr-pos-backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: "file:/app/data/pos.db"
+      PORT: "4000"
+      FRONTEND_ORIGIN: "http://localhost:1994"
+      COOKIE_SECURE: "false"
+      # Spain VERI*FACTU producer identifier (see docs/verifactu.md). Only needed for Spanish installs.
+      VERIFACTU_PRODUCER_ID: ""
+      # In-app "Update now" button (Settings > Updates) -> the updater below.
+      UPDATER_URL: "http://nodedr-pos-updater:8080"
+      UPDATER_TOKEN: "nodedr-pos-updater"
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /app/data
+      # Optional direct-USB thermal printing (see backend/src/lib/escposUsb.js).
+      # Bind-mounting the whole /dev/bus/usb tree (rather than a fixed device
+      # path, which only covers device nodes already present at container
+      # start) keeps this working across printer unplug/replug without a
+      # restart. No printer attached is completely fine too — this mount and
+      # the cgroup rules below just make one usable if/when you plug one in.
+      - /dev/bus/usb:/dev/bus/usb
+    device_cgroup_rules:
+      - "c 189:* rmw"
+      - "c 180:* rmw"
+    networks:
+      - nodedr-pos
+    x-casaos:
+      envs:
+        - container: FRONTEND_ORIGIN
+          description:
+            en_US: Origin allowed to call the API (CORS). Leave as the default for local/offline use — only change for a VPS behind real HTTPS.
+        - container: COOKIE_SECURE
+          description:
+            en_US: Set to true only when served over real HTTPS (e.g. via the optional Caddy or Cloudflare Tunnel profile). Leave false for plain local/LAN use.
+        - container: VERIFACTU_PRODUCER_ID
+          description:
+            en_US: Spain only. The software producer's identifier for VERI*FACTU records (at most 20 characters). Leave empty outside Spain.
+      volumes:
+        - container: /app/data
+          description:
+            en_US: SQLite database and session secret — back this up.
+        - container: /dev/bus/usb
+          description:
+            en_US: USB passthrough for optional direct-USB thermal receipt printing. Safe to leave as-is with no printer attached.
+
+  frontend:
+    image: ghcr.io/raktim94/nodedr-pos-frontend:1.6.2
+    container_name: nodedr-pos-frontend
+    hostname: nodedr-pos-frontend
+    restart: unless-stopped
+    ports:
+      - target: 3000
+        published: "1994"
+        protocol: tcp
+    depends_on:
+      - backend
+    networks:
+      - nodedr-pos
+    x-casaos:
+      ports:
+        - container: "3000"
+          description:
+            en_US: NodeDR POS web interface
+          protocol: tcp
+
+  # Powers the in-app "Update now" button. Does nothing on its own (no
+  # polling): when an admin presses the button, the backend tells it which
+  # published version to move to, and it pulls that version of the two
+  # NodeDR POS images above and recreates those two containers (nothing else).
+  # Needs the Docker socket to do that; data in /DATA/AppData is untouched.
+  updater:
+    image: ghcr.io/raktim94/nodedr-pos-updater:1.6.2
+    container_name: nodedr-pos-updater
+    hostname: nodedr-pos-updater
+    restart: unless-stopped
+    environment:
+      UPDATER_TOKEN: "nodedr-pos-updater"
+      TARGET_CONTAINERS: "nodedr-pos-backend,nodedr-pos-frontend"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - nodedr-pos
+    x-casaos:
+      volumes:
+        - container: /var/run/docker.sock
+          description:
+            en_US: Docker socket, used only by the in-app "Update now" button to move the two NodeDR POS containers to a newer version.
+
+networks:
+  nodedr-pos:
+    driver: bridge
+
+x-casaos:
+  id: com.nodedr.pos
+  architectures:
+    - amd64
+    - arm64
+  main: frontend
+  author: NodeDR Infotech Private Limited
+  developer: Raktim94
+  category: Finance
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/NodeDR-POS/icon.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/NodeDR-POS/thumbnail.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/NodeDR-POS/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/NodeDR-POS/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/NodeDR-POS/screenshot-3.png
+  title:
+    en_US: NodeDR POS
+  tagline:
+    en_US: Offline-first point of sale and inventory for small retail shops
+  description:
+    en_US: |
+      NodeDR POS is a free, open-source, offline-first Point of Sale and
+      inventory management system for small retail shops. No subscription,
+      no internet connection required, no data ever leaving your home
+      server — it's built to run on your own hardware and stay there.
+
+      Scan a barcode (with a USB scanner or straight from a phone/tablet
+      camera) to sell it, press Enter to check out, and print or download
+      the receipt with one click. GST-inclusive pricing with CGST/SGST
+      breakdown, per-product standing discounts, a loyalty points program,
+      customer dues ("udhaar"), and full returns/exchanges with store
+      credit are all built in.
+
+      Access it from any device on your home network at
+      `http://<your-server>:1994` — the counter machine itself, or any
+      tablet/phone you use as a second till.
+  tips:
+    before_install:
+      en_US: |
+        Your data (the SQLite database) persists at
+        `/DATA/AppData/nodedr-pos/data`, following CasaOS/ZimaOS's standard
+        backup/restore convention.
+
+        On first launch you'll create an admin account and set up your shop
+        — no manual configuration needed.
+
+        Optional: for direct-USB thermal receipt printing, plug the printer
+        into the box before or after install — it's detected automatically
+        via the bundled `/dev/bus/usb` passthrough. No printer? Receipts
+        still print fine via the browser dialog or download as PDF.
+  index: /
+  scheme: http
+  port_map: "1994"
+  version: "1.6.2"
+  update_at: "2026-10-24"
+  release_notes:
+    en_US: |-
+      1.6.2 (2026-10-24):
+      - Security update: zod 4.6.6 (fixes a memory-exhaustion advisory). No behaviour changes.
+
+      1.6.1 (2026-10-22):
+      - VERI*FACTU now works only for shops in Spain (euro shops): it is hidden and never
+        records for any other currency.
+
+      1.6.0 (2026-10-22):
+      - New: Spain VERI*FACTU (Settings > VERI*FACTU). Every sale becomes a
+        simplified invoice in a tamper-evident chain, returns become corrective
+        invoices, receipts print the AEAT QR code, and records can be reported to
+        the tax agency with your own certificate. Implemented, not certified: it
+        has not been run against the live AEAT portal and no Declaracion
+        Responsable has been issued. Off by default; nothing changes elsewhere.
+
+      1.5.1 (2026-10-08):
+      - Scanning an unknown barcode in Inventory now looks it up online and
+        opens the form pre-filled (falls back to a blank form if offline).
+      - Online data is validated (barcode check digit, junk names, wrong-code
+        records) with warnings, and "Check online" in the product form lets you
+        replace the name, category or photo of an existing product.
+
+      1.5.0 (2026-10-08):
+      - New: find products online by name or barcode and add them after review;
+        product photos; edit/delete suppliers and create purchase orders by hand.
+      - New: customer display on any phone/tablet/second screen over the LAN,
+        with the UPI payment QR, plus a payment-confirmation sound.
+      - Online orders: orders already paid on the website are handed over without
+        a POS bill; pay-at-pickup orders are billed at hand-over. Developer guide
+        for connecting your own website through the API (docs/CUSTOM_STORE.md).
+
+      1.4.0 (2026-10-07):
+      - New: in-app updates. Settings > Updates shows when a new version is
+        available and updates NodeDR POS with one click.
+      - Many more currencies (incl. Hong Kong dollar), online orders, IMEI &
+        warranty, purchasing, reports and more — see the project README.
+
+      1.1.0 (2026-08-21):
+      - Dashboard: new "Total Due" stat and a customers-with-due section for
+        quick collections follow-up.
+      - Auth: fixed a stale-onboarding-state bug and added long-lived
+        sessions with step-up re-authentication for sensitive actions.
+      - Fixed an accidental-close bug where dragging a text selection that
+        ended outside a dialog would close it.
+      - API responses now sent with Cache-Control: no-store, so the browser
+        or a proxy in front of it never serves stale POS data.
+      - Redesigned homepage with a real "get started" account-creation path
+        (previously a bare redirect).
+      - Fixed camera barcode/QR scanning reliability: removed an overly
+        strict format restriction and improved focus/decode behavior.
+      - Fixed the Settings tab getting stuck on "Loading settings…" forever.
+      - Patched npm-audit-flagged dependency vulnerabilities.
+
+      1.0.0 (2026-08-03):
+      Initial CasaOS/ZimaOS release: offline-first POS and inventory
+      management, barcode/QR scanning (USB scanner or phone/tablet camera),
+      GST-inclusive billing, loyalty points, customer dues, and returns with
+      store credit.
+  website: "https://www.nodedr.com"
+  repo: "https://github.com/Raktim94/nodedr-pos"
+  support: "https://github.com/Raktim94/nodedr-pos/issues"
+  docs: "https://github.com/Raktim94/nodedr-pos#readme"

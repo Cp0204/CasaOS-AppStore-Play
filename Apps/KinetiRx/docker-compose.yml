@@ -1,0 +1,157 @@
+name: kinetirx
+
+services:
+  # Service keys stay plain (postgres/backend/frontend): the frontend image's
+  # nginx.conf has `proxy_pass http://backend:8080` baked in at build time.
+  # container_name/hostname carry the kinetirx- prefix for host uniqueness instead.
+  postgres:
+    image: postgres:16-alpine
+    container_name: kinetirx-postgres
+    hostname: kinetirx-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kinetirx
+      POSTGRES_PASSWORD: "please-change-this-password"
+      POSTGRES_DB: kinetirx
+    volumes:
+      - /DATA/AppData/$AppID/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kinetirx -d kinetirx"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - kinetirx_net
+
+  backend:
+    image: ghcr.io/raktim94/kinetirx-backend:1.6.14
+    container_name: kinetirx-backend
+    hostname: kinetirx-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgres://kinetirx:please-change-this-password@postgres:5432/kinetirx?sslmode=disable"
+      JWT_SECRET: "please-change-this-jwt-secret-before-going-live"
+      # Left blank on purpose — create the admin account from the app's own
+      # first-run screen on first visit instead of a shared default password.
+      KINETIRX_ADMIN_PASSWORD: ""
+      GEMINI_API_KEY: ""
+      # Optional — enables Settings -> S3 Offsite Backup. Leave blank to keep
+      # that feature disabled (it fails closed with a clear in-app error
+      # rather than storing a backup secret in plaintext).
+      BACKUP_ENCRYPTION_KEY: ""
+      PORT: "8080"
+      GIN_MODE: release
+      ALLOWED_ORIGINS: "http://localhost:3080"
+    networks:
+      - kinetirx_net
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--spider", "http://127.0.0.1:8080/api/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    x-casaos:
+      envs:
+        - container: DATABASE_URL
+          description:
+            en_US: Must match the Postgres password below if you change it. Leave as default unless you know why you're changing it.
+        - container: JWT_SECRET
+          description:
+            en_US: Signs login sessions. Change this to a long random value (32+ random bytes) before exposing the instance beyond your own LAN — changing it later logs everyone out.
+        - container: KINETIRX_ADMIN_PASSWORD
+          description:
+            en_US: Optional. Leave blank to create the admin account from the app's own first-run screen instead. If set, it seeds the Master Admin account (id EMP-ADMIN-1) on first boot — change it immediately after first login from Employee Control, there is no password-reset flow.
+        - container: GEMINI_API_KEY
+          description:
+            en_US: Optional, zero-config path to AI-powered OCR bill scanning and the clinical AI assistant. Leave blank to run those features in offline/fallback mode, or set BACKUP_ENCRYPTION_KEY below and configure any OpenAI-compatible provider from Settings instead (takes priority over this).
+        - container: BACKUP_ENCRYPTION_KEY
+          description:
+            en_US: "Optional — required to save any secret from the app's own Settings screen: S3 Offsite Backup credentials, or an AI provider API key (Settings -> AI OCR / Vision Model) as an alternative to GEMINI_API_KEY above. Generate one with: openssl rand -hex 32. Leave blank if you don't need either."
+
+  frontend:
+    image: ghcr.io/raktim94/kinetirx-frontend:1.6.14
+    container_name: kinetirx-frontend
+    hostname: kinetirx-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - target: 80
+        published: "3080"
+        protocol: tcp
+    networks:
+      - kinetirx_net
+    x-casaos:
+      ports:
+        - container: "80"
+          description:
+            en_US: Web UI port.
+
+networks:
+  kinetirx_net:
+    driver: bridge
+
+x-casaos:
+  id: com.nodedr.kinetirx
+  architectures:
+    - amd64
+    - arm64
+  main: frontend
+  category: Productivity
+  author: Nodedr Infotech Private Limited
+  developer: Raktim94
+  # Self-referencing this repo (not the CasaOS-AppStore fork, which uses jsdelivr
+  # CDN URLs in its own copy) so "install now via raw URL" works pre-merge.
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/KinetiRx/icon.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/KinetiRx/thumbnail.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/KinetiRx/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/KinetiRx/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/KinetiRx/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/KinetiRx/screenshot-4.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/KinetiRx/screenshot-5.png
+  title:
+    en_US: KinetiRx
+  tagline:
+    en_US: Pharmacy & clinic management — POS, inventory, patients, and daily accounts in one app.
+  description:
+    en_US: >-
+      KinetiRx (Pharma Care Pro) is a self-hosted pharmacy and small-clinic
+      management system: point-of-sale billing with GST invoicing, medicine
+      inventory and distributor tracking, patient records and due-khata
+      (credit ledger), OPD visit scheduling, daily sales/cash-drawer
+      reconciliation, expense tracking, doctor outreach campaigns, and
+      role-based employee accounts — all backed by your own Postgres
+      database running on this device, with no third-party SaaS dependency
+      for core operations. Optional Gemini AI integration adds purchase-bill
+      OCR scanning and a clinical assistant when a Gemini API key is
+      supplied.
+  tips:
+    before_install:
+      en_US: >-
+        On first visit, create your admin account right in the app — no
+        manual configuration needed. **Change the Postgres password and JWT
+        secret below before using this for anything beyond a local trial**
+        — neither is auto-generated. To use Settings -> S3 Offsite Backup,
+        set BACKUP_ENCRYPTION_KEY below first (openssl rand -hex 32) — the
+        S3 endpoint/bucket/keys themselves are entered later, from Settings.
+  index: /
+  port_map: "3080"
+  scheme: http
+  version: "1.6.14"
+  update_at: "2026-09-11"
+  release_notes:
+    en_US: >-
+      1.6.14: Fixed the Due Khata "Collect" action recording a hardcoded
+      stale date (2026-08-17) as the last transaction date on every
+      collected payment instead of the actual date it was collected. Full
+      history: https://github.com/Raktim94/KinetiRx/blob/main/CHANGELOG.md
+  website: "https://kinetirx.nodedr.com"
+  repo: "https://github.com/Raktim94/KinetiRx"
+  support: "https://github.com/Raktim94/KinetiRx/issues"
+  docs: "https://github.com/Raktim94/KinetiRx#readme"
