@@ -1,0 +1,84 @@
+name: Release v2 store
+
+# Builds the v2 app store index (index.json + per-app json/yml assets) served at
+#   https://play.cuse.eu.org/index.json
+#
+# The v1 (zip) packages are built separately by release-v1.yml.
+# Both workflows are idempotent and update the same rolling `new` release, so
+# either one can run first.
+
+permissions:
+  contents: write
+
+on:
+  push:
+    paths:
+      - '**.yml'
+      - '**.json'
+      - '!Apps_pre/**'
+      - '!dist/**'
+  workflow_dispatch:
+
+# Shared with release-v1.yml so the two never fight over the `new` release.
+concurrency:
+  group: appstore-release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build v2 store index
+        id: build_v2
+        uses: IceWhaleTech/build-appstore-action@v1
+        with:
+          source: .
+          output: dist
+          base-url: "https://play.cuse.eu.org"
+
+      - name: Package v2 dist
+        run: |
+          cp Tools/index.html dist/
+          ( cd dist && zip -qr ../dist.zip . )
+          echo "index.json app_count: $(python3 -c 'import json;print(json.load(open("dist/index.json"))["app_count"])')"
+
+      - name: Publish v2 store asset
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG=new
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --title "v$(date +%Y%m%d)" --notes "v1 + v2 app store"
+          fi
+          gh release upload "$TAG" dist.zip --clobber
+
+      - name: Upload to OSS
+        id: upload_to_oss
+        uses: tvrcgo/upload-to-oss@master
+        with:
+          key-id: ${{ secrets.OSS_KEY_ID }}
+          key-secret: ${{ secrets.OSS_KEY_SECRET }}
+          endpoint: ${{ secrets.OSS_ENDPOINT }}
+          bucket: ${{ secrets.OSS_BUCKET }}
+          assets: |
+            dist/**:/
+
+      - name: Cloudflare Purge Cached
+        run: |
+          # https://developers.cloudflare.com/api/operations/zone-purge#purge-cached-content-by-url
+          response=$(curl --silent --request POST \
+            --url https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache \
+            --header 'Content-Type: application/json' \
+            --header 'X-Auth-Email: ${{ secrets.CLOUDFLARE_EMAIL }}' \
+            --header 'X-Auth-Key: ${{ secrets.CLOUDFLARE_API_KEY }}' \
+            --data '{"purge_everything": true}')
+          if echo "$response" | grep -q '"success":false'; then
+            echo "Cloudflare Purge Cached Failed: $response"
+            exit 1
+          else
+            echo "Cloudflare Purge Cached Success."
+          fi
