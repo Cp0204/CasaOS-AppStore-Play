@@ -60,32 +60,13 @@ jobs:
           tag_name: new
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
+      # Packages are built by parsing each compose file instead of grepping it:
+      # the old pattern required `architectures:` to be the first key under
+      # `x-casaos:`, which stopped matching every app after the v2 refactor.
       - name: Filter and Create Release
         id: create_release
         run: |
-          # Build universal
-          zip AppStore.zip $(find . -type f \( -wholename "./*.json" -o -wholename "./Apps/*.yml" \))
-          universal_count=$(find ./Apps/ -name "*.yml" | wc -l)
-
-          # Build arm
-          [ -d "./Apps_arm" ] && cp -rfu ./Apps_arm/*   ./Apps/
-          zip AppStore_arm.zip   $(find . -type f -wholename "./*.json" && find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-#]*- arm\s*\n' {} \;)
-          arm_count=$(find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-#]*- arm\s*\n' {} \; | wc -l)
-          git checkout -- ./Apps && git clean -df ./Apps
-
-          # Build arm64
-          [ -d "./Apps_arm64" ] && cp -rfu ./Apps_arm64/* ./Apps/
-          zip AppStore_arm64.zip $(find . -type f -wholename "./*.json" && find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-#]*- arm64\s*\n' {} \;)
-          arm64_count=$(find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-#]*- arm64\s*\n' {} \; | wc -l)
-          git checkout -- ./Apps && git clean -df ./Apps
-
-          # Build amd64
-          [ -d "./Apps_amd64" ] && cp -rfu ./Apps_amd64/* ./Apps/
-          zip AppStore_amd64.zip $(find . -type f -wholename "./*.json" && find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-#]*- amd64\s*\n' {} \;)
-          amd64_count=$(find . -type f -wholename "./Apps/*.yml" -exec grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-#]*- amd64\s*\n' {} \; | wc -l)
-
-          echo "app_counts=universal($universal_count), arm($arm_count), arm64($arm64_count), amd64($amd64_count)" >> $GITHUB_OUTPUT
-
+          bash Tools/build_arch_store.sh
           # Proxy get.docker.com
           wget https://get.docker.com -O get_docker.sh
         env:
