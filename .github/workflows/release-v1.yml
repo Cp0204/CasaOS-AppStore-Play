@@ -1,26 +1,34 @@
-name: Create Release
+name: Release v1 store
+
+# Builds the v1 (zip) app store packages that older CasaOS clients pull from:
+#   https://play.cuse.eu.org/Cp0204-AppStore-Play.zip
+#   https://play.cuse.eu.org/Cp0204-AppStore-Play-{arm,arm64,amd64}.zip
+#
+# The v2 store (index.json / dist) is built separately by release-v2.yml.
+# Both workflows are idempotent and update the same rolling `new` release, so
+# either one can run first.
 
 permissions:
   contents: write
 
 on:
   push:
-    # branches:
-    #   - main
     paths:
       - '**.yml'
       - '**.json'
       - '!Apps_pre/**'
-  # pull_request:
-  #   types: [closed]
-  #   branches:
-  #     - main
+      - '!dist/**'
   workflow_dispatch:
     inputs:
       tags:
         description: 'Test tags'
-        required: true
+        required: false
         type: string
+
+# Shared with release-v2.yml so the two never fight over the `new` release.
+concurrency:
+  group: appstore-release
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -35,73 +43,45 @@ jobs:
       - name: Get Commit Messages
         id: get_commit_messages
         run: |
-          # Get the latest tag
           LATEST_TAG=$(git tag --sort=-creatordate | head -n 1)
-
-          # If there is no latest tag, get only the latest commit message
           if [ -z "$LATEST_TAG" ]; then
             COMMITS=$(git log -1 --pretty=format:'- %s (%h)')
           else
             COMMITS=$(git log --pretty=format:'- %s (%h)' --no-merges "$LATEST_TAG"..HEAD)
           fi
+          {
+            echo "commits<<EOF"
+            echo "$COMMITS"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          echo "release_date=$(date +'%Y%m%d')" >> "$GITHUB_OUTPUT"
 
-          # Output Multi-Line String
-          echo "commits<<EOF" >> $GITHUB_OUTPUT
-          echo "$COMMITS" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-          # Get the release date
-          RELEASE_DATE=$(date +'%Y%m%d')
-          echo "release_date=$RELEASE_DATE" >> $GITHUB_OUTPUT
-
-      - name: Delete tag and release
-        uses: dev-drprasad/delete-tag-and-release@v1.1
-        with:
-          tag_name: new
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      # Packages are built by parsing each compose file instead of grepping it:
-      # the old pattern required `architectures:` to be the first key under
-      # `x-casaos:`, which stopped matching every app after the v2 refactor.
-      - name: Filter and Create Release
-        id: create_release
+      - name: Build v1 store packages
+        id: build_v1
         run: |
-          bash Tools/build_arch_store.sh
+          bash Tools/build_v1_store.sh
           # Proxy get.docker.com
           wget https://get.docker.com -O get_docker.sh
+
+      - name: Publish v1 store assets
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build v2 Dist
-        id: build_v2_dist
-        uses: IceWhaleTech/build-appstore-action@v1
-        with:
-          source: .
-          output: dist
-          base-url: "https://play.cuse.eu.org"
-
-      - name: Zip v2 Dist
-        shell: bash
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMITS: ${{ steps.get_commit_messages.outputs.commits }}
+          RELEASE_DATE: ${{ steps.get_commit_messages.outputs.release_date }}
+          APP_COUNTS: ${{ steps.build_v1.outputs.app_counts }}
         run: |
-          cp Tools/index.html dist/
-          cd dist && zip -r ../dist.zip . && cd ..
-
-      - name: Upload New Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            AppStore.zip
-            AppStore_arm.zip
-            AppStore_arm64.zip
-            AppStore_amd64.zip
-            dist.zip
-          tag_name: new
-          name: "v${{ steps.get_commit_messages.outputs.release_date }}"
-          draft: false
-          prerelease: false
-          body: "## What's Changed\n\n${{ steps.get_commit_messages.outputs.commits }}\n\n📊 **App Counts:** ${{ steps.create_release.outputs.app_counts }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG=new
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --title "v$RELEASE_DATE" --notes "v1 + v2 app store"
+          fi
+          BODY=$(printf "## What's Changed\n\n%s\n\n📊 **v1 App Counts:** %s" "$COMMITS" "$APP_COUNTS")
+          gh release edit "$TAG" --title "v$RELEASE_DATE" --notes "$BODY"
+          gh release upload "$TAG" \
+            AppStore.zip \
+            AppStore_arm.zip \
+            AppStore_arm64.zip \
+            AppStore_amd64.zip \
+            --clobber
 
       - name: Upload to OSS
         id: upload_to_oss
@@ -120,11 +100,9 @@ jobs:
             Tools/get_casaos.sh:get_casaos.sh
             Tools/casaos_newbie.sh:casaos_newbie.sh
             Tools/YAML-Generator.html:generate/index.html
-            dist/**:/
 
       - name: Cloudflare Purge Cached
         run: |
-          # Cloudflare Purge Cached
           # https://developers.cloudflare.com/api/operations/zone-purge#purge-cached-content-by-url
           response=$(curl --silent --request POST \
             --url https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache \

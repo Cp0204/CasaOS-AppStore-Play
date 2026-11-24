@@ -1,16 +1,21 @@
 #!/usr/bin/env bash
 # Build the CasaOS v1 (zip) app store packages, one per architecture.
 #
-# Pure shell, no PyYAML. The old implementation failed because it filtered with
+# This is the v1 store only: four zips plus the root json manifests that older
+# CasaOS clients pull from
+#   https://play.cuse.eu.org/Cp0204-AppStore-Play[-<arch>].zip
+# The v2 store (index.json / dist) is built by .github/workflows/release-v2.yml.
+#
+# The previous implementation filtered apps with
 #     grep -rlPz 'x-casaos:\s*\n\s*architectures:[\n\s\w-#]*- arm\s*\n'
 # which requires `architectures:` to be the *first* key under `x-casaos:`.
 # After the v2 refactor every app has `id:` in front, so nothing matched and
 # AppStore_amd64.zip ended up with zero apps.
 #
 # Here one awk pass reads every compose file and extracts the architecture list
-# (block style `- arm`, flow style `[amd64, arm]`, inline comments, quotes; key
-# order irrelevant). Everything else is table lookups, so the whole build costs
-# a handful of forks instead of one subprocess per app per architecture.
+# (block style `- arm`, flow style `[amd64, arm64]`, inline comments, quotes,
+# CRLF; key order irrelevant). Everything else is table lookups, so the whole
+# build costs a handful of forks instead of one subprocess per app.
 set -euo pipefail
 
 ARCHITECTURES=(amd64 arm arm64)
