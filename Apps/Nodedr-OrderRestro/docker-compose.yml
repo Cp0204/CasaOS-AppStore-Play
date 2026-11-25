@@ -23,7 +23,7 @@ services:
       - nodedr-restaurant-pos
 
   backend:
-    image: ghcr.io/raktim94/nodedr-restaurant-pos-backend:1.20.0
+    image: ghcr.io/raktim94/nodedr-restaurant-pos-backend:1.45.0
     container_name: nodedr-restaurant-pos-backend
     hostname: nodedr-restaurant-pos-backend
     restart: unless-stopped
@@ -85,7 +85,7 @@ services:
             en_US: Auto-generated login security key. Created automatically on first launch — leave it alone.
 
   web:
-    image: ghcr.io/raktim94/nodedr-restaurant-pos-web:1.20.0
+    image: ghcr.io/raktim94/nodedr-restaurant-pos-web:1.45.0
     container_name: nodedr-restaurant-pos-web
     hostname: nodedr-restaurant-pos-web
     restart: unless-stopped
@@ -106,11 +106,11 @@ services:
 
   # In-app "Update now" (Settings > Updates): pulls the newer OrderRestro
   # images above and recreates those two containers (nothing else). Needs the
-  # Docker socket to do that; data in /DATA/AppData is untouched. The updater
-  # image is generic (it only manages the containers named below), so the
-  # one published for NodeDR POS is reused.
+  # Docker socket to do that; data in /DATA/AppData is untouched. This repo's
+  # own hardened updater is published by .github/workflows/docker-publish.yml;
+  # :edge tracks master until the next version tag publishes a pinned tag.
   updater:
-    image: ghcr.io/raktim94/nodedr-pos-updater:1.5.1
+    image: ghcr.io/raktim94/nodedr-restaurant-pos-updater:1.45.0
     container_name: nodedr-restaurant-pos-updater
     hostname: nodedr-restaurant-pos-updater
     restart: unless-stopped
@@ -183,10 +183,48 @@ x-casaos:
   index: /
   scheme: http
   port_map: "1995"
-  version: "1.20.0"
-  update_at: "2026-11-03"
+  version: "1.45.0"
+  update_at: "2026-11-25"
   release_notes:
     en_US: |-
+      1.45.0: expense approvals and a petty cash box, purchase returns with supplier credit and a price variance report, split billing (split an open bill by line or quantity), a customer delivery tracking link, a balanced double-entry journal export, longer report ranges, and Brazilian Portuguese. Database migrations are applied automatically on update; back up first.
+
+      1.44.0: Reports rebuilt. Daily sales now has a totals line and opens every bill of a day; a new All bills (day book) report lists each invoice with time, payment, discount, tax, refunds and who billed it, and exports to Excel, PDF or CSV. Order history can be searched by any date range, and an admin can delete a finished bill from its detail window (password asked, a record stays in the Audit Log). The Audit Log can be exported and is now permanent: nobody, admins included, can edit or delete entries. One additive database migration.
+
+      1.42.2: fixes a rare failure in 1.42.1 where several payment attempts for the same bill at the same moment could all fail with an error (nothing was charged); stock journal actions are also safe under the same load. Update straight to this version. No database migration.
+
+      1.42.1: safety and reliability fixes. Two tills can no longer overpay one bill; gift-card refunds credit exactly what was refunded; unclear online-refund answers keep the hold for review and owners can close a reviewed entry; a DENY permission override also removes an implied permission; GST report matches the bills; customer dues stay fast on big lists; stock receipts, stock takes and recipes are safer; the phone app resumes an interrupted sale and keeps numbering after a restore; backup and sync credentials are encrypted at rest. No database migration.
+
+      1.42.0: customer dues, a ledger of unpaid and part-paid bills with filters, later payments and a WhatsApp reminder you review and send; a guest bill QR; reservations can no longer double-book a table; the phone backup now keeps unsent expenses, refunds and reservations; currency follows the restaurant setting; stock rows are locked during receipts and transfers; security, payment-recovery, backup and updater fixes from community pull requests. No database migration.
+
+      1.41.1: fixes a server that would not start in 1.41.0. No database migration.
+
+      1.41.0: the phone app asks whether to connect to a server or run on the phone alone, add several tables at once, a clearer credit-sale (part payment) screen with a dues ageing summary, and Android file downloads in server mode. No database migration.
+
+      1.40.1: a hardware barcode scanner works anywhere on the phone Sell screen, web POS scanning by barcode or SKU, archived menu items hidden, and an AI Operations Copilot that respects the signed-in user's permissions. No database migration.
+
+      1.40.0: Stock Journal recipes per product and reopenable drafts, optional customer PIN code and status, and the Stock Journal on the phone. Database migration applied automatically on update.
+
+      1.39.2: optional "Show cost today" switch on the POS, and new finished products from the Stock Journal go on the menu by default. No database migration.
+
+      1.39.1: Stock Journal Manager role, and producing menu items directly from the Stock Journal. Database migration applied automatically on update.
+
+      1.39.0: next-generation interface, faster startup and a new mobile release. Database migration applied automatically on update.
+
+      1.22.1: the Android app keeps the kitchen board working with no connection. Tickets stay on
+      screen, can be moved along, and are sent when the connection is back.
+
+      1.22.0: refunds and a fresh look. A refund on an order that was paid online can now go back
+      to the customer's original card or UPI (Razorpay and Stripe). The app has a new calmer
+      design with a violet accent, in light and dark. The Android app opens payment links in the
+      phone's browser. A database change is applied automatically on update; back up first.
+
+      1.21.0: online payments. Under Settings > Payments pick your country, choose a payment
+      gateway (Razorpay, Stripe and Cashfree work today) and enter its test keys. The cashier can
+      then show a payment link or QR code and the bill closes only after the gateway confirms the
+      money. Starts in Test mode and moves no real money until you switch to Live. A database
+      change is applied automatically on update; back up first.
+
       1.20.0: departments and per-person access. Group staff into departments, and allow or
       block single permissions for one person (with an optional end date) without making a new
       role. Paste a supplier invoice's text to fill in the invoice form. The dashboard is

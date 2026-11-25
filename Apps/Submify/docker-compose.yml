@@ -47,7 +47,7 @@ services:
       - submify
 
   api:
-    image: ghcr.io/raktim94/submify-api:0.4.1
+    image: ghcr.io/raktim94/submify-api:0.5.1
     container_name: submify-api
     hostname: submify-api
     restart: unless-stopped
@@ -144,7 +144,7 @@ services:
             en_US: Locally-stored file uploads (used whenever a project has no S3-compatible credentials configured) — back this up.
 
   web:
-    image: ghcr.io/raktim94/submify-web:0.4.1
+    image: ghcr.io/raktim94/submify-web:0.5.1
     container_name: submify-web
     hostname: submify-web
     restart: unless-stopped
@@ -160,7 +160,7 @@ services:
       - submify
 
   nginx:
-    image: ghcr.io/raktim94/submify-nginx:0.4.1
+    image: ghcr.io/raktim94/submify-nginx:0.5.1
     container_name: submify-nginx
     hostname: submify-nginx
     restart: unless-stopped
@@ -238,10 +238,14 @@ x-casaos:
   index: /
   scheme: http
   port_map: "2512"
-  version: "0.4.1"
-  update_at: "2026-10-24"
+  version: "0.5.1"
+  update_at: "2026-11-16"
   release_notes:
     en_US: |-
+      0.5.1: behind Cloudflare Tunnel or another TLS proxy the bundled nginx no longer rewrites X-Forwarded-Proto to http, so form snippets and upload URLs are generated with https.
+
+      0.5.0: master API keys for AI agents (Settings -> API keys) and a built-in MCP server at /api/v1/mcp with 37 tools; security fixes (atomic first-run registration, sessions end on password change, portal sessions end on portal password change, booking availability enforced, stored integration secrets no longer replayed to a new destination, upload extension follows content type, removing a teammate keeps their projects). Adds one database table (migration 0017) on first start.
+
       0.4.1: security update: zod 4.6.6 (fixes a memory-exhaustion advisory); the MCP server now uses the zod 4 record API. No behaviour changes.
 
       0.1.0: initial CasaOS/ZimaOS store listing — project dashboard,

@@ -2,7 +2,7 @@ name: nodedr-pos
 
 services:
   backend:
-    image: ghcr.io/raktim94/nodedr-pos-backend:1.6.2
+    image: ghcr.io/raktim94/nodedr-pos-backend:1.7.0
     container_name: nodedr-pos-backend
     hostname: nodedr-pos-backend
     restart: unless-stopped
@@ -52,7 +52,7 @@ services:
             en_US: USB passthrough for optional direct-USB thermal receipt printing. Safe to leave as-is with no printer attached.
 
   frontend:
-    image: ghcr.io/raktim94/nodedr-pos-frontend:1.6.2
+    image: ghcr.io/raktim94/nodedr-pos-frontend:1.7.0
     container_name: nodedr-pos-frontend
     hostname: nodedr-pos-frontend
     restart: unless-stopped
@@ -77,7 +77,7 @@ services:
   # NodeDR POS images above and recreates those two containers (nothing else).
   # Needs the Docker socket to do that; data in /DATA/AppData is untouched.
   updater:
-    image: ghcr.io/raktim94/nodedr-pos-updater:1.6.2
+    image: ghcr.io/raktim94/nodedr-pos-updater:1.7.0
     container_name: nodedr-pos-updater
     hostname: nodedr-pos-updater
     restart: unless-stopped
@@ -151,10 +151,25 @@ x-casaos:
   index: /
   scheme: http
   port_map: "1994"
-  version: "1.6.2"
-  update_at: "2026-10-24"
+  version: "1.7.0"
+  update_at: "2026-11-22"
   release_notes:
     en_US: |-
+      1.7.0 (2026-11-22):
+      - Security: signing in is now limited per account as well as per address;
+        changing or resetting a password signs that account out everywhere else;
+        a disabled account stays signed out even if re-enabled; staff without the
+        Reports or Inventory right no longer see what stock cost you; returns,
+        VERI*FACTU settings/certificate and exchange rates ask for your password;
+        repeated lines on one bill, return or purchase receipt can no longer slip
+        past stock and quantity checks; CSV exports cannot carry spreadsheet
+        formulas; Excel imports refuse oversized files.
+      - Updated libraries with known vulnerabilities (Next.js, node-forge, hono and others).
+      - New: English and Spanish interface with a language switch.
+      - Fixed physical barcode scanners at POS Checkout.
+      - A card-terminal payment can pay for only one bill.
+      - Set TRUST_PROXY_HOPS if you put Caddy or a tunnel in front (see the README).
+
       1.6.2 (2026-10-24):
       - Security update: zod 4.6.6 (fixes a memory-exhaustion advisory). No behaviour changes.
 
