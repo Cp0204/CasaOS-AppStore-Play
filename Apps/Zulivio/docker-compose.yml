@@ -1,0 +1,364 @@
+name: zulivio
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: zulivio-postgres
+    hostname: zulivio-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nodedr
+      POSTGRES_PASSWORD: "please-change-this-password"
+      POSTGRES_DB: zulivio
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/postgres
+        target: /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nodedr -d zulivio"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - zulivio
+
+  backend:
+    image: ghcr.io/raktim94/zulivio-backend:1.12.1
+    container_name: zulivio-backend
+    hostname: zulivio-backend
+    restart: unless-stopped
+    # CasaOS has no clean way to run a one-shot init container before the
+    # main app, so migrations run inline here on every start instead of the
+    # separate `migrate` service used by the plain `compose.yaml` — Prisma
+    # migrate deploy is idempotent, so this is safe on restarts.
+    command: ["sh", "-c", "npx prisma migrate deploy && node dist/src/main.js"]
+    environment:
+      DATABASE_URL: "postgresql://nodedr:please-change-this-password@zulivio-postgres:5432/zulivio"
+      PORT: "4100"
+      NODE_ENV: "production"
+      CORS_ORIGIN: "http://localhost:2996"
+      COOKIE_SECURE: "false"
+      UPLOADS_DIR: "/data/uploads"
+      BOOTSTRAP_DISABLED: "false"
+      GOOGLE_SHEETS_CLIENT_EMAIL: ""
+      GOOGLE_SHEETS_PRIVATE_KEY: ""
+      FIELD_ENCRYPTION_KEY: ""
+      FIELD_ENCRYPTION_KEY_PATH: "/data/secrets/field-encryption.key"
+      S3_BACKUP_ENDPOINT: ""
+      S3_BACKUP_BUCKET: ""
+      S3_BACKUP_ACCESS_KEY_ID: ""
+      S3_BACKUP_SECRET_ACCESS_KEY: ""
+      S3_BACKUP_REGION: "auto"
+      S3_BACKUP_INTERVAL_DAYS: "3"
+      S3_BACKUP_RETAIN_COUNT: "2"
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/uploads
+        target: /data/uploads
+      - type: bind
+        source: /DATA/AppData/$AppID/secrets
+        target: /data/secrets
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - zulivio
+    x-casaos:
+      envs:
+        - container: DATABASE_URL
+          description:
+            en_US: Must match the Postgres password below if you change it. Leave as default unless you know why you're changing it.
+        - container: CORS_ORIGIN
+          description:
+            en_US: >-
+              Origin(s) the browser uses to reach the web app, comma-separated. The default only covers browsing
+              from the server itself — if you (or your team) will open this from another device on the network,
+              add that device-visible origin too, e.g. "http://localhost:2996,http://192.168.1.50:2996" using
+              your server's actual LAN IP, or every login/CSV-import/save request from that device will silently
+              fail with "Cross-origin request blocked" even though the page itself loads fine. If you put this
+              instance behind a reverse proxy, Cloudflare Tunnel, or custom domain, this MUST also include the
+              full public URL with its scheme (e.g. https://your-domain.example) — a bare hostname with no
+              http:// or https:// will not match the browser's Origin header.
+        - container: BOOTSTRAP_DISABLED
+          description:
+            en_US: Set to true after you've created your organization, to close self-service signup on this instance.
+        - container: COOKIE_SECURE
+          description:
+            en_US: Leave false for plain-HTTP LAN access (the default and normal case for CasaOS). Only set true if you've put this instance behind your own HTTPS reverse proxy — otherwise login will silently fail.
+        - container: GOOGLE_SHEETS_CLIENT_EMAIL
+          description:
+            en_US: Optional — a Google service account email, to enable live Google Sheets import/export. Leave blank to keep this feature disabled.
+        - container: GOOGLE_SHEETS_PRIVATE_KEY
+          description:
+            en_US: Optional — paired with GOOGLE_SHEETS_CLIENT_EMAIL above. Leave blank to keep Google Sheets sync disabled.
+        - container: FIELD_ENCRYPTION_KEY
+          description:
+            en_US: >-
+              Optional. Encrypts S3 backup credentials / a Google Sheets service account saved from Settings
+              (stored in Postgres) at rest. Leave blank — the app auto-generates and persists its own key in
+              the volume below, no setup needed. Only set this manually to pin a specific key (e.g. restoring
+              a Postgres backup onto a fresh volume without its matching secrets volume). 32 raw bytes,
+              base64-encoded — generate with: openssl rand -base64 32
+        - container: S3_BACKUP_ENDPOINT
+          description:
+            en_US: Optional — S3-compatible endpoint URL (e.g. https://s3.example.com) for automatic backups. Leave blank to keep backups disabled.
+        - container: S3_BACKUP_BUCKET
+          description:
+            en_US: Optional — the bucket automatic backups upload to. Required if S3_BACKUP_ENDPOINT is set.
+        - container: S3_BACKUP_ACCESS_KEY_ID
+          description:
+            en_US: Optional — S3 access key ID for the backup bucket above.
+        - container: S3_BACKUP_SECRET_ACCESS_KEY
+          description:
+            en_US: Optional — S3 secret access key, paired with S3_BACKUP_ACCESS_KEY_ID above.
+        - container: S3_BACKUP_INTERVAL_DAYS
+          description:
+            en_US: How often (in days) to run an automatic backup. Default 3.
+        - container: S3_BACKUP_RETAIN_COUNT
+          description:
+            en_US: How many verified backups to keep in the bucket at once — older ones are deleted after a new one verifies. Default 2.
+      volumes:
+        - container: /data/uploads
+          description:
+            en_US: Uploaded knowledge-base PDFs — back this up.
+        - container: /data/secrets
+          description:
+            en_US: >-
+              Auto-generated encryption key protecting any S3 backup / Google Sheets credentials saved from
+              Settings. Back this up alongside the database — losing it makes those saved secrets unrecoverable
+              (you'd just need to re-enter them from Settings).
+
+  web:
+    image: ghcr.io/raktim94/zulivio-web:1.12.1
+    container_name: zulivio-web
+    hostname: zulivio-web
+    restart: unless-stopped
+    ports:
+      - target: 3000
+        published: "2996"
+        protocol: tcp
+    depends_on:
+      - backend
+    networks:
+      - zulivio
+    x-casaos:
+      ports:
+        - container: "3000"
+          description:
+            en_US: Zulivio web interface
+          protocol: tcp
+
+networks:
+  zulivio:
+    driver: bridge
+
+x-casaos:
+  id: com.nodedr.zulivio
+  architectures:
+    - amd64
+    - arm64
+  main: web
+  author: NodeDR Infotech Private Limited
+  developer: Raktim94
+  category: Productivity
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Zulivio/icon.png
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Zulivio/thumbnail.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Zulivio/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Zulivio/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Zulivio/screenshot-3.png
+  title:
+    en_US: Zulivio
+  tagline:
+    en_US: Open-source CRM and humane workforce operations — employees, assignments, attendance, and reporting
+  description:
+    en_US: |
+      Zulivio is a free, open-source, self-hostable CRM and workforce
+      operations platform: role-based employee management (add/remove with
+      auto-generated credentials), work assignment tracking with outcomes,
+      an explicit attendance state machine (shift/break/logout with a full
+      audit trail), a PDF knowledge base with acknowledgement tracking,
+      daily team tips, a master dashboard with live analytics, and CSV/Google
+      Sheets import-export. Runs entirely on your own hardware — no
+      subscription, no data leaving your server.
+
+      Access it from any device on your home network at
+      `http://<your-server>:2996`.
+  tips:
+    before_install:
+      en_US: |
+        **Before first launch**, change the placeholder Postgres password
+        in both the `postgres` service's `POSTGRES_PASSWORD` and the
+        `backend` service's `DATABASE_URL` — they must match.
+
+        Your data (Postgres database + uploaded knowledge-base PDFs)
+        persists at `/DATA/AppData/zulivio/`, following CasaOS/ZimaOS's
+        standard backup/restore convention.
+
+        After install, open the app and go to `/setup` to create your
+        organization and its first Master Owner account — no manual
+        configuration or demo data needed.
+
+        To enable automatic backups, the Master Owner can connect any
+        S3-compatible bucket directly from Settings in the app (tested
+        live before it's saved — no restart needed). The S3_BACKUP_*
+        fields above are an alternative for setting it from here instead,
+        if you'd rather not enter the key in the app itself.
+  index: /
+  scheme: http
+  port_map: "2996"
+  version: "1.12.1"
+  update_at: "2026-10-24"
+  release_notes:
+    en_US: |-
+      1.12.1: security update: zod 4.6.6 (fixes a memory-exhaustion advisory). No behaviour changes.
+
+      1.12.0: added Mobile Call History — register company phones under
+      Settings > Mobile Devices (per-device token, shown once), sync call
+      metadata in real time (MacroDroid) or in bulk (a future Android app, or
+      an uploaded call-log export to back-fill old history), and browse it
+      under Sales > Calls and on each lead. De-duplicated, tenant-isolated,
+      role-scoped, with retention and delete controls. Also removes the
+      DISABLE_CSP opt-out (CodeQL insecure-helmet alert).
+
+      1.11.0: added a MacroDroid missed-call integration — a MASTER_OWNER
+      can issue a per-device API token (Settings > Integrations) for an
+      employee's phone, then MacroDroid's "Call Missed" trigger posts it to
+      a new webhook that matches the caller against an existing lead or
+      opens a new one, owned by that employee, with a callback follow-up
+      scheduled right away so it surfaces in their queue.
+
+      1.10.0: the Leads list can now select every lead matching your current
+      filters, not just what's checked on the current page, and delete them
+      all in one action. Data Hub adds a type-to-confirm "delete all leads"
+      danger zone for clearing test/demo data in one shot.
+
+      1.9.1: fixed lead CSV import not recognizing a "Public Phone" column
+      (common in scraped/lead-gen exports) — those numbers used to land
+      silently in custom fields instead of the lead's phone field. Leads can
+      now be bulk-disqualified with a loss reason (the existing "Move to
+      stage" bulk action), and a new "Delete permanently" bulk action
+      removes selected leads outright for when the rows themselves need to
+      go, e.g. a bad import — bulk-disqualify into a loss stage stays the
+      recommended way to clear a batch, since it's reversible.
+
+      1.9.0: added an Attendance calendar showing your own present/absent
+      days and worked/break time for a month, plus a manager+ "Team
+      attendance" table (days present, worked/break time, calls) for
+      everyone in your team over a date range. Fixed a bug where a lead
+      assigned to someone (as opposed to an Assignment) never showed up on
+      their Overview/Start Work page. Fixed lead CSV import picking an
+      Excel-mangled phone column over a clean fallback column (like
+      phone_local_10d) already present in the same row. Removed the "Call
+      next lead" button from My Day; its overdue-follow-ups count now
+      links straight to the Follow-ups tab.
+
+      1.8.1: fixed phone numbers getting mangled into scientific notation
+      (e.g. "9.18605E+11") when exporting/importing leads as CSV and opening
+      the file in Excel — exported phone numbers now stay plain text, and a
+      phone number that already arrived in that mangled form gets
+      reconstructed on import. Agent Assist's caller-ID lookup now matches a
+      lead by phone number regardless of country-code formatting.
+
+      1.8.0: leads can now be deleted (lead page and board cards). Fixed a
+      Tasks page crash ("Cannot read properties of undefined") that could
+      happen if the tasks endpoint ever resolved with a missing list.
+      Pipeline cards for a lead-converted opportunity now link back to that
+      lead's page instead of being a dead end. The per-employee report now
+      also shows a login count. Assignments can now optionally link to a
+      specific Lead or Opportunity, so a work item stays connected to the
+      CRM record it's actually about — the link shows on both the
+      Assignments list and the linked record's own page.
+
+      1.7.1: account creation and password-change now have a show/hide
+      toggle and a confirm-password field so a mistyped password is caught
+      before submit. Opportunities CSV import now validates
+      expectedCloseDate instead of surfacing a raw database error on a bad
+      date. Leads CSV import now accepts a company-only row (no full_name)
+      — common in scraped/B2B lead exports — falling back to the company
+      name as the lead's identity, and the leads importer is now also
+      available on the Data Hub page.
+
+      1.7.0: separated employees can now be permanently deleted (once they
+      have no lead/assignment/attendance history to lose — otherwise you're
+      told exactly what's blocking it), fixing a gap where a SUSPENDED/
+      ON_LEAVE employee also couldn't even be separated in the first place.
+      Adds a one-tap "Quick access" shortcut row to the master dashboard,
+      a quick "Note" button right on lead board cards so a caller can log
+      a note without opening the lead, and a copy-to-clipboard button for
+      the phone number on the lead workspace page.
+
+      1.6.1: fixes a Helpdesk page crash ("x.find is not a function") that
+      could happen if a workflow query ever resolved to something other
+      than an array — now degrades to "no workflows" instead of crashing
+      the page.
+
+      1.6.0: CSV lead imports now preserve any unrecognized columns
+      (rating, category, outreach angle, etc.) into a custom-fields bag
+      instead of dropping them, so any export shape can be imported
+      without a schema change. Adds a forced password-change gate after an
+      admin resets an employee's password, and one-tap call/WhatsApp/copy
+      quick actions right on lead board cards.
+
+      1.5.0: security and zero-config hardening, plus a large batch of CRM
+      feature work. Closes the Critical/High findings from a full security
+      audit: the auth guard is now global (deny-by-default — a new
+      controller that forgets to guard itself is protected automatically
+      instead of silently open), every duplicated role-hierarchy check was
+      consolidated into one source of truth, a real race condition in
+      assignment/employee number generation (two requests landing at the
+      same instant could collide) is fixed with a bounded retry instead of
+      a plain count-and-increment, an Origin/Referer allowlist now backs
+      the existing CSRF defense, Helmet security headers were added, and
+      bootstrap/password-change are now rate-limited (previously only
+      login was). Fixes an insecure Helmet configuration flagged by
+      CodeQL — the Content-Security-Policy is now on by default instead of
+      opt-in. FIELD_ENCRYPTION_KEY (protects saved S3 backup / Google
+      Sheets credentials) is now auto-generated and persisted on first run
+      instead of requiring manual setup — matches this store's zero-config
+      install philosophy. The S3 backup secret access key is now encrypted
+      at rest. Employee email uniqueness is now enforced globally, not
+      just per-organization (closing the same race at the database level,
+      not just the app layer), closing a real data-integrity gap. Also adds
+      local backup download/upload restore and in-app self-update, a
+      redesigned retractable sidebar, a linked user manual and public docs
+      page, an MCP server with personal API keys, a Google Sheets Settings
+      integration, a Postgres healthcheck default-database fix, and a
+      mobile accessibility/contrast fix from a Playwright/axe audit. Adds
+      a large Sales Head / RBAC layer: scope-resolution helpers
+      (Manager vs Sales Head vs Admin), an employee workspace UI, a sales
+      head dashboard with drill-down, a quality audit/workflow/helpdesk
+      module, plus a cross-tenant isolation e2e suite backing a published
+      security audit report.
+
+      1.4.0: the employee directory now only ever shows accounts strictly
+      below your rank (never a peer or higher), matching what
+      edit/reset-password/remove already enforced. Employees, Sales
+      Dashboard, Data Hub, and Settings are now guarded even on direct URL
+      access, not just a hidden nav link. Adds an audit log viewer
+      (Settings > Activity log, Master Owner only).
+
+      1.3.0: backups can now be connected entirely from Settings (Master
+      Owner only) — endpoint, bucket, and access key are entered there,
+      tested live before saving, and stored in the app itself. No CasaOS/
+      env-var editing required, though the S3_BACKUP_* fields above still
+      work as an alternative.
+
+      1.2.0: adds automatic S3 backups of the database and uploaded files,
+      configured via the S3_BACKUP_* fields above, with verified rolling
+      retention and a one-click destructive restore. Moves the default
+      web port from 3100 to 2996 to reduce collisions with other apps.
+
+      1.1.0: fixes login on plain-HTTP CasaOS/ZimaOS installs (the session
+      cookie was marked Secure and silently dropped by the browser — see
+      COOKIE_SECURE below). Adds opportunities CSV import/export, territory
+      and capacity-based assignment routing modes, and rep-level forecast
+      breakdown on the sales dashboard.
+
+      1.0.0: employee lifecycle, role-based access control, work
+      assignments, attendance tracking, knowledge base and tips, master
+      dashboard, and CSV/Google Sheets import-export.
+  website: "https://zulivio.nodedr.com/"
+  repo: "https://github.com/Raktim94/zulivio"
+  support: "https://zulivio.nodedr.com/contact"
+  docs: "https://github.com/Raktim94/zulivio#readme"
