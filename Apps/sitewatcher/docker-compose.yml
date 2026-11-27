@@ -1,0 +1,74 @@
+name: sitewatcher
+services:
+  sitewatcher:
+    image: ghcr.io/nikkurkov/sitewatcher@sha256:c66f8916f531331b11c732ee389f2d255e68f21707e155e5db76454c54894e8d
+    command: [sitewatcher, web]
+    restart: unless-stopped
+    environment:
+      DATABASE_PATH: /data/sitewatcher.db
+      SITEWATCHER_WEB_BIND: 0.0.0.0
+      SITEWATCHER_WEB_ALLOWED_HOSTS: 127.0.0.1,localhost
+    ports:
+      - "18081:8080"
+    volumes:
+      - sitewatcher-data:/data
+    healthcheck:
+      test: [CMD, python, -c, 'import urllib.request; urllib.request.urlopen("http://127.0.0.1:8080/healthz", timeout=3)']
+      interval: 15s
+      timeout: 5s
+      start_period: 10s
+    x-casaos:
+      envs:
+        - container: SITEWATCHER_WEB_ALLOWED_HOSTS
+          description:
+            en_US: Add the IP address or hostname you use to open SiteWatcher, separated by commas.
+            zh_CN: 添加用于访问 SiteWatcher 的 IP 地址或主机名，多个地址请用逗号分隔。
+  sitewatcher-worker:
+    image: ghcr.io/nikkurkov/sitewatcher@sha256:c66f8916f531331b11c732ee389f2d255e68f21707e155e5db76454c54894e8d
+    command: [sitewatcher, worker]
+    restart: unless-stopped
+    environment:
+      DATABASE_PATH: /data/sitewatcher.db
+    volumes:
+      - sitewatcher-data:/data
+    depends_on:
+      sitewatcher:
+        condition: service_healthy
+
+volumes:
+  sitewatcher-data:
+
+x-casaos:
+  id: com.cp0204.sitewatcher
+  architectures:
+    - amd64
+    - arm64
+  main: sitewatcher
+  store_app_id: sitewatcher
+  author: NikKurkov
+  developer: NikKurkov
+  category: Networking
+  icon: https://raw.githubusercontent.com/NikKurkov/sitewatcher/main/assets/brand/apple-touch-icon.png
+  screenshot_link:
+    - https://raw.githubusercontent.com/NikKurkov/sitewatcher/main/docs/screenshots/readme-history-dark-en.png
+  description:
+    en_US: Self-hosted website monitoring for uptime, response times, TLS certificates, and domain expiration, with shareable status pages.
+    zh_CN: 自托管网站监控工具，支持网站可用性、响应时间、TLS 证书和域名到期检查，并可分享状态页面。
+  tagline:
+    en_US: Website and domain monitoring
+    zh_CN: 网站与域名监控
+  title:
+    en_US: SiteWatcher
+  tips:
+    before_install:
+      en_US: |
+        Add the NAS IP or hostname to SITEWATCHER_WEB_ALLOWED_HOSTS in app settings.
+        Open the sitewatcher container terminal, run sitewatcher setup, and choose a username and password.
+        Use the HTTP port on a trusted LAN. Set up HTTPS through a reverse proxy before exposing it publicly.
+      zh_CN: |
+        请在应用设置中将 NAS 的 IP 地址或主机名添加到 SITEWATCHER_WEB_ALLOWED_HOSTS。
+        打开 sitewatcher 容器终端，运行 sitewatcher setup 并设置用户名和密码。
+        请在可信局域网内使用 HTTP 端口。对外开放前请通过反向代理配置 HTTPS。
+  port_map: "18081"
+  scheme: http
+  index: /
